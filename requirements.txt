@@ -1,0 +1,11 @@
+Flask
+flask-cors
+python-dotenv
+PyJWT
+pandas==1.5.3
+pandas_market_calendars
+requests
+ta-lib      # if used
+schedule
+datetime
+jwt

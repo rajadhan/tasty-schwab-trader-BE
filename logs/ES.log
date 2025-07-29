@@ -1,0 +1,1306 @@
+2025-07-24 02:57:00,001 - INFO - Running strategy for /ES at 2025-07-23 13:57:00.001399-04:00 with params: QTY=100, TRENDS=(20, EMA), (50, EMA)
+2025-07-24 02:57:00,002 - INFO - Fetching historical data for /ES
+2025-07-24 02:57:02,646 - ERROR - Error in getting historical data for /ES: Expecting value: line 3 column 9 (char 22)
+2025-07-24 02:57:12,647 - INFO - Fetching historical data for /ES
+2025-07-24 02:57:14,662 - ERROR - Error in getting historical data for /ES: Expecting value: line 3 column 9 (char 22)
+2025-07-24 02:57:24,663 - INFO - Fetching historical data for /ES
+2025-07-24 02:57:25,959 - ERROR - Error in getting historical data for /ES: Expecting value: line 3 column 9 (char 22)
+2025-07-24 02:57:35,960 - INFO - Fetching historical data for /ES
+2025-07-24 02:57:37,206 - ERROR - Error in getting historical data for /ES: Expecting value: line 3 column 9 (char 22)
+2025-07-24 02:57:47,206 - INFO - Fetching historical data for /ES
+2025-07-24 02:57:48,489 - ERROR - Error in getting historical data for /ES: Expecting value: line 3 column 9 (char 22)
+2025-07-24 02:57:58,490 - INFO - Fetching historical data for /ES
+2025-07-24 02:57:59,744 - ERROR - Error in getting historical data for /ES: Expecting value: line 3 column 9 (char 22)
+2025-07-24 02:58:09,744 - INFO - Fetching historical data for /ES
+2025-07-24 02:58:11,067 - ERROR - Error in getting historical data for /ES: Expecting value: line 3 column 9 (char 22)
+2025-07-24 02:58:21,068 - INFO - Fetching historical data for /ES
+2025-07-24 02:58:22,318 - ERROR - Error in getting historical data for /ES: Expecting value: line 3 column 9 (char 22)
+2025-07-24 02:58:32,319 - INFO - Fetching historical data for /ES
+2025-07-24 02:58:33,664 - ERROR - Error in getting historical data for /ES: Expecting value: line 3 column 9 (char 22)
+2025-07-24 03:04:00,001 - INFO - Running strategy for /ES at 2025-07-23 14:04:00.001079-04:00 with params: QTY=100, TRENDS=(20, EMA), (50, EMA)
+2025-07-24 03:04:00,001 - INFO - Fetching historical data for /ES
+2025-07-24 03:04:01,646 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:04:03,614 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:04:03,614 - ERROR - Failed to refresh access token
+2025-07-24 03:04:03,614 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:04:08,615 - INFO - Fetching historical data for /ES
+2025-07-24 03:04:09,869 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:04:11,967 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:04:11,967 - ERROR - Failed to refresh access token
+2025-07-24 03:04:11,968 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:04:16,968 - INFO - Fetching historical data for /ES
+2025-07-24 03:04:18,501 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:04:22,548 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:04:22,548 - ERROR - Failed to refresh access token
+2025-07-24 03:04:22,548 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:04:27,549 - INFO - Fetching historical data for /ES
+2025-07-24 03:04:29,586 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:04:31,674 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:04:31,675 - ERROR - Failed to refresh access token
+2025-07-24 03:04:31,675 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:04:36,675 - INFO - Fetching historical data for /ES
+2025-07-24 03:04:38,536 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:04:40,041 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:04:40,041 - ERROR - Failed to refresh access token
+2025-07-24 03:04:40,042 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:04:45,042 - INFO - Fetching historical data for /ES
+2025-07-24 03:04:46,544 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:04:47,900 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:04:47,901 - ERROR - Failed to refresh access token
+2025-07-24 03:04:47,901 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:04:52,901 - INFO - Fetching historical data for /ES
+2025-07-24 03:04:54,447 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:04:55,804 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:04:55,804 - ERROR - Failed to refresh access token
+2025-07-24 03:04:55,804 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:05:00,805 - INFO - Fetching historical data for /ES
+2025-07-24 03:05:02,327 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:05:04,886 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:05:04,886 - ERROR - Failed to refresh access token
+2025-07-24 03:05:04,886 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:05:09,887 - INFO - Fetching historical data for /ES
+2025-07-24 03:05:13,913 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:05:17,473 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:05:17,473 - ERROR - Failed to refresh access token
+2025-07-24 03:05:17,473 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:05:22,474 - INFO - Fetching historical data for /ES
+2025-07-24 03:05:23,729 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:05:26,776 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:05:26,776 - ERROR - Failed to refresh access token
+2025-07-24 03:05:26,776 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:05:31,776 - INFO - Fetching historical data for /ES
+2025-07-24 03:05:33,467 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:05:36,541 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:05:36,542 - ERROR - Failed to refresh access token
+2025-07-24 03:05:36,542 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:05:41,543 - INFO - Fetching historical data for /ES
+2025-07-24 03:05:43,497 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:05:44,856 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:05:44,856 - ERROR - Failed to refresh access token
+2025-07-24 03:05:44,856 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:05:49,857 - INFO - Fetching historical data for /ES
+2025-07-24 03:05:51,728 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:05:53,064 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:05:53,064 - ERROR - Failed to refresh access token
+2025-07-24 03:05:53,064 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:05:58,065 - INFO - Fetching historical data for /ES
+2025-07-24 03:05:59,728 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:06:02,129 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:06:02,129 - ERROR - Failed to refresh access token
+2025-07-24 03:06:02,129 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:06:07,130 - INFO - Fetching historical data for /ES
+2025-07-24 03:06:08,645 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:06:10,008 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:06:10,008 - ERROR - Failed to refresh access token
+2025-07-24 03:06:10,008 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:06:15,009 - INFO - Fetching historical data for /ES
+2025-07-24 03:06:16,564 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:06:18,377 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:06:18,377 - ERROR - Failed to refresh access token
+2025-07-24 03:06:18,377 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:06:23,378 - INFO - Fetching historical data for /ES
+2025-07-24 03:06:27,506 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:06:47,177 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:06:47,177 - ERROR - Failed to refresh access token
+2025-07-24 03:06:47,177 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:06:52,178 - INFO - Fetching historical data for /ES
+2025-07-24 03:06:53,408 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:06:55,170 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:06:55,170 - ERROR - Failed to refresh access token
+2025-07-24 03:06:55,170 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:07:00,170 - INFO - Fetching historical data for /ES
+2025-07-24 03:07:02,140 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:07:03,479 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:07:03,479 - ERROR - Failed to refresh access token
+2025-07-24 03:07:03,479 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:07:08,480 - INFO - Fetching historical data for /ES
+2025-07-24 03:07:11,176 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:07:12,518 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:07:12,518 - ERROR - Failed to refresh access token
+2025-07-24 03:07:12,518 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:07:17,519 - INFO - Fetching historical data for /ES
+2025-07-24 03:07:20,925 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:07:22,281 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:07:22,281 - ERROR - Failed to refresh access token
+2025-07-24 03:07:22,281 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:07:27,282 - INFO - Fetching historical data for /ES
+2025-07-24 03:07:29,162 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:07:30,933 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:07:30,933 - ERROR - Failed to refresh access token
+2025-07-24 03:07:30,933 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:07:35,934 - INFO - Fetching historical data for /ES
+2025-07-24 03:07:38,191 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:07:40,974 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:07:40,974 - ERROR - Failed to refresh access token
+2025-07-24 03:07:40,974 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:07:45,975 - INFO - Fetching historical data for /ES
+2025-07-24 03:07:47,212 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:07:48,823 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:07:48,823 - ERROR - Failed to refresh access token
+2025-07-24 03:07:48,823 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:07:53,824 - INFO - Fetching historical data for /ES
+2025-07-24 03:07:55,087 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:07:57,443 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:07:57,443 - ERROR - Failed to refresh access token
+2025-07-24 03:07:57,444 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:08:02,444 - INFO - Fetching historical data for /ES
+2025-07-24 03:08:03,690 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:08:06,451 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:08:06,451 - ERROR - Failed to refresh access token
+2025-07-24 03:08:06,451 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:08:11,452 - INFO - Fetching historical data for /ES
+2025-07-24 03:08:14,597 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:08:16,662 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:08:16,662 - ERROR - Failed to refresh access token
+2025-07-24 03:08:16,662 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:08:21,663 - INFO - Fetching historical data for /ES
+2025-07-24 03:08:22,925 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:08:25,002 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:08:25,003 - ERROR - Failed to refresh access token
+2025-07-24 03:08:25,003 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:08:30,003 - INFO - Fetching historical data for /ES
+2025-07-24 03:08:31,871 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:08:35,589 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:08:35,589 - ERROR - Failed to refresh access token
+2025-07-24 03:08:35,589 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:08:40,590 - INFO - Fetching historical data for /ES
+2025-07-24 03:08:41,862 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:08:43,493 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:08:43,493 - ERROR - Failed to refresh access token
+2025-07-24 03:08:43,493 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:08:48,494 - INFO - Fetching historical data for /ES
+2025-07-24 03:08:50,081 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:08:51,414 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:08:51,414 - ERROR - Failed to refresh access token
+2025-07-24 03:08:51,414 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:08:56,415 - INFO - Fetching historical data for /ES
+2025-07-24 03:08:57,938 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:09:00,032 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:09:00,032 - ERROR - Failed to refresh access token
+2025-07-24 03:09:00,032 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:09:05,033 - INFO - Fetching historical data for /ES
+2025-07-24 03:09:06,284 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:09:09,169 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:09:09,169 - ERROR - Failed to refresh access token
+2025-07-24 03:09:09,169 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:09:14,170 - INFO - Fetching historical data for /ES
+2025-07-24 03:09:15,526 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:09:17,145 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:09:17,145 - ERROR - Failed to refresh access token
+2025-07-24 03:09:17,145 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:09:22,146 - INFO - Fetching historical data for /ES
+2025-07-24 03:09:23,400 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:09:25,052 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:09:25,052 - ERROR - Failed to refresh access token
+2025-07-24 03:09:25,052 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:09:30,053 - INFO - Fetching historical data for /ES
+2025-07-24 03:09:31,311 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:09:32,912 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:09:32,912 - ERROR - Failed to refresh access token
+2025-07-24 03:09:32,912 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:09:37,913 - INFO - Fetching historical data for /ES
+2025-07-24 03:09:39,167 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:09:40,792 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:09:40,792 - ERROR - Failed to refresh access token
+2025-07-24 03:09:40,792 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:09:45,793 - INFO - Fetching historical data for /ES
+2025-07-24 03:09:47,035 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:09:48,688 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:09:48,688 - ERROR - Failed to refresh access token
+2025-07-24 03:09:48,688 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:09:53,689 - INFO - Fetching historical data for /ES
+2025-07-24 03:09:55,404 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:09:57,503 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:09:57,504 - ERROR - Failed to refresh access token
+2025-07-24 03:09:57,504 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:10:02,504 - INFO - Fetching historical data for /ES
+2025-07-24 03:10:03,753 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:10:06,143 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:10:06,143 - ERROR - Failed to refresh access token
+2025-07-24 03:10:06,144 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:10:11,145 - INFO - Fetching historical data for /ES
+2025-07-24 03:10:12,402 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:10:14,535 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:10:14,535 - ERROR - Failed to refresh access token
+2025-07-24 03:10:14,535 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:10:19,536 - INFO - Fetching historical data for /ES
+2025-07-24 03:10:20,774 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:10:22,402 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:10:22,402 - ERROR - Failed to refresh access token
+2025-07-24 03:10:22,402 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:10:27,403 - INFO - Fetching historical data for /ES
+2025-07-24 03:10:28,927 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:10:30,306 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:10:30,306 - ERROR - Failed to refresh access token
+2025-07-24 03:10:30,306 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:10:35,307 - INFO - Fetching historical data for /ES
+2025-07-24 03:10:36,848 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:10:38,197 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:10:38,197 - ERROR - Failed to refresh access token
+2025-07-24 03:10:38,197 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:10:43,198 - INFO - Fetching historical data for /ES
+2025-07-24 03:10:45,694 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:10:47,041 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:10:47,041 - ERROR - Failed to refresh access token
+2025-07-24 03:10:47,041 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:10:52,042 - INFO - Fetching historical data for /ES
+2025-07-24 03:10:55,101 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:10:56,511 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:10:56,511 - ERROR - Failed to refresh access token
+2025-07-24 03:10:56,511 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:11:01,512 - INFO - Fetching historical data for /ES
+2025-07-24 03:11:03,093 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:11:04,868 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:11:04,868 - ERROR - Failed to refresh access token
+2025-07-24 03:11:04,868 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:11:09,869 - INFO - Fetching historical data for /ES
+2025-07-24 03:11:11,125 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:11:14,156 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:11:14,157 - ERROR - Failed to refresh access token
+2025-07-24 03:11:14,157 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:11:19,157 - INFO - Fetching historical data for /ES
+2025-07-24 03:11:23,300 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:11:24,706 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:11:24,706 - ERROR - Failed to refresh access token
+2025-07-24 03:11:24,706 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:11:29,706 - INFO - Fetching historical data for /ES
+2025-07-24 03:11:31,253 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:11:33,637 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:11:33,637 - ERROR - Failed to refresh access token
+2025-07-24 03:11:33,637 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:11:38,638 - INFO - Fetching historical data for /ES
+2025-07-24 03:11:39,981 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:11:41,792 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:11:41,793 - ERROR - Failed to refresh access token
+2025-07-24 03:11:41,793 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:11:46,794 - INFO - Fetching historical data for /ES
+2025-07-24 03:11:48,041 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:11:49,726 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:11:49,726 - ERROR - Failed to refresh access token
+2025-07-24 03:11:49,726 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:11:54,726 - INFO - Fetching historical data for /ES
+2025-07-24 03:11:57,098 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:11:58,703 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:11:58,703 - ERROR - Failed to refresh access token
+2025-07-24 03:11:58,703 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:12:03,704 - INFO - Fetching historical data for /ES
+2025-07-24 03:12:05,224 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:12:06,556 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:12:06,556 - ERROR - Failed to refresh access token
+2025-07-24 03:12:06,556 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:12:11,557 - INFO - Fetching historical data for /ES
+2025-07-24 03:12:13,098 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:12:14,443 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:12:14,443 - ERROR - Failed to refresh access token
+2025-07-24 03:12:14,443 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:12:19,443 - INFO - Fetching historical data for /ES
+2025-07-24 03:12:20,968 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:12:23,486 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:12:23,486 - ERROR - Failed to refresh access token
+2025-07-24 03:12:23,486 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:12:28,487 - INFO - Fetching historical data for /ES
+2025-07-24 03:12:29,763 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:12:31,540 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:12:31,541 - ERROR - Failed to refresh access token
+2025-07-24 03:12:31,541 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:12:36,542 - INFO - Fetching historical data for /ES
+2025-07-24 03:12:37,792 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:12:39,466 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:12:39,467 - ERROR - Failed to refresh access token
+2025-07-24 03:12:39,467 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:12:44,468 - INFO - Fetching historical data for /ES
+2025-07-24 03:12:45,732 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:12:49,872 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:12:49,872 - ERROR - Failed to refresh access token
+2025-07-24 03:12:49,872 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:12:54,873 - INFO - Fetching historical data for /ES
+2025-07-24 03:12:56,109 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:12:58,189 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:12:58,189 - ERROR - Failed to refresh access token
+2025-07-24 03:12:58,189 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:13:03,190 - INFO - Fetching historical data for /ES
+2025-07-24 03:13:04,766 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:13:06,140 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:13:06,140 - ERROR - Failed to refresh access token
+2025-07-24 03:13:06,140 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:13:11,140 - INFO - Fetching historical data for /ES
+2025-07-24 03:13:13,843 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:13:15,500 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:13:15,500 - ERROR - Failed to refresh access token
+2025-07-24 03:13:15,500 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:13:20,501 - INFO - Fetching historical data for /ES
+2025-07-24 03:13:21,753 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:13:23,341 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:13:23,341 - ERROR - Failed to refresh access token
+2025-07-24 03:13:23,341 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:13:28,342 - INFO - Fetching historical data for /ES
+2025-07-24 03:13:30,330 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:13:32,209 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:13:32,209 - ERROR - Failed to refresh access token
+2025-07-24 03:13:32,209 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:13:37,210 - INFO - Fetching historical data for /ES
+2025-07-24 03:13:38,476 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:13:41,827 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:13:41,827 - ERROR - Failed to refresh access token
+2025-07-24 03:13:41,827 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:13:46,828 - INFO - Fetching historical data for /ES
+2025-07-24 03:13:48,360 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:13:49,745 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:13:49,745 - ERROR - Failed to refresh access token
+2025-07-24 03:13:49,745 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:13:54,745 - INFO - Fetching historical data for /ES
+2025-07-24 03:13:56,301 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:13:57,623 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:13:57,623 - ERROR - Failed to refresh access token
+2025-07-24 03:13:57,623 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:14:02,624 - INFO - Fetching historical data for /ES
+2025-07-24 03:14:04,439 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:14:05,938 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:14:05,938 - ERROR - Failed to refresh access token
+2025-07-24 03:14:05,938 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:14:10,938 - INFO - Fetching historical data for /ES
+2025-07-24 03:14:12,522 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:14:13,850 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:14:13,850 - ERROR - Failed to refresh access token
+2025-07-24 03:14:13,850 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:14:18,851 - INFO - Fetching historical data for /ES
+2025-07-24 03:14:20,447 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:14:22,225 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:14:22,225 - ERROR - Failed to refresh access token
+2025-07-24 03:14:22,225 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:14:27,225 - INFO - Fetching historical data for /ES
+2025-07-24 03:14:28,468 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:14:30,058 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:14:30,058 - ERROR - Failed to refresh access token
+2025-07-24 03:14:30,058 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:14:35,058 - INFO - Fetching historical data for /ES
+2025-07-24 03:14:36,378 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:14:38,427 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:14:38,427 - ERROR - Failed to refresh access token
+2025-07-24 03:14:38,427 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:14:43,428 - INFO - Fetching historical data for /ES
+2025-07-24 03:14:44,725 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:14:46,360 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:14:46,360 - ERROR - Failed to refresh access token
+2025-07-24 03:14:46,360 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:14:51,361 - INFO - Fetching historical data for /ES
+2025-07-24 03:14:52,959 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:14:54,574 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:14:54,575 - ERROR - Failed to refresh access token
+2025-07-24 03:14:54,575 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:14:59,576 - INFO - Fetching historical data for /ES
+2025-07-24 03:15:00,825 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:15:02,409 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:15:02,409 - ERROR - Failed to refresh access token
+2025-07-24 03:15:02,409 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:15:07,410 - INFO - Fetching historical data for /ES
+2025-07-24 03:15:08,697 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:15:10,329 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:15:10,329 - ERROR - Failed to refresh access token
+2025-07-24 03:15:10,329 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:15:15,329 - INFO - Fetching historical data for /ES
+2025-07-24 03:15:17,887 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:15:19,579 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:15:19,579 - ERROR - Failed to refresh access token
+2025-07-24 03:15:19,580 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:15:24,581 - INFO - Fetching historical data for /ES
+2025-07-24 03:15:25,826 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:15:27,452 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:15:27,453 - ERROR - Failed to refresh access token
+2025-07-24 03:15:27,453 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:15:32,453 - INFO - Fetching historical data for /ES
+2025-07-24 03:15:33,719 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:15:35,327 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:15:35,327 - ERROR - Failed to refresh access token
+2025-07-24 03:15:35,328 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:15:40,328 - INFO - Fetching historical data for /ES
+2025-07-24 03:15:41,922 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:15:43,735 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:15:43,735 - ERROR - Failed to refresh access token
+2025-07-24 03:15:43,735 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:15:48,736 - INFO - Fetching historical data for /ES
+2025-07-24 03:15:51,321 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:15:52,706 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:15:52,706 - ERROR - Failed to refresh access token
+2025-07-24 03:15:52,706 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:15:57,706 - INFO - Fetching historical data for /ES
+2025-07-24 03:15:59,267 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:16:00,629 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:16:00,629 - ERROR - Failed to refresh access token
+2025-07-24 03:16:00,629 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:16:05,630 - INFO - Fetching historical data for /ES
+2025-07-24 03:16:07,222 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:16:08,545 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:16:08,545 - ERROR - Failed to refresh access token
+2025-07-24 03:16:08,545 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:16:13,545 - INFO - Fetching historical data for /ES
+2025-07-24 03:16:15,424 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:16:17,263 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:16:17,263 - ERROR - Failed to refresh access token
+2025-07-24 03:16:17,263 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:16:22,264 - INFO - Fetching historical data for /ES
+2025-07-24 03:16:24,878 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:16:26,206 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:16:26,206 - ERROR - Failed to refresh access token
+2025-07-24 03:16:26,206 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:16:31,207 - INFO - Fetching historical data for /ES
+2025-07-24 03:16:32,703 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:16:34,154 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:16:34,154 - ERROR - Failed to refresh access token
+2025-07-24 03:16:34,154 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:16:39,154 - INFO - Fetching historical data for /ES
+2025-07-24 03:16:40,686 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:16:42,156 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:16:42,157 - ERROR - Failed to refresh access token
+2025-07-24 03:16:42,157 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:16:47,158 - INFO - Fetching historical data for /ES
+2025-07-24 03:16:48,663 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:16:49,997 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:16:49,997 - ERROR - Failed to refresh access token
+2025-07-24 03:16:49,997 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:16:54,997 - INFO - Fetching historical data for /ES
+2025-07-24 03:16:56,495 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:16:58,558 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:16:58,558 - ERROR - Failed to refresh access token
+2025-07-24 03:16:58,558 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:17:03,559 - INFO - Fetching historical data for /ES
+2025-07-24 03:17:05,117 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:17:06,524 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:17:06,524 - ERROR - Failed to refresh access token
+2025-07-24 03:17:06,524 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:17:11,524 - INFO - Fetching historical data for /ES
+2025-07-24 03:17:13,029 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:17:14,350 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:17:14,350 - ERROR - Failed to refresh access token
+2025-07-24 03:17:14,350 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:17:19,351 - INFO - Fetching historical data for /ES
+2025-07-24 03:17:20,853 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:17:22,666 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:17:22,666 - ERROR - Failed to refresh access token
+2025-07-24 03:17:22,666 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:17:27,666 - INFO - Fetching historical data for /ES
+2025-07-24 03:17:29,178 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:17:30,521 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:17:30,521 - ERROR - Failed to refresh access token
+2025-07-24 03:17:30,521 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:17:35,522 - INFO - Fetching historical data for /ES
+2025-07-24 03:17:38,408 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:17:39,840 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:17:39,840 - ERROR - Failed to refresh access token
+2025-07-24 03:17:39,840 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:17:44,840 - INFO - Fetching historical data for /ES
+2025-07-24 03:17:46,071 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:17:47,761 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:17:47,762 - ERROR - Failed to refresh access token
+2025-07-24 03:17:47,762 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:17:52,762 - INFO - Fetching historical data for /ES
+2025-07-24 03:17:53,991 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:17:55,601 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:17:55,601 - ERROR - Failed to refresh access token
+2025-07-24 03:17:55,601 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:18:00,601 - INFO - Fetching historical data for /ES
+2025-07-24 03:18:01,857 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:18:03,483 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:18:03,483 - ERROR - Failed to refresh access token
+2025-07-24 03:18:03,483 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:18:08,484 - INFO - Fetching historical data for /ES
+2025-07-24 03:18:09,752 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:18:11,366 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:18:11,366 - ERROR - Failed to refresh access token
+2025-07-24 03:18:11,366 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:18:16,367 - INFO - Fetching historical data for /ES
+2025-07-24 03:18:17,877 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:18:19,226 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:18:19,226 - ERROR - Failed to refresh access token
+2025-07-24 03:18:19,226 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:18:24,227 - INFO - Fetching historical data for /ES
+2025-07-24 03:18:25,732 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:18:27,113 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:18:27,113 - ERROR - Failed to refresh access token
+2025-07-24 03:18:27,113 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:18:32,114 - INFO - Fetching historical data for /ES
+2025-07-24 03:18:33,613 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:18:35,361 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:18:35,361 - ERROR - Failed to refresh access token
+2025-07-24 03:18:35,361 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:18:40,362 - INFO - Fetching historical data for /ES
+2025-07-24 03:18:42,059 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:18:43,800 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:18:43,800 - ERROR - Failed to refresh access token
+2025-07-24 03:18:43,801 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:18:48,801 - INFO - Fetching historical data for /ES
+2025-07-24 03:18:50,084 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:18:52,150 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:18:52,150 - ERROR - Failed to refresh access token
+2025-07-24 03:18:52,151 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:18:57,151 - INFO - Fetching historical data for /ES
+2025-07-24 03:18:58,390 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:19:00,014 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:19:00,014 - ERROR - Failed to refresh access token
+2025-07-24 03:19:00,014 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:19:05,014 - INFO - Fetching historical data for /ES
+2025-07-24 03:19:06,550 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:19:08,460 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:19:08,460 - ERROR - Failed to refresh access token
+2025-07-24 03:19:08,460 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:19:13,461 - INFO - Fetching historical data for /ES
+2025-07-24 03:19:15,856 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:19:17,181 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:19:17,181 - ERROR - Failed to refresh access token
+2025-07-24 03:19:17,181 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:19:22,182 - INFO - Fetching historical data for /ES
+2025-07-24 03:19:23,427 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:19:27,016 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:19:27,016 - ERROR - Failed to refresh access token
+2025-07-24 03:19:27,016 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:19:32,017 - INFO - Fetching historical data for /ES
+2025-07-24 03:19:34,870 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:19:36,514 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:19:36,515 - ERROR - Failed to refresh access token
+2025-07-24 03:19:36,515 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:19:41,516 - INFO - Fetching historical data for /ES
+2025-07-24 03:19:47,434 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:19:50,608 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:19:50,608 - ERROR - Failed to refresh access token
+2025-07-24 03:19:50,609 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:19:55,609 - INFO - Fetching historical data for /ES
+2025-07-24 03:19:57,934 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:20:00,651 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:20:00,651 - ERROR - Failed to refresh access token
+2025-07-24 03:20:00,651 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:20:05,651 - INFO - Fetching historical data for /ES
+2025-07-24 03:20:07,608 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:20:09,037 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:20:09,037 - ERROR - Failed to refresh access token
+2025-07-24 03:20:09,037 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:20:14,038 - INFO - Fetching historical data for /ES
+2025-07-24 03:20:15,622 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:20:16,982 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:20:16,982 - ERROR - Failed to refresh access token
+2025-07-24 03:20:16,982 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:20:21,982 - INFO - Fetching historical data for /ES
+2025-07-24 03:20:26,694 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:20:29,041 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:20:29,042 - ERROR - Failed to refresh access token
+2025-07-24 03:20:29,042 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:20:34,042 - INFO - Fetching historical data for /ES
+2025-07-24 03:20:37,581 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:20:40,014 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:20:40,014 - ERROR - Failed to refresh access token
+2025-07-24 03:20:40,014 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:20:45,015 - INFO - Fetching historical data for /ES
+2025-07-24 03:20:47,396 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:20:48,741 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:20:48,741 - ERROR - Failed to refresh access token
+2025-07-24 03:20:48,742 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:20:53,742 - INFO - Fetching historical data for /ES
+2025-07-24 03:20:55,337 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:20:56,693 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:20:56,693 - ERROR - Failed to refresh access token
+2025-07-24 03:20:56,693 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:21:01,694 - INFO - Fetching historical data for /ES
+2025-07-24 03:21:17,634 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:21:23,954 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:21:23,954 - ERROR - Failed to refresh access token
+2025-07-24 03:21:23,954 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:21:28,955 - INFO - Fetching historical data for /ES
+2025-07-24 03:21:30,213 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:21:31,929 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:21:31,930 - ERROR - Failed to refresh access token
+2025-07-24 03:21:31,930 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:21:36,930 - INFO - Fetching historical data for /ES
+2025-07-24 03:21:39,443 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:21:41,137 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:21:41,137 - ERROR - Failed to refresh access token
+2025-07-24 03:21:41,137 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:21:46,137 - INFO - Fetching historical data for /ES
+2025-07-24 03:21:47,393 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:21:49,038 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:21:49,038 - ERROR - Failed to refresh access token
+2025-07-24 03:21:49,038 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:21:54,039 - INFO - Fetching historical data for /ES
+2025-07-24 03:21:55,857 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:21:57,540 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:21:57,540 - ERROR - Failed to refresh access token
+2025-07-24 03:21:57,540 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:22:02,540 - INFO - Fetching historical data for /ES
+2025-07-24 03:22:03,796 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:22:05,389 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:22:05,389 - ERROR - Failed to refresh access token
+2025-07-24 03:22:05,389 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:22:10,390 - INFO - Fetching historical data for /ES
+2025-07-24 03:22:11,656 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:22:15,341 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:22:15,341 - ERROR - Failed to refresh access token
+2025-07-24 03:22:15,341 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:22:20,342 - INFO - Fetching historical data for /ES
+2025-07-24 03:22:21,669 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:22:23,277 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:22:23,277 - ERROR - Failed to refresh access token
+2025-07-24 03:22:23,277 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:22:28,278 - INFO - Fetching historical data for /ES
+2025-07-24 03:22:29,530 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:22:31,174 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:22:31,174 - ERROR - Failed to refresh access token
+2025-07-24 03:22:31,174 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:22:36,174 - INFO - Fetching historical data for /ES
+2025-07-24 03:22:37,444 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:22:39,037 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:22:39,037 - ERROR - Failed to refresh access token
+2025-07-24 03:22:39,037 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:22:44,038 - INFO - Fetching historical data for /ES
+2025-07-24 03:22:45,280 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:22:48,051 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:22:48,052 - ERROR - Failed to refresh access token
+2025-07-24 03:22:48,052 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:22:53,052 - INFO - Fetching historical data for /ES
+2025-07-24 03:22:54,315 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:22:56,012 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:22:56,012 - ERROR - Failed to refresh access token
+2025-07-24 03:22:56,012 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:23:01,012 - INFO - Fetching historical data for /ES
+2025-07-24 03:23:02,349 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:23:03,942 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:23:03,942 - ERROR - Failed to refresh access token
+2025-07-24 03:23:03,942 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:23:08,943 - INFO - Fetching historical data for /ES
+2025-07-24 03:23:10,207 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:23:12,186 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:23:12,187 - ERROR - Failed to refresh access token
+2025-07-24 03:23:12,187 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:23:17,187 - INFO - Fetching historical data for /ES
+2025-07-24 03:23:21,306 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:23:22,686 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:23:22,686 - ERROR - Failed to refresh access token
+2025-07-24 03:23:22,686 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:23:27,687 - INFO - Fetching historical data for /ES
+2025-07-24 03:23:29,204 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:23:31,692 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:23:31,692 - ERROR - Failed to refresh access token
+2025-07-24 03:23:31,692 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:23:36,693 - INFO - Fetching historical data for /ES
+2025-07-24 03:23:38,220 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:23:39,544 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:23:39,544 - ERROR - Failed to refresh access token
+2025-07-24 03:23:39,544 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:23:44,545 - INFO - Fetching historical data for /ES
+2025-07-24 03:23:47,055 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:23:48,424 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:23:48,424 - ERROR - Failed to refresh access token
+2025-07-24 03:23:48,424 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:23:53,425 - INFO - Fetching historical data for /ES
+2025-07-24 03:23:55,670 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:23:57,443 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:23:57,443 - ERROR - Failed to refresh access token
+2025-07-24 03:23:57,444 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:24:02,444 - INFO - Fetching historical data for /ES
+2025-07-24 03:24:04,744 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:24:06,385 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:24:06,385 - ERROR - Failed to refresh access token
+2025-07-24 03:24:06,385 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:24:11,386 - INFO - Fetching historical data for /ES
+2025-07-24 03:24:12,626 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:24:14,245 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:24:14,245 - ERROR - Failed to refresh access token
+2025-07-24 03:24:14,245 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:24:19,246 - INFO - Fetching historical data for /ES
+2025-07-24 03:24:20,771 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:24:23,539 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:24:23,539 - ERROR - Failed to refresh access token
+2025-07-24 03:24:23,539 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:24:28,539 - INFO - Fetching historical data for /ES
+2025-07-24 03:24:33,650 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:24:37,494 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:24:37,494 - ERROR - Failed to refresh access token
+2025-07-24 03:24:37,494 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:24:42,494 - INFO - Fetching historical data for /ES
+2025-07-24 03:24:43,740 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:24:45,846 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:24:45,846 - ERROR - Failed to refresh access token
+2025-07-24 03:24:45,846 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:24:50,847 - INFO - Fetching historical data for /ES
+2025-07-24 03:24:52,104 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:24:53,714 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:24:53,714 - ERROR - Failed to refresh access token
+2025-07-24 03:24:53,714 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:24:58,714 - INFO - Fetching historical data for /ES
+2025-07-24 03:25:01,089 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:25:02,728 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:25:02,728 - ERROR - Failed to refresh access token
+2025-07-24 03:25:02,728 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:25:07,729 - INFO - Fetching historical data for /ES
+2025-07-24 03:25:09,038 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:25:10,685 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:25:10,685 - ERROR - Failed to refresh access token
+2025-07-24 03:25:10,685 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:25:15,686 - INFO - Fetching historical data for /ES
+2025-07-24 03:25:16,955 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:25:18,557 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:25:18,557 - ERROR - Failed to refresh access token
+2025-07-24 03:25:18,558 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:25:23,558 - INFO - Fetching historical data for /ES
+2025-07-24 03:25:24,795 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:25:26,401 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:25:26,401 - ERROR - Failed to refresh access token
+2025-07-24 03:25:26,401 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:25:31,402 - INFO - Fetching historical data for /ES
+2025-07-24 03:25:32,663 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:25:34,279 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:25:34,280 - ERROR - Failed to refresh access token
+2025-07-24 03:25:34,280 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:25:39,280 - INFO - Fetching historical data for /ES
+2025-07-24 03:25:40,869 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:25:42,484 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:25:42,484 - ERROR - Failed to refresh access token
+2025-07-24 03:25:42,484 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:25:47,485 - INFO - Fetching historical data for /ES
+2025-07-24 03:25:48,793 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:25:51,939 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:25:51,939 - ERROR - Failed to refresh access token
+2025-07-24 03:25:51,939 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:25:56,940 - INFO - Fetching historical data for /ES
+2025-07-24 03:25:58,191 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:25:59,829 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:25:59,829 - ERROR - Failed to refresh access token
+2025-07-24 03:25:59,829 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:26:04,829 - INFO - Fetching historical data for /ES
+2025-07-24 03:26:06,072 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:26:09,199 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:26:09,199 - ERROR - Failed to refresh access token
+2025-07-24 03:26:09,199 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:26:14,200 - INFO - Fetching historical data for /ES
+2025-07-24 03:26:15,459 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:26:18,699 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:26:18,699 - ERROR - Failed to refresh access token
+2025-07-24 03:26:18,699 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:26:23,700 - INFO - Fetching historical data for /ES
+2025-07-24 03:26:25,017 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:26:26,961 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:26:26,961 - ERROR - Failed to refresh access token
+2025-07-24 03:26:26,961 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:26:31,962 - INFO - Fetching historical data for /ES
+2025-07-24 03:26:33,542 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:26:34,901 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:26:34,901 - ERROR - Failed to refresh access token
+2025-07-24 03:26:34,901 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:26:39,902 - INFO - Fetching historical data for /ES
+2025-07-24 03:26:41,146 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:26:42,774 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:26:42,774 - ERROR - Failed to refresh access token
+2025-07-24 03:26:42,775 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:26:47,775 - INFO - Fetching historical data for /ES
+2025-07-24 03:26:49,474 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:26:52,535 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:26:52,535 - ERROR - Failed to refresh access token
+2025-07-24 03:26:52,535 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:26:57,535 - INFO - Fetching historical data for /ES
+2025-07-24 03:26:58,773 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:27:00,409 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:27:00,409 - ERROR - Failed to refresh access token
+2025-07-24 03:27:00,409 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:27:05,410 - INFO - Fetching historical data for /ES
+2025-07-24 03:27:06,660 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:27:08,392 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:27:08,392 - ERROR - Failed to refresh access token
+2025-07-24 03:27:08,392 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:27:13,392 - INFO - Fetching historical data for /ES
+2025-07-24 03:27:15,952 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:27:17,798 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:27:17,798 - ERROR - Failed to refresh access token
+2025-07-24 03:27:17,798 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:27:22,799 - INFO - Fetching historical data for /ES
+2025-07-24 03:27:24,045 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:27:25,669 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:27:25,669 - ERROR - Failed to refresh access token
+2025-07-24 03:27:25,669 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:27:30,670 - INFO - Fetching historical data for /ES
+2025-07-24 03:27:31,898 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:27:33,514 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:27:33,514 - ERROR - Failed to refresh access token
+2025-07-24 03:27:33,514 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:27:38,515 - INFO - Fetching historical data for /ES
+2025-07-24 03:27:39,768 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:27:41,490 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:27:41,490 - ERROR - Failed to refresh access token
+2025-07-24 03:27:41,490 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:27:46,491 - INFO - Fetching historical data for /ES
+2025-07-24 03:27:47,747 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:27:49,496 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:27:49,496 - ERROR - Failed to refresh access token
+2025-07-24 03:27:49,496 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:27:54,497 - INFO - Fetching historical data for /ES
+2025-07-24 03:27:55,813 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:27:57,539 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:27:57,539 - ERROR - Failed to refresh access token
+2025-07-24 03:27:57,539 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:28:02,540 - INFO - Fetching historical data for /ES
+2025-07-24 03:28:03,785 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:28:05,479 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:28:05,479 - ERROR - Failed to refresh access token
+2025-07-24 03:28:05,479 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:28:10,480 - INFO - Fetching historical data for /ES
+2025-07-24 03:28:12,845 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:28:14,477 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:28:14,477 - ERROR - Failed to refresh access token
+2025-07-24 03:28:14,477 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:28:19,478 - INFO - Fetching historical data for /ES
+2025-07-24 03:28:20,727 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:28:22,895 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:28:22,895 - ERROR - Failed to refresh access token
+2025-07-24 03:28:22,895 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:28:27,895 - INFO - Fetching historical data for /ES
+2025-07-24 03:28:30,228 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:28:31,849 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:28:31,849 - ERROR - Failed to refresh access token
+2025-07-24 03:28:31,849 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:28:36,850 - INFO - Fetching historical data for /ES
+2025-07-24 03:28:38,605 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:28:40,255 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:28:40,255 - ERROR - Failed to refresh access token
+2025-07-24 03:28:40,255 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:28:45,256 - INFO - Fetching historical data for /ES
+2025-07-24 03:28:46,517 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:28:49,209 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:28:49,210 - ERROR - Failed to refresh access token
+2025-07-24 03:28:49,210 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:28:54,210 - INFO - Fetching historical data for /ES
+2025-07-24 03:28:55,457 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:28:57,085 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:28:57,085 - ERROR - Failed to refresh access token
+2025-07-24 03:28:57,086 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:29:02,086 - INFO - Fetching historical data for /ES
+2025-07-24 03:29:03,339 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:29:05,011 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:29:05,011 - ERROR - Failed to refresh access token
+2025-07-24 03:29:05,011 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:29:10,011 - INFO - Fetching historical data for /ES
+2025-07-24 03:29:11,513 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:29:15,452 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:29:15,453 - ERROR - Failed to refresh access token
+2025-07-24 03:29:15,453 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:29:20,453 - INFO - Fetching historical data for /ES
+2025-07-24 03:29:21,969 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:29:23,499 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:29:23,499 - ERROR - Failed to refresh access token
+2025-07-24 03:29:23,500 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:29:28,500 - INFO - Fetching historical data for /ES
+2025-07-24 03:29:30,017 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:29:31,389 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:29:31,389 - ERROR - Failed to refresh access token
+2025-07-24 03:29:31,389 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:29:36,390 - INFO - Fetching historical data for /ES
+2025-07-24 03:29:38,859 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:29:40,483 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:29:40,483 - ERROR - Failed to refresh access token
+2025-07-24 03:29:40,483 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:29:45,483 - INFO - Fetching historical data for /ES
+2025-07-24 03:29:47,443 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:29:48,773 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:29:48,773 - ERROR - Failed to refresh access token
+2025-07-24 03:29:48,773 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:29:53,774 - INFO - Fetching historical data for /ES
+2025-07-24 03:29:55,280 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:29:56,885 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:29:56,885 - ERROR - Failed to refresh access token
+2025-07-24 03:29:56,885 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:30:01,887 - INFO - Fetching historical data for /ES
+2025-07-24 03:30:04,514 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:30:07,793 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:30:07,793 - ERROR - Failed to refresh access token
+2025-07-24 03:30:07,793 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:30:12,794 - INFO - Fetching historical data for /ES
+2025-07-24 03:30:14,058 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:30:15,689 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:30:15,689 - ERROR - Failed to refresh access token
+2025-07-24 03:30:15,689 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:30:20,689 - INFO - Fetching historical data for /ES
+2025-07-24 03:30:21,975 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:30:24,400 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:30:24,400 - ERROR - Failed to refresh access token
+2025-07-24 03:30:24,400 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:30:29,400 - INFO - Fetching historical data for /ES
+2025-07-24 03:30:30,649 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:30:32,273 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:30:32,273 - ERROR - Failed to refresh access token
+2025-07-24 03:30:32,273 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:30:37,274 - INFO - Fetching historical data for /ES
+2025-07-24 03:30:38,775 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:30:40,133 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:30:40,133 - ERROR - Failed to refresh access token
+2025-07-24 03:30:40,133 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:30:45,133 - INFO - Fetching historical data for /ES
+2025-07-24 03:30:47,815 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:30:49,164 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:30:49,164 - ERROR - Failed to refresh access token
+2025-07-24 03:30:49,164 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:30:54,165 - INFO - Fetching historical data for /ES
+2025-07-24 03:30:55,680 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:30:57,008 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:30:57,008 - ERROR - Failed to refresh access token
+2025-07-24 03:30:57,008 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:31:02,009 - INFO - Fetching historical data for /ES
+2025-07-24 03:31:03,521 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:31:04,842 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:31:04,842 - ERROR - Failed to refresh access token
+2025-07-24 03:31:04,842 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:31:09,842 - INFO - Fetching historical data for /ES
+2025-07-24 03:31:11,436 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:31:12,773 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:31:12,773 - ERROR - Failed to refresh access token
+2025-07-24 03:31:12,773 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:31:17,774 - INFO - Fetching historical data for /ES
+2025-07-24 03:31:19,299 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:31:20,618 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:31:20,618 - ERROR - Failed to refresh access token
+2025-07-24 03:31:20,618 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:31:25,619 - INFO - Fetching historical data for /ES
+2025-07-24 03:31:27,120 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:31:28,448 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:31:28,448 - ERROR - Failed to refresh access token
+2025-07-24 03:31:28,448 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:31:33,448 - INFO - Fetching historical data for /ES
+2025-07-24 03:31:35,010 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:31:36,345 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:31:36,346 - ERROR - Failed to refresh access token
+2025-07-24 03:31:36,346 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:31:41,347 - INFO - Fetching historical data for /ES
+2025-07-24 03:31:42,873 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:31:45,374 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:31:45,374 - ERROR - Failed to refresh access token
+2025-07-24 03:31:45,374 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:31:50,374 - INFO - Fetching historical data for /ES
+2025-07-24 03:31:51,884 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:31:53,223 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:31:53,223 - ERROR - Failed to refresh access token
+2025-07-24 03:31:53,223 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:31:58,224 - INFO - Fetching historical data for /ES
+2025-07-24 03:32:00,460 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:32:02,823 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:32:02,823 - ERROR - Failed to refresh access token
+2025-07-24 03:32:02,823 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:32:07,823 - INFO - Fetching historical data for /ES
+2025-07-24 03:32:09,061 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:32:10,693 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:32:10,693 - ERROR - Failed to refresh access token
+2025-07-24 03:32:10,693 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:32:15,694 - INFO - Fetching historical data for /ES
+2025-07-24 03:32:16,942 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:32:18,648 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:32:18,648 - ERROR - Failed to refresh access token
+2025-07-24 03:32:18,648 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:32:23,649 - INFO - Fetching historical data for /ES
+2025-07-24 03:32:25,986 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:32:32,854 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:32:32,854 - ERROR - Failed to refresh access token
+2025-07-24 03:32:32,854 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:32:37,855 - INFO - Fetching historical data for /ES
+2025-07-24 03:32:39,428 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:32:41,142 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:32:41,142 - ERROR - Failed to refresh access token
+2025-07-24 03:32:41,142 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:32:46,142 - INFO - Fetching historical data for /ES
+2025-07-24 03:32:48,621 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:32:50,423 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:32:50,423 - ERROR - Failed to refresh access token
+2025-07-24 03:32:50,423 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:32:55,423 - INFO - Fetching historical data for /ES
+2025-07-24 03:32:58,248 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:33:00,758 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:33:00,758 - ERROR - Failed to refresh access token
+2025-07-24 03:33:00,758 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:33:05,759 - INFO - Fetching historical data for /ES
+2025-07-24 03:33:07,030 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:33:09,124 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:33:09,124 - ERROR - Failed to refresh access token
+2025-07-24 03:33:09,124 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:33:14,124 - INFO - Fetching historical data for /ES
+2025-07-24 03:33:15,363 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:33:16,966 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:33:16,966 - ERROR - Failed to refresh access token
+2025-07-24 03:33:16,966 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:33:21,967 - INFO - Fetching historical data for /ES
+2025-07-24 03:33:24,473 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:33:26,125 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:33:26,125 - ERROR - Failed to refresh access token
+2025-07-24 03:33:26,125 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:33:31,125 - INFO - Fetching historical data for /ES
+2025-07-24 03:33:32,377 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:33:34,005 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:33:34,005 - ERROR - Failed to refresh access token
+2025-07-24 03:33:34,005 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:33:39,006 - INFO - Fetching historical data for /ES
+2025-07-24 03:33:40,232 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:33:41,941 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:33:41,941 - ERROR - Failed to refresh access token
+2025-07-24 03:33:41,941 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:33:46,942 - INFO - Fetching historical data for /ES
+2025-07-24 03:33:48,452 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:33:49,779 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:33:49,779 - ERROR - Failed to refresh access token
+2025-07-24 03:33:49,779 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:33:54,780 - INFO - Fetching historical data for /ES
+2025-07-24 03:33:57,652 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:33:59,004 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:33:59,004 - ERROR - Failed to refresh access token
+2025-07-24 03:33:59,004 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:34:04,004 - INFO - Fetching historical data for /ES
+2025-07-24 03:34:05,329 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:34:07,098 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:34:07,099 - ERROR - Failed to refresh access token
+2025-07-24 03:34:07,099 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:34:12,099 - INFO - Fetching historical data for /ES
+2025-07-24 03:34:13,348 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:34:15,197 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:34:15,197 - ERROR - Failed to refresh access token
+2025-07-24 03:34:15,197 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:34:20,198 - INFO - Fetching historical data for /ES
+2025-07-24 03:34:21,444 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:34:23,197 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:34:23,197 - ERROR - Failed to refresh access token
+2025-07-24 03:34:23,197 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:34:28,198 - INFO - Fetching historical data for /ES
+2025-07-24 03:34:29,454 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:34:31,055 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:34:31,055 - ERROR - Failed to refresh access token
+2025-07-24 03:34:31,055 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:34:36,055 - INFO - Fetching historical data for /ES
+2025-07-24 03:34:37,299 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:34:38,990 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:34:38,990 - ERROR - Failed to refresh access token
+2025-07-24 03:34:38,990 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:34:43,991 - INFO - Fetching historical data for /ES
+2025-07-24 03:34:45,344 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:34:46,690 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:34:46,690 - ERROR - Failed to refresh access token
+2025-07-24 03:34:46,690 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:34:51,690 - INFO - Fetching historical data for /ES
+2025-07-24 03:34:53,239 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:34:54,578 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:34:54,578 - ERROR - Failed to refresh access token
+2025-07-24 03:34:54,578 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:34:59,578 - INFO - Fetching historical data for /ES
+2025-07-24 03:35:01,121 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:35:02,920 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:35:02,920 - ERROR - Failed to refresh access token
+2025-07-24 03:35:02,920 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:35:07,921 - INFO - Fetching historical data for /ES
+2025-07-24 03:35:10,967 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:35:12,754 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:35:12,754 - ERROR - Failed to refresh access token
+2025-07-24 03:35:12,755 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:35:17,756 - INFO - Fetching historical data for /ES
+2025-07-24 03:35:19,312 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:35:20,661 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:35:20,661 - ERROR - Failed to refresh access token
+2025-07-24 03:35:20,662 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:35:25,662 - INFO - Fetching historical data for /ES
+2025-07-24 03:35:28,980 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:35:34,480 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:35:34,481 - ERROR - Failed to refresh access token
+2025-07-24 03:35:34,481 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:35:39,481 - INFO - Fetching historical data for /ES
+2025-07-24 03:35:42,277 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:35:43,629 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:35:43,629 - ERROR - Failed to refresh access token
+2025-07-24 03:35:43,629 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:35:48,630 - INFO - Fetching historical data for /ES
+2025-07-24 03:35:50,173 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:35:51,502 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:35:51,502 - ERROR - Failed to refresh access token
+2025-07-24 03:35:51,502 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:35:56,502 - INFO - Fetching historical data for /ES
+2025-07-24 03:35:58,015 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:35:59,371 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:35:59,371 - ERROR - Failed to refresh access token
+2025-07-24 03:35:59,371 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:36:04,371 - INFO - Fetching historical data for /ES
+2025-07-24 03:36:05,926 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:36:07,322 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:36:07,323 - ERROR - Failed to refresh access token
+2025-07-24 03:36:07,323 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:36:12,323 - INFO - Fetching historical data for /ES
+2025-07-24 03:36:13,833 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:36:15,187 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:36:15,187 - ERROR - Failed to refresh access token
+2025-07-24 03:36:15,187 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:36:20,188 - INFO - Fetching historical data for /ES
+2025-07-24 03:36:21,813 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:36:23,143 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:36:23,143 - ERROR - Failed to refresh access token
+2025-07-24 03:36:23,143 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:36:28,144 - INFO - Fetching historical data for /ES
+2025-07-24 03:36:29,414 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:36:30,770 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:36:30,770 - ERROR - Failed to refresh access token
+2025-07-24 03:36:30,770 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:36:35,771 - INFO - Fetching historical data for /ES
+2025-07-24 03:36:37,351 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:36:38,726 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:36:38,726 - ERROR - Failed to refresh access token
+2025-07-24 03:36:38,726 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:36:43,727 - INFO - Fetching historical data for /ES
+2025-07-24 03:36:45,250 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:36:46,601 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:36:46,602 - ERROR - Failed to refresh access token
+2025-07-24 03:36:46,602 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:36:51,603 - INFO - Fetching historical data for /ES
+2025-07-24 03:36:53,102 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:36:54,557 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:36:54,557 - ERROR - Failed to refresh access token
+2025-07-24 03:36:54,557 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:36:59,558 - INFO - Fetching historical data for /ES
+2025-07-24 03:37:01,173 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:37:02,504 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:37:02,504 - ERROR - Failed to refresh access token
+2025-07-24 03:37:02,504 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:37:07,504 - INFO - Fetching historical data for /ES
+2025-07-24 03:37:09,732 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:37:11,530 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:37:11,531 - ERROR - Failed to refresh access token
+2025-07-24 03:37:11,531 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:37:16,532 - INFO - Fetching historical data for /ES
+2025-07-24 03:37:18,034 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:37:19,651 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:37:19,652 - ERROR - Failed to refresh access token
+2025-07-24 03:37:19,652 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:37:24,652 - INFO - Fetching historical data for /ES
+2025-07-24 03:37:25,905 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:37:29,829 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:37:29,829 - ERROR - Failed to refresh access token
+2025-07-24 03:37:29,829 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:37:34,830 - INFO - Fetching historical data for /ES
+2025-07-24 03:37:36,073 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:37:37,539 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:37:37,539 - ERROR - Failed to refresh access token
+2025-07-24 03:37:37,539 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:37:42,540 - INFO - Fetching historical data for /ES
+2025-07-24 03:37:44,050 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:37:46,463 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:37:46,463 - ERROR - Failed to refresh access token
+2025-07-24 03:37:46,463 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:37:51,464 - INFO - Fetching historical data for /ES
+2025-07-24 03:37:52,955 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:37:54,610 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:37:54,610 - ERROR - Failed to refresh access token
+2025-07-24 03:37:54,610 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:37:59,611 - INFO - Fetching historical data for /ES
+2025-07-24 03:38:00,968 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:38:02,865 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:38:02,865 - ERROR - Failed to refresh access token
+2025-07-24 03:38:02,865 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:38:07,866 - INFO - Fetching historical data for /ES
+2025-07-24 03:38:10,216 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:38:11,682 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:38:11,682 - ERROR - Failed to refresh access token
+2025-07-24 03:38:11,682 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:38:16,683 - INFO - Fetching historical data for /ES
+2025-07-24 03:38:18,545 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:38:20,252 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:38:20,252 - ERROR - Failed to refresh access token
+2025-07-24 03:38:20,252 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:38:25,253 - INFO - Fetching historical data for /ES
+2025-07-24 03:38:28,945 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:38:31,367 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:38:31,367 - ERROR - Failed to refresh access token
+2025-07-24 03:38:31,367 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:38:36,367 - INFO - Fetching historical data for /ES
+2025-07-24 03:38:37,885 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:38:39,239 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:38:39,239 - ERROR - Failed to refresh access token
+2025-07-24 03:38:39,239 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:38:44,240 - INFO - Fetching historical data for /ES
+2025-07-24 03:38:45,779 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:38:47,107 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:38:47,108 - ERROR - Failed to refresh access token
+2025-07-24 03:38:47,108 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:38:52,109 - INFO - Fetching historical data for /ES
+2025-07-24 03:38:54,347 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:38:56,033 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:38:56,033 - ERROR - Failed to refresh access token
+2025-07-24 03:38:56,034 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:39:01,035 - INFO - Fetching historical data for /ES
+2025-07-24 03:39:02,922 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:39:04,270 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:39:04,270 - ERROR - Failed to refresh access token
+2025-07-24 03:39:04,270 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:39:09,271 - INFO - Fetching historical data for /ES
+2025-07-24 03:39:11,784 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:39:13,168 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:39:13,168 - ERROR - Failed to refresh access token
+2025-07-24 03:39:13,168 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:39:18,169 - INFO - Fetching historical data for /ES
+2025-07-24 03:39:19,696 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:39:21,062 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:39:21,062 - ERROR - Failed to refresh access token
+2025-07-24 03:39:21,062 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:39:26,063 - INFO - Fetching historical data for /ES
+2025-07-24 03:39:27,570 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:39:28,899 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:39:28,899 - ERROR - Failed to refresh access token
+2025-07-24 03:39:28,900 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:39:33,900 - INFO - Fetching historical data for /ES
+2025-07-24 03:39:35,484 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:39:37,105 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:39:37,105 - ERROR - Failed to refresh access token
+2025-07-24 03:39:37,105 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:39:42,106 - INFO - Fetching historical data for /ES
+2025-07-24 03:39:43,351 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:39:44,965 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:39:44,965 - ERROR - Failed to refresh access token
+2025-07-24 03:39:44,965 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:39:49,966 - INFO - Fetching historical data for /ES
+2025-07-24 03:39:51,300 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:39:53,018 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:39:53,018 - ERROR - Failed to refresh access token
+2025-07-24 03:39:53,018 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:39:58,019 - INFO - Fetching historical data for /ES
+2025-07-24 03:39:59,331 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:40:00,676 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:40:00,676 - ERROR - Failed to refresh access token
+2025-07-24 03:40:00,676 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:40:05,677 - INFO - Fetching historical data for /ES
+2025-07-24 03:40:06,919 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:40:08,537 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:40:08,538 - ERROR - Failed to refresh access token
+2025-07-24 03:40:08,538 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:40:13,538 - INFO - Fetching historical data for /ES
+2025-07-24 03:40:14,871 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:40:16,926 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:40:16,926 - ERROR - Failed to refresh access token
+2025-07-24 03:40:16,926 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:40:21,927 - INFO - Fetching historical data for /ES
+2025-07-24 03:40:27,510 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:40:28,843 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:40:28,843 - ERROR - Failed to refresh access token
+2025-07-24 03:40:28,843 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:40:33,843 - INFO - Fetching historical data for /ES
+2025-07-24 03:40:35,337 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:40:36,718 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:40:36,718 - ERROR - Failed to refresh access token
+2025-07-24 03:40:36,718 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:40:41,718 - INFO - Fetching historical data for /ES
+2025-07-24 03:40:43,220 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:40:44,565 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:40:44,565 - ERROR - Failed to refresh access token
+2025-07-24 03:40:44,565 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:40:49,565 - INFO - Fetching historical data for /ES
+2025-07-24 03:40:51,166 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:40:52,849 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:40:52,849 - ERROR - Failed to refresh access token
+2025-07-24 03:40:52,849 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:40:57,850 - INFO - Fetching historical data for /ES
+2025-07-24 03:40:59,349 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:41:00,683 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:41:00,684 - ERROR - Failed to refresh access token
+2025-07-24 03:41:00,684 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:41:05,684 - INFO - Fetching historical data for /ES
+2025-07-24 03:41:07,978 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:41:10,880 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:41:10,880 - ERROR - Failed to refresh access token
+2025-07-24 03:41:10,880 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:41:15,881 - INFO - Fetching historical data for /ES
+2025-07-24 03:41:18,669 - WARNING - Access token expired, attempting to refresh...
+2025-07-24 03:41:20,000 - ERROR - Failed to refresh token: 400 - {"error":"unsupported_token_type","error_description":"400 Bad Request: \"{\"error_description\":\"java.lang.IllegalArgumentException: String length must be a multiple of four.\",\"error\":\"invalid_grant\"}\""}
+2025-07-24 03:41:20,000 - ERROR - Failed to refresh access token
+2025-07-24 03:41:20,000 - ERROR - Error in getting historical data for /ES: Authentication failed and token refresh failed
+2025-07-24 03:41:25,001 - INFO - Fetching historical data for /ES
