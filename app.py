@@ -165,6 +165,39 @@ def get_ticker():
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 500
 
+@app.route('/api/delete-ticker', methods=['DELETE'])
+@token_required
+def delete_ticker():
+    try:
+        data = request.get_json()
+        strategy = data.get('strategy')
+        symbol_key = data.get('symbol')
+
+        if strategy == 'ema':
+            saved_data = load_json(EMA_TICKER_DATA_PATH)
+            
+            # in case of empty data
+            if not saved_data:
+                return jsonify({'success': True, 'data': []}), 200
+            
+            # Check if symbol exists in data
+            if symbol_key not in saved_data:
+                return jsonify({'success': False, 'error': 'Symbol not found'}), 404
+            
+            # Store the deleted data before removing
+            deleted_data = saved_data[symbol_key]
+            
+            # Delete the symbol from data
+            del saved_data[symbol_key]
+            
+            # Save the updated data back to file
+            save_json(EMA_TICKER_DATA_PATH, saved_data)
+            
+            return jsonify({'success': True, 'data': saved_data}), 200
+
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
+
 @app.route('/api/refresh-token-link', methods=['POST'])
 @token_required
 def refresh_link():
