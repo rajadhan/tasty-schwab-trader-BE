@@ -18,7 +18,8 @@ JWT_EXPIRATION_MINUTES = 60 * 24 * 30
 ADMIN_CREDENTIALS_PATH = os.path.join('credentials', 'admin_credentials.json')
 SYMBOL_DATA_PATH = os.path.join('consts', 'symbol.json')
 TREND_DATA_PATH = os.path.join('consts', 'trend_line.json')
-TICKER_DATA_PATH = os.path.join('settings', 'ticker_data.json')
+EMA_TICKER_DATA_PATH = os.path.join('settings', 'ema_ticker_data.json')
+SUPER_TICKER_DATA_PATH = os.path.join('settins', 'super_ticker_data.json')
 REFRESH_TOKEN_LINK = os.path.join('jsons', 'refresh_token_link.json')
 
 # ================== JSON Utilities ===============
@@ -41,7 +42,6 @@ trend_data = load_json(TREND_DATA_PATH)
 # ================== JWT Auth Utilities ===================
 
 def generate_token(email, password):
-    print("eifjeifjioejo", datetime.utcnow())
     payload = {
         'email': email,
         'password': password,
@@ -85,7 +85,10 @@ def login():
 
         if email == admin_credentials.get('email') and password == admin_credentials.get('password'):
             token = generate_token(email, password)
-            return jsonify({'success': True, 'token': token}), 200
+
+            refresh_token_path = load_json(REFRESH_TOKEN_LINK);
+            refresh_token_link = refresh_token_path.get('refresh_token_link', '')
+            return jsonify({'success': True, 'token': token, 'refreshToken': refresh_token_link}), 200
         else:
             return jsonify({'success': False, 'message': 'Invalid email or password'}), 401
     except Exception as e:
@@ -100,48 +103,47 @@ def add_ticker():
         if not data:
             return jsonify({'success': False, 'error': 'No data provided'}), 400
 
-        if (data.get('symbol') in symbol_data.get('symbol') and 
-            data.get('trend_line_1') in trend_data.get('trend') and 
-            data.get('trend_line_2') in trend_data.get('trend') and 
-            data.get('period_1') and data.get('period_2') and 
-            data.get('timeframe') and 
-            data.get('schwab_quantity') and 
-            data.get('tastytrade_quantity') and 
-            isinstance(data.get('trade_enabled'), bool)):
+        if (data.get("strategy") == "ema"):
+            if (data.get('symbol') in symbol_data.get('symbol') and 
+                data.get('trend_line_1') in trend_data.get('trend') and 
+                data.get('trend_line_2') in trend_data.get('trend') and 
+                data.get('period_1') and data.get('period_2') and 
+                data.get('timeframe') and 
+                data.get('schwab_quantity') and 
+                data.get('tastytrade_quantity') and 
+                isinstance(data.get('trade_enabled'), bool)):
 
-            # Convert timeframe to desired format
-            raw_timeframe = str(data.get('timeframe'))
+                # Convert timeframe to desired format
+                raw_timeframe = str(data.get('timeframe'))
+                if raw_timeframe.endswith("Min"):
+                    formatted_timeframe = raw_timeframe.replace("Min", "")
+                elif raw_timeframe.endswith("Hour"):
+                    formatted_timeframe = raw_timeframe.replace("Hour", "h")
+                elif raw_timeframe.endswith("Day"):
+                    formatted_timeframe = raw_timeframe.replace("Day", "d")
+                else:
+                    formatted_timeframe = raw_timeframe  # e.g., 100t remains unchanged
 
-            if raw_timeframe.endswith("Min"):
-                formatted_timeframe = raw_timeframe.replace("Min", "")
-            elif raw_timeframe.endswith("Hour"):
-                formatted_timeframe = raw_timeframe.replace("Hour", "h")
-            elif raw_timeframe.endswith("Day"):
-                formatted_timeframe = raw_timeframe.replace("Day", "d")
+                # Load current data
+                saved_data = load_json(EMA_TICKER_DATA_PATH)
+                symbol_key = f"{data.get('symbol')}"
+                formatted = [
+                    formatted_timeframe,
+                    str(data.get('schwab_quantity')),
+                    str(data.get('trade_enabled')).upper(),
+                    str(data.get('tastytrade_quantity')),
+                    str(data.get('trend_line_1')),
+                    str(data.get('period_1')),
+                    str(data.get('trend_line_2')),
+                    str(data.get('period_2'))
+                ]
+
+                saved_data[symbol_key] = formatted
+                save_json(EMA_TICKER_DATA_PATH, saved_data)
+                return jsonify({'success': True, 'data': saved_data}), 201
             else:
-                formatted_timeframe = raw_timeframe  # e.g., 100t remains unchanged
-
-            # Load current data
-            saved_data = load_json(TICKER_DATA_PATH)
-
-            symbol_key = f"{data.get('symbol')}"
-            formatted = [
-                formatted_timeframe,
-                str(data.get('schwab_quantity')),
-                str(data.get('trade_enabled')).upper(),
-                str(data.get('tastytrade_quantity')),
-                str(data.get('trend_line_1')),
-                str(data.get('period_1')),
-                str(data.get('trend_line_2')),
-                str(data.get('period_2'))
-            ]
-
-            saved_data[symbol_key] = formatted
-            save_json(TICKER_DATA_PATH, saved_data)
-
-            return jsonify({'success': True}), 201
-        else:
-            return jsonify({'success': False, 'error': 'Invalid input data'}), 400
+                return jsonify({'success': False, 'error': 'Invalid input data'}), 400
+        # else: 
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 500
 
@@ -149,49 +151,16 @@ def add_ticker():
 @token_required
 def get_ticker():
     try:
-        data = load_json(TICKER_DATA_PATH)
-        if not data:
-            return jsonify({'success': True, 'data': []}), 200
+        strategy = request.args.get('strategy') # Get query from request
 
-        result = []
+        if strategy == 'ema': # In case of EMA crossover strategy
+            data = load_json(EMA_TICKER_DATA_PATH)
+            
+            # In case of no data
+            if not data:
+                return jsonify({'success': True, 'data': []}), 200
 
-        for symbol_key, values in data.items():
-            if not isinstance(values, list) or len(values) < 8:
-                # Skip malformed entries
-                continue
-
-            # symbol = symbol_key.lstrip('/')  # Remove initial slash ("/MSTR" -> "MSTR")
-
-            raw_timeframe = values[0]
-
-            def reverse_timeframe(tf):
-                if tf.endswith('h'):
-                    return tf.replace('h', 'Hour')
-                elif tf.endswith('d'):
-                    return tf.replace('d', 'Day')
-                elif tf.endswith('t'):
-                    return tf  # Leave tick unchanged
-                elif tf.isdigit():
-                    return tf + 'Min'
-                return tf  # fallback
-
-            formatted_timeframe = reverse_timeframe(raw_timeframe)
-
-            ticker = {
-                "symbol": symbol_key,
-                "timeframe": formatted_timeframe,
-                "schwab_quantity": int(values[1]),
-                "trade_enabled": values[2].upper() == "TRUE",
-                "tastytrade_quantity": int(values[3]),
-                "trend_line_1": values[4],
-                "period_1": int(values[5]),
-                "trend_line_2": values[6],
-                "period_2": int(values[7])
-            }
-
-            result.append(ticker)
-
-        return jsonify({'success': True, 'data': result}), 200
+            return jsonify({'success': True, 'data': data}), 200
 
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 500
@@ -210,7 +179,7 @@ def refresh_link():
 @token_required
 def start_trading():
     try:
-        data = load_json(TICKER_DATA_PATH)
+        data = load_json(EMA_TICKER_DATA_PATH)
         if not data:
             return jsonify({'success': False, 'error': 'No ticker data found'}), 404
 

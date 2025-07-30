@@ -58,6 +58,7 @@ def get_refresh_token(redirect_link):
         )
         print('4')
         response = response.json()
+        print("response", response)
         refresh_token = response["refresh_token"]
         access_token = response["access_token"]
 
