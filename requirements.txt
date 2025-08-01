@@ -1,11 +1,9 @@
-Flask
+flask
 flask-cors
 python-dotenv
 PyJWT
 pandas==1.5.3
-pandas_market_calendars
+pandas-market-calendars
 requests
-ta-lib      # if used
+TA-Lib
 schedule
-datetime
-jwt

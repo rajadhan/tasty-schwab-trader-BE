@@ -86,7 +86,6 @@ def login():
 
         if email == admin_credentials.get('email') and password == admin_credentials.get('password'):
             token = generate_token(email, password)
-
             refresh_token_path = load_json(REFRESH_TOKEN_LINK);
             refresh_token_link = refresh_token_path.get('refresh_token_link', '')
             return jsonify({'success': True, 'token': token, 'refreshToken': refresh_token_link}), 200
