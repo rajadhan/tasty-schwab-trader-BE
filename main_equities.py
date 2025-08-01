@@ -132,8 +132,8 @@ def supertrend_strategy(ticker, logger, get_strategy_params, get_historical_data
         # Example expected params (can be adjusted):
         timeframe = params.get("timeframe", "15min")
         trade_enabled = params.get("trade_enabled", True)
-        qty_schwab = int(params.get("quantity_schwab", 10))
-        qty_tastytrade = int(params.get("quantity_tastytrade", 10))
+        qty_schwab = int(params.get("schwab_quantity", 10))
+        qty_tastytrade = int(params.get("tastytrade_quantity", 10))
         # MA params
         short_ma_len = int(params.get("short_ma_length", 9))
         short_ma_type = params.get("short_ma_type", "EMA")
@@ -148,9 +148,9 @@ def supertrend_strategy(ticker, logger, get_strategy_params, get_historical_data
         # Fibonacci & Support/Demand
         fibonacci_enabled = bool(params.get("fibonacci_enabled", False))
         support_demand_enabled = bool(params.get("support_demand_enabled", False))
-        timezone_str = params.get("timezone", "America/New_York")
-        show_volume_bubbles = bool(params.get("show_volume_bubbles", False))
-        show_bubbles_price = bool(params.get("show_bubbles_price", False))
+        # timezone_str = params.get("timezone", "America/New_York")
+        # show_volume_bubbles = bool(params.get("show_volume_bubbles", False))
+        # show_bubbles_price = bool(params.get("show_bubbles_price", False))
 
         trades_file = f"trades/{ticker[1:] if ticker.startswith('/') else ticker}.json"
 

@@ -7,6 +7,7 @@ import os
 from time import sleep
 from datetime import datetime, timezone, timedelta
 from pytz import timezone as pytz_timezone
+import json
 
 
 def create_header(auth_type, logger=None):
@@ -41,9 +42,18 @@ def create_header(auth_type, logger=None):
 def get_refresh_token(redirect_link):
     try:
         print('1')
-        code = (
-            f'{redirect_link[redirect_link.index("code=")+5:redirect_link.index("%40")]}@'
-        )
+        # Fix the code extraction logic
+        if "code=" not in redirect_link:
+            print("No authorization code found in link")
+            return False
+            
+        # Extract the authorization code properly
+        code_start = redirect_link.index("code=") + 5
+        code_end = redirect_link.find("&", code_start)
+        if code_end == -1:
+            code_end = len(redirect_link)
+        
+        code = redirect_link[code_start:code_end]
         print('2')
 
         data = {
@@ -57,10 +67,26 @@ def get_refresh_token(redirect_link):
             authtoken_link, headers=create_header("Basic"), data=data
         )
         print('4')
-        response = response.json()
-        print("response", response)
-        refresh_token = response["refresh_token"]
-        access_token = response["access_token"]
+        
+        # Check HTTP status code first
+        if response.status_code != 200:
+            print(f"API request failed with status {response.status_code}: {response.text}")
+            return False
+            
+        response_data = response.json()
+        print("response", response_data)
+        
+        # Check for error in response
+        if "error" in response_data:
+            print(f"API returned error: {response_data['error']}")
+            return False
+            
+        refresh_token = response_data.get("refresh_token")
+        access_token = response_data.get("access_token")
+        
+        if not refresh_token or not access_token:
+            print("Missing tokens in response")
+            return False
 
         with open(refresh_token_path, "w") as file:
             file.write(refresh_token)
@@ -71,7 +97,7 @@ def get_refresh_token(redirect_link):
         return True
 
     except Exception as e:
-        print(f"Error in getting refresh token = {str(e)} {response}")
+        print(f"Error in getting refresh token = {str(e)}")
         return False
 
 def refresh_access_token(logger=None):
@@ -479,10 +505,19 @@ def validate_refresh_link(link, REFRESH_TOKEN_LINK):
     Returns (bool, str) for success status and message.
     """
     try:
+        # Validate link format
+        if not link or not isinstance(link, str):
+            return False, "Invalid link format"
+            
+        if "code=" not in link:
+            return False, "No authorization code found in link"
+            
         is_valid = get_refresh_token(link)
         if is_valid:
+            # Save the link as JSON with proper structure
+            link_data = {"refresh_token_link": link}
             with open(REFRESH_TOKEN_LINK, "w") as file:
-                json.dump(link, file, indent=2)
+                json.dump(link_data, file, indent=2)
             return True, "Token refreshed successfully"
         else:
             return False, "Link is expired or invalid"

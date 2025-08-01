@@ -19,7 +19,8 @@ ADMIN_CREDENTIALS_PATH = os.path.join('credentials', 'admin_credentials.json')
 SYMBOL_DATA_PATH = os.path.join('consts', 'symbol.json')
 TREND_DATA_PATH = os.path.join('consts', 'trend_line.json')
 EMA_TICKER_DATA_PATH = os.path.join('settings', 'ema_ticker_data.json')
-SUPER_TICKER_DATA_PATH = os.path.join('settins', 'super_ticker_data.json')
+ZERODAY_TICKER_DATA_PATH = os.path.join('settings', 'zeroday_ticker_data.json')
+SUPER_TICKER_DATA_PATH = os.path.join('settings', 'super_ticker_data.json')
 REFRESH_TOKEN_LINK = os.path.join('jsons', 'refresh_token_link.json')
 
 # ================== JSON Utilities ===============
@@ -102,15 +103,14 @@ def add_ticker():
         data = request.json
         if not data:
             return jsonify({'success': False, 'error': 'No data provided'}), 400
-
-        if (data.get("strategy") == "ema"):
+        if (data.get("strategy") == "ema" or data.get("strategy") == "zeroday"):
             if (data.get('symbol') in symbol_data.get('symbol') and 
                 data.get('trend_line_1') in trend_data.get('trend') and 
                 data.get('trend_line_2') in trend_data.get('trend') and 
                 data.get('period_1') and data.get('period_2') and 
                 data.get('timeframe') and 
-                data.get('schwab_quantity') and 
-                data.get('tastytrade_quantity') and 
+                # data.get('schwab_quantity') and 
+                # data.get('tastytrade_quantity') and 
                 isinstance(data.get('trade_enabled'), bool)):
 
                 # Convert timeframe to desired format
@@ -124,8 +124,6 @@ def add_ticker():
                 else:
                     formatted_timeframe = raw_timeframe  # e.g., 100t remains unchanged
 
-                # Load current data
-                saved_data = load_json(EMA_TICKER_DATA_PATH)
                 symbol_key = f"{data.get('symbol')}"
                 formatted = [
                     formatted_timeframe,
@@ -138,12 +136,52 @@ def add_ticker():
                     str(data.get('period_2'))
                 ]
 
-                saved_data[symbol_key] = formatted
-                save_json(EMA_TICKER_DATA_PATH, saved_data)
-                return jsonify({'success': True, 'data': saved_data}), 201
             else:
                 return jsonify({'success': False, 'error': 'Invalid input data'}), 400
-        # else: 
+        elif data.get("strategy") == "supertrend":
+            # Convert timeframe to desired format
+            raw_timeframe = str(data.get('timeframe'))
+            if raw_timeframe.endswith("Min"):
+                formatted_timeframe = raw_timeframe.replace("Min", "")
+            elif raw_timeframe.endswith("Hour"):
+                formatted_timeframe = raw_timeframe.replace("Hour", "h")
+            elif raw_timeframe.endswith("Day"):
+                formatted_timeframe = raw_timeframe.replace("Day", "d")
+            else:
+                formatted_timeframe = raw_timeframe  # e.g., 100t remains unchanged
+            symbol_key = f"{data.get('symbol')}"
+            formatted = [
+                formatted_timeframe,
+                str(data.get('schwab_quantity')),
+                str(data.get('trade_enabled')).upper(),
+                str(data.get('tastytrade_quantity')),
+                str(data.get('short_ma_length')),
+                str(data.get('short_ma_type')),
+                str(data.get('mid_ma_length')),
+                str(data.get('mid_ma_type')),
+                str(data.get('long_ma_length')),
+                str(data.get('long_ma_type')),
+                str(data.get('zigzag_percent_reversal')),
+                str(data.get('atr_length')),
+                str(data.get('zigzag_atr_multiple')),
+                str(data.get('fibonacci_enabled')),
+                str(data.get('support_demand_enabled')),
+            ]
+        # Load current data
+        if (data.get("strategy") =="ema"):
+            saved_data = load_json(EMA_TICKER_DATA_PATH)
+            saved_data[symbol_key] = formatted
+            save_json(EMA_TICKER_DATA_PATH, saved_data)
+        elif (data.get("strategy") == "zeroday"):
+            saved_data = load_json(ZERODAY_TICKER_DATA_PATH)
+            saved_data[symbol_key] = formatted
+            save_json(ZERODAY_TICKER_DATA_PATH, saved_data)
+        elif (data.get("strategy") == "supertrend"):
+            saved_data = load_json(SUPER_TICKER_DATA_PATH)
+            saved_data[symbol_key] = formatted
+            save_json(SUPER_TICKER_DATA_PATH, saved_data)
+        return jsonify({'success': True, 'data': saved_data}), 201
+
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 500
 
@@ -155,12 +193,16 @@ def get_ticker():
 
         if strategy == 'ema': # In case of EMA crossover strategy
             data = load_json(EMA_TICKER_DATA_PATH)
+        elif strategy == 'zeroday': # In case of 0 day SPX strategy
+            data = load_json(ZERODAY_TICKER_DATA_PATH)
+        elif strategy == 'supertrend': # In case of Supertrend
+            data = load_json(SUPER_TICKER_DATA_PATH)
             
-            # In case of no data
-            if not data:
-                return jsonify({'success': True, 'data': []}), 200
+        # In case of no data
+        if not data:
+            return jsonify({'success': True, 'data': []}), 200
 
-            return jsonify({'success': True, 'data': data}), 200
+        return jsonify({'success': True, 'data': data}), 200
 
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 500
@@ -175,25 +217,31 @@ def delete_ticker():
 
         if strategy == 'ema':
             saved_data = load_json(EMA_TICKER_DATA_PATH)
+        elif strategy == 'zeroday':
+            saved_data = load_json(ZERODAY_TICKER_DATA_PATH)
+        elif strategy == 'supertrend':
+            saved_data = load_json(SUPER_TICKER_DATA_PATH)
             
-            # in case of empty data
-            if not saved_data:
-                return jsonify({'success': True, 'data': []}), 200
-            
-            # Check if symbol exists in data
-            if symbol_key not in saved_data:
-                return jsonify({'success': False, 'error': 'Symbol not found'}), 404
-            
-            # Store the deleted data before removing
-            deleted_data = saved_data[symbol_key]
-            
-            # Delete the symbol from data
-            del saved_data[symbol_key]
-            
-            # Save the updated data back to file
+        # in case of empty data
+        if not saved_data:
+            return jsonify({'success': True, 'data': []}), 200
+        
+        # Check if symbol exists in data
+        if symbol_key not in saved_data:
+            return jsonify({'success': False, 'error': 'Symbol not found'}), 404
+        
+        # Delete the symbol from data
+        del saved_data[symbol_key]
+        
+        # Save the updated data back to file
+        if strategy == 'ema':
             save_json(EMA_TICKER_DATA_PATH, saved_data)
-            
-            return jsonify({'success': True, 'data': saved_data}), 200
+        elif strategy == 'zeroday':
+            save_json(ZERODAY_TICKER_DATA_PATH, saved_data)
+        elif strategy == 'supertrend':
+            save_json(SUPER_TICKER_DATA_PATH, saved_data)
+        
+        return jsonify({'success': True, 'data': saved_data}), 200
 
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 500
