@@ -8,13 +8,15 @@ from time import sleep
 from datetime import datetime, timezone, timedelta
 from pytz import timezone as pytz_timezone
 import json
-
+from urllib.parse import unquote
 
 def create_header(auth_type, logger=None):
     try:
         if auth_type == "Basic":
+            credentials = f"{api_key}:{api_secret}"
+            encoded_credentials = base64.b64encode(credentials.encode("utf-8")).decode('utf-8')
             return {
-                "Authorization": f'Basic {base64.b64encode(bytes(f"{api_key}:{api_secret}", "utf-8")).decode("utf-8")}',
+                "Authorization": f'Basic {encoded_credentials}',
                 "Content-Type": "application/x-www-form-urlencoded",
             }
         elif auth_type == "Bearer":
@@ -41,7 +43,6 @@ def create_header(auth_type, logger=None):
 
 def get_refresh_token(redirect_link):
     try:
-        print('1')
         # Fix the code extraction logic
         if "code=" not in redirect_link:
             print("No authorization code found in link")
@@ -52,21 +53,18 @@ def get_refresh_token(redirect_link):
         code_end = redirect_link.find("&", code_start)
         if code_end == -1:
             code_end = len(redirect_link)
-        
         code = redirect_link[code_start:code_end]
-        print('2')
+        code = unquote(code)
 
         data = {
             "grant_type": "authorization_code",
             "code": code,
             "redirect_uri": api_callback_url,
         }
-        print('3')
 
         response = requests.post(
-            authtoken_link, headers=create_header("Basic"), data=data
+            authtoken_link, data=data, headers=create_header("Basic")
         )
-        print('4')
         
         # Check HTTP status code first
         if response.status_code != 200:
@@ -74,7 +72,6 @@ def get_refresh_token(redirect_link):
             return False
             
         response_data = response.json()
-        print("response", response_data)
         
         # Check for error in response
         if "error" in response_data:
