@@ -7,10 +7,14 @@ account_username = "tim30mcke"
 account_password = "Sweeny07!"
 account_id = "13241612"
 
+# Tasty Trade credentials
 tastytrade_link = "https://api.tastyworks.com"
 
 username = "tmckenna@boardwalkag.com"    # tastytrade
 password = "Boardwalk2024!"              # tastytrade
+
+tasty_client_secret = "94cf0194a470e5f376284dcc0baa444b37b534d9"
+tasty_client_id = "f1ff7542-2fa9-446c-a57e-22f95108e02c"
 
 account_id = "5WX28756"
 # MSTR, TSLA, NVDA, /MES, /ES, /MNQ, /NQ, /MRTY, /RTY
@@ -24,7 +28,7 @@ symbols = [
     "/NQ",
     "/M2K",
     "/RTY",
-]  #  removed
+]   # removed
 
 # TOKEN PATHS
 access_token_path = "tokens/access_token.txt"

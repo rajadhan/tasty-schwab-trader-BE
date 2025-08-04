@@ -123,6 +123,7 @@ def ema_strategy(ticker, logger):
 # place_order_api(ticker, quantity, action, account_id, logger, order_type) -> order_id int/str
 # wilders_smoothing(df_or_series, length) -> pd.Series of smoothed data
 
+
 def supertrend_strategy(ticker, logger, get_strategy_params, get_historical_data, place_order_api, account_id):
     try:
         logger.info(f"{ticker} strategy started at {datetime.now(pytz.utc)}")
