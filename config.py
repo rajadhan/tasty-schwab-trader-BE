@@ -52,3 +52,7 @@ link_sheet = "Token_Link"
 
 
 time_zone = "US/Eastern"
+
+EMA_TICKER_DATA_PATH = os.path.join('settings', 'ema_ticker_data.json')
+SUPER_TICKER_DATA_PATH = os.path.join('settings', 'super_ticker_data.json')
+ZERODAY_TICKER_DATA_PATH = os.path.join('settings', 'zeroday_ticker_data.json')

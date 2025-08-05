@@ -3,9 +3,8 @@ from flask_cors import CORS
 import json, os, jwt, datetime
 from functools import wraps
 from main_equities import run_every_week
-import sys
-import requests
 from schwab.client import *
+from utils import EMA_TICKER_DATA_PATH, SUPER_TICKER_DATA_PATH, ZERODAY_TICKER_DATA_PATH, ticker_data_path_for_strategy
 
 app = Flask(__name__)
 CORS(app)
@@ -18,9 +17,6 @@ JWT_EXPIRATION_MINUTES = 60 * 24 * 30
 ADMIN_CREDENTIALS_PATH = os.path.join('credentials', 'admin_credentials.json')
 SYMBOL_DATA_PATH = os.path.join('consts', 'symbol.json')
 TREND_DATA_PATH = os.path.join('consts', 'trend_line.json')
-EMA_TICKER_DATA_PATH = os.path.join('settings', 'ema_ticker_data.json')
-ZERODAY_TICKER_DATA_PATH = os.path.join('settings', 'zeroday_ticker_data.json')
-SUPER_TICKER_DATA_PATH = os.path.join('settings', 'super_ticker_data.json')
 REFRESH_TOKEN_LINK = os.path.join('jsons', 'refresh_token_link.json')
 
 # ================== JSON Utilities ===============
@@ -102,6 +98,7 @@ def add_ticker():
         data = request.json
         if not data:
             return jsonify({'success': False, 'error': 'No data provided'}), 400
+        
         if (data.get("strategy") == "ema" or data.get("strategy") == "zeroday"):
             if (data.get('symbol') in symbol_data.get('symbol') and 
                 data.get('trend_line_1') in trend_data.get('trend') and 
@@ -167,20 +164,13 @@ def add_ticker():
                 str(data.get('support_demand_enabled')),
             ]
         # Load current data
-        if (data.get("strategy") =="ema"):
-            saved_data = load_json(EMA_TICKER_DATA_PATH)
-            saved_data[symbol_key] = formatted
-            save_json(EMA_TICKER_DATA_PATH, saved_data)
-        elif (data.get("strategy") == "zeroday"):
-            saved_data = load_json(ZERODAY_TICKER_DATA_PATH)
-            saved_data[symbol_key] = formatted
-            save_json(ZERODAY_TICKER_DATA_PATH, saved_data)
-        elif (data.get("strategy") == "supertrend"):
-            saved_data = load_json(SUPER_TICKER_DATA_PATH)
-            saved_data[symbol_key] = formatted
-            save_json(SUPER_TICKER_DATA_PATH, saved_data)
-        return jsonify({'success': True, 'data': saved_data}), 201
+        strategy = data.get("strategy")
+        TICKER_DATA_PATH = ticker_data_path_for_strategy(strategy)
+        saved_data = load_json(TICKER_DATA_PATH)
+        saved_data[symbol_key] = formatted
+        save_json(TICKER_DATA_PATH, saved_data)
 
+        return jsonify({'success': True, 'data': saved_data}), 201
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 500
 
@@ -189,20 +179,16 @@ def add_ticker():
 def get_ticker():
     try:
         strategy = request.args.get('strategy') # Get query from request
-
-        if strategy == 'ema': # In case of EMA crossover strategy
-            data = load_json(EMA_TICKER_DATA_PATH)
-        elif strategy == 'zeroday': # In case of 0 day SPX strategy
-            data = load_json(ZERODAY_TICKER_DATA_PATH)
-        elif strategy == 'supertrend': # In case of Supertrend
-            data = load_json(SUPER_TICKER_DATA_PATH)
+        
+        # Load current data
+        TICKER_DATA_PATH = ticker_data_path_for_strategy(strategy)
+        data = load_json(TICKER_DATA_PATH)
             
         # In case of no data
         if not data:
             return jsonify({'success': True, 'data': []}), 200
 
         return jsonify({'success': True, 'data': data}), 200
-
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 500
 
@@ -214,12 +200,9 @@ def delete_ticker():
         strategy = data.get('strategy')
         symbol_key = data.get('symbol')
 
-        if strategy == 'ema':
-            saved_data = load_json(EMA_TICKER_DATA_PATH)
-        elif strategy == 'zeroday':
-            saved_data = load_json(ZERODAY_TICKER_DATA_PATH)
-        elif strategy == 'supertrend':
-            saved_data = load_json(SUPER_TICKER_DATA_PATH)
+        # Load current data
+        TICKER_DATA_PATH = ticker_data_path_for_strategy(strategy)
+        saved_data = load_json(TICKER_DATA_PATH)
             
         # in case of empty data
         if not saved_data:
@@ -233,15 +216,9 @@ def delete_ticker():
         del saved_data[symbol_key]
         
         # Save the updated data back to file
-        if strategy == 'ema':
-            save_json(EMA_TICKER_DATA_PATH, saved_data)
-        elif strategy == 'zeroday':
-            save_json(ZERODAY_TICKER_DATA_PATH, saved_data)
-        elif strategy == 'supertrend':
-            save_json(SUPER_TICKER_DATA_PATH, saved_data)
+        save_json(TICKER_DATA_PATH, saved_data)
         
         return jsonify({'success': True, 'data': saved_data}), 200
-
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 500
 
@@ -259,7 +236,11 @@ def refresh_link():
 @token_required
 def start_trading():
     try:
-        data = load_json(EMA_TICKER_DATA_PATH)
+        strategy = request.args.get('strategy') # Get query from request
+        # Load current data
+        TICKER_DATA_PATH = ticker_data_path_for_strategy(strategy)
+        data = load_json(TICKER_DATA_PATH)
+        print("data", data)  # TODO
         if not data:
             return jsonify({'success': False, 'error': 'No ticker data found'}), 404
 
@@ -269,10 +250,10 @@ def start_trading():
             # values[2] is trade_enabled ("TRUE" or "FALSE")
             if len(values) >= 3 and values[2] == "TRUE":
                 trade_enabled_symbols.append(symbol)
-
+        print("trade_enabled_symbols", trade_enabled_symbols)  # TODO
         if trade_enabled_symbols:
             print('Loading trading parameters ... ')            
-            run_every_week()       
+            run_every_week(strategy)
             # result = requests.get('https://api.schwabapi.com/v1/oauth/authorize?response_type=code&client_id=1iSr8ykD9qh2M2HoQv56wM2R1kWgQYZI&redirect_uri=https://127.0.0.1', allow_redirects=True) 
             print('Trading started!')
             # print(result.json())

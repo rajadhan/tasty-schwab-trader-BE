@@ -5,20 +5,36 @@ from time import sleep
 from datetime import datetime
 import pytz
 from config import *
-from utils import is_holiday, is_within_time_range, get_current_datetime, get_market_hours, get_strategy_prarams, sleep_until_next_interval, configure_logger, store_logs, wilders_smoothing, sleep_base_on_timeframe
+from utils import (
+    is_holiday,
+    is_within_time_range,
+    get_current_datetime,
+    get_market_hours,
+    get_strategy_prarams,
+    configure_logger,
+    store_logs,
+    wilders_smoothing,
+    sleep_base_on_timeframe,
+)
 from schwab.client import historical_data, place_order
 import schedule
 from tastytrade import place_tastytrade_order
-
-TICKER_DATA_PATH = os.path.join('settings', 'ticker_data.json')
+from utils import ticker_data_path_for_strategy
 
 def ema_strategy(ticker, logger):
     """Runs the trading strategy for the specified ticker."""
     try:
         print(ticker + " strategy started")
-        [timeframe, schwab_qty, trade_enabled, tasty_qty, trend_line_1, period_1, trend_line_2, period_2] = (
-            get_strategy_prarams(ticker, logger)
-        )
+        [
+            timeframe,
+            schwab_qty,
+            trade_enabled,
+            tasty_qty,
+            trend_line_1,
+            period_1,
+            trend_line_2,
+            period_2,
+        ] = get_strategy_prarams(ticker, logger)
         if trade_enabled != "TRUE":
             logger.info(f"Skipping strategy for {ticker}, trade flag is FALSE.")
             with open(
@@ -77,34 +93,127 @@ def ema_strategy(ticker, logger):
         if ticker not in trades.copy():
             if Long_condition:
                 logger.info(f"Long condition triggered for {ticker}")
-                order_id_schwab = place_order(ticker, schwab_qty, "BUY", account_id, logger, "OPENING") if schwab_qty > 0 else 0
-                order_id_tastytrade = place_tastytrade_order(ticker, tasty_qty, "Buy to Open", account_id, logger) if tasty_qty > 0 else 0
-                trades[ticker] = {"action": "LONG", "order_id_schwab": order_id_schwab, "order_id_tastytrade": order_id_tastytrade}
+                order_id_schwab = (
+                    place_order(
+                        ticker, schwab_qty, "BUY", account_id, logger, "OPENING"
+                    )
+                    if schwab_qty > 0
+                    else 0
+                )
+                order_id_tastytrade = (
+                    place_tastytrade_order(
+                        ticker, tasty_qty, "Buy to Open", account_id, logger
+                    )
+                    if tasty_qty > 0
+                    else 0
+                )
+                trades[ticker] = {
+                    "action": "LONG",
+                    "order_id_schwab": order_id_schwab,
+                    "order_id_tastytrade": order_id_tastytrade,
+                }
             elif Short_condition:
                 logger.info(f"Short condition triggered for {ticker}")
-                order_id_schwab = place_order(ticker, schwab_qty, "SELL_SHORT", account_id, logger, "OPENING") if schwab_qty > 0 else 0
-                order_id_tastytrade = place_tastytrade_order(ticker, tasty_qty, "Sell to Open", account_id, logger) if tasty_qty > 0 else 0
-                trades[ticker] = {"action": "SHORT", "order_id_schwab": order_id_schwab, "order_id_tastytrade": order_id_tastytrade}
+                order_id_schwab = (
+                    place_order(
+                        ticker, schwab_qty, "SELL_SHORT", account_id, logger, "OPENING"
+                    )
+                    if schwab_qty > 0
+                    else 0
+                )
+                order_id_tastytrade = (
+                    place_tastytrade_order(
+                        ticker, tasty_qty, "Sell to Open", account_id, logger
+                    )
+                    if tasty_qty > 0
+                    else 0
+                )
+                trades[ticker] = {
+                    "action": "SHORT",
+                    "order_id_schwab": order_id_schwab,
+                    "order_id_tastytrade": order_id_tastytrade,
+                }
         else:
             if trades[ticker]["action"] == "LONG" and Short_condition:
                 logger.info(
                     f"Reversing position for {ticker}: Closing LONG, opening SHORT"
                 )
-                long_order_id_schwab = place_order(ticker, schwab_qty, "SELL", account_id, logger, "CLOSING") if schwab_qty > 0 else 0
-                long_order_id_tastytrade = place_tastytrade_order(ticker, tasty_qty, "Sell to Close", account_id, logger) if tasty_qty > 0 else 0
-                short_order_id_schwab = place_order(ticker, schwab_qty, "SELL_SHORT", account_id, logger, "OPENING") if schwab_qty > 0 else 0
-                short_order_id_tastytrade = place_tastytrade_order(ticker, tasty_qty, "Sell to Open", account_id, logger) if tasty_qty > 0 else 0
-                trades[ticker] = {"action": "SHORT", "order_id_schwab": short_order_id_schwab, "order_id_tastytrade": short_order_id_tastytrade}
+                long_order_id_schwab = (
+                    place_order(
+                        ticker, schwab_qty, "SELL", account_id, logger, "CLOSING"
+                    )
+                    if schwab_qty > 0
+                    else 0
+                )
+                long_order_id_tastytrade = (
+                    place_tastytrade_order(
+                        ticker, tasty_qty, "Sell to Close", account_id, logger
+                    )
+                    if tasty_qty > 0
+                    else 0
+                )
+                short_order_id_schwab = (
+                    place_order(
+                        ticker, schwab_qty, "SELL_SHORT", account_id, logger, "OPENING"
+                    )
+                    if schwab_qty > 0
+                    else 0
+                )
+                short_order_id_tastytrade = (
+                    place_tastytrade_order(
+                        ticker, tasty_qty, "Sell to Open", account_id, logger
+                    )
+                    if tasty_qty > 0
+                    else 0
+                )
+                trades[ticker] = {
+                    "action": "SHORT",
+                    "order_id_schwab": short_order_id_schwab,
+                    "order_id_tastytrade": short_order_id_tastytrade,
+                }
 
             elif trades[ticker]["action"] == "SHORT" and Long_condition:
                 logger.info(
                     f"Reversing position for {ticker}: Closing SHORT, opening LONG"
                 )
-                short_order_id_schwab = place_order(ticker, schwab_qty, "BUY_TO_COVER", account_id, logger, "CLOSING") if schwab_qty > 0 else 0
-                short_order_id_tastytrade = place_tastytrade_order(ticker, tasty_qty, "Buy to Close", account_id, logger) if tasty_qty > 0 else 0
-                long_order_id_schwab = place_order(ticker, schwab_qty, "BUY", account_id, logger, "OPENING") if schwab_qty > 0 else 0
-                long_order_id_tastytrade = place_tastytrade_order(ticker, tasty_qty, "Buy to Open", account_id, logger) if tasty_qty > 0 else 0
-                trades[ticker] = {"action": "LONG", "order_id_schwab": long_order_id_schwab, "order_id_tastytrade": long_order_id_tastytrade}
+                short_order_id_schwab = (
+                    place_order(
+                        ticker,
+                        schwab_qty,
+                        "BUY_TO_COVER",
+                        account_id,
+                        logger,
+                        "CLOSING",
+                    )
+                    if schwab_qty > 0
+                    else 0
+                )
+                short_order_id_tastytrade = (
+                    place_tastytrade_order(
+                        ticker, tasty_qty, "Buy to Close", account_id, logger
+                    )
+                    if tasty_qty > 0
+                    else 0
+                )
+                long_order_id_schwab = (
+                    place_order(
+                        ticker, schwab_qty, "BUY", account_id, logger, "OPENING"
+                    )
+                    if schwab_qty > 0
+                    else 0
+                )
+                long_order_id_tastytrade = (
+                    place_tastytrade_order(
+                        ticker, tasty_qty, "Buy to Open", account_id, logger
+                    )
+                    if tasty_qty > 0
+                    else 0
+                )
+                trades[ticker] = {
+                    "action": "LONG",
+                    "order_id_schwab": long_order_id_schwab,
+                    "order_id_tastytrade": long_order_id_tastytrade,
+                }
 
         with open(
             f"trades/{ticker[1:] if '/' == ticker[0] else ticker}.json", "w"
@@ -116,6 +225,7 @@ def ema_strategy(ticker, logger):
     except Exception as e:
         logger.error(f"Error in strategy for {ticker}: {e}", exc_info=True)
 
+
 # NOTE: Replace the following helper functions with your real implementations:
 #
 # get_strategy_params(ticker) -> dict of user parameters (front-end configurable)
@@ -124,7 +234,14 @@ def ema_strategy(ticker, logger):
 # wilders_smoothing(df_or_series, length) -> pd.Series of smoothed data
 
 
-def supertrend_strategy(ticker, logger, get_strategy_params, get_historical_data, place_order_api, account_id):
+def supertrend_strategy(
+    ticker,
+    logger,
+    get_strategy_params,
+    get_historical_data,
+    place_order_api,
+    account_id,
+):
     try:
         logger.info(f"{ticker} strategy started at {datetime.now(pytz.utc)}")
 
@@ -143,7 +260,9 @@ def supertrend_strategy(ticker, logger, get_strategy_params, get_historical_data
         long_ma_len = int(params.get("long_ma_length", 21))
         long_ma_type = params.get("long_ma_type", "EMA")
         # ZigZag/ATR params
-        zigzag_percent_reversal = float(params.get("zigzag_percent_reversal", 1.0))  # in percent, e.g. 1.0 for 1%
+        zigzag_percent_reversal = float(
+            params.get("zigzag_percent_reversal", 1.0)
+        )  # in percent, e.g. 1.0 for 1%
         atr_length = int(params.get("atr_length", 14))
         atr_reversal_mult = float(params.get("zigzag_atr_multiple", 2.0))
         # Fibonacci & Support/Demand
@@ -156,7 +275,9 @@ def supertrend_strategy(ticker, logger, get_strategy_params, get_historical_data
         trades_file = f"trades/{ticker[1:] if ticker.startswith('/') else ticker}.json"
 
         if not trade_enabled:
-            logger.info(f"Trade disabled for {ticker}, skipping execution and clearing trades file if any.")
+            logger.info(
+                f"Trade disabled for {ticker}, skipping execution and clearing trades file if any."
+            )
             try:
                 with open(trades_file, "r") as f:
                     trades = json.load(f)
@@ -180,7 +301,9 @@ def supertrend_strategy(ticker, logger, get_strategy_params, get_historical_data
         # Ensure required columns exist
         for col in ["open", "high", "low", "close", "volume"]:
             if col not in df.columns:
-                raise ValueError(f"Missing required price/volume column '{col}' in historical data")
+                raise ValueError(
+                    f"Missing required price/volume column '{col}' in historical data"
+                )
 
         # 4. Define helper: Moving Average calculators
         def calc_ma(series, length, ma_type):
@@ -194,7 +317,7 @@ def supertrend_strategy(ticker, logger, get_strategy_params, get_historical_data
                 wma = np.zeros(len(series))
                 wma[0] = series.iloc[0]
                 for i in range(1, len(series)):
-                    wma[i] = wma[i-1] + alpha*(series.iloc[i] - wma[i-1])
+                    wma[i] = wma[i - 1] + alpha * (series.iloc[i] - wma[i - 1])
                 return pd.Series(wma, index=series.index)
             else:
                 logger.warning(f"Unknown MA type {ma_type}, defaulting to EMA")
@@ -206,10 +329,18 @@ def supertrend_strategy(ticker, logger, get_strategy_params, get_historical_data
         df["slow"] = calc_ma(df["close"], long_ma_len, long_ma_type)
 
         # 5. Compute Supertrend-like buy/sell and stop conditions
-        buy_condition = (df["superfast"] > df["fast"]) & (df["fast"] > df["slow"]) & (df["low"] > df["superfast"])
+        buy_condition = (
+            (df["superfast"] > df["fast"])
+            & (df["fast"] > df["slow"])
+            & (df["low"] > df["superfast"])
+        )
         stop_buy_condition = df["superfast"] <= df["fast"]
 
-        sell_condition = (df["superfast"] < df["fast"]) & (df["fast"] < df["slow"]) & (df["high"] < df["superfast"])
+        sell_condition = (
+            (df["superfast"] < df["fast"])
+            & (df["fast"] < df["slow"])
+            & (df["high"] < df["superfast"])
+        )
         stop_sell_condition = df["superfast"] >= df["fast"]
 
         # Stateful signal computation similar to CompoundValue from TOS
@@ -227,8 +358,12 @@ def supertrend_strategy(ticker, logger, get_strategy_params, get_historical_data
         df["buy_signal"] = stateful_signal(buy_condition, stop_buy_condition)
         df["sell_signal"] = stateful_signal(sell_condition, stop_sell_condition)
 
-        df["Buy_Signal"] = (df["buy_signal"].shift(1).fillna(0) == 0) & (df["buy_signal"] == 1)
-        df["Sell_Signal"] = (df["sell_signal"].shift(1).fillna(0) == 0) & (df["sell_signal"] == 1)
+        df["Buy_Signal"] = (df["buy_signal"].shift(1).fillna(0) == 0) & (
+            df["buy_signal"] == 1
+        )
+        df["Sell_Signal"] = (df["sell_signal"].shift(1).fillna(0) == 0) & (
+            df["sell_signal"] == 1
+        )
 
         # 6. --- ZigZag and ATR-based swing detection ---
 
@@ -241,7 +376,9 @@ def supertrend_strategy(ticker, logger, get_strategy_params, get_historical_data
             tr2 = abs(high - close.shift())
             tr3 = abs(low - close.shift())
             tr = pd.concat([tr1, tr2, tr3], axis=1).max(axis=1)
-            atr_val = tr.rolling(n, min_periods=1).mean()  # Wilder smoothing could be used here
+            atr_val = tr.rolling(
+                n, min_periods=1
+            ).mean()  # Wilder smoothing could be used here
             return atr_val
 
         df["ATR"] = atr(df, atr_length)
@@ -320,7 +457,9 @@ def supertrend_strategy(ticker, logger, get_strategy_params, get_historical_data
         support_zones = []
         demand_zones = []
 
-        swing_points = df[["swing_high", "swing_low", "swing_direction"]].dropna(subset=["swing_direction"])
+        swing_points = df[["swing_high", "swing_low", "swing_direction"]].dropna(
+            subset=["swing_direction"]
+        )
         swing_points = swing_points.reset_index()
 
         max_zones_to_store = 5  # configurable
@@ -346,11 +485,17 @@ def supertrend_strategy(ticker, logger, get_strategy_params, get_historical_data
             second_last_swing = swing_points.iloc[-2]
 
             # Determine up or down swing
-            if last_swing["swing_direction"] == 1 and second_last_swing["swing_direction"] == 0:
+            if (
+                last_swing["swing_direction"] == 1
+                and second_last_swing["swing_direction"] == 0
+            ):
                 # Up swing from low to high
                 swing_low_val = second_last_swing["swing_low"]
                 swing_high_val = last_swing["swing_high"]
-            elif last_swing["swing_direction"] == 0 and second_last_swing["swing_direction"] == 1:
+            elif (
+                last_swing["swing_direction"] == 0
+                and second_last_swing["swing_direction"] == 1
+            ):
                 # Down swing from high to low
                 swing_high_val = second_last_swing["swing_high"]
                 swing_low_val = last_swing["swing_low"]
@@ -381,31 +526,128 @@ def supertrend_strategy(ticker, logger, get_strategy_params, get_historical_data
         if ticker not in trades:
             if last_buy_signal:
                 logger.info(f"Buy signal for {ticker}: Placing LONG orders.")
-                order_id_schwab = place_order_api(ticker, qty_schwab, "BUY", account_id, logger, "OPENING") if qty_schwab > 0 else 0
-                order_id_tasty = place_order_api(ticker, qty_tasty, "Buy to Open", account_id, logger) if qty_tasty > 0 else 0
-                trades[ticker] = {"position": "LONG", "order_id_schwab": order_id_schwab, "order_id_tastytrade": order_id_tasty}
+                order_id_schwab = (
+                    place_order_api(
+                        ticker, qty_schwab, "BUY", account_id, logger, "OPENING"
+                    )
+                    if qty_schwab > 0
+                    else 0
+                )
+                order_id_tasty = (
+                    place_order_api(
+                        ticker, qty_tasty, "Buy to Open", account_id, logger
+                    )
+                    if qty_tasty > 0
+                    else 0
+                )
+                trades[ticker] = {
+                    "position": "LONG",
+                    "order_id_schwab": order_id_schwab,
+                    "order_id_tastytrade": order_id_tasty,
+                }
             elif last_sell_signal:
                 logger.info(f"Sell signal for {ticker}: Placing SHORT orders.")
-                order_id_schwab = place_order_api(ticker, qty_schwab, "SELL_SHORT", account_id, logger, "OPENING") if qty_schwab > 0 else 0
-                order_id_tasty = place_order_api(ticker, qty_tasty, "Sell to Open", account_id, logger) if qty_tasty > 0 else 0
-                trades[ticker] = {"position": "SHORT", "order_id_schwab": order_id_schwab, "order_id_tastytrade": order_id_tasty}
+                order_id_schwab = (
+                    place_order_api(
+                        ticker, qty_schwab, "SELL_SHORT", account_id, logger, "OPENING"
+                    )
+                    if qty_schwab > 0
+                    else 0
+                )
+                order_id_tasty = (
+                    place_order_api(
+                        ticker, qty_tasty, "Sell to Open", account_id, logger
+                    )
+                    if qty_tasty > 0
+                    else 0
+                )
+                trades[ticker] = {
+                    "position": "SHORT",
+                    "order_id_schwab": order_id_schwab,
+                    "order_id_tastytrade": order_id_tasty,
+                }
         else:
             current_position = trades[ticker]["position"]
             if current_position == "LONG" and last_sell_signal:
-                logger.info(f"Reversing LONG to SHORT for {ticker}: Closing LONG, opening SHORT")
-                close_id_schwab = place_order_api(ticker, qty_schwab, "SELL", account_id, logger, "CLOSING") if qty_schwab > 0 else 0
-                close_id_tasty = place_order_api(ticker, qty_tasty, "Sell to Close", account_id, logger) if qty_tasty > 0 else 0
-                open_id_schwab = place_order_api(ticker, qty_schwab, "SELL_SHORT", account_id, logger, "OPENING") if qty_schwab > 0 else 0
-                open_id_tasty = place_order_api(ticker, qty_tasty, "Sell to Open", account_id, logger) if qty_tasty > 0 else 0
-                trades[ticker] = {"position": "SHORT", "order_id_schwab": open_id_schwab, "order_id_tastytrade": open_id_tasty}
+                logger.info(
+                    f"Reversing LONG to SHORT for {ticker}: Closing LONG, opening SHORT"
+                )
+                close_id_schwab = (
+                    place_order_api(
+                        ticker, qty_schwab, "SELL", account_id, logger, "CLOSING"
+                    )
+                    if qty_schwab > 0
+                    else 0
+                )
+                close_id_tasty = (
+                    place_order_api(
+                        ticker, qty_tasty, "Sell to Close", account_id, logger
+                    )
+                    if qty_tasty > 0
+                    else 0
+                )
+                open_id_schwab = (
+                    place_order_api(
+                        ticker, qty_schwab, "SELL_SHORT", account_id, logger, "OPENING"
+                    )
+                    if qty_schwab > 0
+                    else 0
+                )
+                open_id_tasty = (
+                    place_order_api(
+                        ticker, qty_tasty, "Sell to Open", account_id, logger
+                    )
+                    if qty_tasty > 0
+                    else 0
+                )
+                trades[ticker] = {
+                    "position": "SHORT",
+                    "order_id_schwab": open_id_schwab,
+                    "order_id_tastytrade": open_id_tasty,
+                }
 
             elif current_position == "SHORT" and last_buy_signal:
-                logger.info(f"Reversing SHORT to LONG for {ticker}: Closing SHORT, opening LONG")
-                close_id_schwab = place_order_api(ticker, qty_schwab, "BUY_TO_COVER", account_id, logger, "CLOSING") if qty_schwab > 0 else 0
-                close_id_tasty = place_order_api(ticker, qty_tasty, "Buy to Close", account_id, logger) if qty_tasty > 0 else 0
-                open_id_schwab = place_order_api(ticker, qty_schwab, "BUY", account_id, logger, "OPENING") if qty_schwab > 0 else 0
-                open_id_tasty = place_order_api(ticker, qty_tasty, "Buy to Open", account_id, logger) if qty_tasty > 0 else 0
-                trades[ticker] = {"position": "LONG", "order_id_schwab": open_id_schwab, "order_id_tastytrade": open_id_tasty}
+                logger.info(
+                    f"Reversing SHORT to LONG for {ticker}: Closing SHORT, opening LONG"
+                )
+                close_id_schwab = (
+                    place_order_api(
+                        ticker,
+                        qty_schwab,
+                        "BUY_TO_COVER",
+                        account_id,
+                        logger,
+                        "CLOSING",
+                    )
+                    if qty_schwab > 0
+                    else 0
+                )
+                close_id_tasty = (
+                    place_order_api(
+                        ticker, qty_tasty, "Buy to Close", account_id, logger
+                    )
+                    if qty_tasty > 0
+                    else 0
+                )
+                open_id_schwab = (
+                    place_order_api(
+                        ticker, qty_schwab, "BUY", account_id, logger, "OPENING"
+                    )
+                    if qty_schwab > 0
+                    else 0
+                )
+                open_id_tasty = (
+                    place_order_api(
+                        ticker, qty_tasty, "Buy to Open", account_id, logger
+                    )
+                    if qty_tasty > 0
+                    else 0
+                )
+                trades[ticker] = {
+                    "position": "LONG",
+                    "order_id_schwab": open_id_schwab,
+                    "order_id_tastytrade": open_id_tasty,
+                }
 
         # 10. Save trade states
         with open(trades_file, "w") as f:
@@ -424,9 +666,28 @@ def supertrend_strategy(ticker, logger, get_strategy_params, get_historical_data
     except Exception as e:
         logger.error(f"Exception in strategy for {ticker}: {str(e)}", exc_info=True)
 
+
 def main_strategy_loop(ticker):
     """Main loop for running the strategy for a specific ticker."""
     logger = configure_logger(ticker)
+
+    strategy, config = get_strategy_for_ticker(ticker)
+
+    if strategy == "ema":
+        ema_strategy(ticker, logger)
+    elif strategy == "supertrend":
+        supertrend_strategy(
+            ticker,
+            logger,
+            get_strategy_prarams,
+            historical_data,
+            place_order,
+            account_id,
+        )
+    elif strategy == "zeroday":
+        logger.info(f"Zero-day strategy for {ticker} requires manual trigger")
+    else:
+        logger.error(f"No strategy configured for {ticker}")
 
     try:
         while is_within_time_range():
@@ -469,9 +730,11 @@ def main_strategy_loop(ticker):
         logger.error(f"Error in main loop for {ticker}: {e}", exc_info=True)
 
 
-def run_every_week():
+def run_every_week(strategy):
     """Starts threads for each ticker."""
-    with open(TICKER_DATA_PATH, 'r') as file:
+    TICKER_DATA_PATH = ticker_data_path_for_strategy(strategy)
+    print("ticker_data_path", TICKER_DATA_PATH) # TODO
+    with open(TICKER_DATA_PATH, "r") as file:
         ticker_n_tf = json.load(file)
 
     threads = []
@@ -496,5 +759,5 @@ def main():
 
 # Start the process
 if __name__ == "__main__":
-#     main()
+    #     main()
     run_every_week()

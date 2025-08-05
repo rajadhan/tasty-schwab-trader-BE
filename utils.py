@@ -385,3 +385,159 @@ async def on_tick_received(tick_data, tick_buffers):
     symbol = tick_data['symbol']
     if symbol in tick_buffers:
         tick_buffers[symbol].add_tick(tick_data)
+
+
+# Strategy Router Functions
+def load_json(filepath):
+    """Load JSON file safely."""
+    try:
+        with open(filepath, 'r') as file:
+            return json.load(file)
+    except Exception:
+        return {}
+    
+def save_json(filepath, data):
+    with open(filepath, 'w') as file:
+        json.dump(data, file, indent=4)
+
+def load_strategy_configs():
+    """Load all strategy configuration files."""
+    try:
+        ema_data = load_json(os.path.join('settings', 'ema_ticker_data.json'))
+        super_data = load_json(os.path.join('settings', 'super_ticker_data.json'))
+        zeroday_data = load_json(os.path.join('settings', 'zeroday_ticker_data.json'))
+        return ema_data, super_data, zeroday_data
+    except Exception as e:
+        print(f"Error loading strategy configs: {e}")
+        return {}, {}, {}
+
+
+def get_strategy_for_ticker(ticker):
+    """Determine which strategy configuration to use for a ticker."""
+    ema_data, super_data, zeroday_data = load_strategy_configs()
+    
+    if ticker in ema_data:
+        return 'ema', ema_data[ticker]
+    elif ticker in super_data:
+        return 'supertrend', super_data[ticker]
+    elif ticker in zeroday_data:
+        return 'zeroday', zeroday_data[ticker]
+    else:
+        return None, None
+
+
+def parse_strategy_params(config, strategy_type):
+    """Parse configuration parameters for any strategy."""
+    try:
+        if strategy_type == 'ema':
+            return {
+                'timeframe': config[0],
+                'schwab_qty': int(config[1]) if config[1].isdigit() else 0,
+                'trade_enabled': config[2] == "TRUE",
+                'tasty_qty': int(config[3]) if config[3].isdigit() else 0,
+                'trend_line_1': config[4],
+                'period_1': int(config[5]),
+                'trend_line_2': config[6],
+                'period_2': int(config[7])
+            }
+        elif strategy_type == 'supertrend':
+            return {
+                'timeframe': config[0],
+                'schwab_qty': int(config[1]) if config[1].isdigit() else 0,
+                'trade_enabled': config[2] == "TRUE",
+                'tasty_qty': int(config[3]) if config[3].isdigit() else 0,
+                'short_ma_len': int(config[4]),
+                'short_ma_type': config[5],
+                'mid_ma_len': int(config[6]),
+                'mid_ma_type': config[7],
+                'long_ma_len': int(config[8]),
+                'long_ma_type': config[9],
+                'atr_length': int(config[10]),
+                'zigzag_percent': float(config[11]),
+                'atr_multiple': float(config[12]),
+                'fibonacci_enabled': config[13] == "True",
+                'support_demand_enabled': config[14] == "True"
+            }
+        elif strategy_type == 'zeroday':
+            return {
+                'timeframe': config[0],
+                'schwab_qty': int(config[1]) if config[1].isdigit() else 0,
+                'trade_enabled': config[2] == "TRUE",
+                'tasty_qty': int(config[3]) if config[3].isdigit() else 0,
+                'trend_line_1': config[4],
+                'period_1': int(config[5]),
+                'trend_line_2': config[6],
+                'period_2': int(config[7])
+            }
+        else:
+            return None
+    except Exception as e:
+        print(f"Error parsing strategy params for {strategy_type}: {e}")
+        return None
+
+
+def get_trade_file_path(ticker, strategy_type):
+    """Get strategy-specific trade file path."""
+    base_name = ticker[1:] if ticker.startswith('/') else ticker
+    return f"trades/{strategy_type}_{base_name}.json"
+
+
+def get_all_active_tickers():
+    """Get all tickers that are configured and enabled for trading across all strategies."""
+    ema_data, super_data, zeroday_data = load_strategy_configs()
+    
+    active_tickers = []
+    
+    # Check EMA strategy tickers
+    for ticker, config in ema_data.items():
+        if config[2] == "TRUE":  # trade_enabled
+            active_tickers.append((ticker, 'ema'))
+    
+    # Check Supertrend strategy tickers
+    for ticker, config in super_data.items():
+        if config[2] == "TRUE":  # trade_enabled
+            active_tickers.append((ticker, 'supertrend'))
+    
+    # Note: Zero-day tickers are manual, not automatic
+    # But we can include them for reference
+    for ticker, config in zeroday_data.items():
+        if config[2] == "TRUE":  # trade_enabled
+            active_tickers.append((ticker, 'zeroday'))
+    
+    return active_tickers
+
+
+def validate_strategy_config(ticker, strategy_type, config):
+    """Validate that a strategy configuration is complete and valid."""
+    try:
+        if strategy_type == 'ema':
+            required_length = 8
+            if len(config) != required_length:
+                return False, f"EMA strategy requires {required_length} parameters, got {len(config)}"
+        elif strategy_type == 'supertrend':
+            required_length = 15
+            if len(config) != required_length:
+                return False, f"Supertrend strategy requires {required_length} parameters, got {len(config)}"
+        elif strategy_type == 'zeroday':
+            required_length = 8
+            if len(config) != required_length:
+                return False, f"Zero-day strategy requires {required_length} parameters, got {len(config)}"
+        else:
+            return False, f"Unknown strategy type: {strategy_type}"
+        
+        # Check if trade_enabled is valid
+        if config[2] not in ["TRUE", "FALSE"]:
+            return False, f"trade_enabled must be 'TRUE' or 'FALSE', got {config[2]}"
+        
+        return True, "Configuration is valid"
+    except Exception as e:
+        return False, f"Error validating config: {str(e)}"
+    
+def ticker_data_path_for_strategy(strategy):
+    if strategy == 'ema':
+        TICKER_DATA_PATH = EMA_TICKER_DATA_PATH
+    elif strategy == 'supertrend':
+        TICKER_DATA_PATH = SUPER_TICKER_DATA_PATH
+    elif strategy == 'zeroday':
+        TICKER_DATA_PATH = ZERODAY_TICKER_DATA_PATH
+    return TICKER_DATA_PATH
