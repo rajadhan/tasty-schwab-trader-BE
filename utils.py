@@ -281,11 +281,13 @@ def sleep_until_next_interval(ticker, interval_minutes):
     sleep(seconds_until_next_interval)
 
 
-def get_strategy_prarams(ticker, logger):
+def get_strategy_prarams(strategy, ticker, logger):
     try:
-        with open(tickers_path, "r") as file:
+        print("fififi") # TODO
+        TICKER_DATA_PATH = ticker_data_path_for_strategy(strategy)
+        with open(TICKER_DATA_PATH, "r") as file:
             strategy_params = json.load(file)
-
+        print("strategy_params", strategy_params) # TODO
         return strategy_params[ticker]
     except Exception as e:
         logger.error(f"Error in getting strategy params: {str(e)}")

@@ -4,6 +4,8 @@ import os
 from time import sleep
 from datetime import datetime
 import pytz
+import pandas as pd
+import numpy as np
 from config import *
 from utils import (
     is_holiday,
@@ -15,6 +17,7 @@ from utils import (
     store_logs,
     wilders_smoothing,
     sleep_base_on_timeframe,
+    get_strategy_for_ticker
 )
 from schwab.client import historical_data, place_order
 import schedule
@@ -23,8 +26,9 @@ from utils import ticker_data_path_for_strategy
 
 def ema_strategy(ticker, logger):
     """Runs the trading strategy for the specified ticker."""
+    print("ema_strategy", ticker, logger)  # TODO
     try:
-        print(ticker + " strategy started")
+        print(ticker + " strategy started") # TODO
         [
             timeframe,
             schwab_qty,
@@ -34,20 +38,22 @@ def ema_strategy(ticker, logger):
             period_1,
             trend_line_2,
             period_2,
-        ] = get_strategy_prarams(ticker, logger)
+        ] = get_strategy_prarams('ema', ticker, logger)
+        print("tickersss", timeframe, schwab_qty, trade_enabled)  # TODO
         if trade_enabled != "TRUE":
             logger.info(f"Skipping strategy for {ticker}, trade flag is FALSE.")
-            with open(
-                f"trades/{ticker[1:] if '/' == ticker[0] else ticker}.json", "r"
-            ) as file:
-                trades = json.load(file)
-            if ticker in trades:
-                trades = {}
+            trade_file = f"trades/{ticker[1:] if '/' == ticker[0] else ticker}.json"
+            try:
                 with open(
-                    f"trades/{ticker[1:] if '/' == ticker[0] else ticker}.json",
-                    "w",
+                    trade_file, "r"
                 ) as file:
-                    json.dump(trades, file)
+                    trades = json.load(file)
+                if ticker in trades:
+                    trades = {}
+                    with open(trade_file, "w") as file:
+                        json.dump(trades, file)
+            except FileNotFoundError:
+                trades = {}
             return
 
         logger.info(
@@ -527,17 +533,17 @@ def supertrend_strategy(
             if last_buy_signal:
                 logger.info(f"Buy signal for {ticker}: Placing LONG orders.")
                 order_id_schwab = (
-                    place_order_api(
+                    place_order(
                         ticker, qty_schwab, "BUY", account_id, logger, "OPENING"
                     )
                     if qty_schwab > 0
                     else 0
                 )
                 order_id_tasty = (
-                    place_order_api(
-                        ticker, qty_tasty, "Buy to Open", account_id, logger
+                    place_tastytrade_order(
+                        ticker, qty_tastytrade, "Buy to Open", account_id, logger
                     )
-                    if qty_tasty > 0
+                    if qty_tastytrade > 0
                     else 0
                 )
                 trades[ticker] = {
@@ -548,17 +554,17 @@ def supertrend_strategy(
             elif last_sell_signal:
                 logger.info(f"Sell signal for {ticker}: Placing SHORT orders.")
                 order_id_schwab = (
-                    place_order_api(
+                    place_order(
                         ticker, qty_schwab, "SELL_SHORT", account_id, logger, "OPENING"
                     )
                     if qty_schwab > 0
                     else 0
                 )
                 order_id_tasty = (
-                    place_order_api(
-                        ticker, qty_tasty, "Sell to Open", account_id, logger
+                    place_tastytrade_order(
+                        ticker, qty_tastytrade, "Sell to Open", account_id, logger
                     )
-                    if qty_tasty > 0
+                    if qty_tastytrade > 0
                     else 0
                 )
                 trades[ticker] = {
@@ -573,31 +579,31 @@ def supertrend_strategy(
                     f"Reversing LONG to SHORT for {ticker}: Closing LONG, opening SHORT"
                 )
                 close_id_schwab = (
-                    place_order_api(
+                    place_order(
                         ticker, qty_schwab, "SELL", account_id, logger, "CLOSING"
                     )
                     if qty_schwab > 0
                     else 0
                 )
                 close_id_tasty = (
-                    place_order_api(
-                        ticker, qty_tasty, "Sell to Close", account_id, logger
+                    place_tastytrade_order(
+                        ticker, qty_tastytrade, "Sell to Close", account_id, logger
                     )
-                    if qty_tasty > 0
+                    if qty_tastytrade > 0
                     else 0
                 )
                 open_id_schwab = (
-                    place_order_api(
+                    place_order(
                         ticker, qty_schwab, "SELL_SHORT", account_id, logger, "OPENING"
                     )
                     if qty_schwab > 0
                     else 0
                 )
                 open_id_tasty = (
-                    place_order_api(
-                        ticker, qty_tasty, "Sell to Open", account_id, logger
+                    place_tastytrade_order(
+                        ticker, qty_tastytrade, "Sell to Open", account_id, logger
                     )
-                    if qty_tasty > 0
+                    if qty_tastytrade > 0
                     else 0
                 )
                 trades[ticker] = {
@@ -611,7 +617,7 @@ def supertrend_strategy(
                     f"Reversing SHORT to LONG for {ticker}: Closing SHORT, opening LONG"
                 )
                 close_id_schwab = (
-                    place_order_api(
+                    place_order(
                         ticker,
                         qty_schwab,
                         "BUY_TO_COVER",
@@ -623,24 +629,24 @@ def supertrend_strategy(
                     else 0
                 )
                 close_id_tasty = (
-                    place_order_api(
-                        ticker, qty_tasty, "Buy to Close", account_id, logger
+                    place_tastytrade_order(
+                        ticker, qty_tastytrade, "Buy to Close", account_id, logger
                     )
-                    if qty_tasty > 0
+                    if qty_tastytrade > 0
                     else 0
                 )
                 open_id_schwab = (
-                    place_order_api(
+                    place_order(
                         ticker, qty_schwab, "BUY", account_id, logger, "OPENING"
                     )
                     if qty_schwab > 0
                     else 0
                 )
                 open_id_tasty = (
-                    place_order_api(
-                        ticker, qty_tasty, "Buy to Open", account_id, logger
+                    place_tastytrade_order(
+                        ticker, qty_tastytrade, "Buy to Open", account_id, logger
                     )
-                    if qty_tasty > 0
+                    if qty_tastytrade > 0
                     else 0
                 )
                 trades[ticker] = {
@@ -670,9 +676,9 @@ def supertrend_strategy(
 def main_strategy_loop(ticker):
     """Main loop for running the strategy for a specific ticker."""
     logger = configure_logger(ticker)
-
+    print("efjeijfie") # TODO
     strategy, config = get_strategy_for_ticker(ticker)
-
+    print("strategy", strategy) # TODO
     if strategy == "ema":
         ema_strategy(ticker, logger)
     elif strategy == "supertrend":
@@ -736,7 +742,7 @@ def run_every_week(strategy):
     print("ticker_data_path", TICKER_DATA_PATH) # TODO
     with open(TICKER_DATA_PATH, "r") as file:
         ticker_n_tf = json.load(file)
-
+    print("tickers", ticker_n_tf) # TODO
     threads = []
     for ticker in ticker_n_tf.keys():
         thread = threading.Thread(target=main_strategy_loop, args=(ticker,))
