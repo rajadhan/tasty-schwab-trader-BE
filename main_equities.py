@@ -17,18 +17,26 @@ from utils import (
     store_logs,
     wilders_smoothing,
     sleep_base_on_timeframe,
-    get_strategy_for_ticker
+    get_strategy_for_ticker,
+    get_trade_file_path
 )
 from schwab.client import historical_data, place_order
 import schedule
 from tastytrade import place_tastytrade_order
 from utils import ticker_data_path_for_strategy
+# wilders_smoothing(df_or_series, length) -> pd.Series of smoothed data
+
+import sys
+import os
+# Add tim-repo to Python path for tick_buffer import
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'tim-repo'))
+from tick_buffer import TickDataBuffer
+
 
 def ema_strategy(ticker, logger):
     """Runs the trading strategy for the specified ticker."""
-    print("ema_strategy", ticker, logger)  # TODO
     try:
-        print(ticker + " strategy started") # TODO
+        print(ticker + " strategy started")  # TODO
         [
             timeframe,
             schwab_qty,
@@ -38,15 +46,13 @@ def ema_strategy(ticker, logger):
             period_1,
             trend_line_2,
             period_2,
-        ] = get_strategy_prarams('ema', ticker, logger)
-        print("tickersss", timeframe, schwab_qty, trade_enabled)  # TODO
+        ] = get_strategy_prarams("ema", ticker, logger)
         if trade_enabled != "TRUE":
-            logger.info(f"Skipping strategy for {ticker}, trade flag is FALSE.")
-            trade_file = f"trades/{ticker[1:] if '/' == ticker[0] else ticker}.json"
+            logger.info(f"Skipping  strategy for {ticker}, trade flag is FALSE.")
+            trade_file = get_trade_file_path(ticker, 'ema')
+            print("trade_file", trade_file) # TODO
             try:
-                with open(
-                    trade_file, "r"
-                ) as file:
+                with open(trade_file, "r") as file:
                     trades = json.load(file)
                 if ticker in trades:
                     trades = {}
@@ -57,15 +63,14 @@ def ema_strategy(ticker, logger):
             return
 
         logger.info(
-            f"Running strategy for {ticker} at {datetime.now(tz=pytz.timezone(time_zone))} with params: QTY={schwab_qty}, TRENDS=({period_1}, {trend_line_1}), ({period_2}, {trend_line_2})"
+            f"Running strategy for {ticker} at {datetime.now(tz=pytz.timezone(time_zone))} with params: Schwab_QTY={schwab_qty}, Tasty_QTY={tasty_qty} TRENDS=({period_1}, {trend_line_1}), ({period_2}, {trend_line_2})"
         )
 
         schwab_qty = int(schwab_qty)
         tasty_qty = int(tasty_qty)
-        with open(
-            f"trades/{ticker[1:] if '/' == ticker[0] else ticker}.json", "r"
-        ) as file:
-            trades = json.load(file)
+
+        trade_file = get_trade_file_path(ticker, 'ema')
+        trades = json.load(trade_file)
 
         df = historical_data(
             ticker,
@@ -101,7 +106,7 @@ def ema_strategy(ticker, logger):
                 logger.info(f"Long condition triggered for {ticker}")
                 order_id_schwab = (
                     place_order(
-                        ticker, schwab_qty, "BUY", account_id, logger, "OPENING"
+                        ticker, schwab_qty, "BUY", schwab_account_id, logger, "OPENING"
                     )
                     if schwab_qty > 0
                     else 0
@@ -122,7 +127,7 @@ def ema_strategy(ticker, logger):
                 logger.info(f"Short condition triggered for {ticker}")
                 order_id_schwab = (
                     place_order(
-                        ticker, schwab_qty, "SELL_SHORT", account_id, logger, "OPENING"
+                        ticker, schwab_qty, "SELL_SHORT", schwab_account_id, logger, "OPENING"
                     )
                     if schwab_qty > 0
                     else 0
@@ -146,7 +151,7 @@ def ema_strategy(ticker, logger):
                 )
                 long_order_id_schwab = (
                     place_order(
-                        ticker, schwab_qty, "SELL", account_id, logger, "CLOSING"
+                        ticker, schwab_qty, "SELL", schwab_account_id, logger, "CLOSING"
                     )
                     if schwab_qty > 0
                     else 0
@@ -160,7 +165,7 @@ def ema_strategy(ticker, logger):
                 )
                 short_order_id_schwab = (
                     place_order(
-                        ticker, schwab_qty, "SELL_SHORT", account_id, logger, "OPENING"
+                        ticker, schwab_qty, "SELL_SHORT", schwab_account_id, logger, "OPENING"
                     )
                     if schwab_qty > 0
                     else 0
@@ -187,7 +192,7 @@ def ema_strategy(ticker, logger):
                         ticker,
                         schwab_qty,
                         "BUY_TO_COVER",
-                        account_id,
+                        schwab_account_id,
                         logger,
                         "CLOSING",
                     )
@@ -203,7 +208,7 @@ def ema_strategy(ticker, logger):
                 )
                 long_order_id_schwab = (
                     place_order(
-                        ticker, schwab_qty, "BUY", account_id, logger, "OPENING"
+                        ticker, schwab_qty, "BUY", schwab_account_id, logger, "OPENING"
                     )
                     if schwab_qty > 0
                     else 0
@@ -239,46 +244,152 @@ def ema_strategy(ticker, logger):
 # place_order_api(ticker, quantity, action, account_id, logger, order_type) -> order_id int/str
 # wilders_smoothing(df_or_series, length) -> pd.Series of smoothed data
 
+import sys
+import os
+import redis
+# Add tim-repo to Python path for tick_buffer import
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'tim-repo'))
+from tick_producer import TickDataBufferWithRedis
+
+def get_historical_data(ticker, timeframe, logger):
+    """
+    Fetch historical tick data from Databento and return OHLCV DataFrame for the given ticker and timeframe.
+    Uses TickDataBufferWithRedis for production-ready data handling with Redis integration.
+    Only supports tick-based timeframes for now.
+    """
+    # Helper to check if timeframe is tick-based (e.g., '100tick', '500tick')
+    def is_tick_timeframe(tf):
+        return 'tick' in tf.lower()
+
+    if not is_tick_timeframe(timeframe):
+        raise NotImplementedError("Only tick-based timeframes are supported in this implementation.")
+
+    # Extract tick size from timeframe string (e.g., '100tick' -> 100)
+    try:
+        tick_size = int(''.join([c for c in timeframe if c.isdigit()]))
+    except Exception:
+        logger.error(f"Could not parse tick size from timeframe: {timeframe}")
+        raise
+
+    # Set up Databento API key
+    db_api_key = os.getenv("DATABENTO_API_KEY")
+    if not db_api_key:
+        logger.error("DATABENTO_API_KEY not set in environment.")
+        raise EnvironmentError("DATABENTO_API_KEY not set.")
+
+    # Set up Redis client (optional - for production systems)
+    redis_client = None
+    try:
+        redis_client = redis.Redis(host='localhost', port=6379, db=0)
+        redis_client.ping()  # Test connection
+        logger.info("Redis connection established")
+    except Exception as e:
+        logger.warning(f"Redis not available: {e}. Continuing without Redis integration.")
+        redis_client = None
+
+    # Set up TickDataBufferWithRedis (production-ready)
+    max_period = 10  # Keep more bars for strategy analysis
+    buffer = TickDataBufferWithRedis(
+        ticker=ticker, 
+        tick_size=tick_size, 
+        redis_client=redis_client,
+        db_api_key=db_api_key,
+        max_period=max_period
+    )
+
+    # Set up historical range (last 1 day for now)
+    from datetime import datetime, timedelta, timezone
+    end = datetime.now(timezone.utc)
+    start = end - timedelta(days=1)
+    start_str = start.isoformat()
+    end_str = end.isoformat()
+    dataset = "GLBX.MDP3"  # Default for futures, adjust as needed
+
+    # Warm up buffer with historical ticks
+    buffer.warmup_with_historical_ticks(
+        symbol=ticker,
+        dataset=dataset,
+        start=start_str,
+        end=end_str,
+        schema='trades'
+    )
+
+    # Wait for historical data to load (optional: add timeout)
+    if not buffer.historical_loaded:
+        logger.info(f"Waiting for historical data for {ticker}...")
+        import time
+        for _ in range(10):
+            if buffer.historical_loaded:
+                break
+            time.sleep(1)
+
+    # Get DataFrame of bars
+    df = buffer.get_dataframe(min_bars=5)
+    if df is None or df.empty:
+        logger.error(f"No historical bars available for {ticker}.")
+        raise ValueError(f"No historical bars available for {ticker}.")
+
+    # Ensure required columns
+    for col in ["open", "high", "low", "close", "volume"]:
+        if col not in df.columns:
+            logger.error(f"Missing column {col} in historical data for {ticker}.")
+            raise ValueError(f"Missing column {col} in historical data for {ticker}.")
+
+    logger.info(f"Successfully fetched {len(df)} bars for {ticker} using TickDataBufferWithRedis")
+    return df
+
 
 def supertrend_strategy(
     ticker,
     logger,
-    get_strategy_params,
-    get_historical_data,
-    place_order_api,
-    account_id,
 ):
     try:
         logger.info(f"{ticker} strategy started at {datetime.now(pytz.utc)}")
 
         # 1. Get parameters from frontend/backend
-        params = get_strategy_params(ticker)
-        # Example expected params (can be adjusted):
-        timeframe = params.get("timeframe", "15min")
-        trade_enabled = params.get("trade_enabled", True)
-        qty_schwab = int(params.get("schwab_quantity", 10))
-        qty_tastytrade = int(params.get("tastytrade_quantity", 10))
-        # MA params
-        short_ma_len = int(params.get("short_ma_length", 9))
-        short_ma_type = params.get("short_ma_type", "EMA")
-        mid_ma_len = int(params.get("mid_ma_length", 14))
-        mid_ma_type = params.get("mid_ma_type", "EMA")
-        long_ma_len = int(params.get("long_ma_length", 21))
-        long_ma_type = params.get("long_ma_type", "EMA")
-        # ZigZag/ATR params
-        zigzag_percent_reversal = float(
-            params.get("zigzag_percent_reversal", 1.0)
-        )  # in percent, e.g. 1.0 for 1%
-        atr_length = int(params.get("atr_length", 14))
-        atr_reversal_mult = float(params.get("zigzag_atr_multiple", 2.0))
-        # Fibonacci & Support/Demand
-        fibonacci_enabled = bool(params.get("fibonacci_enabled", False))
-        support_demand_enabled = bool(params.get("support_demand_enabled", False))
-        # timezone_str = params.get("timezone", "America/New_York")
-        # show_volume_bubbles = bool(params.get("show_volume_bubbles", False))
-        # show_bubbles_price = bool(params.get("show_bubbles_price", False))
+        [
+            timeframe,
+            qty_schwab,
+            trade_enabled,
+            qty_tastytrade,
+            short_ma_len,
+            short_ma_type,
+            mid_ma_len,
+            mid_ma_type,
+            long_ma_len,
+            long_ma_type,
+            zigzag_percent_reversal,
+            atr_length,
+            atr_reversal_mult,
+            fibonacci_enabled,
+            support_demand_enabled
+        ] = get_strategy_prarams("supertrend", ticker, logger)
+        # # Example expected params (can be adjusted):
+        # timeframe = params.get("timeframe", "15min")
+        # trade_enabled = params.get("trade_enabled", True)
+        # qty_schwab = int(params.get("schwab_quantity", 10))
+        # qty_tastytrade = int(params.get("tastytrade_quantity", 10))
+        # # MA params
+        # short_ma_len = int(params.get("short_ma_length", 9))
+        # short_ma_type = params.get("short_ma_type", "EMA")
+        # mid_ma_len = int(params.get("mid_ma_length", 14))
+        # mid_ma_type = params.get("mid_ma_type", "EMA")
+        # long_ma_len = int(params.get("long_ma_length", 21))
+        # long_ma_type = params.get("long_ma_type", "EMA")
+        # # ZigZag/ATR params
+        # zigzag_percent_reversal = float(
+        #     params.get("zigzag_percent_reversal", 1.0)
+        # )  # in percent, e.g. 1.0 for 1%
+        # atr_length = int(params.get("atr_length", 14))
+        # atr_reversal_mult = float(params.get("zigzag_atr_multiple", 2.0))
+        # # Fibonacci & Support/Demand
+        # fibonacci_enabled = bool(params.get("fibonacci_enabled", False))
+        # support_demand_enabled = bool(params.get("support_demand_enabled", False))
+        # # timezone_str = params.get("timezone", "America/New_York")
+        # # show_volume_bubbles = bool(params.get("show_volume_bubbles", False))
+        # # show_bubbles_price = bool(params.get("show_bubbles_price", False))
 
-        trades_file = f"trades/{ticker[1:] if ticker.startswith('/') else ticker}.json"
+        trades_file = f"trades/supertrend/{ticker[1:] if ticker.startswith('/') else ticker}.json"
 
         if not trade_enabled:
             logger.info(
@@ -676,19 +787,13 @@ def supertrend_strategy(
 def main_strategy_loop(ticker):
     """Main loop for running the strategy for a specific ticker."""
     logger = configure_logger(ticker)
-    print("efjeijfie") # TODO
     strategy, config = get_strategy_for_ticker(ticker)
-    print("strategy", strategy) # TODO
     if strategy == "ema":
         ema_strategy(ticker, logger)
     elif strategy == "supertrend":
         supertrend_strategy(
             ticker,
             logger,
-            get_strategy_prarams,
-            historical_data,
-            place_order,
-            account_id,
         )
     elif strategy == "zeroday":
         logger.info(f"Zero-day strategy for {ticker} requires manual trigger")
@@ -739,10 +844,8 @@ def main_strategy_loop(ticker):
 def run_every_week(strategy):
     """Starts threads for each ticker."""
     TICKER_DATA_PATH = ticker_data_path_for_strategy(strategy)
-    print("ticker_data_path", TICKER_DATA_PATH) # TODO
     with open(TICKER_DATA_PATH, "r") as file:
         ticker_n_tf = json.load(file)
-    print("tickers", ticker_n_tf) # TODO
     threads = []
     for ticker in ticker_n_tf.keys():
         thread = threading.Thread(target=main_strategy_loop, args=(ticker,))

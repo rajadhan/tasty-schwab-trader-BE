@@ -92,14 +92,27 @@ def login():
             "email"
         ) and password == admin_credentials.get("password"):
             token = generate_token(email, password)
-            refresh_token_path = load_json(REFRESH_TOKEN_LINK)
-            refresh_token_link = refresh_token_path.get("refresh_token_link", "")
+
+            try:
+                with open(refresh_token_path, "r") as file:
+                    refresh_token = json.load(file)
+            except Exception:
+                refresh_token = ""
+
+            try:
+                with open(TASTY_ACCESS_TOKEN_PATH, "r") as file:
+                    tasty_token = json.load(file)
+                    access_token = tasty_token.get("access_token", "")
+            except Exception:
+                access_token = ""
+
             return (
                 jsonify(
                     {
                         "success": True,
                         "token": token,
-                        "refreshToken": refresh_token_link,
+                        "refreshToken": refresh_token,
+                        "tastyToken": access_token,
                     }
                 ),
                 200,
@@ -112,6 +125,60 @@ def login():
     except Exception as e:
         print("error", e)
         return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route("/api/tasty/authorize-url", methods=["GET"])
+@token_required
+def tasty_authorize_url():
+    params = {
+        "response_type": "code",
+        "client_id": TASTY_CLIENT_ID,
+        "redirect_uri": TASTY_REDIRECT_URI,
+    }
+    request_url = requests.Request("GET", TASTY_MY_APP_URL, params=params).prepare().url
+    print("Visit this URL in your browser to authorize:")
+    print(request_url)
+    return request_url
+
+
+@app.route("/api/tasty/access-token", methods=["POST"])
+@token_required
+def tasty_access_token():
+    data = request.json
+    authorization_code = data.get("authorizationCode")
+    access_token_url = f"{TASTY_API}/oauth/token"
+    payload = {
+        "grant_type": "authorization_code",
+        "code": authorization_code,
+        "client_id": TASTY_CLIENT_ID,
+        "client_secret": TASTY_CLIENT_SECRET,
+        "redirect_uri": TASTY_REDIRECT_URI,
+    }
+    headers = {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+    }
+    response = requests.post(access_token_url, data=payload, headers=headers)
+    tokens = response.json()
+    access_token = tokens.get("access_token")
+    refresh_token = tokens.get("refresh_token")
+    if access_token and refresh_token:
+        tokens_to_save = {
+            "access_token": access_token,
+            "refresh_token": refresh_token
+        }
+        with open(TASTY_ACCESS_TOKEN_PATH, 'w') as f:
+            json.dump(tokens_to_save, f)
+        return jsonify(
+            {
+                "success": True,
+                "message": "Tastytrade connection established successfully",
+            }
+        )
+    else:
+        return jsonify(
+            {"success": False, "message": "Failed to establish Tastytrade connection"}
+        )
 
 
 @app.route("/api/add-ticker", methods=["POST"])
@@ -271,53 +338,48 @@ def start_trading():
         # Load current data
         TICKER_DATA_PATH = ticker_data_path_for_strategy(strategy)
         data = load_json(TICKER_DATA_PATH)
-        print("data", data)  # TODO
         if not data:
             return jsonify({"success": False, "error": "No ticker data found"}), 404
 
         trade_enabled_symbols = []
-
         for symbol, values in data.items():
             # values[2] is trade_enabled ("TRUE" or "FALSE")
             if len(values) >= 3 and values[2] == "TRUE":
                 trade_enabled_symbols.append(symbol)
-        print("trade_enabled_symbols", trade_enabled_symbols)  # TODO
+        results = {}
         if trade_enabled_symbols:
             print("Loading trading parameters ... ")
             run_every_week(strategy)
             # result = requests.get('https://api.schwabapi.com/v1/oauth/authorize?response_type=code&client_id=1iSr8ykD9qh2M2HoQv56wM2R1kWgQYZI&redirect_uri=https://127.0.0.1', allow_redirects=True)
             print("Trading started!")
-            # print(result.json())
-
-            # # Get the final URL after all redirects
-            # final_url = result.url
-            # print(f'Final redirected URL: {final_url}')
-            # auth_code = result.args.get('code')
-            # print(f'Auth code: {auth_code}')
-            # header = create_header("Bearer")
+            # After running the strategy, collect trade and signal/chart data for each enabled ticker
+            import os
+            import json
+            for symbol in trade_enabled_symbols:
+                trade_file = os.path.join(f"trades/{strategy}", f"{symbol}.json")
+                trades = None
+                if os.path.exists(trade_file):
+                    try:
+                        with open(trade_file, "r") as f:
+                            trades = json.load(f)
+                    except Exception as e:
+                        trades = {"error": str(e)}
+                # Optionally, add OHLCV/signals/chart data here if available
+                # For now, just return trades
+                results[symbol] = {"trades": trades}
             return (
                 jsonify(
                     {
                         "success": True,
                         "message": "Trading has started",
                         "enabled_symbols": trade_enabled_symbols,
-                        # 'final_url': final_url,
-                        # 'status_code': result.status_code
+                        "results": results,
                     }
                 ),
                 200,
             )
         else:
-            return (
-                jsonify(
-                    {
-                        "success": True,
-                        "message": "Trade disabled or no valid tickers with trading enabled",
-                    }
-                ),
-                200,
-            )
-
+            return jsonify({"success": False, "error": "No enabled symbols for trading"}), 400
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
 

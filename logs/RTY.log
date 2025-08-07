@@ -157,3 +157,54 @@ Traceback (most recent call last):
     [timeframe, *_] = get_strategy_prarams(ticker, logger)
                       ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
 TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-07 04:47:39,844 - INFO - Running strategy for /RTY at 2025-08-06 21:47:39.844957-04:00 with params: QTY=4, TRENDS=(1, EMA), (1, EMA)
+2025-08-07 04:47:39,925 - ERROR - Error in strategy for /RTY: [Errno 2] No such file or directory: 'trades/RTY.json'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in ema_strategy
+    with open(
+         ~~~~^
+        f"trades/{ticker[1:] if '/' == ticker[0] else ticker}.json", "r"
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as file:
+    ^
+FileNotFoundError: [Errno 2] No such file or directory: 'trades/RTY.json'
+2025-08-07 04:47:40,617 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 709, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-07 04:54:57,053 - INFO - Running strategy for /RTY at 2025-08-06 21:54:57.053408-04:00 with params: QTY=4, TRENDS=(1, EMA), (1, EMA)
+2025-08-07 04:54:57,054 - ERROR - Error in strategy for /RTY: [Errno 2] No such file or directory: 'trades/RTY.json'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 63, in ema_strategy
+    with open(
+         ~~~~^
+        f"trades/{ticker[1:] if '/' == ticker[0] else ticker}.json", "r"
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as file:
+    ^
+FileNotFoundError: [Errno 2] No such file or directory: 'trades/RTY.json'
+2025-08-07 04:54:57,583 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 702, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-07 05:02:56,015 - INFO - Running strategy for /RTY at 2025-08-06 22:02:56.015553-04:00 with params: QTY=4, TRENDS=(1, EMA), (1, EMA)
+2025-08-07 05:02:56,015 - ERROR - Error in strategy for /RTY: [Errno 2] No such file or directory: 'trades/RTY.json'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 63, in ema_strategy
+    with open(
+         ~~~~^
+        f"trades/{ticker[1:] if '/' == ticker[0] else ticker}.json", "r"
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as file:
+    ^
+FileNotFoundError: [Errno 2] No such file or directory: 'trades/RTY.json'
+2025-08-07 05:02:56,607 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 702, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'

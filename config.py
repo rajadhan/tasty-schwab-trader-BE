@@ -5,16 +5,22 @@ api_secret = "cVbjaA4euOF923RL"
 
 account_username = "tim30mcke"
 account_password = "Sweeny07!"
-account_id = "13241612"
+schwab_account_id = "13241612"
 
 # Tasty Trade credentials
-tastytrade_link = "https://api.tastyworks.com"
+TASTY_API = "https://api.tastyworks.com"
 
 username = "tmckenna@boardwalkag.com"    # tastytrade
 password = "Boardwalk2024!"              # tastytrade
 
-tasty_client_secret = "94cf0194a470e5f376284dcc0baa444b37b534d9"
-tasty_client_id = "f1ff7542-2fa9-446c-a57e-22f95108e02c"
+TASTY_CLIENT_SECRET = "94cf0194a470e5f376284dcc0baa444b37b534d9"
+TASTY_CLIENT_ID = "f1ff7542-2fa9-446c-a57e-22f95108e02c"
+
+TASTY_MY_APP_URL = "https://my.tastytrade.com/auth.html"
+TASTY_REDIRECT_URI = "https://api.tastyworks.com"
+
+TASTY_ACCESS_TOKEN_PATH = os.path.join("tokens", "tastytrade_tokens.txt")
+
 
 account_id = "5WX28756"
 # MSTR, TSLA, NVDA, /MES, /ES, /MNQ, /NQ, /MRTY, /RTY
@@ -34,7 +40,6 @@ symbols = [
 access_token_path = "tokens/access_token.txt"
 refresh_token_path = "tokens/refresh_token.txt"
 refresh_token_link_path = "jsons/refresh_token_link.json"
-tastytrade_access_token_path = "tokens/tastytrade_access_token.txt"
 tickers_path = os.path.join("settings", "ticker_data.json")
 gs_json_path = "jsons/creds.json"
 

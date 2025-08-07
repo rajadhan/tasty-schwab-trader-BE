@@ -5,23 +5,85 @@ import pandas as pd
 from datetime import datetime
 import pytz
 import os
+import json
 
+# def generate_access_token_for_tastytrade():
+#     """
+#     Generate access token for TastyTrade using username/password authentication.
+#     This is an alternative to OAuth flow for session-based authentication.
+#     """
+#     access_token_url = f"{tastytrade_link}/sessions"
+#     payload = {"login": username, "password": password, "remember-me": True}
+    
+#     try:
+#         response = requests.post(url=access_token_url, json=payload)
+#         response.raise_for_status()
+        
+#         access_token = response.json()["data"]["session-token"]
+        
+#         # Save the access token to file
+#         with open(tastytrade_access_token_path, "w") as f:
+#             f.write(access_token)
+            
+#         print(f"Successfully generated access token for {username}")
+#         return access_token
+        
+#     except requests.exceptions.RequestException as e:
+#         print(f"ERROR! Failed to generate access token for {username}: {e}")
+#         return None
+#     except KeyError as e:
+#         print(f"ERROR! Unexpected response format for {username}: {e}")
+#         return None
+#     except Exception as e:
+#         print(f"ERROR! Unexpected error generating access token for {username}: {e}")
+#         return None
 
-def generate_access_token_for_tastytrade():
-    access_token_url = f"{tastytrade_link}/sessions"
-    payload = {"login": username, "password": password, "remember-me": True}
-    try:
-        response = requests.post(url=access_token_url, json=payload)
-        access_token = response.json()["data"]["session-token"]
-        with open(tastytrade_access_token_path, "w") as f:
-            f.write(access_token)
-    except Exception as e:
-        print(f"ERROR! in generating access token for {username} = {e}")
-        sleep(5)
-        generate_access_token_for_tastytrade(username, password)
+def tastytrade_api_request(method, url, **kwargs):
+    # Load token
+    with open(TASTY_ACCESS_TOKEN_PATH, "r") as f:
+        tokens = json.load(f)
+    access_token = tokens.get("access_token")
+    headers = kwargs.pop("headers", {})
+    headers.update(create_header(access_token))
+    response = requests.request(method, url, headers=headers, **kwargs)
+    if response.status_code == 401 or "invalid_token" in response.text or "expired_token" in response.text:
+        # Try refresh
+        access_token = refresh_tastytrade_token()
+        headers = create_header(access_token)
+        response = requests.request(method, url, headers=headers, **kwargs)
+    return response
 
+def refresh_tastytrade_token():
+    with open(TASTY_ACCESS_TOKEN_PATH, "r") as f:
+        tokens = json.load(f)
+    tasty_refresh_access_token_url = f"{TASTY_API}/oauth/token"
+    refresh_token = tokens.get("refresh_token")
+    payload = {
+        "grant_type": "refresh_token",
+        "refresh_token": refresh_token,
+        "client_id": TASTY_CLIENT_ID,
+        "client_secret": TASTY_CLIENT_SECRET,
+        "redirect_uri": TASTY_REDIRECT_URI,
+    }
+    response = requests.post(tasty_refresh_access_token_url, data=payload)
+    new_tokens = response.json()
+    if "access_token" in new_tokens and "refresh_token" in new_tokens:
+        tokens = {
+            "access_token": new_tokens.get('access_token'),
+            "refresh_token": new_tokens.get('refresh_token')
+        }
+        with open(TASTY_ACCESS_TOKEN_PATH, "w") as f:
+            json.dump(tokens, f)
+        return new_tokens["access_token"]
+    else:
+        raise Exception(f"Failed to refresh token: {new_tokens}")
 
 def create_header(token):
+    
+    # Ensure token is properly formatted
+    if not token.startswith("Bearer "):
+        token = f"Bearer {token}"
+        
     return {
         "Accept": "application/json",
         "Content-Type": "application/json",
