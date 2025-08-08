@@ -7,11 +7,12 @@ account_username = "tim30mcke"
 account_password = "Sweeny07!"
 schwab_account_id = "13241612"
 
+#------------------------------#
 # Tasty Trade credentials
 TASTY_API = "https://api.tastyworks.com"
 
-username = "tmckenna@boardwalkag.com"    # tastytrade
-password = "Boardwalk2024!"              # tastytrade
+TASTY_USERNAME = "tmckenna@boardwalkag.com"    # tastytrade
+TASTY_PASSWORD = "Boardwalk2024!"              # tastytrade
 
 TASTY_CLIENT_SECRET = "94cf0194a470e5f376284dcc0baa444b37b534d9"
 TASTY_CLIENT_ID = "f1ff7542-2fa9-446c-a57e-22f95108e02c"
@@ -21,8 +22,10 @@ TASTY_REDIRECT_URI = "https://api.tastyworks.com"
 
 TASTY_ACCESS_TOKEN_PATH = os.path.join("tokens", "tastytrade_tokens.txt")
 
+TASTY_ACCOUNT_ID = "5WW38442"
+#------------------------------#
 
-account_id = "5WX28756"
+
 # MSTR, TSLA, NVDA, /MES, /ES, /MNQ, /NQ, /MRTY, /RTY
 symbols = [
     "MSTR",
