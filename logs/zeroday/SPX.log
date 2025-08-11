@@ -1,0 +1,10 @@
+2025-08-08 22:28:20,146 - INFO - SPX zeroday strategy started at 2025-08-08 20:28:20.146239+00:00
+2025-08-08 22:28:20,147 - INFO - Running zeroday strategy for SPX at 2025-08-08 16:28:20.147384-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-08 22:28:20,148 - INFO - Fetching historical data for $SPX
+2025-08-08 22:28:20,148 - ERROR - Error in getting historical data for $SPX: Unsupported time frame: 3
+2025-08-08 22:28:25,190 - INFO - Fetching historical data for $SPX
+2025-08-08 22:28:25,205 - ERROR - Error in getting historical data for $SPX: Unsupported time frame: 3
+2025-08-08 22:28:30,219 - INFO - Fetching historical data for $SPX
+2025-08-08 22:28:30,220 - ERROR - Error in getting historical data for $SPX: Unsupported time frame: 3
+2025-08-08 22:28:35,224 - INFO - Fetching historical data for $SPX
+2025-08-08 22:28:35,225 - ERROR - Error in getting historical data for $SPX: Unsupported time frame: 3
