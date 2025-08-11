@@ -42,3 +42,31 @@ Traceback (most recent call last):
   File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 46, in main_strategy_loop
     [timeframe, *_] = get_strategy_prarams(ticker, logger)
 TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 06:00:05,476 - INFO - Running strategy for /ES at 2025-08-10 23:00:05.476869-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 06:00:09,670 - ERROR - Error in strategy for /ES: configure_logger() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 53, in ema_strategy
+    df = get_historical_data(
+        ticker,
+        timeframe,
+        logger=logger,
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 120, in get_historical_data
+    buffer = TickDataBufferWithRedis(
+        ticker=ticker,
+    ...<3 lines>...
+        max_period=10,
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\tick_producer.py", line 123, in __init__
+    super().__init__(ticker, tick_size, db_api_key)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\tick_buffer.py", line 18, in __init__
+    self.logger = configure_logger(ticker)
+                  ~~~~~~~~~~~~~~~~^^^^^^^^
+TypeError: configure_logger() missing 1 required positional argument: 'strategy'
+2025-08-11 06:00:09,831 - ERROR - Error in main loop for /ES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'

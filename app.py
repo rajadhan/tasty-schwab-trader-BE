@@ -1,7 +1,7 @@
 import json
 import os
 import jwt
-from datetime import timedelta, datetime
+from datetime import timedelta, datetime, timezone
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from functools import wraps
@@ -48,7 +48,7 @@ def generate_token(email, password):
     payload = {
         "email": email,
         "password": password,
-        "exp": datetime.utcnow() + timedelta(minutes=JWT_EXPIRATION_MINUTES),
+        "exp": datetime.now(timezone.utc) + timedelta(minutes=JWT_EXPIRATION_MINUTES),
     }
     token = jwt.encode(payload, JWT_SECRET, algorithm="HS256")
     return token

@@ -182,3 +182,21 @@ Traceback (most recent call last):
   File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 46, in main_strategy_loop
     [timeframe, *_] = get_strategy_prarams(ticker, logger)
 TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 06:00:05,600 - INFO - Running strategy for /MES at 2025-08-10 23:00:05.600876-04:00 with params: Schwab_QTY=3, Tasty_QTY=20 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 06:00:07,639 - ERROR - Error in strategy for /MES: Unsupported timeframe: 5
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 53, in ema_strategy
+    df = get_historical_data(
+        ticker,
+        timeframe,
+        logger=logger,
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 159, in get_historical_data
+    raise ValueError(f"Unsupported timeframe: {timeframe}")
+ValueError: Unsupported timeframe: 5
+2025-08-11 06:00:08,807 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'

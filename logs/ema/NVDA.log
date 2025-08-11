@@ -308,3 +308,18 @@ ValueError: Unsupported timeframe: 5
 2025-08-11 04:39:02,051 - INFO - Market closed on weekends
 2025-08-11 04:40:02,060 - INFO - Market closed on weekends
 2025-08-11 04:41:02,069 - INFO - Market closed on weekends
+2025-08-11 06:00:05,475 - INFO - Running strategy for NVDA at 2025-08-10 23:00:05.475097-04:00 with params: Schwab_QTY=4, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 06:00:08,007 - ERROR - Error in strategy for NVDA: Unsupported timeframe: 5
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 53, in ema_strategy
+    df = get_historical_data(
+        ticker,
+        timeframe,
+        logger=logger,
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 159, in get_historical_data
+    raise ValueError(f"Unsupported timeframe: {timeframe}")
+ValueError: Unsupported timeframe: 5
+2025-08-11 06:00:08,008 - INFO - Market closed on weekends
+2025-08-11 06:01:08,009 - INFO - Market closed on weekends
+2025-08-11 06:02:08,010 - INFO - Market closed on weekends
