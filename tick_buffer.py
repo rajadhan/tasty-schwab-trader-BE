@@ -3,6 +3,7 @@ import pandas as pd
 import databento as db
 import asyncio
 import logging
+import os
 from datetime import datetime, timedelta, timezone
 import pytz
 from utils import configure_logger  # Ensure this is correctly imported from your utils module
@@ -29,70 +30,41 @@ class TickDataBuffer:
             self.db_client = db.Historical()
             self.live_client = db.Live()
 
+   
+        if not self.buffer:
+            return None
 
-    def warmup_with_historical_ticks(self, symbol, dataset, start, end, schema='trades'):
-        try:
-            self.logger.info(f"Fetching historical tick data for warmup: {symbol} [{start} to {end}]")
-            print(f"Fetching historical tick data for warmup: {symbol} [{start} to {end}]")
-            # Fetch raw trade ticks
-            result = self.db_client.symbology.resolve(
-                dataset=dataset,
-                symbols=[symbol],
-                stype_in="raw_symbol",
-                stype_out="instrument_id",
-                start_date=start,
-                end_date=end,
-            )
-            print(f"Resolved symbol: {result}")
-            data = self.db_client.timeseries.get_range(
-                dataset=dataset,
-                symbols=[symbol],
-                schema=schema,
-                start=start,
-                end=end
-            )
+        bar = super()._create_bar_from_ticks()
 
-            print(f"Data fetched for {symbol}: {data}")
-            df = data.to_df()
-            if df.empty:
-                self.logger.warning(f"No historical data returned for {symbol}")
-                return
+        if bar:
+            bar_data = {
+                'symbol': self.ticker,
+                'timestamp': bar['timestamp'].isoformat(),
+                'open': bar['open'],
+                'high': bar['high'],
+                'low': bar['low'],
+                'close': bar['close'],
+                'volume': bar['volume']
+            }
 
-            # Only print the first row if DataFrame is not empty
-            print(df.iloc[0].to_json(indent=4))
-            if df.empty:
-                self.logger.warning(f"No historical data returned for {symbol}")
-                return
+            # ---- Publish to Redis Pub/Sub channel ----
+            channel = f"tick_bars:{self.ticker}"
+            self.redis_client.publish(channel, json.dumps(bar_data))
 
-            df.sort_values("ts_event", inplace=True)
-            df.reset_index(drop=True, inplace=True)
+            # ---- Store in Redis ZSET for count-based access ----
+            zset_key = f"bars_history:{self.ticker}"
+            timestamp_score = int(pd.Timestamp(bar['timestamp']).timestamp())  # seconds since epoch
+            self.redis_client.zadd(zset_key, {json.dumps(bar_data): timestamp_score})
 
-            # Normalize price and construct tick dicts
-            df['price'] = df['price'] / 1e9
-            df['timestamp'] = pd.to_datetime(df['ts_event'], unit='ns')
-            df['volume'] = df['size']
+            # ---- Trim ZSET to only keep the latest max_period items ----
+            # Remove all but the latest max_period items (highest scores)
+            self.redis_client.zremrangebyrank(zset_key, 0, -(self.max_period + 2))
 
-            ticks = df[['timestamp', 'price', 'volume']].to_dict(orient='records')
+            self.logger.info(f"ZSET updated for {self.ticker} with timestamp {timestamp_score}")
 
-            self.logger.info(f"Fetched and parsed {len(ticks)} ticks for {symbol}")
+        return bar
 
-            # Build bars from tick chunks
-            bar_ticks = []
-            for tick in ticks:
-                bar_ticks.append(tick)
-                if len(bar_ticks) >= self.tick_size:
-                    self.buffer = bar_ticks
-                    bar = self._create_bar_from_ticks()
-                    self.processed_bars.append(bar)
-                    bar_ticks = []
-
-            self.buffer = []  # clear residuals
-            self.historical_loaded = True
-            self.logger.info(f"Historical warmup completed for {symbol}: {len(self.processed_bars)} bars created.")
-
-        except Exception as e:
-            self.logger.error(f"Databento historical warmup failed for {symbol}: {e}", exc_info=True)
-
+    
     async def start_live_subscription(self, symbol, dataset, schema='trades', start_time=0):
         """Start live tick data subscription using Databento Live API with optional replay"""
         try:

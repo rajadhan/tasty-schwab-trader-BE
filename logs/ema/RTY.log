@@ -1,570 +1,547 @@
-2025-08-08 21:47:56,746 - INFO - Running strategy for /RTY at 2025-08-08 15:47:56.746188-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
-2025-08-08 21:47:56,747 - INFO - Using time-based approach for /RTY with 5 timeframe
-2025-08-08 21:47:57,508 - ERROR - Error fetching time-based data from Databento: 422 data_end_after_available_end
-The dataset GLBX.MDP3 has data available up to '2025-08-08 19:40:00+00:00'. The `end` in the query ('2025-08-08 19:47:56.747836+00:00') is after the available range. Try requesting with an earlier `end`.
-documentation: https://databento.com/docs/api-reference-historical/basics/datasets
-2025-08-08 21:47:57,509 - ERROR - Error in strategy for /RTY: 422 data_end_after_available_end
-The dataset GLBX.MDP3 has data available up to '2025-08-08 19:40:00+00:00'. The `end` in the query ('2025-08-08 19:47:56.747836+00:00') is after the available range. Try requesting with an earlier `end`.
-documentation: https://databento.com/docs/api-reference-historical/basics/datasets
+2025-08-11 14:46:35,736 - INFO - Running strategy for /RTY at 2025-08-11 07:46:35.736886-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 14:46:35,737 - INFO - Attempting to connect to Redis at localhost:6379 db=0
+2025-08-11 14:46:35,739 - ERROR - Error in strategy for /RTY: get_time_based_historical_data() takes 5 positional arguments but 6 were given
 Traceback (most recent call last):
-  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 74, in ema_strategy
-    df = get_historical_data(
-  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 359, in get_historical_data
-    data = db_client.timeseries.get_range(
-  File "C:\Users\csg\AppData\Local\Programs\Python\Python310\lib\site-packages\databento\historical\api\timeseries.py", line 125, in get_range
-    return self._stream(
-  File "C:\Users\csg\AppData\Local\Programs\Python\Python310\lib\site-packages\databento\common\http.py", line 134, in _stream
-    check_http_error(response)
-  File "C:\Users\csg\AppData\Local\Programs\Python\Python310\lib\site-packages\databento\common\http.py", line 249, in check_http_error
-    raise BentoClientError(
-databento.common.error.BentoClientError: 422 data_end_after_available_end
-The dataset GLBX.MDP3 has data available up to '2025-08-08 19:40:00+00:00'. The `end` in the query ('2025-08-08 19:47:56.747836+00:00') is after the available range. Try requesting with an earlier `end`.
-documentation: https://databento.com/docs/api-reference-historical/basics/datasets
-2025-08-08 21:47:58,323 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
-Traceback (most recent call last):
-  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 1116, in main_strategy_loop
-    [timeframe, *_] = get_strategy_prarams(ticker, logger)
-TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
-2025-08-08 21:48:36,296 - INFO - Running strategy for /RTY at 2025-08-08 15:48:36.296593-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
-2025-08-08 21:48:36,299 - INFO - Using time-based approach for /RTY with 5 timeframe
-2025-08-08 21:48:36,746 - ERROR - Error fetching time-based data from Databento: 422 data_end_after_available_end
-The dataset GLBX.MDP3 has data available up to '2025-08-08 19:40:00+00:00'. The `end` in the query ('2025-08-08 19:48:36.298205+00:00') is after the available range. Try requesting with an earlier `end`.
-documentation: https://databento.com/docs/api-reference-historical/basics/datasets
-2025-08-08 21:48:36,746 - ERROR - Error in strategy for /RTY: 422 data_end_after_available_end
-The dataset GLBX.MDP3 has data available up to '2025-08-08 19:40:00+00:00'. The `end` in the query ('2025-08-08 19:48:36.298205+00:00') is after the available range. Try requesting with an earlier `end`.
-documentation: https://databento.com/docs/api-reference-historical/basics/datasets
-Traceback (most recent call last):
-  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 74, in ema_strategy
-    df = get_historical_data(
-  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 361, in get_historical_data
-    data = db_client.timeseries.get_range(
-  File "C:\Users\csg\AppData\Local\Programs\Python\Python310\lib\site-packages\databento\historical\api\timeseries.py", line 125, in get_range
-    return self._stream(
-  File "C:\Users\csg\AppData\Local\Programs\Python\Python310\lib\site-packages\databento\common\http.py", line 134, in _stream
-    check_http_error(response)
-  File "C:\Users\csg\AppData\Local\Programs\Python\Python310\lib\site-packages\databento\common\http.py", line 249, in check_http_error
-    raise BentoClientError(
-databento.common.error.BentoClientError: 422 data_end_after_available_end
-The dataset GLBX.MDP3 has data available up to '2025-08-08 19:40:00+00:00'. The `end` in the query ('2025-08-08 19:48:36.298205+00:00') is after the available range. Try requesting with an earlier `end`.
-documentation: https://databento.com/docs/api-reference-historical/basics/datasets
-2025-08-08 21:48:37,467 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
-Traceback (most recent call last):
-  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 1118, in main_strategy_loop
-    [timeframe, *_] = get_strategy_prarams(ticker, logger)
-TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
-2025-08-08 21:49:44,470 - INFO - Running strategy for /RTY at 2025-08-08 15:49:44.470541-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
-2025-08-08 21:49:44,473 - INFO - Using time-based approach for /RTY with 5 timeframe
-2025-08-08 21:49:44,904 - ERROR - Error fetching time-based data from Databento: 422 data_end_after_available_end
-The dataset GLBX.MDP3 has data available up to '2025-08-08 19:40:00+00:00'. The `end` in the query ('2025-08-08 19:49:44.473230+00:00') is after the available range. Try requesting with an earlier `end`.
-documentation: https://databento.com/docs/api-reference-historical/basics/datasets
-2025-08-08 21:49:44,904 - ERROR - Error in strategy for /RTY: 422 data_end_after_available_end
-The dataset GLBX.MDP3 has data available up to '2025-08-08 19:40:00+00:00'. The `end` in the query ('2025-08-08 19:49:44.473230+00:00') is after the available range. Try requesting with an earlier `end`.
-documentation: https://databento.com/docs/api-reference-historical/basics/datasets
-Traceback (most recent call last):
-  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 74, in ema_strategy
-    df = get_historical_data(
-  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 362, in get_historical_data
-    data = db_client.timeseries.get_range(
-  File "C:\Users\csg\AppData\Local\Programs\Python\Python310\lib\site-packages\databento\historical\api\timeseries.py", line 125, in get_range
-    return self._stream(
-  File "C:\Users\csg\AppData\Local\Programs\Python\Python310\lib\site-packages\databento\common\http.py", line 134, in _stream
-    check_http_error(response)
-  File "C:\Users\csg\AppData\Local\Programs\Python\Python310\lib\site-packages\databento\common\http.py", line 249, in check_http_error
-    raise BentoClientError(
-databento.common.error.BentoClientError: 422 data_end_after_available_end
-The dataset GLBX.MDP3 has data available up to '2025-08-08 19:40:00+00:00'. The `end` in the query ('2025-08-08 19:49:44.473230+00:00') is after the available range. Try requesting with an earlier `end`.
-documentation: https://databento.com/docs/api-reference-historical/basics/datasets
-2025-08-08 21:49:45,748 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
-Traceback (most recent call last):
-  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 1119, in main_strategy_loop
-    [timeframe, *_] = get_strategy_prarams(ticker, logger)
-TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
-2025-08-08 22:28:24,546 - INFO - Running strategy for /RTY at 2025-08-08 16:28:24.546862-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
-2025-08-08 22:28:24,549 - INFO - Using time-based approach for /RTY with 5 timeframe
-2025-08-08 22:28:25,297 - ERROR - Error fetching time-based data from Databento: 422 data_end_after_available_end
-The dataset GLBX.MDP3 has data available up to '2025-08-08 20:20:00+00:00'. The `end` in the query ('2025-08-08 20:28:24.547689+00:00') is after the available range. Try requesting with an earlier `end`.
-documentation: https://databento.com/docs/api-reference-historical/basics/datasets
-2025-08-08 22:28:25,312 - ERROR - Error in strategy for /RTY: 422 data_end_after_available_end
-The dataset GLBX.MDP3 has data available up to '2025-08-08 20:20:00+00:00'. The `end` in the query ('2025-08-08 20:28:24.547689+00:00') is after the available range. Try requesting with an earlier `end`.
-documentation: https://databento.com/docs/api-reference-historical/basics/datasets
-Traceback (most recent call last):
-  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 74, in ema_strategy
-    df = get_historical_data(
-  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 363, in get_historical_data
-    data = db_client.timeseries.get_range(
-  File "C:\Users\csg\AppData\Local\Programs\Python\Python310\lib\site-packages\databento\historical\api\timeseries.py", line 125, in get_range
-    return self._stream(
-  File "C:\Users\csg\AppData\Local\Programs\Python\Python310\lib\site-packages\databento\common\http.py", line 134, in _stream
-    check_http_error(response)
-  File "C:\Users\csg\AppData\Local\Programs\Python\Python310\lib\site-packages\databento\common\http.py", line 249, in check_http_error
-    raise BentoClientError(
-databento.common.error.BentoClientError: 422 data_end_after_available_end
-The dataset GLBX.MDP3 has data available up to '2025-08-08 20:20:00+00:00'. The `end` in the query ('2025-08-08 20:28:24.547689+00:00') is after the available range. Try requesting with an earlier `end`.
-documentation: https://databento.com/docs/api-reference-historical/basics/datasets
-2025-08-08 22:28:26,110 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
-Traceback (most recent call last):
-  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 1120, in main_strategy_loop
-    [timeframe, *_] = get_strategy_prarams(ticker, logger)
-TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
-2025-08-08 22:28:46,881 - INFO - Running strategy for /RTY at 2025-08-08 16:28:46.881894-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
-2025-08-08 22:28:46,886 - INFO - Using time-based approach for /RTY with 5 timeframe
-2025-08-08 22:28:47,295 - ERROR - Error fetching time-based data from Databento: 422 data_end_after_available_end
-The dataset GLBX.MDP3 has data available up to '2025-08-08 20:20:00+00:00'. The `end` in the query ('2025-08-08 20:28:46.882419+00:00') is after the available range. Try requesting with an earlier `end`.
-documentation: https://databento.com/docs/api-reference-historical/basics/datasets
-2025-08-08 22:28:47,371 - ERROR - Error in strategy for /RTY: 422 data_end_after_available_end
-The dataset GLBX.MDP3 has data available up to '2025-08-08 20:20:00+00:00'. The `end` in the query ('2025-08-08 20:28:46.882419+00:00') is after the available range. Try requesting with an earlier `end`.
-documentation: https://databento.com/docs/api-reference-historical/basics/datasets
-Traceback (most recent call last):
-  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 74, in ema_strategy
-    df = get_historical_data(
-  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 363, in get_historical_data
-    data = db_client.timeseries.get_range(
-  File "C:\Users\csg\AppData\Local\Programs\Python\Python310\lib\site-packages\databento\historical\api\timeseries.py", line 125, in get_range
-    return self._stream(
-  File "C:\Users\csg\AppData\Local\Programs\Python\Python310\lib\site-packages\databento\common\http.py", line 134, in _stream
-    check_http_error(response)
-  File "C:\Users\csg\AppData\Local\Programs\Python\Python310\lib\site-packages\databento\common\http.py", line 249, in check_http_error
-    raise BentoClientError(
-databento.common.error.BentoClientError: 422 data_end_after_available_end
-The dataset GLBX.MDP3 has data available up to '2025-08-08 20:20:00+00:00'. The `end` in the query ('2025-08-08 20:28:46.882419+00:00') is after the available range. Try requesting with an earlier `end`.
-documentation: https://databento.com/docs/api-reference-historical/basics/datasets
-2025-08-08 22:28:48,090 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
-Traceback (most recent call last):
-  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 1120, in main_strategy_loop
-    [timeframe, *_] = get_strategy_prarams(ticker, logger)
-TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
-2025-08-09 00:38:17,200 - INFO - Running strategy for /RTY at 2025-08-08 18:38:17.200570-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
-2025-08-09 00:38:21,247 - ERROR - Error in strategy for /RTY: Unsupported timeframe: 5
-Traceback (most recent call last):
-  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 76, in ema_strategy
-    df = get_historical_data(
-  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 159, in get_historical_data
-    raise ValueError(f"Unsupported timeframe: {timeframe}")
-ValueError: Unsupported timeframe: 5
-2025-08-09 00:46:20,581 - ERROR - Error in strategy for /RTY: name 'get_strategy_prarams' is not defined
-Traceback (most recent call last):
-  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 14, in ema_strategy
-    ] = get_strategy_prarams("ema", ticker, logger)
-NameError: name 'get_strategy_prarams' is not defined
-2025-08-09 00:50:35,661 - ERROR - Error in strategy for /RTY: name 'get_strategy_prarams' is not defined
-Traceback (most recent call last):
-  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 14, in ema_strategy
-    ] = get_strategy_prarams("ema", ticker, logger)
-NameError: name 'get_strategy_prarams' is not defined
-2025-08-09 00:51:07,710 - ERROR - Error in strategy for /RTY: name 'get_strategy_prarams' is not defined
-Traceback (most recent call last):
-  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 15, in ema_strategy
-    ] = get_strategy_prarams("ema", ticker, logger)
-NameError: name 'get_strategy_prarams' is not defined
-2025-08-11 02:18:23,747 - INFO - Running strategy for /RTY at 2025-08-10 20:18:23.747076-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
-2025-08-11 02:18:27,795 - ERROR - Error in strategy for /RTY: Unsupported timeframe: 5
-Traceback (most recent call last):
-  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 54, in ema_strategy
-    df = get_historical_data(
-  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 159, in get_historical_data
-    raise ValueError(f"Unsupported timeframe: {timeframe}")
-ValueError: Unsupported timeframe: 5
-2025-08-11 02:18:28,191 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
-Traceback (most recent call last):
-  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 46, in main_strategy_loop
-    [timeframe, *_] = get_strategy_prarams(ticker, logger)
-TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
-2025-08-11 02:19:56,422 - INFO - Running strategy for /RTY at 2025-08-10 20:19:56.422181-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
-2025-08-11 02:20:00,474 - ERROR - Error in strategy for /RTY: Unsupported timeframe: 5
-Traceback (most recent call last):
-  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 56, in ema_strategy
-    df = get_historical_data(
-  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 159, in get_historical_data
-    raise ValueError(f"Unsupported timeframe: {timeframe}")
-ValueError: Unsupported timeframe: 5
-2025-08-11 02:20:00,877 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
-Traceback (most recent call last):
-  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 46, in main_strategy_loop
-    [timeframe, *_] = get_strategy_prarams(ticker, logger)
-TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
-2025-08-11 06:00:05,476 - INFO - Running strategy for /RTY at 2025-08-10 23:00:05.476094-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
-2025-08-11 06:00:07,639 - ERROR - Error in strategy for /RTY: Unsupported timeframe: 5
-Traceback (most recent call last):
-  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 53, in ema_strategy
-    df = get_historical_data(
-        ticker,
-        timeframe,
-        logger=logger,
-    )
-  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 159, in get_historical_data
-    raise ValueError(f"Unsupported timeframe: {timeframe}")
-ValueError: Unsupported timeframe: 5
-2025-08-11 06:00:08,809 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
-Traceback (most recent call last):
-  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
-    [timeframe, *_] = get_strategy_prarams(ticker, logger)
-                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
-TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
-2025-08-11 06:16:43,921 - INFO - Running strategy for /RTY at 2025-08-10 23:16:43.921068-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
-2025-08-11 06:16:45,954 - ERROR - Error in strategy for /RTY: Unsupported timeframe: 5
-Traceback (most recent call last):
-  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 53, in ema_strategy
-    df = get_historical_data(
-        ticker,
-        timeframe,
-        logger=logger,
-    )
-  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 159, in get_historical_data
-    raise ValueError(f"Unsupported timeframe: {timeframe}")
-ValueError: Unsupported timeframe: 5
-2025-08-11 06:16:46,239 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
-Traceback (most recent call last):
-  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
-    [timeframe, *_] = get_strategy_prarams(ticker, logger)
-                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
-TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
-2025-08-11 09:58:47,308 - INFO - Running strategy for /RTY at 2025-08-11 02:58:47.308050-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
-2025-08-11 09:58:49,599 - INFO - Resolved symbol: {'result': {'RTYU5': [{'d0': '2025-08-06', 'd1': '2025-08-12', 's': '42003082'}]}, 'symbols': ['RTYU5'], 'stype_in': 'raw_symbol', 'stype_out': 'instrument_id', 'start_date': '2025-08-06', 'end_date': '2025-08-12', 'partial': [], 'not_found': [], 'message': 'OK', 'status': 0}
-2025-08-11 09:58:50,718 - ERROR - Error getting historical data for /RTY: 422 data_end_after_available_end
-The dataset GLBX.MDP3 has data available up to '2025-08-11 06:50:00+00:00'. The `end` in the query ('2025-08-11 06:58:48.112739+00:00') is after the available range. Try requesting with an earlier `end`.
-documentation: https://databento.com/docs/api-reference-historical/basics/datasets
-Traceback (most recent call last):
-  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 184, in get_time_based_historical_data
-    # Get historical data
-           ^^^^^^^^^^^^^^
-    ...<5 lines>...
-        end=end_date
-    
-  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\historical\api\timeseries.py", line 125, in get_range
-    return self._stream(
-           ~~~~~~~~~~~~^
-        url=self._base_url + ".get_range",
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
     ...<2 lines>...
-        path=path,
-        ^^^^^^^^^^
+        strategy="ema"
     )
-    ^
-  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 134, in _stream
-    check_http_error(response)
-    ~~~~~~~~~~~~~~~~^^^^^^^^^^
-  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 249, in check_http_error
-    raise BentoClientError(
-    ...<5 lines>...
-    )
-databento.common.error.BentoClientError: 422 data_end_after_available_end
-The dataset GLBX.MDP3 has data available up to '2025-08-11 06:50:00+00:00'. The `end` in the query ('2025-08-11 06:58:48.112739+00:00') is after the available range. Try requesting with an earlier `end`.
-documentation: https://databento.com/docs/api-reference-historical/basics/datasets
-2025-08-11 09:58:50,735 - ERROR - Error in strategy for /RTY: 'NoneType' object is not subscriptable
-Traceback (most recent call last):
-  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 60, in ema_strategy
-    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
-                   ~~^^^^^^^^^
-TypeError: 'NoneType' object is not subscriptable
-2025-08-11 09:58:50,898 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 385, in get_historical_and_live_data
+    df = get_historical_data(ticker, timeframe, logger, strategy)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 94, in get_historical_data
+    return get_time_based_historical_data(ticker, timeframe, logger, db_api_key, dataset, strategy)
+TypeError: get_time_based_historical_data() takes 5 positional arguments but 6 were given
+2025-08-11 14:46:36,897 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
 Traceback (most recent call last):
   File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
     [timeframe, *_] = get_strategy_prarams(ticker, logger)
                       ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
 TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
-2025-08-11 10:03:46,935 - INFO - Running strategy for /RTY at 2025-08-11 03:03:46.935317-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
-2025-08-11 10:03:54,075 - INFO - Resolved symbol: {'result': {'RTYU5': [{'d0': '2025-08-06', 'd1': '2025-08-12', 's': '42003082'}]}, 'symbols': ['RTYU5'], 'stype_in': 'raw_symbol', 'stype_out': 'instrument_id', 'start_date': '2025-08-06', 'end_date': '2025-08-12', 'partial': [], 'not_found': [], 'message': 'OK', 'status': 0}
-2025-08-11 10:03:55,534 - ERROR - Error getting historical data for /RTY: 422 data_end_after_available_end
-The dataset GLBX.MDP3 has data available up to '2025-08-11 07:00:00+00:00'. The `end` in the query ('2025-08-11 07:03:52.853866+00:00') is after the available range. Try requesting with an earlier `end`.
-documentation: https://databento.com/docs/api-reference-historical/basics/datasets
+2025-08-11 15:10:27,776 - INFO - Running strategy for /RTY at 2025-08-11 08:10:27.776960-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 15:10:27,777 - INFO - Attempting to connect to Redis at localhost:6379 db=0
+2025-08-11 15:10:27,777 - ERROR - Error in strategy for /RTY: get_time_based_historical_data() takes 5 positional arguments but 6 were given
 Traceback (most recent call last):
-  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 194, in get_time_based_historical_data
-    data = db_client.timeseries.get_range(
-        dataset=dataset,
-    ...<3 lines>...
-        end=end_date
-    )
-  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\historical\api\timeseries.py", line 125, in get_range
-    return self._stream(
-           ~~~~~~~~~~~~^
-        url=self._base_url + ".get_range",
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
     ...<2 lines>...
-        path=path,
-        ^^^^^^^^^^
+        strategy="ema"
     )
-    ^
-  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 134, in _stream
-    check_http_error(response)
-    ~~~~~~~~~~~~~~~~^^^^^^^^^^
-  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 249, in check_http_error
-    raise BentoClientError(
-    ...<5 lines>...
-    )
-databento.common.error.BentoClientError: 422 data_end_after_available_end
-The dataset GLBX.MDP3 has data available up to '2025-08-11 07:00:00+00:00'. The `end` in the query ('2025-08-11 07:03:52.853866+00:00') is after the available range. Try requesting with an earlier `end`.
-documentation: https://databento.com/docs/api-reference-historical/basics/datasets
-2025-08-11 10:03:55,539 - ERROR - Error in strategy for /RTY: 'NoneType' object is not subscriptable
-Traceback (most recent call last):
-  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 60, in ema_strategy
-    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
-                   ~~^^^^^^^^^
-TypeError: 'NoneType' object is not subscriptable
-2025-08-11 10:03:55,709 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 228, in get_historical_and_live_data
+    df = get_historical_data(ticker, timeframe, logger, strategy)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 50, in get_historical_data
+    return get_time_based_historical_data(ticker, timeframe, logger, db_api_key, dataset, strategy)
+TypeError: get_time_based_historical_data() takes 5 positional arguments but 6 were given
+2025-08-11 15:10:28,467 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
 Traceback (most recent call last):
   File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
     [timeframe, *_] = get_strategy_prarams(ticker, logger)
                       ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
 TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
-2025-08-11 10:10:24,616 - INFO - Running strategy for /RTY at 2025-08-11 03:10:24.616307-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
-2025-08-11 10:10:27,166 - INFO - Resolved symbol: {'result': {'RTYU5': [{'d0': '2025-08-06', 'd1': '2025-08-12', 's': '42003082'}]}, 'symbols': ['RTYU5'], 'stype_in': 'raw_symbol', 'stype_out': 'instrument_id', 'start_date': '2025-08-06', 'end_date': '2025-08-12', 'partial': [], 'not_found': [], 'message': 'OK', 'status': 0}
-2025-08-11 10:10:28,342 - ERROR - Error getting historical data for /RTY: 422 data_end_after_available_end
-The dataset GLBX.MDP3 has data available up to '2025-08-11 07:10:00+00:00'. The `end` in the query ('2025-08-11 07:10:25.298881+00:00') is after the available range. Try requesting with an earlier `end`.
-documentation: https://databento.com/docs/api-reference-historical/basics/datasets
+2025-08-11 15:14:52,543 - INFO - Running strategy for /RTY at 2025-08-11 08:14:52.543864-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 15:14:52,545 - INFO - Attempting to connect to Redis at localhost:6379 db=0
+2025-08-11 15:14:52,546 - ERROR - Error in strategy for /RTY: get_time_based_historical_data() takes 5 positional arguments but 6 were given
 Traceback (most recent call last):
-  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 188, in get_time_based_historical_data
-    data = db_client.timeseries.get_range(
-        dataset=dataset,
-    ...<3 lines>...
-        end=end_date
-    )
-  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\historical\api\timeseries.py", line 125, in get_range
-    return self._stream(
-           ~~~~~~~~~~~~^
-        url=self._base_url + ".get_range",
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
     ...<2 lines>...
-        path=path,
-        ^^^^^^^^^^
+        strategy="ema"
     )
-    ^
-  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 134, in _stream
-    check_http_error(response)
-    ~~~~~~~~~~~~~~~~^^^^^^^^^^
-  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 249, in check_http_error
-    raise BentoClientError(
-    ...<5 lines>...
-    )
-databento.common.error.BentoClientError: 422 data_end_after_available_end
-The dataset GLBX.MDP3 has data available up to '2025-08-11 07:10:00+00:00'. The `end` in the query ('2025-08-11 07:10:25.298881+00:00') is after the available range. Try requesting with an earlier `end`.
-documentation: https://databento.com/docs/api-reference-historical/basics/datasets
-2025-08-11 10:10:28,392 - ERROR - Error in strategy for /RTY: 'NoneType' object is not subscriptable
-Traceback (most recent call last):
-  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 60, in ema_strategy
-    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
-                   ~~^^^^^^^^^
-TypeError: 'NoneType' object is not subscriptable
-2025-08-11 10:10:28,543 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 228, in get_historical_and_live_data
+    df = get_historical_data(ticker, timeframe, logger, strategy)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 50, in get_historical_data
+    return get_time_based_historical_data(ticker, timeframe, logger, db_api_key, dataset, strategy)
+TypeError: get_time_based_historical_data() takes 5 positional arguments but 6 were given
+2025-08-11 15:14:53,681 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
 Traceback (most recent call last):
   File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
     [timeframe, *_] = get_strategy_prarams(ticker, logger)
                       ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
 TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
-2025-08-11 10:11:12,094 - INFO - Running strategy for /RTY at 2025-08-11 03:11:12.094150-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
-2025-08-11 10:11:14,761 - INFO - Resolved symbol: {'result': {'RTYU5': [{'d0': '2025-08-06', 'd1': '2025-08-12', 's': '42003082'}]}, 'symbols': ['RTYU5'], 'stype_in': 'raw_symbol', 'stype_out': 'instrument_id', 'start_date': '2025-08-06', 'end_date': '2025-08-12', 'partial': [], 'not_found': [], 'message': 'OK', 'status': 0}
-2025-08-11 10:11:16,027 - ERROR - Error getting historical data for /RTY: 422 data_end_after_available_end
-The dataset GLBX.MDP3 has data available up to '2025-08-11 07:10:00+00:00'. The `end` in the query ('2025-08-11 07:11:12.913898+00:00') is after the available range. Try requesting with an earlier `end`.
-documentation: https://databento.com/docs/api-reference-historical/basics/datasets
+2025-08-11 18:16:59,436 - INFO - Running strategy for /RTY at 2025-08-11 11:16:59.436099-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 18:16:59,563 - INFO - Attempting to connect to Redis at localhost:6379 db=0
+2025-08-11 18:16:59,649 - ERROR - Error in strategy for /RTY: get_time_based_historical_data() takes 5 positional arguments but 6 were given
 Traceback (most recent call last):
-  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 190, in get_time_based_historical_data
-    data = db_client.timeseries.get_range(
-        dataset=dataset,
-    ...<3 lines>...
-        end=end_date
-    )
-  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\historical\api\timeseries.py", line 125, in get_range
-    return self._stream(
-           ~~~~~~~~~~~~^
-        url=self._base_url + ".get_range",
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
     ...<2 lines>...
-        path=path,
-        ^^^^^^^^^^
+        strategy="ema"
     )
-    ^
-  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 134, in _stream
-    check_http_error(response)
-    ~~~~~~~~~~~~~~~~^^^^^^^^^^
-  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 249, in check_http_error
-    raise BentoClientError(
-    ...<5 lines>...
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 298, in get_historical_and_live_data
+    return get_time_based_historical_data(
+        ticker, timeframe, logger, db_api_key, dataset, strategy
     )
-databento.common.error.BentoClientError: 422 data_end_after_available_end
-The dataset GLBX.MDP3 has data available up to '2025-08-11 07:10:00+00:00'. The `end` in the query ('2025-08-11 07:11:12.913898+00:00') is after the available range. Try requesting with an earlier `end`.
-documentation: https://databento.com/docs/api-reference-historical/basics/datasets
-2025-08-11 10:11:16,032 - ERROR - Error in strategy for /RTY: 'NoneType' object is not subscriptable
-Traceback (most recent call last):
-  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 60, in ema_strategy
-    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
-                   ~~^^^^^^^^^
-TypeError: 'NoneType' object is not subscriptable
-2025-08-11 10:11:16,188 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+TypeError: get_time_based_historical_data() takes 5 positional arguments but 6 were given
+2025-08-11 18:17:00,766 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
 Traceback (most recent call last):
   File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
     [timeframe, *_] = get_strategy_prarams(ticker, logger)
                       ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
 TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
-2025-08-11 10:12:03,830 - INFO - Running strategy for /RTY at 2025-08-11 03:12:03.830169-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
-2025-08-11 10:12:05,549 - INFO - Resolved symbol: {'result': {'RTYU5': [{'d0': '2025-08-06', 'd1': '2025-08-12', 's': '42003082'}]}, 'symbols': ['RTYU5'], 'stype_in': 'raw_symbol', 'stype_out': 'instrument_id', 'start_date': '2025-08-06', 'end_date': '2025-08-12', 'partial': [], 'not_found': [], 'message': 'OK', 'status': 0}
-2025-08-11 10:12:06,819 - ERROR - Error getting historical data for /RTY: 422 data_end_after_available_end
-The dataset GLBX.MDP3 has data available up to '2025-08-11 07:10:00+00:00'. The `end` in the query ('2025-08-11 07:12:04.181852+00:00') is after the available range. Try requesting with an earlier `end`.
-documentation: https://databento.com/docs/api-reference-historical/basics/datasets
-Traceback (most recent call last):
-  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 190, in get_time_based_historical_data
-    data = db_client.timeseries.get_range(
-        dataset=dataset,
-    ...<3 lines>...
-        end=end_date
-    )
-  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\historical\api\timeseries.py", line 125, in get_range
-    return self._stream(
-           ~~~~~~~~~~~~^
-        url=self._base_url + ".get_range",
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    ...<2 lines>...
-        path=path,
-        ^^^^^^^^^^
-    )
-    ^
-  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 134, in _stream
-    check_http_error(response)
-    ~~~~~~~~~~~~~~~~^^^^^^^^^^
-  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 249, in check_http_error
-    raise BentoClientError(
-    ...<5 lines>...
-    )
-databento.common.error.BentoClientError: 422 data_end_after_available_end
-The dataset GLBX.MDP3 has data available up to '2025-08-11 07:10:00+00:00'. The `end` in the query ('2025-08-11 07:12:04.181852+00:00') is after the available range. Try requesting with an earlier `end`.
-documentation: https://databento.com/docs/api-reference-historical/basics/datasets
-2025-08-11 10:12:06,823 - ERROR - Error in strategy for /RTY: 'NoneType' object is not subscriptable
-Traceback (most recent call last):
-  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 60, in ema_strategy
-    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
-                   ~~^^^^^^^^^
-TypeError: 'NoneType' object is not subscriptable
-2025-08-11 10:12:06,986 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 20:02:11,844 - INFO - Running strategy for /RTY at 2025-08-11 13:02:11.844789-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 20:02:11,845 - INFO - Attempting to connect to Redis at localhost:6379 db=0
+2025-08-11 20:02:16,376 - INFO - Resolved symbol: {'result': {'RTYU5': [{'d0': '2025-08-06', 'd1': '2025-08-12', 's': '42003082'}]}, 'symbols': ['RTYU5'], 'stype_in': 'raw_symbol', 'stype_out': 'instrument_id', 'start_date': '2025-08-06', 'end_date': '2025-08-12', 'partial': [], 'not_found': [], 'message': 'OK', 'status': 0}
+2025-08-11 20:02:31,654 - INFO - Created 828 5 bars for /RTY
+2025-08-11 20:02:31,995 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
 Traceback (most recent call last):
   File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
     [timeframe, *_] = get_strategy_prarams(ticker, logger)
                       ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
 TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
-2025-08-11 10:54:00,463 - INFO - Running strategy for /RTY at 2025-08-11 03:54:00.463670-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
-2025-08-11 10:54:00,463 - INFO - Running strategy for /RTY at 2025-08-11 03:54:00.463670-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
-2025-08-11 10:54:02,418 - INFO - Resolved symbol: {'result': {'RTYU5': [{'d0': '2025-08-06', 'd1': '2025-08-12', 's': '42003082'}]}, 'symbols': ['RTYU5'], 'stype_in': 'raw_symbol', 'stype_out': 'instrument_id', 'start_date': '2025-08-06', 'end_date': '2025-08-12', 'partial': [], 'not_found': [], 'message': 'OK', 'status': 0}
-2025-08-11 10:54:02,418 - INFO - Resolved symbol: {'result': {'RTYU5': [{'d0': '2025-08-06', 'd1': '2025-08-12', 's': '42003082'}]}, 'symbols': ['RTYU5'], 'stype_in': 'raw_symbol', 'stype_out': 'instrument_id', 'start_date': '2025-08-06', 'end_date': '2025-08-12', 'partial': [], 'not_found': [], 'message': 'OK', 'status': 0}
-2025-08-11 10:54:03,773 - ERROR - Error getting historical data for /RTY: 422 data_end_after_available_end
-The dataset GLBX.MDP3 has data available up to '2025-08-11 07:50:00+00:00'. The `end` in the query ('2025-08-11 07:54:00.870087+00:00') is after the available range. Try requesting with an earlier `end`.
-documentation: https://databento.com/docs/api-reference-historical/basics/datasets
+2025-08-11 20:05:48,097 - INFO - Running strategy for /RTY at 2025-08-11 13:05:48.097549-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 20:05:48,103 - INFO - Attempting to connect to Redis at localhost:6379 db=0
+2025-08-11 20:05:48,103 - ERROR - Error in strategy for /RTY: cannot access local variable 'df' where it is not associated with a value
 Traceback (most recent call last):
-  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 190, in get_time_based_historical_data
-    if data is None:
-           ^^^^^^^^^
-    ...<5 lines>...
-    if df.empty:
-    ^
-  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\historical\api\timeseries.py", line 125, in get_range
-    return self._stream(
-           ~~~~~~~~~~~~^
-        url=self._base_url + ".get_range",
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
     ...<2 lines>...
-        path=path,
-        ^^^^^^^^^^
+        strategy="ema"
     )
-    ^
-  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 134, in _stream
-    check_http_error(response)
-    ~~~~~~~~~~~~~~~~^^^^^^^^^^
-  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 249, in check_http_error
-    raise BentoClientError(
-    ...<5 lines>...
-    )
-databento.common.error.BentoClientError: 422 data_end_after_available_end
-The dataset GLBX.MDP3 has data available up to '2025-08-11 07:50:00+00:00'. The `end` in the query ('2025-08-11 07:54:00.870087+00:00') is after the available range. Try requesting with an earlier `end`.
-documentation: https://databento.com/docs/api-reference-historical/basics/datasets
-2025-08-11 10:54:03,773 - ERROR - Error getting historical data for /RTY: 422 data_end_after_available_end
-The dataset GLBX.MDP3 has data available up to '2025-08-11 07:50:00+00:00'. The `end` in the query ('2025-08-11 07:54:00.870087+00:00') is after the available range. Try requesting with an earlier `end`.
-documentation: https://databento.com/docs/api-reference-historical/basics/datasets
-Traceback (most recent call last):
-  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 190, in get_time_based_historical_data
-    if data is None:
-           ^^^^^^^^^
-    ...<5 lines>...
-    if df.empty:
-    ^
-  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\historical\api\timeseries.py", line 125, in get_range
-    return self._stream(
-           ~~~~~~~~~~~~^
-        url=self._base_url + ".get_range",
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    ...<2 lines>...
-        path=path,
-        ^^^^^^^^^^
-    )
-    ^
-  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 134, in _stream
-    check_http_error(response)
-    ~~~~~~~~~~~~~~~~^^^^^^^^^^
-  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 249, in check_http_error
-    raise BentoClientError(
-    ...<5 lines>...
-    )
-databento.common.error.BentoClientError: 422 data_end_after_available_end
-The dataset GLBX.MDP3 has data available up to '2025-08-11 07:50:00+00:00'. The `end` in the query ('2025-08-11 07:54:00.870087+00:00') is after the available range. Try requesting with an earlier `end`.
-documentation: https://databento.com/docs/api-reference-historical/basics/datasets
-2025-08-11 10:54:03,777 - ERROR - Error in strategy for /RTY: 'NoneType' object is not subscriptable
-Traceback (most recent call last):
-  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 60, in ema_strategy
-    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
-                   ~~^^^^^^^^^
-TypeError: 'NoneType' object is not subscriptable
-2025-08-11 10:54:03,777 - ERROR - Error in strategy for /RTY: 'NoneType' object is not subscriptable
-Traceback (most recent call last):
-  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 60, in ema_strategy
-    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
-                   ~~^^^^^^^^^
-TypeError: 'NoneType' object is not subscriptable
-2025-08-11 10:54:03,962 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 342, in get_historical_and_live_data
+    if df is not None:
+       ^^
+UnboundLocalError: cannot access local variable 'df' where it is not associated with a value
+2025-08-11 20:05:48,783 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
 Traceback (most recent call last):
   File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
     [timeframe, *_] = get_strategy_prarams(ticker, logger)
                       ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
 TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
-2025-08-11 10:54:03,962 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 20:06:11,281 - INFO - Running strategy for /RTY at 2025-08-11 13:06:11.281689-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 20:06:11,282 - INFO - Attempting to connect to Redis at localhost:6379 db=0
+2025-08-11 20:06:11,282 - ERROR - Error in strategy for /RTY: cannot access local variable 'df' where it is not associated with a value
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 342, in get_historical_and_live_data
+    if df is not None:
+       ^^
+UnboundLocalError: cannot access local variable 'df' where it is not associated with a value
+2025-08-11 20:06:12,233 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
 Traceback (most recent call last):
   File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
     [timeframe, *_] = get_strategy_prarams(ticker, logger)
                       ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
 TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
-2025-08-11 11:15:18,978 - INFO - Running strategy for /RTY at 2025-08-11 04:15:18.978016-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
-2025-08-11 11:15:22,048 - INFO - Resolved symbol: {'result': {'RTYU5': [{'d0': '2025-08-06', 'd1': '2025-08-12', 's': '42003082'}]}, 'symbols': ['RTYU5'], 'stype_in': 'raw_symbol', 'stype_out': 'instrument_id', 'start_date': '2025-08-06', 'end_date': '2025-08-12', 'partial': [], 'not_found': [], 'message': 'OK', 'status': 0}
-2025-08-11 11:15:23,188 - ERROR - Error getting historical data for /RTY: 422 data_end_after_available_end
-The dataset GLBX.MDP3 has data available up to '2025-08-11 08:10:00+00:00'. The `end` in the query ('2025-08-11 08:15:19.931840+00:00') is after the available range. Try requesting with an earlier `end`.
-documentation: https://databento.com/docs/api-reference-historical/basics/datasets
+2025-08-11 21:18:22,165 - INFO - Running strategy for /RTY at 2025-08-11 14:18:22.165116-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:18:27,266 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
 Traceback (most recent call last):
-  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 181, in get_time_based_historical_data
-    data = db_client.timeseries.get_range(
-        dataset=dataset,
-    ...<3 lines>...
-        end=end_date
-    )
-  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\historical\api\timeseries.py", line 125, in get_range
-    return self._stream(
-           ~~~~~~~~~~~~^
-        url=self._base_url + ".get_range",
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:20:17,921 - INFO - Running strategy for /RTY at 2025-08-11 14:20:17.921184-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:20:20,320 - ERROR - Error in strategy for /RTY: unsupported operand type(s) for -: 'str' and 'datetime.timedelta'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
     ...<2 lines>...
-        path=path,
-        ^^^^^^^^^^
+        strategy="ema"
     )
-    ^
-  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 134, in _stream
-    check_http_error(response)
-    ~~~~~~~~~~~~~~~~^^^^^^^^^^
-  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 249, in check_http_error
-    raise BentoClientError(
-    ...<5 lines>...
-    )
-databento.common.error.BentoClientError: 422 data_end_after_available_end
-The dataset GLBX.MDP3 has data available up to '2025-08-11 08:10:00+00:00'. The `end` in the query ('2025-08-11 08:15:19.931840+00:00') is after the available range. Try requesting with an earlier `end`.
-documentation: https://databento.com/docs/api-reference-historical/basics/datasets
-2025-08-11 11:15:23,192 - ERROR - Error in strategy for /RTY: 'NoneType' object is not subscriptable
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 82, in get_historical_and_live_data
+    get_historical_data(ticker, timeframe, logger)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 74, in get_historical_data
+    start_time = get_historical_start_time(timeframe, end_time)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 57, in get_historical_start_time
+    start_time = (end_time - timedelta(days=5)).isoformat()
+                  ~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'str' and 'datetime.timedelta'
+2025-08-11 21:20:20,608 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
 Traceback (most recent call last):
-  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 60, in ema_strategy
-    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
-                   ~~^^^^^^^^^
-TypeError: 'NoneType' object is not subscriptable
-2025-08-11 11:15:23,361 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:20:34,652 - INFO - Running strategy for /RTY at 2025-08-11 14:20:34.651981-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:20:34,652 - INFO - Running strategy for /RTY at 2025-08-11 14:20:34.651981-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:20:37,224 - ERROR - Error in strategy for /RTY: unsupported operand type(s) for -: 'str' and 'datetime.timedelta'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 82, in get_historical_and_live_data
+    get_historical_data(ticker, timeframe, logger)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 74, in get_historical_data
+    start_time = get_historical_start_time(timeframe, end_time)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 57, in get_historical_start_time
+    start_time = (end_time - timedelta(days=5)).isoformat()
+                  ~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'str' and 'datetime.timedelta'
+2025-08-11 21:20:37,224 - ERROR - Error in strategy for /RTY: unsupported operand type(s) for -: 'str' and 'datetime.timedelta'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 82, in get_historical_and_live_data
+    get_historical_data(ticker, timeframe, logger)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 74, in get_historical_data
+    start_time = get_historical_start_time(timeframe, end_time)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 57, in get_historical_start_time
+    start_time = (end_time - timedelta(days=5)).isoformat()
+                  ~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'str' and 'datetime.timedelta'
+2025-08-11 21:20:37,708 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:20:37,708 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:21:03,351 - INFO - Running strategy for /RTY at 2025-08-11 14:21:03.351884-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:21:05,985 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:21:30,710 - INFO - Running strategy for /RTY at 2025-08-11 14:21:30.710293-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:21:32,626 - ERROR - Error in strategy for /RTY: unsupported operand type(s) for -: 'str' and 'datetime.timedelta'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 82, in get_historical_and_live_data
+    get_historical_data(ticker, timeframe, logger)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 74, in get_historical_data
+    start_time = get_historical_start_time(timeframe, end_time)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 57, in get_historical_start_time
+    start_time = (end_time - timedelta(days=5)).isoformat()
+                  ~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'str' and 'datetime.timedelta'
+2025-08-11 21:21:32,840 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:33:00,584 - INFO - Running strategy for /RTY at 2025-08-11 14:33:00.584657-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:33:02,987 - ERROR - Error in strategy for /RTY: unsupported operand type(s) for -: 'str' and 'datetime.timedelta'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 98, in get_historical_and_live_data
+    get_historical_data(ticker, timeframe, logger)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 87, in get_historical_data
+    start_time = get_historical_start_time(timeframe, end_time)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 58, in get_historical_start_time
+    start_time = (end_time - timedelta(days=5)).isoformat()
+                  ~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'str' and 'datetime.timedelta'
+2025-08-11 21:33:03,395 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:33:33,424 - INFO - Running strategy for /RTY at 2025-08-11 14:33:33.424109-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:33:36,013 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:34:25,088 - INFO - Running strategy for /RTY at 2025-08-11 14:34:25.088650-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:34:28,740 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:34:58,454 - INFO - Running strategy for /RTY at 2025-08-11 14:34:58.454462-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:35:02,937 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:35:38,193 - INFO - Running strategy for /RTY at 2025-08-11 14:35:38.193837-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:35:40,633 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:36:04,942 - INFO - Running strategy for /RTY at 2025-08-11 14:36:04.942311-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:36:07,510 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:37:18,281 - INFO - Running strategy for /RTY at 2025-08-11 14:37:18.281574-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:37:21,303 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:38:23,660 - INFO - Running strategy for /RTY at 2025-08-11 14:38:23.660923-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:38:26,149 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:38:44,315 - INFO - Running strategy for /RTY at 2025-08-11 14:38:44.315032-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:38:46,856 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:39:11,029 - INFO - Running strategy for /RTY at 2025-08-11 14:39:11.029836-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:39:13,588 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:41:42,569 - INFO - Running strategy for /RTY at 2025-08-11 14:41:42.569324-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:41:44,775 - ERROR - Error in strategy for /RTY: unsupported operand type(s) for -: 'str' and 'datetime.timedelta'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 99, in get_historical_and_live_data
+    get_historical_data(ticker, timeframe, logger)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 88, in get_historical_data
+    start_time = get_historical_start_time(timeframe, end_time)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 58, in get_historical_start_time
+    start_time = (end_time - timedelta(days=5)).isoformat()
+                  ~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'str' and 'datetime.timedelta'
+2025-08-11 21:41:44,928 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:43:31,655 - INFO - Running strategy for /RTY at 2025-08-11 14:43:31.655200-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:43:35,394 - ERROR - Error in strategy for /RTY: unsupported operand type(s) for -: 'str' and 'datetime.timedelta'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 100, in get_historical_and_live_data
+    get_historical_data(ticker, timeframe, logger)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 89, in get_historical_data
+    start_time = get_historical_start_time(timeframe, end_time)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 58, in get_historical_start_time
+    start_time = (end_time - timedelta(days=5)).isoformat()
+                  ~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'str' and 'datetime.timedelta'
+2025-08-11 21:43:35,546 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:45:49,970 - INFO - Running strategy for /RTY at 2025-08-11 14:45:49.970236-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:45:53,448 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:48:07,778 - INFO - Running strategy for /RTY at 2025-08-11 14:48:07.778311-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:48:10,290 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:51:24,932 - INFO - Running strategy for /RTY at 2025-08-11 14:51:24.932097-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:51:27,507 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:53:18,406 - INFO - Running strategy for /RTY at 2025-08-11 14:53:18.406351-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:53:21,091 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:55:16,793 - INFO - Running strategy for /RTY at 2025-08-11 14:55:16.793920-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:55:19,604 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:56:30,187 - INFO - Running strategy for /RTY at 2025-08-11 14:56:30.187868-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:56:32,672 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 22:01:22,035 - INFO - Running strategy for /RTY at 2025-08-11 15:01:22.035156-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 22:01:28,319 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 22:01:44,243 - INFO - Running strategy for /RTY at 2025-08-11 15:01:44.243916-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 22:01:46,139 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 22:02:01,846 - INFO - Running strategy for /RTY at 2025-08-11 15:02:01.846066-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 22:02:05,024 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 22:04:14,462 - INFO - Running strategy for /RTY at 2025-08-11 15:04:14.462854-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 22:04:17,177 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 22:04:48,968 - INFO - Running strategy for /RTY at 2025-08-11 15:04:48.968532-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 22:04:51,614 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 22:27:17,858 - INFO - Running strategy for /RTY at 2025-08-11 15:27:17.858049-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 22:27:19,902 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 22:32:20,878 - INFO - Running strategy for /RTY at 2025-08-11 15:32:20.878453-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 22:32:22,986 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 22:36:15,079 - INFO - Running strategy for /RTY at 2025-08-11 15:36:15.078975-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 22:36:17,343 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 22:37:53,932 - INFO - Running strategy for /RTY at 2025-08-11 15:37:53.932583-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 22:37:56,798 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 23:04:07,309 - INFO - Running strategy for /RTY at 2025-08-11 16:04:07.309771-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:04:21,297 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 23:04:42,591 - INFO - Running strategy for /RTY at 2025-08-11 16:04:42.591540-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:05:09,565 - INFO - Running strategy for /RTY at 2025-08-11 16:05:09.565032-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:05:56,502 - INFO - Running strategy for /RTY at 2025-08-11 16:05:56.502605-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:06:09,473 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 23:09:55,897 - INFO - Running strategy for /RTY at 2025-08-11 16:09:55.897754-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:09:58,764 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 23:11:14,075 - INFO - Running strategy for /RTY at 2025-08-11 16:11:14.075769-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:11:16,989 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 23:14:12,009 - INFO - Running strategy for /RTY at 2025-08-11 16:14:12.009702-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:14:15,166 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 23:20:26,404 - INFO - Running strategy for /RTY at 2025-08-11 16:20:26.404305-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:20:29,362 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 23:30:48,441 - INFO - Running strategy for /RTY at 2025-08-11 16:30:48.440984-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:30:50,701 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 23:58:03,398 - INFO - Running strategy for /RTY at 2025-08-11 16:58:03.398475-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:58:06,404 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 23:58:45,999 - INFO - Running strategy for /RTY at 2025-08-11 16:58:45.999698-04:00 with params: Schwab_QTY=4, Tasty_QTY=30 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:58:47,999 - ERROR - Error in main loop for /RTY: get_strategy_prarams() missing 1 required positional argument: 'logger'
 Traceback (most recent call last):
   File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
     [timeframe, *_] = get_strategy_prarams(ticker, logger)

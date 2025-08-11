@@ -1,53 +1,350 @@
-2025-08-11 06:16:43,922 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
-2025-08-11 06:16:43,923 - INFO - Market closed on weekends
-2025-08-11 06:17:43,924 - INFO - Market closed on weekends
-2025-08-11 06:18:43,925 - INFO - Market closed on weekends
-2025-08-11 06:19:43,926 - INFO - Market closed on weekends
-2025-08-11 06:20:43,927 - INFO - Market closed on weekends
-2025-08-11 06:21:43,929 - INFO - Market closed on weekends
-2025-08-11 06:22:43,931 - INFO - Market closed on weekends
-2025-08-11 06:23:43,932 - INFO - Market closed on weekends
-2025-08-11 06:24:43,933 - INFO - Market closed on weekends
-2025-08-11 06:25:43,933 - INFO - Market closed on weekends
-2025-08-11 06:26:43,935 - INFO - Market closed on weekends
-2025-08-11 06:27:43,937 - INFO - Market closed on weekends
-2025-08-11 06:28:43,937 - INFO - Market closed on weekends
-2025-08-11 06:29:43,938 - INFO - Market closed on weekends
-2025-08-11 06:30:43,938 - INFO - Market closed on weekends
-2025-08-11 06:31:43,939 - INFO - Market closed on weekends
-2025-08-11 06:32:43,940 - INFO - Market closed on weekends
-2025-08-11 06:33:43,941 - INFO - Market closed on weekends
-2025-08-11 06:34:43,941 - INFO - Market closed on weekends
-2025-08-11 06:35:43,942 - INFO - Market closed on weekends
-2025-08-11 06:36:43,943 - INFO - Market closed on weekends
-2025-08-11 06:37:43,943 - INFO - Market closed on weekends
-2025-08-11 06:38:43,944 - INFO - Market closed on weekends
-2025-08-11 06:39:43,946 - INFO - Market closed on weekends
-2025-08-11 06:40:43,947 - INFO - Market closed on weekends
-2025-08-11 06:41:43,948 - INFO - Market closed on weekends
-2025-08-11 06:42:43,950 - INFO - Market closed on weekends
-2025-08-11 06:43:43,950 - INFO - Market closed on weekends
-2025-08-11 06:44:43,952 - INFO - Market closed on weekends
-2025-08-11 06:45:43,953 - INFO - Market closed on weekends
-2025-08-11 06:46:43,954 - INFO - Market closed on weekends
-2025-08-11 06:47:43,956 - INFO - Market closed on weekends
-2025-08-11 06:48:43,958 - INFO - Market closed on weekends
-2025-08-11 06:49:43,959 - INFO - Market closed on weekends
-2025-08-11 06:50:43,960 - INFO - Market closed on weekends
-2025-08-11 06:51:43,961 - INFO - Market closed on weekends
-2025-08-11 06:52:43,962 - INFO - Market closed on weekends
-2025-08-11 06:53:43,963 - INFO - Market closed on weekends
-2025-08-11 06:54:43,965 - INFO - Market closed on weekends
-2025-08-11 06:55:43,966 - INFO - Market closed on weekends
-2025-08-11 06:56:43,967 - INFO - Market closed on weekends
-2025-08-11 06:57:43,968 - INFO - Market closed on weekends
-2025-08-11 06:58:43,969 - INFO - Market closed on weekends
-2025-08-11 06:59:43,971 - INFO - Market closed on weekends
-2025-08-11 09:58:47,283 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
-2025-08-11 10:03:46,940 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
-2025-08-11 10:10:24,617 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
-2025-08-11 10:11:12,085 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
-2025-08-11 10:12:03,831 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
-2025-08-11 10:54:00,467 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
-2025-08-11 10:54:00,467 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
-2025-08-11 11:15:18,980 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 14:46:35,739 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 15:10:27,777 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 15:14:52,547 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 18:16:59,639 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 18:17:01,252 - ERROR - Error in main loop for TSLA: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 20:02:11,853 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 20:02:12,425 - ERROR - Error in main loop for TSLA: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 20:05:48,091 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 20:05:49,198 - ERROR - Error in main loop for TSLA: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 20:06:11,283 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 20:06:12,372 - ERROR - Error in main loop for TSLA: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:18:22,169 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 21:18:22,695 - ERROR - Error in main loop for TSLA: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:20:17,921 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 21:20:18,369 - ERROR - Error in main loop for TSLA: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:20:34,654 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 21:20:34,654 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 21:20:35,067 - ERROR - Error in main loop for TSLA: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:20:35,067 - ERROR - Error in main loop for TSLA: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:21:03,361 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 21:21:03,834 - ERROR - Error in main loop for TSLA: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:21:30,712 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 21:21:31,208 - ERROR - Error in main loop for TSLA: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:33:00,589 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 21:33:01,106 - ERROR - Error in main loop for TSLA: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:33:33,425 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 21:33:33,871 - ERROR - Error in main loop for TSLA: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:34:25,091 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 21:34:25,759 - ERROR - Error in main loop for TSLA: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:34:58,454 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 21:34:58,989 - ERROR - Error in main loop for TSLA: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:35:38,195 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 21:35:38,894 - ERROR - Error in main loop for TSLA: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:36:04,944 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 21:36:05,368 - ERROR - Error in main loop for TSLA: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:37:18,283 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 21:37:19,006 - ERROR - Error in main loop for TSLA: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:38:23,660 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 21:38:24,399 - ERROR - Error in main loop for TSLA: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:38:44,315 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 21:38:44,715 - ERROR - Error in main loop for TSLA: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:39:11,030 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 21:39:11,537 - ERROR - Error in main loop for TSLA: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:41:42,572 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 21:41:43,237 - ERROR - Error in main loop for TSLA: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:43:31,660 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 21:43:32,179 - ERROR - Error in main loop for TSLA: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:45:49,974 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 21:45:50,562 - ERROR - Error in main loop for TSLA: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:48:07,780 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 21:48:08,509 - ERROR - Error in main loop for TSLA: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:51:24,932 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 21:51:25,646 - ERROR - Error in main loop for TSLA: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:53:18,410 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 21:53:19,049 - ERROR - Error in main loop for TSLA: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:55:16,795 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 21:55:17,252 - ERROR - Error in main loop for TSLA: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:56:30,189 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 21:56:30,660 - ERROR - Error in main loop for TSLA: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 22:01:22,036 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 22:01:22,517 - ERROR - Error in main loop for TSLA: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 22:01:44,193 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 22:01:44,633 - ERROR - Error in main loop for TSLA: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 22:02:01,853 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 22:02:02,370 - ERROR - Error in main loop for TSLA: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 22:04:14,462 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 22:04:14,970 - ERROR - Error in main loop for TSLA: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 22:04:48,923 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 22:04:49,379 - ERROR - Error in main loop for TSLA: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 22:27:17,858 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 22:27:18,260 - ERROR - Error in main loop for TSLA: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 22:32:20,881 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 22:32:21,429 - ERROR - Error in main loop for TSLA: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 22:36:15,082 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 22:36:15,604 - ERROR - Error in main loop for TSLA: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 22:37:53,936 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 22:37:54,600 - ERROR - Error in main loop for TSLA: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 23:04:07,311 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 23:04:08,151 - INFO - Market closed
+2025-08-11 23:04:08,151 - ERROR - Error in main loop for TSLA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:04:42,591 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 23:04:43,079 - INFO - Market closed
+2025-08-11 23:04:43,079 - ERROR - Error in main loop for TSLA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:05:09,565 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 23:05:09,950 - INFO - Market closed
+2025-08-11 23:05:09,950 - ERROR - Error in main loop for TSLA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:05:56,504 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 23:05:57,081 - INFO - Market closed
+2025-08-11 23:05:57,082 - ERROR - Error in main loop for TSLA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:09:55,905 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 23:09:56,527 - INFO - Market closed
+2025-08-11 23:09:56,528 - ERROR - Error in main loop for TSLA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:11:14,077 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 23:11:14,493 - INFO - Market closed
+2025-08-11 23:11:14,496 - ERROR - Error in main loop for TSLA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:14:12,012 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 23:14:12,573 - INFO - Market closed
+2025-08-11 23:14:12,573 - ERROR - Error in main loop for TSLA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:20:26,408 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 23:20:26,923 - INFO - Market closed
+2025-08-11 23:20:26,923 - ERROR - Error in main loop for TSLA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:30:48,443 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 23:30:48,915 - INFO - Market closed
+2025-08-11 23:30:48,915 - ERROR - Error in main loop for TSLA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:58:03,398 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 23:58:03,951 - INFO - Market closed
+2025-08-11 23:58:03,951 - ERROR - Error in main loop for TSLA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:58:46,001 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 23:58:46,443 - INFO - Market closed
+2025-08-11 23:58:46,444 - ERROR - Error in main loop for TSLA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
