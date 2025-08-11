@@ -14,7 +14,7 @@ TASTY_API = "https://api.tastyworks.com"
 TASTY_USERNAME = "tmckenna@boardwalkag.com"    # tastytrade
 TASTY_PASSWORD = "Boardwalk2024!"              # tastytrade
 
-TASTY_CLIENT_SECRET = "94cf0194a470e5f376284dcc0baa444b37b534d9"
+TASTY_CLIENT_SECRET = "8283d5bbbb61c1e58b5e1b5b913ffc775e12d46a"
 TASTY_CLIENT_ID = "f1ff7542-2fa9-446c-a57e-22f95108e02c"
 
 TASTY_MY_APP_URL = "https://my.tastytrade.com/auth.html"
