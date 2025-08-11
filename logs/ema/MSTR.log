@@ -1,0 +1,164 @@
+2025-08-08 21:47:56,746 - INFO - Running strategy for MSTR at 2025-08-08 15:47:56.746188-04:00 with params: Schwab_QTY=0, Tasty_QTY=40 TRENDS=(5, EMA), (2, SMA)
+2025-08-08 21:47:56,747 - INFO - Using time-based approach for MSTR with 30 timeframe
+2025-08-08 21:47:57,319 - ERROR - Error fetching time-based data from Databento: 422 data_end_after_available_end
+The dataset GLBX.MDP3 has data available up to '2025-08-08 19:40:00+00:00'. The `end` in the query ('2025-08-08 19:47:56.747822+00:00') is after the available range. Try requesting with an earlier `end`.
+documentation: https://databento.com/docs/api-reference-historical/basics/datasets
+2025-08-08 21:47:57,319 - ERROR - Error in strategy for MSTR: 422 data_end_after_available_end
+The dataset GLBX.MDP3 has data available up to '2025-08-08 19:40:00+00:00'. The `end` in the query ('2025-08-08 19:47:56.747822+00:00') is after the available range. Try requesting with an earlier `end`.
+documentation: https://databento.com/docs/api-reference-historical/basics/datasets
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 74, in ema_strategy
+    df = get_historical_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 359, in get_historical_data
+    data = db_client.timeseries.get_range(
+  File "C:\Users\csg\AppData\Local\Programs\Python\Python310\lib\site-packages\databento\historical\api\timeseries.py", line 125, in get_range
+    return self._stream(
+  File "C:\Users\csg\AppData\Local\Programs\Python\Python310\lib\site-packages\databento\common\http.py", line 134, in _stream
+    check_http_error(response)
+  File "C:\Users\csg\AppData\Local\Programs\Python\Python310\lib\site-packages\databento\common\http.py", line 249, in check_http_error
+    raise BentoClientError(
+databento.common.error.BentoClientError: 422 data_end_after_available_end
+The dataset GLBX.MDP3 has data available up to '2025-08-08 19:40:00+00:00'. The `end` in the query ('2025-08-08 19:47:56.747822+00:00') is after the available range. Try requesting with an earlier `end`.
+documentation: https://databento.com/docs/api-reference-historical/basics/datasets
+2025-08-08 21:47:58,472 - ERROR - Error in main loop for MSTR: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 1130, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-08 21:48:36,296 - INFO - Running strategy for MSTR at 2025-08-08 15:48:36.296043-04:00 with params: Schwab_QTY=0, Tasty_QTY=40 TRENDS=(5, EMA), (2, SMA)
+2025-08-08 21:48:36,298 - INFO - Using time-based approach for MSTR with 30 timeframe
+2025-08-08 21:48:36,688 - ERROR - Error fetching time-based data from Databento: 422 data_end_after_available_end
+The dataset GLBX.MDP3 has data available up to '2025-08-08 19:40:00+00:00'. The `end` in the query ('2025-08-08 19:48:36.296593+00:00') is after the available range. Try requesting with an earlier `end`.
+documentation: https://databento.com/docs/api-reference-historical/basics/datasets
+2025-08-08 21:48:36,688 - ERROR - Error in strategy for MSTR: 422 data_end_after_available_end
+The dataset GLBX.MDP3 has data available up to '2025-08-08 19:40:00+00:00'. The `end` in the query ('2025-08-08 19:48:36.296593+00:00') is after the available range. Try requesting with an earlier `end`.
+documentation: https://databento.com/docs/api-reference-historical/basics/datasets
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 74, in ema_strategy
+    df = get_historical_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 361, in get_historical_data
+    data = db_client.timeseries.get_range(
+  File "C:\Users\csg\AppData\Local\Programs\Python\Python310\lib\site-packages\databento\historical\api\timeseries.py", line 125, in get_range
+    return self._stream(
+  File "C:\Users\csg\AppData\Local\Programs\Python\Python310\lib\site-packages\databento\common\http.py", line 134, in _stream
+    check_http_error(response)
+  File "C:\Users\csg\AppData\Local\Programs\Python\Python310\lib\site-packages\databento\common\http.py", line 249, in check_http_error
+    raise BentoClientError(
+databento.common.error.BentoClientError: 422 data_end_after_available_end
+The dataset GLBX.MDP3 has data available up to '2025-08-08 19:40:00+00:00'. The `end` in the query ('2025-08-08 19:48:36.296593+00:00') is after the available range. Try requesting with an earlier `end`.
+documentation: https://databento.com/docs/api-reference-historical/basics/datasets
+2025-08-08 21:48:38,018 - ERROR - Error in main loop for MSTR: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 1132, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-08 21:49:44,470 - INFO - Running strategy for MSTR at 2025-08-08 15:49:44.470541-04:00 with params: Schwab_QTY=0, Tasty_QTY=40 TRENDS=(5, EMA), (2, SMA)
+2025-08-08 21:49:44,473 - INFO - Using time-based approach for MSTR with 30 timeframe
+2025-08-08 21:49:45,210 - ERROR - Error fetching time-based data from Databento: 422 data_end_after_available_end
+The dataset GLBX.MDP3 has data available up to '2025-08-08 19:40:00+00:00'. The `end` in the query ('2025-08-08 19:49:44.473230+00:00') is after the available range. Try requesting with an earlier `end`.
+documentation: https://databento.com/docs/api-reference-historical/basics/datasets
+2025-08-08 21:49:45,236 - ERROR - Error in strategy for MSTR: 422 data_end_after_available_end
+The dataset GLBX.MDP3 has data available up to '2025-08-08 19:40:00+00:00'. The `end` in the query ('2025-08-08 19:49:44.473230+00:00') is after the available range. Try requesting with an earlier `end`.
+documentation: https://databento.com/docs/api-reference-historical/basics/datasets
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 74, in ema_strategy
+    df = get_historical_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 362, in get_historical_data
+    data = db_client.timeseries.get_range(
+  File "C:\Users\csg\AppData\Local\Programs\Python\Python310\lib\site-packages\databento\historical\api\timeseries.py", line 125, in get_range
+    return self._stream(
+  File "C:\Users\csg\AppData\Local\Programs\Python\Python310\lib\site-packages\databento\common\http.py", line 134, in _stream
+    check_http_error(response)
+  File "C:\Users\csg\AppData\Local\Programs\Python\Python310\lib\site-packages\databento\common\http.py", line 249, in check_http_error
+    raise BentoClientError(
+databento.common.error.BentoClientError: 422 data_end_after_available_end
+The dataset GLBX.MDP3 has data available up to '2025-08-08 19:40:00+00:00'. The `end` in the query ('2025-08-08 19:49:44.473230+00:00') is after the available range. Try requesting with an earlier `end`.
+documentation: https://databento.com/docs/api-reference-historical/basics/datasets
+2025-08-08 21:49:46,153 - ERROR - Error in main loop for MSTR: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 1133, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-08 22:28:24,546 - INFO - Running strategy for MSTR at 2025-08-08 16:28:24.546175-04:00 with params: Schwab_QTY=0, Tasty_QTY=40 TRENDS=(5, EMA), (2, SMA)
+2025-08-08 22:28:24,549 - INFO - Using time-based approach for MSTR with 30 timeframe
+2025-08-08 22:28:24,991 - ERROR - Error fetching time-based data from Databento: 422 data_end_after_available_end
+The dataset GLBX.MDP3 has data available up to '2025-08-08 20:20:00+00:00'. The `end` in the query ('2025-08-08 20:28:24.546681+00:00') is after the available range. Try requesting with an earlier `end`.
+documentation: https://databento.com/docs/api-reference-historical/basics/datasets
+2025-08-08 22:28:25,022 - ERROR - Error in strategy for MSTR: 422 data_end_after_available_end
+The dataset GLBX.MDP3 has data available up to '2025-08-08 20:20:00+00:00'. The `end` in the query ('2025-08-08 20:28:24.546681+00:00') is after the available range. Try requesting with an earlier `end`.
+documentation: https://databento.com/docs/api-reference-historical/basics/datasets
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 74, in ema_strategy
+    df = get_historical_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 363, in get_historical_data
+    data = db_client.timeseries.get_range(
+  File "C:\Users\csg\AppData\Local\Programs\Python\Python310\lib\site-packages\databento\historical\api\timeseries.py", line 125, in get_range
+    return self._stream(
+  File "C:\Users\csg\AppData\Local\Programs\Python\Python310\lib\site-packages\databento\common\http.py", line 134, in _stream
+    check_http_error(response)
+  File "C:\Users\csg\AppData\Local\Programs\Python\Python310\lib\site-packages\databento\common\http.py", line 249, in check_http_error
+    raise BentoClientError(
+databento.common.error.BentoClientError: 422 data_end_after_available_end
+The dataset GLBX.MDP3 has data available up to '2025-08-08 20:20:00+00:00'. The `end` in the query ('2025-08-08 20:28:24.546681+00:00') is after the available range. Try requesting with an earlier `end`.
+documentation: https://databento.com/docs/api-reference-historical/basics/datasets
+2025-08-08 22:28:26,320 - INFO - Market closed
+2025-08-08 22:28:46,879 - INFO - Running strategy for MSTR at 2025-08-08 16:28:46.879056-04:00 with params: Schwab_QTY=0, Tasty_QTY=40 TRENDS=(5, EMA), (2, SMA)
+2025-08-08 22:28:46,883 - INFO - Using time-based approach for MSTR with 30 timeframe
+2025-08-08 22:28:47,264 - ERROR - Error fetching time-based data from Databento: 422 data_end_after_available_end
+The dataset GLBX.MDP3 has data available up to '2025-08-08 20:20:00+00:00'. The `end` in the query ('2025-08-08 20:28:46.879646+00:00') is after the available range. Try requesting with an earlier `end`.
+documentation: https://databento.com/docs/api-reference-historical/basics/datasets
+2025-08-08 22:28:47,264 - ERROR - Error in strategy for MSTR: 422 data_end_after_available_end
+The dataset GLBX.MDP3 has data available up to '2025-08-08 20:20:00+00:00'. The `end` in the query ('2025-08-08 20:28:46.879646+00:00') is after the available range. Try requesting with an earlier `end`.
+documentation: https://databento.com/docs/api-reference-historical/basics/datasets
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 74, in ema_strategy
+    df = get_historical_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 363, in get_historical_data
+    data = db_client.timeseries.get_range(
+  File "C:\Users\csg\AppData\Local\Programs\Python\Python310\lib\site-packages\databento\historical\api\timeseries.py", line 125, in get_range
+    return self._stream(
+  File "C:\Users\csg\AppData\Local\Programs\Python\Python310\lib\site-packages\databento\common\http.py", line 134, in _stream
+    check_http_error(response)
+  File "C:\Users\csg\AppData\Local\Programs\Python\Python310\lib\site-packages\databento\common\http.py", line 249, in check_http_error
+    raise BentoClientError(
+databento.common.error.BentoClientError: 422 data_end_after_available_end
+The dataset GLBX.MDP3 has data available up to '2025-08-08 20:20:00+00:00'. The `end` in the query ('2025-08-08 20:28:46.879646+00:00') is after the available range. Try requesting with an earlier `end`.
+documentation: https://databento.com/docs/api-reference-historical/basics/datasets
+2025-08-08 22:28:48,723 - INFO - Market closed
+2025-08-09 00:38:17,200 - INFO - Running strategy for MSTR at 2025-08-08 18:38:17.200570-04:00 with params: Schwab_QTY=0, Tasty_QTY=40 TRENDS=(5, EMA), (2, SMA)
+2025-08-09 00:38:21,248 - ERROR - Error in strategy for MSTR: Unsupported timeframe: 30
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 76, in ema_strategy
+    df = get_historical_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 159, in get_historical_data
+    raise ValueError(f"Unsupported timeframe: {timeframe}")
+ValueError: Unsupported timeframe: 30
+2025-08-09 00:46:20,579 - ERROR - Error in strategy for MSTR: name 'get_strategy_prarams' is not defined
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 14, in ema_strategy
+    ] = get_strategy_prarams("ema", ticker, logger)
+NameError: name 'get_strategy_prarams' is not defined
+2025-08-09 00:50:35,657 - ERROR - Error in strategy for MSTR: name 'get_strategy_prarams' is not defined
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 14, in ema_strategy
+    ] = get_strategy_prarams("ema", ticker, logger)
+NameError: name 'get_strategy_prarams' is not defined
+2025-08-09 00:51:07,708 - ERROR - Error in strategy for MSTR: name 'get_strategy_prarams' is not defined
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 15, in ema_strategy
+    ] = get_strategy_prarams("ema", ticker, logger)
+NameError: name 'get_strategy_prarams' is not defined
+2025-08-11 02:18:23,747 - INFO - Running strategy for MSTR at 2025-08-10 20:18:23.747076-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 02:18:31,824 - ERROR - Error in strategy for MSTR: configure_logger() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 54, in ema_strategy
+    df = get_historical_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 120, in get_historical_data
+    buffer = TickDataBufferWithRedis(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\tick_producer.py", line 123, in __init__
+    super().__init__(ticker, tick_size, db_api_key)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\tick_buffer.py", line 18, in __init__
+    self.logger = configure_logger(ticker)
+TypeError: configure_logger() missing 1 required positional argument: 'strategy'
+2025-08-11 02:18:31,850 - INFO - Market closed on weekends
+2025-08-11 02:19:31,859 - INFO - Market closed on weekends

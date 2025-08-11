@@ -54,6 +54,7 @@ The application will start on `http://localhost:5000`
 ### Trading Management
 - `POST /api/add-ticker` - Add a new ticker with strategy parameters
 - `GET /api/get-ticker` - Get all configured tickers
+- `POST /api/manual-trade` - Manually execute trades for the zeroday strategy
 - `GET /api/start-trading` - Start the automated trading process
 
 ## Configuration
