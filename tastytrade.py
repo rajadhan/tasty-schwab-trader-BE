@@ -34,13 +34,11 @@ def refresh_tastytrade_token():
     }
     response = requests.post(tasty_refresh_access_token_url, data=payload)
     new_tokens = response.json()
-    print("new_token", new_tokens)
-    if "access_token" in new_tokens and "refresh_token" in new_tokens:
+    if "access_token" in new_tokens:
         tokens = {
             "access_token": new_tokens.get('access_token'),
-            "refresh_token": new_tokens.get('refresh_token')
+            "refresh_token": refresh_token
         }
-        print("tokens", tokens)
         with open(TASTY_ACCESS_TOKEN_PATH, "w") as f:
             json.dump(tokens, f)
         return new_tokens["access_token"]
@@ -80,7 +78,7 @@ def update_tastytrade_instruments_csv(output_file="tastytrade_instruments.csv"):
         items = data["data"]["items"]
         print("itmes", items)
         df = pd.DataFrame(items)
-        pritn("df", df)
+        print("df", df)
 
         # Save to CSV
         df.to_csv(output_file, index=False)
