@@ -7,6 +7,8 @@ import pytz
 import os
 import json
 
+from utils import save_json
+
 
 def create_header(token):
     # Ensure token is properly formatted
@@ -39,8 +41,7 @@ def refresh_tastytrade_token():
             "access_token": new_tokens.get('access_token'),
             "refresh_token": refresh_token
         }
-        with open(TASTY_ACCESS_TOKEN_PATH, "w") as f:
-            json.dump(tokens, f)
+        save_json(TASTY_ACCESS_TOKEN_PATH, tokens)
         return new_tokens["access_token"]
     else:
         raise Exception(f"Failed to refresh token: {new_tokens}")

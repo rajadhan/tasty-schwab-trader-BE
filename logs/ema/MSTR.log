@@ -1,622 +1,1297 @@
-2025-08-08 21:47:56,746 - INFO - Running strategy for MSTR at 2025-08-08 15:47:56.746188-04:00 with params: Schwab_QTY=0, Tasty_QTY=40 TRENDS=(5, EMA), (2, SMA)
-2025-08-08 21:47:56,747 - INFO - Using time-based approach for MSTR with 30 timeframe
-2025-08-08 21:47:57,319 - ERROR - Error fetching time-based data from Databento: 422 data_end_after_available_end
-The dataset GLBX.MDP3 has data available up to '2025-08-08 19:40:00+00:00'. The `end` in the query ('2025-08-08 19:47:56.747822+00:00') is after the available range. Try requesting with an earlier `end`.
-documentation: https://databento.com/docs/api-reference-historical/basics/datasets
-2025-08-08 21:47:57,319 - ERROR - Error in strategy for MSTR: 422 data_end_after_available_end
-The dataset GLBX.MDP3 has data available up to '2025-08-08 19:40:00+00:00'. The `end` in the query ('2025-08-08 19:47:56.747822+00:00') is after the available range. Try requesting with an earlier `end`.
-documentation: https://databento.com/docs/api-reference-historical/basics/datasets
+2025-08-11 14:46:35,734 - INFO - Running strategy for MSTR at 2025-08-11 07:46:35.734747-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 14:46:35,735 - INFO - Attempting to connect to Redis at localhost:6379 db=0
+2025-08-11 14:46:35,736 - ERROR - Error in strategy for MSTR: configure_logger() missing 1 required positional argument: 'strategy'
 Traceback (most recent call last):
-  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 74, in ema_strategy
-    df = get_historical_data(
-  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 359, in get_historical_data
-    data = db_client.timeseries.get_range(
-  File "C:\Users\csg\AppData\Local\Programs\Python\Python310\lib\site-packages\databento\historical\api\timeseries.py", line 125, in get_range
-    return self._stream(
-  File "C:\Users\csg\AppData\Local\Programs\Python\Python310\lib\site-packages\databento\common\http.py", line 134, in _stream
-    check_http_error(response)
-  File "C:\Users\csg\AppData\Local\Programs\Python\Python310\lib\site-packages\databento\common\http.py", line 249, in check_http_error
-    raise BentoClientError(
-databento.common.error.BentoClientError: 422 data_end_after_available_end
-The dataset GLBX.MDP3 has data available up to '2025-08-08 19:40:00+00:00'. The `end` in the query ('2025-08-08 19:47:56.747822+00:00') is after the available range. Try requesting with an earlier `end`.
-documentation: https://databento.com/docs/api-reference-historical/basics/datasets
-2025-08-08 21:47:58,472 - ERROR - Error in main loop for MSTR: get_strategy_prarams() missing 1 required positional argument: 'logger'
-Traceback (most recent call last):
-  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 1130, in main_strategy_loop
-    [timeframe, *_] = get_strategy_prarams(ticker, logger)
-TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
-2025-08-08 21:48:36,296 - INFO - Running strategy for MSTR at 2025-08-08 15:48:36.296043-04:00 with params: Schwab_QTY=0, Tasty_QTY=40 TRENDS=(5, EMA), (2, SMA)
-2025-08-08 21:48:36,298 - INFO - Using time-based approach for MSTR with 30 timeframe
-2025-08-08 21:48:36,688 - ERROR - Error fetching time-based data from Databento: 422 data_end_after_available_end
-The dataset GLBX.MDP3 has data available up to '2025-08-08 19:40:00+00:00'. The `end` in the query ('2025-08-08 19:48:36.296593+00:00') is after the available range. Try requesting with an earlier `end`.
-documentation: https://databento.com/docs/api-reference-historical/basics/datasets
-2025-08-08 21:48:36,688 - ERROR - Error in strategy for MSTR: 422 data_end_after_available_end
-The dataset GLBX.MDP3 has data available up to '2025-08-08 19:40:00+00:00'. The `end` in the query ('2025-08-08 19:48:36.296593+00:00') is after the available range. Try requesting with an earlier `end`.
-documentation: https://databento.com/docs/api-reference-historical/basics/datasets
-Traceback (most recent call last):
-  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 74, in ema_strategy
-    df = get_historical_data(
-  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 361, in get_historical_data
-    data = db_client.timeseries.get_range(
-  File "C:\Users\csg\AppData\Local\Programs\Python\Python310\lib\site-packages\databento\historical\api\timeseries.py", line 125, in get_range
-    return self._stream(
-  File "C:\Users\csg\AppData\Local\Programs\Python\Python310\lib\site-packages\databento\common\http.py", line 134, in _stream
-    check_http_error(response)
-  File "C:\Users\csg\AppData\Local\Programs\Python\Python310\lib\site-packages\databento\common\http.py", line 249, in check_http_error
-    raise BentoClientError(
-databento.common.error.BentoClientError: 422 data_end_after_available_end
-The dataset GLBX.MDP3 has data available up to '2025-08-08 19:40:00+00:00'. The `end` in the query ('2025-08-08 19:48:36.296593+00:00') is after the available range. Try requesting with an earlier `end`.
-documentation: https://databento.com/docs/api-reference-historical/basics/datasets
-2025-08-08 21:48:38,018 - ERROR - Error in main loop for MSTR: get_strategy_prarams() missing 1 required positional argument: 'logger'
-Traceback (most recent call last):
-  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 1132, in main_strategy_loop
-    [timeframe, *_] = get_strategy_prarams(ticker, logger)
-TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
-2025-08-08 21:49:44,470 - INFO - Running strategy for MSTR at 2025-08-08 15:49:44.470541-04:00 with params: Schwab_QTY=0, Tasty_QTY=40 TRENDS=(5, EMA), (2, SMA)
-2025-08-08 21:49:44,473 - INFO - Using time-based approach for MSTR with 30 timeframe
-2025-08-08 21:49:45,210 - ERROR - Error fetching time-based data from Databento: 422 data_end_after_available_end
-The dataset GLBX.MDP3 has data available up to '2025-08-08 19:40:00+00:00'. The `end` in the query ('2025-08-08 19:49:44.473230+00:00') is after the available range. Try requesting with an earlier `end`.
-documentation: https://databento.com/docs/api-reference-historical/basics/datasets
-2025-08-08 21:49:45,236 - ERROR - Error in strategy for MSTR: 422 data_end_after_available_end
-The dataset GLBX.MDP3 has data available up to '2025-08-08 19:40:00+00:00'. The `end` in the query ('2025-08-08 19:49:44.473230+00:00') is after the available range. Try requesting with an earlier `end`.
-documentation: https://databento.com/docs/api-reference-historical/basics/datasets
-Traceback (most recent call last):
-  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 74, in ema_strategy
-    df = get_historical_data(
-  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 362, in get_historical_data
-    data = db_client.timeseries.get_range(
-  File "C:\Users\csg\AppData\Local\Programs\Python\Python310\lib\site-packages\databento\historical\api\timeseries.py", line 125, in get_range
-    return self._stream(
-  File "C:\Users\csg\AppData\Local\Programs\Python\Python310\lib\site-packages\databento\common\http.py", line 134, in _stream
-    check_http_error(response)
-  File "C:\Users\csg\AppData\Local\Programs\Python\Python310\lib\site-packages\databento\common\http.py", line 249, in check_http_error
-    raise BentoClientError(
-databento.common.error.BentoClientError: 422 data_end_after_available_end
-The dataset GLBX.MDP3 has data available up to '2025-08-08 19:40:00+00:00'. The `end` in the query ('2025-08-08 19:49:44.473230+00:00') is after the available range. Try requesting with an earlier `end`.
-documentation: https://databento.com/docs/api-reference-historical/basics/datasets
-2025-08-08 21:49:46,153 - ERROR - Error in main loop for MSTR: get_strategy_prarams() missing 1 required positional argument: 'logger'
-Traceback (most recent call last):
-  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 1133, in main_strategy_loop
-    [timeframe, *_] = get_strategy_prarams(ticker, logger)
-TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
-2025-08-08 22:28:24,546 - INFO - Running strategy for MSTR at 2025-08-08 16:28:24.546175-04:00 with params: Schwab_QTY=0, Tasty_QTY=40 TRENDS=(5, EMA), (2, SMA)
-2025-08-08 22:28:24,549 - INFO - Using time-based approach for MSTR with 30 timeframe
-2025-08-08 22:28:24,991 - ERROR - Error fetching time-based data from Databento: 422 data_end_after_available_end
-The dataset GLBX.MDP3 has data available up to '2025-08-08 20:20:00+00:00'. The `end` in the query ('2025-08-08 20:28:24.546681+00:00') is after the available range. Try requesting with an earlier `end`.
-documentation: https://databento.com/docs/api-reference-historical/basics/datasets
-2025-08-08 22:28:25,022 - ERROR - Error in strategy for MSTR: 422 data_end_after_available_end
-The dataset GLBX.MDP3 has data available up to '2025-08-08 20:20:00+00:00'. The `end` in the query ('2025-08-08 20:28:24.546681+00:00') is after the available range. Try requesting with an earlier `end`.
-documentation: https://databento.com/docs/api-reference-historical/basics/datasets
-Traceback (most recent call last):
-  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 74, in ema_strategy
-    df = get_historical_data(
-  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 363, in get_historical_data
-    data = db_client.timeseries.get_range(
-  File "C:\Users\csg\AppData\Local\Programs\Python\Python310\lib\site-packages\databento\historical\api\timeseries.py", line 125, in get_range
-    return self._stream(
-  File "C:\Users\csg\AppData\Local\Programs\Python\Python310\lib\site-packages\databento\common\http.py", line 134, in _stream
-    check_http_error(response)
-  File "C:\Users\csg\AppData\Local\Programs\Python\Python310\lib\site-packages\databento\common\http.py", line 249, in check_http_error
-    raise BentoClientError(
-databento.common.error.BentoClientError: 422 data_end_after_available_end
-The dataset GLBX.MDP3 has data available up to '2025-08-08 20:20:00+00:00'. The `end` in the query ('2025-08-08 20:28:24.546681+00:00') is after the available range. Try requesting with an earlier `end`.
-documentation: https://databento.com/docs/api-reference-historical/basics/datasets
-2025-08-08 22:28:26,320 - INFO - Market closed
-2025-08-08 22:28:46,879 - INFO - Running strategy for MSTR at 2025-08-08 16:28:46.879056-04:00 with params: Schwab_QTY=0, Tasty_QTY=40 TRENDS=(5, EMA), (2, SMA)
-2025-08-08 22:28:46,883 - INFO - Using time-based approach for MSTR with 30 timeframe
-2025-08-08 22:28:47,264 - ERROR - Error fetching time-based data from Databento: 422 data_end_after_available_end
-The dataset GLBX.MDP3 has data available up to '2025-08-08 20:20:00+00:00'. The `end` in the query ('2025-08-08 20:28:46.879646+00:00') is after the available range. Try requesting with an earlier `end`.
-documentation: https://databento.com/docs/api-reference-historical/basics/datasets
-2025-08-08 22:28:47,264 - ERROR - Error in strategy for MSTR: 422 data_end_after_available_end
-The dataset GLBX.MDP3 has data available up to '2025-08-08 20:20:00+00:00'. The `end` in the query ('2025-08-08 20:28:46.879646+00:00') is after the available range. Try requesting with an earlier `end`.
-documentation: https://databento.com/docs/api-reference-historical/basics/datasets
-Traceback (most recent call last):
-  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 74, in ema_strategy
-    df = get_historical_data(
-  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 363, in get_historical_data
-    data = db_client.timeseries.get_range(
-  File "C:\Users\csg\AppData\Local\Programs\Python\Python310\lib\site-packages\databento\historical\api\timeseries.py", line 125, in get_range
-    return self._stream(
-  File "C:\Users\csg\AppData\Local\Programs\Python\Python310\lib\site-packages\databento\common\http.py", line 134, in _stream
-    check_http_error(response)
-  File "C:\Users\csg\AppData\Local\Programs\Python\Python310\lib\site-packages\databento\common\http.py", line 249, in check_http_error
-    raise BentoClientError(
-databento.common.error.BentoClientError: 422 data_end_after_available_end
-The dataset GLBX.MDP3 has data available up to '2025-08-08 20:20:00+00:00'. The `end` in the query ('2025-08-08 20:28:46.879646+00:00') is after the available range. Try requesting with an earlier `end`.
-documentation: https://databento.com/docs/api-reference-historical/basics/datasets
-2025-08-08 22:28:48,723 - INFO - Market closed
-2025-08-09 00:38:17,200 - INFO - Running strategy for MSTR at 2025-08-08 18:38:17.200570-04:00 with params: Schwab_QTY=0, Tasty_QTY=40 TRENDS=(5, EMA), (2, SMA)
-2025-08-09 00:38:21,248 - ERROR - Error in strategy for MSTR: Unsupported timeframe: 30
-Traceback (most recent call last):
-  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 76, in ema_strategy
-    df = get_historical_data(
-  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 159, in get_historical_data
-    raise ValueError(f"Unsupported timeframe: {timeframe}")
-ValueError: Unsupported timeframe: 30
-2025-08-09 00:46:20,579 - ERROR - Error in strategy for MSTR: name 'get_strategy_prarams' is not defined
-Traceback (most recent call last):
-  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 14, in ema_strategy
-    ] = get_strategy_prarams("ema", ticker, logger)
-NameError: name 'get_strategy_prarams' is not defined
-2025-08-09 00:50:35,657 - ERROR - Error in strategy for MSTR: name 'get_strategy_prarams' is not defined
-Traceback (most recent call last):
-  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 14, in ema_strategy
-    ] = get_strategy_prarams("ema", ticker, logger)
-NameError: name 'get_strategy_prarams' is not defined
-2025-08-09 00:51:07,708 - ERROR - Error in strategy for MSTR: name 'get_strategy_prarams' is not defined
-Traceback (most recent call last):
-  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 15, in ema_strategy
-    ] = get_strategy_prarams("ema", ticker, logger)
-NameError: name 'get_strategy_prarams' is not defined
-2025-08-11 02:18:23,747 - INFO - Running strategy for MSTR at 2025-08-10 20:18:23.747076-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
-2025-08-11 02:18:31,824 - ERROR - Error in strategy for MSTR: configure_logger() missing 1 required positional argument: 'strategy'
-Traceback (most recent call last):
-  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 54, in ema_strategy
-    df = get_historical_data(
-  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 120, in get_historical_data
-    buffer = TickDataBufferWithRedis(
-  File "D:\sde\Tim\tasty-schwab-trader-BE\tick_producer.py", line 123, in __init__
-    super().__init__(ticker, tick_size, db_api_key)
-  File "D:\sde\Tim\tasty-schwab-trader-BE\tick_buffer.py", line 18, in __init__
-    self.logger = configure_logger(ticker)
-TypeError: configure_logger() missing 1 required positional argument: 'strategy'
-2025-08-11 02:18:31,850 - INFO - Market closed on weekends
-2025-08-11 02:19:31,859 - INFO - Market closed on weekends
-2025-08-11 02:19:56,422 - INFO - Running strategy for MSTR at 2025-08-10 20:19:56.422181-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
-2025-08-11 02:20:04,509 - ERROR - Error in strategy for MSTR: configure_logger() missing 1 required positional argument: 'strategy'
-Traceback (most recent call last):
-  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 56, in ema_strategy
-    df = get_historical_data(
-  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 120, in get_historical_data
-    buffer = TickDataBufferWithRedis(
-  File "D:\sde\Tim\tasty-schwab-trader-BE\tick_producer.py", line 123, in __init__
-    super().__init__(ticker, tick_size, db_api_key)
-  File "D:\sde\Tim\tasty-schwab-trader-BE\tick_buffer.py", line 18, in __init__
-    self.logger = configure_logger(ticker)
-TypeError: configure_logger() missing 1 required positional argument: 'strategy'
-2025-08-11 02:20:04,510 - INFO - Market closed on weekends
-2025-08-11 02:21:04,521 - INFO - Market closed on weekends
-2025-08-11 02:22:04,528 - INFO - Market closed on weekends
-2025-08-11 02:23:04,544 - INFO - Market closed on weekends
-2025-08-11 02:24:04,551 - INFO - Market closed on weekends
-2025-08-11 02:25:04,553 - INFO - Market closed on weekends
-2025-08-11 02:26:04,567 - INFO - Market closed on weekends
-2025-08-11 02:27:04,574 - INFO - Market closed on weekends
-2025-08-11 02:28:04,576 - INFO - Market closed on weekends
-2025-08-11 02:29:04,590 - INFO - Market closed on weekends
-2025-08-11 02:30:04,604 - INFO - Market closed on weekends
-2025-08-11 02:31:04,605 - INFO - Market closed on weekends
-2025-08-11 02:32:04,613 - INFO - Market closed on weekends
-2025-08-11 02:33:04,614 - INFO - Market closed on weekends
-2025-08-11 02:34:04,627 - INFO - Market closed on weekends
-2025-08-11 02:35:04,642 - INFO - Market closed on weekends
-2025-08-11 02:36:04,657 - INFO - Market closed on weekends
-2025-08-11 02:37:04,662 - INFO - Market closed on weekends
-2025-08-11 02:38:04,665 - INFO - Market closed on weekends
-2025-08-11 02:39:04,677 - INFO - Market closed on weekends
-2025-08-11 02:40:04,693 - INFO - Market closed on weekends
-2025-08-11 02:41:04,696 - INFO - Market closed on weekends
-2025-08-11 02:42:04,699 - INFO - Market closed on weekends
-2025-08-11 02:43:04,711 - INFO - Market closed on weekends
-2025-08-11 02:44:04,721 - INFO - Market closed on weekends
-2025-08-11 02:45:04,736 - INFO - Market closed on weekends
-2025-08-11 02:46:04,743 - INFO - Market closed on weekends
-2025-08-11 02:47:04,756 - INFO - Market closed on weekends
-2025-08-11 02:48:04,769 - INFO - Market closed on weekends
-2025-08-11 02:49:04,773 - INFO - Market closed on weekends
-2025-08-11 02:50:04,774 - INFO - Market closed on weekends
-2025-08-11 02:51:04,790 - INFO - Market closed on weekends
-2025-08-11 02:52:04,803 - INFO - Market closed on weekends
-2025-08-11 02:53:04,811 - INFO - Market closed on weekends
-2025-08-11 02:54:04,820 - INFO - Market closed on weekends
-2025-08-11 02:55:04,824 - INFO - Market closed on weekends
-2025-08-11 02:56:04,834 - INFO - Market closed on weekends
-2025-08-11 02:57:04,843 - INFO - Market closed on weekends
-2025-08-11 02:58:04,847 - INFO - Market closed on weekends
-2025-08-11 02:59:04,858 - INFO - Market closed on weekends
-2025-08-11 03:00:04,863 - INFO - Market closed on weekends
-2025-08-11 03:01:04,874 - INFO - Market closed on weekends
-2025-08-11 03:02:04,884 - INFO - Market closed on weekends
-2025-08-11 03:03:04,894 - INFO - Market closed on weekends
-2025-08-11 03:04:04,899 - INFO - Market closed on weekends
-2025-08-11 03:05:04,903 - INFO - Market closed on weekends
-2025-08-11 03:06:04,905 - INFO - Market closed on weekends
-2025-08-11 03:07:04,912 - INFO - Market closed on weekends
-2025-08-11 03:08:04,924 - INFO - Market closed on weekends
-2025-08-11 03:09:04,927 - INFO - Market closed on weekends
-2025-08-11 03:10:04,929 - INFO - Market closed on weekends
-2025-08-11 03:11:04,944 - INFO - Market closed on weekends
-2025-08-11 03:12:04,956 - INFO - Market closed on weekends
-2025-08-11 03:13:04,976 - INFO - Market closed on weekends
-2025-08-11 03:14:04,979 - INFO - Market closed on weekends
-2025-08-11 03:15:04,995 - INFO - Market closed on weekends
-2025-08-11 03:16:05,009 - INFO - Market closed on weekends
-2025-08-11 03:17:05,022 - INFO - Market closed on weekends
-2025-08-11 03:18:05,031 - INFO - Market closed on weekends
-2025-08-11 03:19:05,042 - INFO - Market closed on weekends
-2025-08-11 03:20:05,053 - INFO - Market closed on weekends
-2025-08-11 03:21:05,057 - INFO - Market closed on weekends
-2025-08-11 03:22:05,066 - INFO - Market closed on weekends
-2025-08-11 03:23:05,069 - INFO - Market closed on weekends
-2025-08-11 03:24:05,084 - INFO - Market closed on weekends
-2025-08-11 03:25:05,086 - INFO - Market closed on weekends
-2025-08-11 03:26:05,096 - INFO - Market closed on weekends
-2025-08-11 03:27:05,111 - INFO - Market closed on weekends
-2025-08-11 03:28:05,125 - INFO - Market closed on weekends
-2025-08-11 03:29:05,140 - INFO - Market closed on weekends
-2025-08-11 03:30:05,143 - INFO - Market closed on weekends
-2025-08-11 03:31:05,156 - INFO - Market closed on weekends
-2025-08-11 03:32:05,157 - INFO - Market closed on weekends
-2025-08-11 03:33:05,160 - INFO - Market closed on weekends
-2025-08-11 03:34:05,166 - INFO - Market closed on weekends
-2025-08-11 03:35:05,175 - INFO - Market closed on weekends
-2025-08-11 03:36:05,181 - INFO - Market closed on weekends
-2025-08-11 03:37:05,190 - INFO - Market closed on weekends
-2025-08-11 03:38:05,194 - INFO - Market closed on weekends
-2025-08-11 03:39:05,204 - INFO - Market closed on weekends
-2025-08-11 03:40:05,217 - INFO - Market closed on weekends
-2025-08-11 03:41:05,220 - INFO - Market closed on weekends
-2025-08-11 03:42:05,226 - INFO - Market closed on weekends
-2025-08-11 03:43:05,236 - INFO - Market closed on weekends
-2025-08-11 03:44:05,250 - INFO - Market closed on weekends
-2025-08-11 03:45:05,251 - INFO - Market closed on weekends
-2025-08-11 03:46:05,254 - INFO - Market closed on weekends
-2025-08-11 03:47:05,267 - INFO - Market closed on weekends
-2025-08-11 03:48:05,281 - INFO - Market closed on weekends
-2025-08-11 03:49:05,286 - INFO - Market closed on weekends
-2025-08-11 03:50:05,298 - INFO - Market closed on weekends
-2025-08-11 03:51:05,306 - INFO - Market closed on weekends
-2025-08-11 03:52:05,313 - INFO - Market closed on weekends
-2025-08-11 03:53:05,318 - INFO - Market closed on weekends
-2025-08-11 03:54:05,332 - INFO - Market closed on weekends
-2025-08-11 03:55:05,342 - INFO - Market closed on weekends
-2025-08-11 03:56:05,349 - INFO - Market closed on weekends
-2025-08-11 03:57:05,354 - INFO - Market closed on weekends
-2025-08-11 03:58:05,358 - INFO - Market closed on weekends
-2025-08-11 03:59:05,361 - INFO - Market closed on weekends
-2025-08-11 04:00:05,376 - INFO - Market closed on weekends
-2025-08-11 04:01:05,380 - INFO - Market closed on weekends
-2025-08-11 04:02:05,394 - INFO - Market closed on weekends
-2025-08-11 04:03:05,395 - INFO - Market closed on weekends
-2025-08-11 04:04:05,403 - INFO - Market closed on weekends
-2025-08-11 04:05:05,416 - INFO - Market closed on weekends
-2025-08-11 04:06:05,425 - INFO - Market closed on weekends
-2025-08-11 04:07:05,436 - INFO - Market closed on weekends
-2025-08-11 04:08:05,441 - INFO - Market closed on weekends
-2025-08-11 04:09:05,451 - INFO - Market closed on weekends
-2025-08-11 04:10:05,467 - INFO - Market closed on weekends
-2025-08-11 04:11:05,480 - INFO - Market closed on weekends
-2025-08-11 04:12:05,483 - INFO - Market closed on weekends
-2025-08-11 04:13:05,498 - INFO - Market closed on weekends
-2025-08-11 04:14:05,499 - INFO - Market closed on weekends
-2025-08-11 04:15:05,510 - INFO - Market closed on weekends
-2025-08-11 04:16:05,523 - INFO - Market closed on weekends
-2025-08-11 04:17:05,528 - INFO - Market closed on weekends
-2025-08-11 04:18:05,538 - INFO - Market closed on weekends
-2025-08-11 04:19:05,541 - INFO - Market closed on weekends
-2025-08-11 04:20:05,544 - INFO - Market closed on weekends
-2025-08-11 04:21:05,560 - INFO - Market closed on weekends
-2025-08-11 04:22:05,568 - INFO - Market closed on weekends
-2025-08-11 04:23:05,575 - INFO - Market closed on weekends
-2025-08-11 04:24:05,586 - INFO - Market closed on weekends
-2025-08-11 04:25:05,588 - INFO - Market closed on weekends
-2025-08-11 04:26:05,595 - INFO - Market closed on weekends
-2025-08-11 04:27:05,596 - INFO - Market closed on weekends
-2025-08-11 04:28:05,605 - INFO - Market closed on weekends
-2025-08-11 04:29:05,620 - INFO - Market closed on weekends
-2025-08-11 04:30:05,633 - INFO - Market closed on weekends
-2025-08-11 04:31:05,639 - INFO - Market closed on weekends
-2025-08-11 04:32:05,650 - INFO - Market closed on weekends
-2025-08-11 04:33:05,664 - INFO - Market closed on weekends
-2025-08-11 04:34:05,678 - INFO - Market closed on weekends
-2025-08-11 04:35:05,688 - INFO - Market closed on weekends
-2025-08-11 04:36:05,693 - INFO - Market closed on weekends
-2025-08-11 04:37:05,701 - INFO - Market closed on weekends
-2025-08-11 04:38:05,711 - INFO - Market closed on weekends
-2025-08-11 04:39:05,725 - INFO - Market closed on weekends
-2025-08-11 04:40:05,734 - INFO - Market closed on weekends
-2025-08-11 04:41:05,743 - INFO - Market closed on weekends
-2025-08-11 06:00:05,477 - INFO - Running strategy for MSTR at 2025-08-10 23:00:05.477919-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
-2025-08-11 06:00:09,670 - ERROR - Error in strategy for MSTR: configure_logger() missing 1 required positional argument: 'strategy'
-Traceback (most recent call last):
-  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 53, in ema_strategy
-    df = get_historical_data(
-        ticker,
-        timeframe,
-        logger=logger,
-    )
-  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 120, in get_historical_data
-    buffer = TickDataBufferWithRedis(
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
         ticker=ticker,
-    ...<3 lines>...
-        max_period=10,
+    ...<2 lines>...
+        strategy="ema"
     )
-  File "D:\work\work\Tim McKenna\Tim\backend\tick_producer.py", line 123, in __init__
-    super().__init__(ticker, tick_size, db_api_key)
-    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\work\work\Tim McKenna\Tim\backend\tick_buffer.py", line 18, in __init__
-    self.logger = configure_logger(ticker)
-                  ~~~~~~~~~~~~~~~~^^^^^^^^
-TypeError: configure_logger() missing 1 required positional argument: 'strategy'
-2025-08-11 06:00:09,672 - INFO - Market closed on weekends
-2025-08-11 06:01:09,673 - INFO - Market closed on weekends
-2025-08-11 06:02:09,673 - INFO - Market closed on weekends
-2025-08-11 06:16:43,919 - INFO - Running strategy for MSTR at 2025-08-10 23:16:43.919787-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
-2025-08-11 06:16:48,011 - ERROR - Error in strategy for MSTR: configure_logger() missing 1 required positional argument: 'strategy'
-Traceback (most recent call last):
-  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 53, in ema_strategy
-    df = get_historical_data(
-        ticker,
-        timeframe,
-        logger=logger,
-    )
-  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 120, in get_historical_data
-    buffer = TickDataBufferWithRedis(
-        ticker=ticker,
-    ...<3 lines>...
-        max_period=10,
-    )
-  File "D:\work\work\Tim McKenna\Tim\backend\tick_producer.py", line 123, in __init__
-    super().__init__(ticker, tick_size, db_api_key)
-    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\work\work\Tim McKenna\Tim\backend\tick_buffer.py", line 18, in __init__
-    self.logger = configure_logger(ticker)
-                  ~~~~~~~~~~~~~~~~^^^^^^^^
-TypeError: configure_logger() missing 1 required positional argument: 'strategy'
-2025-08-11 06:16:48,013 - INFO - Market closed on weekends
-2025-08-11 06:17:48,014 - INFO - Market closed on weekends
-2025-08-11 06:18:48,015 - INFO - Market closed on weekends
-2025-08-11 06:19:48,016 - INFO - Market closed on weekends
-2025-08-11 06:20:48,017 - INFO - Market closed on weekends
-2025-08-11 06:21:48,018 - INFO - Market closed on weekends
-2025-08-11 06:22:48,019 - INFO - Market closed on weekends
-2025-08-11 06:23:48,020 - INFO - Market closed on weekends
-2025-08-11 06:24:48,021 - INFO - Market closed on weekends
-2025-08-11 06:25:48,021 - INFO - Market closed on weekends
-2025-08-11 06:26:48,022 - INFO - Market closed on weekends
-2025-08-11 06:27:48,023 - INFO - Market closed on weekends
-2025-08-11 06:28:48,023 - INFO - Market closed on weekends
-2025-08-11 06:29:48,024 - INFO - Market closed on weekends
-2025-08-11 06:30:48,025 - INFO - Market closed on weekends
-2025-08-11 06:31:48,026 - INFO - Market closed on weekends
-2025-08-11 06:32:48,027 - INFO - Market closed on weekends
-2025-08-11 06:33:48,028 - INFO - Market closed on weekends
-2025-08-11 06:34:48,029 - INFO - Market closed on weekends
-2025-08-11 06:35:48,030 - INFO - Market closed on weekends
-2025-08-11 06:36:48,030 - INFO - Market closed on weekends
-2025-08-11 06:37:48,032 - INFO - Market closed on weekends
-2025-08-11 06:38:48,033 - INFO - Market closed on weekends
-2025-08-11 06:39:48,034 - INFO - Market closed on weekends
-2025-08-11 06:40:48,035 - INFO - Market closed on weekends
-2025-08-11 06:41:48,036 - INFO - Market closed on weekends
-2025-08-11 06:42:48,037 - INFO - Market closed on weekends
-2025-08-11 06:43:48,038 - INFO - Market closed on weekends
-2025-08-11 06:44:48,039 - INFO - Market closed on weekends
-2025-08-11 06:45:48,041 - INFO - Market closed on weekends
-2025-08-11 06:46:48,042 - INFO - Market closed on weekends
-2025-08-11 06:47:48,043 - INFO - Market closed on weekends
-2025-08-11 06:48:48,043 - INFO - Market closed on weekends
-2025-08-11 06:49:48,043 - INFO - Market closed on weekends
-2025-08-11 06:50:48,045 - INFO - Market closed on weekends
-2025-08-11 06:51:48,046 - INFO - Market closed on weekends
-2025-08-11 06:52:48,047 - INFO - Market closed on weekends
-2025-08-11 06:53:48,048 - INFO - Market closed on weekends
-2025-08-11 06:54:48,049 - INFO - Market closed on weekends
-2025-08-11 06:55:48,050 - INFO - Market closed on weekends
-2025-08-11 06:56:48,052 - INFO - Market closed on weekends
-2025-08-11 06:57:48,053 - INFO - Market closed on weekends
-2025-08-11 06:58:48,055 - INFO - Market closed on weekends
-2025-08-11 06:59:48,056 - INFO - Market closed on weekends
-2025-08-11 09:58:47,293 - INFO - Running strategy for MSTR at 2025-08-11 02:58:47.293007-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
-2025-08-11 09:58:47,386 - ERROR - Error in strategy for MSTR: configure_logger() missing 1 required positional argument: 'strategy'
-Traceback (most recent call last):
-  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 52, in ema_strategy
-    df = get_historical_data(
-        ticker,
-        timeframe,
-        logger=logger,
-    )
-  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 82, in get_historical_data
-    if is_tick_timeframe(timeframe):
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 102, in get_tick_based_historical_data
-    # Initialize tick buffer
-                  ^^^^^^^^^^
-    ...<5 lines>...
-        max_period=max_period
-    
-  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 18, in __init__
-    super().__init__(ticker, tick_size, db_api_key)
-    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\work\work\Tim McKenna\Tim\backend\tick_buffer.py", line 18, in __init__
-    self.logger = configure_logger(ticker)
-                  ~~~~~~~~~~~~~~~~^^^^^^^^
-TypeError: configure_logger() missing 1 required positional argument: 'strategy'
-2025-08-11 10:03:46,938 - INFO - Running strategy for MSTR at 2025-08-11 03:03:46.938449-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
-2025-08-11 10:04:00,034 - ERROR - Error in strategy for MSTR: configure_logger() missing 1 required positional argument: 'strategy'
-Traceback (most recent call last):
-  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 52, in ema_strategy
-    df = get_historical_data(
-        ticker,
-        timeframe,
-        logger=logger,
-    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 385, in get_historical_and_live_data
+    df = get_historical_data(ticker, timeframe, logger, strategy)
   File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 92, in get_historical_data
-    return get_tick_based_historical_data(ticker, timeframe, logger, redis_client, db_api_key, dataset)
-  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 112, in get_tick_based_historical_data
+    return get_tick_based_historical_data(ticker, timeframe, logger, redis_client, db_api_key, dataset, strategy)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 108, in get_tick_based_historical_data
     tick_buffer = TickDataBufferWithRedis(
         ticker=ticker_for_data,
-    ...<3 lines>...
-        max_period=max_period
+    ...<4 lines>...
+        strategy=strategy
     )
   File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 18, in __init__
     super().__init__(ticker, tick_size, db_api_key)
     ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\work\work\Tim McKenna\Tim\backend\tick_buffer.py", line 18, in __init__
+  File "D:\work\work\Tim McKenna\Tim\backend\tick_buffer.py", line 19, in __init__
     self.logger = configure_logger(ticker)
                   ~~~~~~~~~~~~~~~~^^^^^^^^
 TypeError: configure_logger() missing 1 required positional argument: 'strategy'
-2025-08-11 10:10:24,609 - INFO - Running strategy for MSTR at 2025-08-11 03:10:24.609600-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
-2025-08-11 10:10:24,614 - ERROR - Error in strategy for MSTR: The API key is currently set to 'YOUR_API_KEY'. Please replace this value with a key from your user portal https://databento.com/portal/keys
+2025-08-11 15:10:27,774 - INFO - Running strategy for MSTR at 2025-08-11 08:10:27.774230-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 15:10:27,774 - INFO - Attempting to connect to Redis at localhost:6379 db=0
+2025-08-11 15:10:29,265 - ERROR - Error in strategy for MSTR: name 'tick_buffer' is not defined
 Traceback (most recent call last):
-  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 52, in ema_strategy
-    df = get_historical_data(
-        ticker,
-        timeframe,
-        logger=logger,
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
     )
-  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 82, in get_historical_data
-    return get_tick_based_historical_data(ticker, timeframe, logger, redis_client, db_api_key, dataset)
-  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 93, in get_tick_based_historical_data
-    print(client.metadata.list_datasets())
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
-  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\historical\api\metadata.py", line 86, in list_datasets
-    response: Response = self._get(
-                         ~~~~~~~~~^
-        url=self._base_url + ".list_datasets",
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        params=params,
-        ^^^^^^^^^^^^^^
-        basic_auth=True,
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 228, in get_historical_and_live_data
+    df = get_historical_data(ticker, timeframe, logger, strategy)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 48, in get_historical_data
+    return get_tick_based_historical_data(ticker, timeframe, logger, redis_client, db_api_key, dataset, strategy)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 84, in get_tick_based_historical_data
+    tick_buffer.warmup_with_historical_ticks(
+    ^^^^^^^^^^^
+NameError: name 'tick_buffer' is not defined
+2025-08-11 15:14:52,541 - INFO - Running strategy for MSTR at 2025-08-11 08:14:52.541499-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 15:14:52,542 - INFO - Attempting to connect to Redis at localhost:6379 db=0
+2025-08-11 15:14:54,118 - ERROR - Error in strategy for MSTR: name 'tick_buffer' is not defined
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 228, in get_historical_and_live_data
+    df = get_historical_data(ticker, timeframe, logger, strategy)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 48, in get_historical_data
+    return get_tick_based_historical_data(ticker, timeframe, logger, redis_client, db_api_key, dataset, strategy)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 84, in get_tick_based_historical_data
+    tick_buffer.warmup_with_historical_ticks(
+    ^^^^^^^^^^^
+NameError: name 'tick_buffer' is not defined
+2025-08-11 18:16:59,431 - INFO - Running strategy for MSTR at 2025-08-11 11:16:59.430836-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 18:16:59,639 - INFO - Attempting to connect to Redis at localhost:6379 db=0
+2025-08-11 18:17:02,545 - ERROR - Error in strategy for MSTR: warmup_with_historical_ticks() missing 6 required positional arguments: 'dataset', 'start', 'end', 'logger', 'tick_size', and 'create_bar_from_ticks_fn'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 287, in get_historical_and_live_data
+    warmup_with_historical_ticks(ticker_for_data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+TypeError: warmup_with_historical_ticks() missing 6 required positional arguments: 'dataset', 'start', 'end', 'logger', 'tick_size', and 'create_bar_from_ticks_fn'
+2025-08-11 18:17:03,005 - ERROR - Error in main loop for MSTR: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 20:02:11,843 - INFO - Running strategy for MSTR at 2025-08-11 13:02:11.843722-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 20:02:11,844 - INFO - Attempting to connect to Redis at localhost:6379 db=0
+2025-08-11 20:02:13,348 - ERROR - Error in strategy for MSTR: module 'threading' has no attribute 'lock'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 124, in get_historical_and_live_data
+    lock = threading.lock()
+           ^^^^^^^^^^^^^^
+AttributeError: module 'threading' has no attribute 'lock'. Did you mean: 'Lock'?
+2025-08-11 20:02:13,761 - ERROR - Error in main loop for MSTR: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 20:05:48,087 - INFO - Running strategy for MSTR at 2025-08-11 13:05:48.087044-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 20:05:48,088 - INFO - Attempting to connect to Redis at localhost:6379 db=0
+2025-08-11 20:05:49,640 - ERROR - Error in strategy for MSTR: module 'threading' has no attribute 'lock'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 124, in get_historical_and_live_data
+    lock = threading.lock()
+           ^^^^^^^^^^^^^^
+AttributeError: module 'threading' has no attribute 'lock'. Did you mean: 'Lock'?
+2025-08-11 20:05:49,979 - ERROR - Error in main loop for MSTR: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 20:06:11,277 - INFO - Running strategy for MSTR at 2025-08-11 13:06:11.277054-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 20:06:11,277 - INFO - Attempting to connect to Redis at localhost:6379 db=0
+2025-08-11 20:06:12,603 - ERROR - Error in strategy for MSTR: module 'threading' has no attribute 'lock'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 123, in get_historical_and_live_data
+    lock = threading.lock()
+           ^^^^^^^^^^^^^^
+AttributeError: module 'threading' has no attribute 'lock'. Did you mean: 'Lock'?
+2025-08-11 20:06:12,951 - ERROR - Error in main loop for MSTR: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:18:22,164 - INFO - Running strategy for MSTR at 2025-08-11 14:18:22.164826-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:18:25,745 - ERROR - Error in main loop for MSTR: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:20:17,916 - INFO - Running strategy for MSTR at 2025-08-11 14:20:17.916956-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:20:20,711 - ERROR - Error in strategy for MSTR: unsupported operand type(s) for -: 'str' and 'datetime.timedelta'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 82, in get_historical_and_live_data
+    get_historical_data(ticker, timeframe, logger)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 74, in get_historical_data
+    start_time = get_historical_start_time(timeframe, end_time)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 65, in get_historical_start_time
+    start_time = (end_time - timedelta(days=1)).isoformat()
+                  ~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'str' and 'datetime.timedelta'
+2025-08-11 21:20:21,099 - ERROR - Error in main loop for MSTR: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:20:34,650 - INFO - Running strategy for MSTR at 2025-08-11 14:20:34.650780-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:20:34,650 - INFO - Running strategy for MSTR at 2025-08-11 14:20:34.650780-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:20:36,379 - ERROR - Error in strategy for MSTR: unsupported operand type(s) for -: 'str' and 'datetime.timedelta'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 82, in get_historical_and_live_data
+    get_historical_data(ticker, timeframe, logger)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 74, in get_historical_data
+    start_time = get_historical_start_time(timeframe, end_time)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 65, in get_historical_start_time
+    start_time = (end_time - timedelta(days=1)).isoformat()
+                  ~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'str' and 'datetime.timedelta'
+2025-08-11 21:20:36,379 - ERROR - Error in strategy for MSTR: unsupported operand type(s) for -: 'str' and 'datetime.timedelta'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 82, in get_historical_and_live_data
+    get_historical_data(ticker, timeframe, logger)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 74, in get_historical_data
+    start_time = get_historical_start_time(timeframe, end_time)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 65, in get_historical_start_time
+    start_time = (end_time - timedelta(days=1)).isoformat()
+                  ~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'str' and 'datetime.timedelta'
+2025-08-11 21:20:36,790 - ERROR - Error in main loop for MSTR: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:20:36,790 - ERROR - Error in main loop for MSTR: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:21:03,340 - INFO - Running strategy for MSTR at 2025-08-11 14:21:03.340052-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:21:05,777 - ERROR - Error in main loop for MSTR: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:21:30,710 - INFO - Running strategy for MSTR at 2025-08-11 14:21:30.710128-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:21:33,604 - ERROR - Error in strategy for MSTR: unsupported operand type(s) for -: 'str' and 'datetime.timedelta'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 82, in get_historical_and_live_data
+    get_historical_data(ticker, timeframe, logger)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 74, in get_historical_data
+    start_time = get_historical_start_time(timeframe, end_time)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 65, in get_historical_start_time
+    start_time = (end_time - timedelta(days=1)).isoformat()
+                  ~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'str' and 'datetime.timedelta'
+2025-08-11 21:21:33,926 - ERROR - Error in main loop for MSTR: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:33:00,583 - INFO - Running strategy for MSTR at 2025-08-11 14:33:00.583775-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:33:02,332 - ERROR - Error in strategy for MSTR: unsupported operand type(s) for -: 'str' and 'datetime.timedelta'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 98, in get_historical_and_live_data
+    get_historical_data(ticker, timeframe, logger)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 87, in get_historical_data
+    start_time = get_historical_start_time(timeframe, end_time)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 66, in get_historical_start_time
+    start_time = (end_time - timedelta(days=1)).isoformat()
+                  ~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'str' and 'datetime.timedelta'
+2025-08-11 21:33:03,020 - ERROR - Error in main loop for MSTR: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:33:33,420 - INFO - Running strategy for MSTR at 2025-08-11 14:33:33.420378-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:33:35,424 - ERROR - Error in strategy for MSTR: extract_tick_count() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 98, in get_historical_and_live_data
+    get_historical_data(ticker, timeframe, logger)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 90, in get_historical_data
+    tick_size = extract_tick_count(timeframe, dataset)
+TypeError: extract_tick_count() takes 1 positional argument but 2 were given
+2025-08-11 21:33:36,051 - ERROR - Error in main loop for MSTR: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:34:25,084 - INFO - Running strategy for MSTR at 2025-08-11 14:34:25.084002-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:34:27,691 - ERROR - Error in strategy for MSTR: extract_tick_count() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 99, in get_historical_and_live_data
+    get_historical_data(ticker, timeframe, logger)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 91, in get_historical_data
+    tick_size = extract_tick_count(timeframe, dataset)
+TypeError: extract_tick_count() takes 1 positional argument but 2 were given
+2025-08-11 21:34:28,648 - ERROR - Error in main loop for MSTR: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:34:58,451 - INFO - Running strategy for MSTR at 2025-08-11 14:34:58.451009-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:35:01,138 - ERROR - Error in strategy for MSTR: extract_tick_count() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 100, in get_historical_and_live_data
+    get_historical_data(ticker, timeframe, logger)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 92, in get_historical_data
+    tick_size = extract_tick_count(timeframe, dataset)
+TypeError: extract_tick_count() takes 1 positional argument but 2 were given
+2025-08-11 21:35:01,775 - ERROR - Error in main loop for MSTR: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:35:38,190 - INFO - Running strategy for MSTR at 2025-08-11 14:35:38.190620-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:35:41,536 - ERROR - Error in strategy for MSTR: 400 symbology_invalid_symbol
+Invalid format for `continuous` symbol 'MSTR', expected format: '[ROOT].[ROLL_RULE].[RANK]'.
+documentation: https://databento.com/docs/api-reference-historical/basics/symbology
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 98, in get_historical_and_live_data
+    get_historical_data(ticker, timeframe, logger)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 91, in get_historical_data
+    df = get_tick_based_data(tick_size, dataset, start_time, end_time, symbol)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 71, in get_tick_based_data
+    data = DATABENTO_CLIENT.timeseries.get_range(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dataset=dataset,
         ^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+        limit=tick_size
+        ^^^^^^^^^^^^^^^
+    ).to_df()
+    ^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\historical\api\timeseries.py", line 125, in get_range
+    return self._stream(
+           ~~~~~~~~~~~~^
+        url=self._base_url + ".get_range",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        path=path,
+        ^^^^^^^^^^
     )
     ^
-  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 59, in _get
-    self._check_api_key()
-    ~~~~~~~~~~~~~~~~~~~^^
-  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 48, in _check_api_key
-    raise ValueError(
-    ...<2 lines>...
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 134, in _stream
+    check_http_error(response)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 249, in check_http_error
+    raise BentoClientError(
+    ...<5 lines>...
     )
-ValueError: The API key is currently set to 'YOUR_API_KEY'. Please replace this value with a key from your user portal https://databento.com/portal/keys
-2025-08-11 10:11:12,084 - INFO - Running strategy for MSTR at 2025-08-11 03:11:12.083985-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
-2025-08-11 10:11:12,093 - ERROR - Error in strategy for MSTR: The API key is currently set to 'YOUR_API_KEY'. Please replace this value with a key from your user portal https://databento.com/portal/keys
+databento.common.error.BentoClientError: 400 symbology_invalid_symbol
+Invalid format for `continuous` symbol 'MSTR', expected format: '[ROOT].[ROLL_RULE].[RANK]'.
+documentation: https://databento.com/docs/api-reference-historical/basics/symbology
+2025-08-11 21:35:42,048 - ERROR - Error in main loop for MSTR: get_strategy_prarams() missing 1 required positional argument: 'logger'
 Traceback (most recent call last):
-  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 52, in ema_strategy
-    df = get_historical_data(
-        ticker,
-        timeframe,
-        logger=logger,
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:36:04,938 - INFO - Running strategy for MSTR at 2025-08-11 14:36:04.938665-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:36:08,824 - ERROR - Error in strategy for MSTR: 400 symbology_invalid_symbol
+Invalid format for `continuous` symbol 'MSTR', expected format: '[ROOT].[ROLL_RULE].[RANK]'.
+documentation: https://databento.com/docs/api-reference-historical/basics/symbology
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
     )
-  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 83, in get_historical_data
-    return get_tick_based_historical_data(ticker, timeframe, logger, redis_client, db_api_key, dataset)
-  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 95, in get_tick_based_historical_data
-    print(client.metadata.list_datasets())
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
-  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\historical\api\metadata.py", line 86, in list_datasets
-    response: Response = self._get(
-                         ~~~~~~~~~^
-        url=self._base_url + ".list_datasets",
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        params=params,
-        ^^^^^^^^^^^^^^
-        basic_auth=True,
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 99, in get_historical_and_live_data
+    get_historical_data(ticker, timeframe, logger)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 92, in get_historical_data
+    df = get_tick_based_data(tick_size, dataset, start_time, end_time, symbol)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 71, in get_tick_based_data
+    data = DATABENTO_CLIENT.timeseries.get_range(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dataset=dataset,
         ^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+        limit=tick_size
+        ^^^^^^^^^^^^^^^
+    ).to_df()
+    ^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\historical\api\timeseries.py", line 125, in get_range
+    return self._stream(
+           ~~~~~~~~~~~~^
+        url=self._base_url + ".get_range",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        path=path,
+        ^^^^^^^^^^
     )
     ^
-  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 59, in _get
-    self._check_api_key()
-    ~~~~~~~~~~~~~~~~~~~^^
-  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 48, in _check_api_key
-    raise ValueError(
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 134, in _stream
+    check_http_error(response)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 249, in check_http_error
+    raise BentoClientError(
+    ...<5 lines>...
+    )
+databento.common.error.BentoClientError: 400 symbology_invalid_symbol
+Invalid format for `continuous` symbol 'MSTR', expected format: '[ROOT].[ROLL_RULE].[RANK]'.
+documentation: https://databento.com/docs/api-reference-historical/basics/symbology
+2025-08-11 21:36:09,210 - ERROR - Error in main loop for MSTR: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:37:18,280 - INFO - Running strategy for MSTR at 2025-08-11 14:37:18.280205-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:37:21,657 - ERROR - Error in strategy for MSTR: 400 symbology_invalid_symbol
+Invalid format for `continuous` symbol 'MSTR', expected format: '[ROOT].[ROLL_RULE].[RANK]'.
+documentation: https://databento.com/docs/api-reference-historical/basics/symbology
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
     ...<2 lines>...
+        strategy="ema"
     )
-ValueError: The API key is currently set to 'YOUR_API_KEY'. Please replace this value with a key from your user portal https://databento.com/portal/keys
-2025-08-11 10:12:03,825 - INFO - Running strategy for MSTR at 2025-08-11 03:12:03.825491-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
-2025-08-11 10:12:06,988 - ERROR - Error in strategy for MSTR: configure_logger() missing 1 required positional argument: 'strategy'
-Traceback (most recent call last):
-  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 52, in ema_strategy
-    df = get_historical_data(
-        ticker,
-        timeframe,
-        logger=logger,
-    )
-  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 83, in get_historical_data
-    return get_tick_based_historical_data(ticker, timeframe, logger, redis_client, db_api_key, dataset)
-  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 108, in get_tick_based_historical_data
-    tick_buffer = TickDataBufferWithRedis(
-        ticker=ticker_for_data,
-    ...<3 lines>...
-        max_period=max_period
-    )
-  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 18, in __init__
-    super().__init__(ticker, tick_size, db_api_key)
-    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\work\work\Tim McKenna\Tim\backend\tick_buffer.py", line 18, in __init__
-    self.logger = configure_logger(ticker)
-                  ~~~~~~~~~~~~~~~~^^^^^^^^
-TypeError: configure_logger() missing 1 required positional argument: 'strategy'
-2025-08-11 10:54:00,446 - INFO - Running strategy for MSTR at 2025-08-11 03:54:00.446402-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
-2025-08-11 10:54:00,446 - INFO - Running strategy for MSTR at 2025-08-11 03:54:00.446402-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
-2025-08-11 10:54:02,850 - ERROR - Error in strategy for MSTR: configure_logger() missing 1 required positional argument: 'strategy'
-Traceback (most recent call last):
-  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 52, in ema_strategy
-    df = get_historical_data(
-        ticker,
-        timeframe,
-        logger=logger,
-    )
-  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 83, in get_historical_data
-    else:
-    
-  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 108, in get_tick_based_historical_data
-    # Get metadata to determine safe historical end time
-                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 99, in get_historical_and_live_data
+    get_historical_data(ticker, timeframe, logger)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 92, in get_historical_data
+    df = get_tick_based_data(tick_size, dataset, start_time, end_time, symbol)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 71, in get_tick_based_data
+    data = DATABENTO_CLIENT.timeseries.get_range(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dataset=dataset,
+        ^^^^^^^^^^^^^^^^
     ...<5 lines>...
-            safe_historical_end = pd.to_datetime(schema_range["end"]).tz_convert("UTC")
-    
-  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 18, in __init__
-    super().__init__(ticker, tick_size, db_api_key)
-    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\work\work\Tim McKenna\Tim\backend\tick_buffer.py", line 18, in __init__
-    self.logger = configure_logger(ticker)
-                  ~~~~~~~~~~~~~~~~^^^^^^^^
-TypeError: configure_logger() missing 1 required positional argument: 'strategy'
-2025-08-11 10:54:02,850 - ERROR - Error in strategy for MSTR: configure_logger() missing 1 required positional argument: 'strategy'
-Traceback (most recent call last):
-  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 52, in ema_strategy
-    df = get_historical_data(
-        ticker,
-        timeframe,
-        logger=logger,
+        limit=tick_size
+        ^^^^^^^^^^^^^^^
+    ).to_df()
+    ^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\historical\api\timeseries.py", line 125, in get_range
+    return self._stream(
+           ~~~~~~~~~~~~^
+        url=self._base_url + ".get_range",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        path=path,
+        ^^^^^^^^^^
     )
-  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 83, in get_historical_data
-    else:
-    
-  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 108, in get_tick_based_historical_data
-    # Get metadata to determine safe historical end time
-                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 134, in _stream
+    check_http_error(response)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 249, in check_http_error
+    raise BentoClientError(
     ...<5 lines>...
-            safe_historical_end = pd.to_datetime(schema_range["end"]).tz_convert("UTC")
-    
-  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 18, in __init__
-    super().__init__(ticker, tick_size, db_api_key)
-    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\work\work\Tim McKenna\Tim\backend\tick_buffer.py", line 18, in __init__
-    self.logger = configure_logger(ticker)
-                  ~~~~~~~~~~~~~~~~^^^^^^^^
-TypeError: configure_logger() missing 1 required positional argument: 'strategy'
-2025-08-11 11:15:18,978 - INFO - Running strategy for MSTR at 2025-08-11 04:15:18.978324-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
-2025-08-11 11:15:18,979 - ERROR - Error in strategy for MSTR: configure_logger() missing 1 required positional argument: 'strategy'
+    )
+databento.common.error.BentoClientError: 400 symbology_invalid_symbol
+Invalid format for `continuous` symbol 'MSTR', expected format: '[ROOT].[ROLL_RULE].[RANK]'.
+documentation: https://databento.com/docs/api-reference-historical/basics/symbology
+2025-08-11 21:37:21,997 - ERROR - Error in main loop for MSTR: get_strategy_prarams() missing 1 required positional argument: 'logger'
 Traceback (most recent call last):
-  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 52, in ema_strategy
-    df = get_historical_data(
-        ticker,
-        timeframe,
-        logger=logger,
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:38:23,655 - INFO - Running strategy for MSTR at 2025-08-11 14:38:23.655577-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:38:27,273 - ERROR - Error in strategy for MSTR: 400 symbology_invalid_symbol
+Invalid format for `continuous` symbol 'MSTR', expected format: '[ROOT].[ROLL_RULE].[RANK]'.
+documentation: https://databento.com/docs/api-reference-historical/basics/symbology
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
     )
-  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 82, in get_historical_data
-    return get_tick_based_historical_data(ticker, timeframe, logger, redis_client, db_api_key, dataset)
-  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 99, in get_tick_based_historical_data
-    tick_buffer = TickDataBufferWithRedis(
-        ticker=ticker_for_data,
-    ...<3 lines>...
-        max_period=max_period
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 99, in get_historical_and_live_data
+    get_historical_data(ticker, timeframe, logger)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 92, in get_historical_data
+    df = get_tick_based_data(tick_size, dataset, start_time, end_time, symbol)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 72, in get_tick_based_data
+    data = DATABENTO_CLIENT.timeseries.get_range(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dataset=dataset,
+        ^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+        limit=tick_size
+        ^^^^^^^^^^^^^^^
+    ).to_df()
+    ^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\historical\api\timeseries.py", line 125, in get_range
+    return self._stream(
+           ~~~~~~~~~~~~^
+        url=self._base_url + ".get_range",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        path=path,
+        ^^^^^^^^^^
     )
-  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 18, in __init__
-    super().__init__(ticker, tick_size, db_api_key)
-    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\work\work\Tim McKenna\Tim\backend\tick_buffer.py", line 18, in __init__
-    self.logger = configure_logger(ticker)
-                  ~~~~~~~~~~~~~~~~^^^^^^^^
-TypeError: configure_logger() missing 1 required positional argument: 'strategy'
+    ^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 134, in _stream
+    check_http_error(response)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 249, in check_http_error
+    raise BentoClientError(
+    ...<5 lines>...
+    )
+databento.common.error.BentoClientError: 400 symbology_invalid_symbol
+Invalid format for `continuous` symbol 'MSTR', expected format: '[ROOT].[ROLL_RULE].[RANK]'.
+documentation: https://databento.com/docs/api-reference-historical/basics/symbology
+2025-08-11 21:38:27,800 - ERROR - Error in main loop for MSTR: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:38:44,310 - INFO - Running strategy for MSTR at 2025-08-11 14:38:44.310193-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:38:48,749 - ERROR - Error in strategy for MSTR: 400 symbology_invalid_symbol
+Invalid format for `continuous` symbol 'MSTR', expected format: '[ROOT].[ROLL_RULE].[RANK]'.
+documentation: https://databento.com/docs/api-reference-historical/basics/symbology
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 99, in get_historical_and_live_data
+    get_historical_data(ticker, timeframe, logger)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 92, in get_historical_data
+    df = get_tick_based_data(tick_size, dataset, start_time, end_time, symbol)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 71, in get_tick_based_data
+    data = DATABENTO_CLIENT.timeseries.get_range(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dataset=dataset,
+        ^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+        limit=tick_size
+        ^^^^^^^^^^^^^^^
+    ).to_df()
+    ^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\historical\api\timeseries.py", line 125, in get_range
+    return self._stream(
+           ~~~~~~~~~~~~^
+        url=self._base_url + ".get_range",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        path=path,
+        ^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 134, in _stream
+    check_http_error(response)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 249, in check_http_error
+    raise BentoClientError(
+    ...<5 lines>...
+    )
+databento.common.error.BentoClientError: 400 symbology_invalid_symbol
+Invalid format for `continuous` symbol 'MSTR', expected format: '[ROOT].[ROLL_RULE].[RANK]'.
+documentation: https://databento.com/docs/api-reference-historical/basics/symbology
+2025-08-11 21:38:49,088 - ERROR - Error in main loop for MSTR: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:39:11,026 - INFO - Running strategy for MSTR at 2025-08-11 14:39:11.026690-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:39:14,634 - ERROR - Error in strategy for MSTR: 400 symbology_invalid_symbol
+Invalid format for `continuous` symbol 'MSTR', expected format: '[ROOT].[ROLL_RULE].[RANK]'.
+documentation: https://databento.com/docs/api-reference-historical/basics/symbology
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 107, in get_historical_and_live_data
+    get_historical_data(ticker, timeframe, logger)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 100, in get_historical_data
+    df = get_tick_based_data(tick_size, dataset, start_time, end_time, symbol)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 71, in get_tick_based_data
+    data = DATABENTO_CLIENT.timeseries.get_range(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dataset=dataset,
+        ^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+        limit=tick_size
+        ^^^^^^^^^^^^^^^
+    ).to_df()
+    ^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\historical\api\timeseries.py", line 125, in get_range
+    return self._stream(
+           ~~~~~~~~~~~~^
+        url=self._base_url + ".get_range",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        path=path,
+        ^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 134, in _stream
+    check_http_error(response)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 249, in check_http_error
+    raise BentoClientError(
+    ...<5 lines>...
+    )
+databento.common.error.BentoClientError: 400 symbology_invalid_symbol
+Invalid format for `continuous` symbol 'MSTR', expected format: '[ROOT].[ROLL_RULE].[RANK]'.
+documentation: https://databento.com/docs/api-reference-historical/basics/symbology
+2025-08-11 21:39:15,032 - ERROR - Error in main loop for MSTR: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:41:42,567 - INFO - Running strategy for MSTR at 2025-08-11 14:41:42.566954-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:41:45,931 - ERROR - Error in strategy for MSTR: unsupported operand type(s) for -: 'str' and 'datetime.timedelta'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 99, in get_historical_and_live_data
+    get_historical_data(ticker, timeframe, logger)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 88, in get_historical_data
+    start_time = get_historical_start_time(timeframe, end_time)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 66, in get_historical_start_time
+    start_time = (end_time - timedelta(days=1)).isoformat()
+                  ~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'str' and 'datetime.timedelta'
+2025-08-11 21:41:46,262 - ERROR - Error in main loop for MSTR: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:43:31,653 - INFO - Running strategy for MSTR at 2025-08-11 14:43:31.653076-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:43:34,560 - ERROR - Error in strategy for MSTR: unsupported operand type(s) for -: 'str' and 'datetime.timedelta'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 100, in get_historical_and_live_data
+    get_historical_data(ticker, timeframe, logger)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 89, in get_historical_data
+    start_time = get_historical_start_time(timeframe, end_time)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 66, in get_historical_start_time
+    start_time = (end_time - timedelta(days=1)).isoformat()
+                  ~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'str' and 'datetime.timedelta'
+2025-08-11 21:43:34,916 - ERROR - Error in main loop for MSTR: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:45:49,967 - INFO - Running strategy for MSTR at 2025-08-11 14:45:49.967224-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:45:52,945 - ERROR - Error in strategy for MSTR: 400 symbology_invalid_symbol
+Invalid format for `continuous` symbol 'MSTR', expected format: '[ROOT].[ROLL_RULE].[RANK]'.
+documentation: https://databento.com/docs/api-reference-historical/basics/symbology
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 101, in get_historical_and_live_data
+    get_historical_data(ticker, timeframe, logger)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 94, in get_historical_data
+    df = get_tick_based_data(tick_size, dataset, start_time, end_time, symbol)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 71, in get_tick_based_data
+    data = DATABENTO_CLIENT.timeseries.get_range(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dataset=dataset,
+        ^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+        limit=tick_size
+        ^^^^^^^^^^^^^^^
+    ).to_df()
+    ^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\historical\api\timeseries.py", line 125, in get_range
+    return self._stream(
+           ~~~~~~~~~~~~^
+        url=self._base_url + ".get_range",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        path=path,
+        ^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 134, in _stream
+    check_http_error(response)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 249, in check_http_error
+    raise BentoClientError(
+    ...<5 lines>...
+    )
+databento.common.error.BentoClientError: 400 symbology_invalid_symbol
+Invalid format for `continuous` symbol 'MSTR', expected format: '[ROOT].[ROLL_RULE].[RANK]'.
+documentation: https://databento.com/docs/api-reference-historical/basics/symbology
+2025-08-11 21:45:53,308 - ERROR - Error in main loop for MSTR: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:48:07,775 - INFO - Running strategy for MSTR at 2025-08-11 14:48:07.775628-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:48:13,652 - ERROR - Error in main loop for MSTR: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:51:24,928 - INFO - Running strategy for MSTR at 2025-08-11 14:51:24.928098-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:51:29,779 - ERROR - Error in main loop for MSTR: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:53:18,404 - INFO - Running strategy for MSTR at 2025-08-11 14:53:18.404810-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:53:22,593 - ERROR - Error in main loop for MSTR: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:55:16,793 - INFO - Running strategy for MSTR at 2025-08-11 14:55:16.793764-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:55:23,857 - ERROR - Error in main loop for MSTR: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 21:56:30,185 - INFO - Running strategy for MSTR at 2025-08-11 14:56:30.185045-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 21:56:32,724 - ERROR - Error in strategy for MSTR: 400 symbology_invalid_symbol
+Invalid format for `continuous` symbol 'MSTR', expected format: '[ROOT].[ROLL_RULE].[RANK]'.
+documentation: https://databento.com/docs/api-reference-historical/basics/symbology
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 99, in get_historical_and_live_data
+    get_historical_data(ticker, timeframe, logger)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 94, in get_historical_data
+    df = get_tick_based_data(tick_size, dataset, start_time, end_time, symbol)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 72, in get_tick_based_data
+    data = DATABENTO_CLIENT.timeseries.get_range(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dataset=dataset,
+        ^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+        limit=tick_size
+        ^^^^^^^^^^^^^^^
+    ).to_df()
+    ^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\historical\api\timeseries.py", line 125, in get_range
+    return self._stream(
+           ~~~~~~~~~~~~^
+        url=self._base_url + ".get_range",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        path=path,
+        ^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 134, in _stream
+    check_http_error(response)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 249, in check_http_error
+    raise BentoClientError(
+    ...<5 lines>...
+    )
+databento.common.error.BentoClientError: 400 symbology_invalid_symbol
+Invalid format for `continuous` symbol 'MSTR', expected format: '[ROOT].[ROLL_RULE].[RANK]'.
+documentation: https://databento.com/docs/api-reference-historical/basics/symbology
+2025-08-11 21:56:33,120 - ERROR - Error in main loop for MSTR: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 22:01:22,033 - INFO - Running strategy for MSTR at 2025-08-11 15:01:22.033262-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 22:01:26,047 - ERROR - Error in strategy for MSTR: 400 symbology_invalid_symbol
+Invalid format for `continuous` symbol 'ESH5', expected format: '[ROOT].[ROLL_RULE].[RANK]'.
+documentation: https://databento.com/docs/api-reference-historical/basics/symbology
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 99, in get_historical_and_live_data
+    get_historical_data(ticker, timeframe, logger)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 94, in get_historical_data
+    df = get_tick_based_data(tick_size, dataset, start_time, end_time, symbol)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 72, in get_tick_based_data
+    data = DATABENTO_CLIENT.timeseries.get_range(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dataset=dataset,
+        ^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+        limit=100
+        ^^^^^^^^^
+    ).to_df()
+    ^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\historical\api\timeseries.py", line 125, in get_range
+    return self._stream(
+           ~~~~~~~~~~~~^
+        url=self._base_url + ".get_range",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        path=path,
+        ^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 134, in _stream
+    check_http_error(response)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 249, in check_http_error
+    raise BentoClientError(
+    ...<5 lines>...
+    )
+databento.common.error.BentoClientError: 400 symbology_invalid_symbol
+Invalid format for `continuous` symbol 'ESH5', expected format: '[ROOT].[ROLL_RULE].[RANK]'.
+documentation: https://databento.com/docs/api-reference-historical/basics/symbology
+2025-08-11 22:01:26,546 - ERROR - Error in main loop for MSTR: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 22:01:44,193 - INFO - Running strategy for MSTR at 2025-08-11 15:01:44.193912-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 22:01:48,165 - ERROR - Error in strategy for MSTR: 400 symbology_invalid_symbol
+Invalid format for `continuous` symbol 'ESH5', expected format: '[ROOT].[ROLL_RULE].[RANK]'.
+documentation: https://databento.com/docs/api-reference-historical/basics/symbology
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 99, in get_historical_and_live_data
+    get_historical_data(ticker, timeframe, logger)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 94, in get_historical_data
+    df = get_tick_based_data(tick_size, dataset, start_time, end_time, symbol)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 72, in get_tick_based_data
+    data = DATABENTO_CLIENT.timeseries.get_range(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dataset=dataset,
+        ^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+        # limit=100
+        ^^^^^^^^^^^
+    ).to_df()
+    ^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\historical\api\timeseries.py", line 125, in get_range
+    return self._stream(
+           ~~~~~~~~~~~~^
+        url=self._base_url + ".get_range",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        path=path,
+        ^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 134, in _stream
+    check_http_error(response)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 249, in check_http_error
+    raise BentoClientError(
+    ...<5 lines>...
+    )
+databento.common.error.BentoClientError: 400 symbology_invalid_symbol
+Invalid format for `continuous` symbol 'ESH5', expected format: '[ROOT].[ROLL_RULE].[RANK]'.
+documentation: https://databento.com/docs/api-reference-historical/basics/symbology
+2025-08-11 22:01:48,686 - ERROR - Error in main loop for MSTR: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 22:02:01,837 - INFO - Running strategy for MSTR at 2025-08-11 15:02:01.837417-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 22:02:10,661 - ERROR - Error in strategy for MSTR: 422 symbology_invalid_request
+None of the symbols could be resolved
+documentation: https://databento.com/docs/api-reference-historical/basics/symbology
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 99, in get_historical_and_live_data
+    get_historical_data(ticker, timeframe, logger)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 94, in get_historical_data
+    df = get_tick_based_data(tick_size, dataset, start_time, end_time, symbol)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 72, in get_tick_based_data
+    data = DATABENTO_CLIENT.timeseries.get_range(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dataset=dataset,
+        ^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+        # limit=100
+        ^^^^^^^^^^^
+    ).to_df()
+    ^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\historical\api\timeseries.py", line 125, in get_range
+    return self._stream(
+           ~~~~~~~~~~~~^
+        url=self._base_url + ".get_range",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        path=path,
+        ^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 134, in _stream
+    check_http_error(response)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 249, in check_http_error
+    raise BentoClientError(
+    ...<5 lines>...
+    )
+databento.common.error.BentoClientError: 422 symbology_invalid_request
+None of the symbols could be resolved
+documentation: https://databento.com/docs/api-reference-historical/basics/symbology
+2025-08-11 22:02:11,000 - ERROR - Error in main loop for MSTR: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 22:04:14,458 - INFO - Running strategy for MSTR at 2025-08-11 15:04:14.458645-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 22:04:15,946 - ERROR - Error in strategy for MSTR: 'MetadataHttpAPI' object has no attribute 'list_symbols'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 100, in get_historical_and_live_data
+    get_historical_data(ticker, timeframe, logger)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 95, in get_historical_data
+    df = get_tick_based_data(tick_size, dataset, start_time, end_time, symbol)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 72, in get_tick_based_data
+    print(DATABENTO_CLIENT.metadata.list_symbols(dataset=dataset).head())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MetadataHttpAPI' object has no attribute 'list_symbols'
+2025-08-11 22:04:16,309 - ERROR - Error in main loop for MSTR: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 22:04:48,920 - INFO - Running strategy for MSTR at 2025-08-11 15:04:48.920725-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 22:04:50,511 - ERROR - Error in strategy for MSTR: 'MetadataHttpAPI' object has no attribute 'list_symbols'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 100, in get_historical_and_live_data
+    get_historical_data(ticker, timeframe, logger)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 95, in get_historical_data
+    df = get_tick_based_data(tick_size, dataset, start_time, end_time, symbol)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 72, in get_tick_based_data
+    print(DATABENTO_CLIENT.metadata.list_symbols(dataset=dataset).head())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MetadataHttpAPI' object has no attribute 'list_symbols'
+2025-08-11 22:04:50,842 - ERROR - Error in main loop for MSTR: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 22:27:17,854 - INFO - Running strategy for MSTR at 2025-08-11 15:27:17.854221-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 22:27:23,504 - ERROR - Error in main loop for MSTR: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 22:32:20,876 - INFO - Running strategy for MSTR at 2025-08-11 15:32:20.876487-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 22:32:24,665 - ERROR - Error in main loop for MSTR: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 22:36:15,078 - INFO - Running strategy for MSTR at 2025-08-11 15:36:15.078110-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 22:36:19,232 - ERROR - Error in main loop for MSTR: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 22:37:53,928 - INFO - Running strategy for MSTR at 2025-08-11 15:37:53.928453-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 22:37:57,895 - ERROR - Error in main loop for MSTR: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 23:04:07,305 - INFO - Running strategy for MSTR at 2025-08-11 16:04:07.305180-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:04:09,926 - ERROR - Error in strategy for MSTR: name 'start' is not defined
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 119, in get_historical_and_live_data
+    get_historical_data(ticker, timeframe, logger)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 113, in get_historical_data
+    instrument_id = symbology_resolve(dataset, symbol, start, end)
+                                                       ^^^^^
+NameError: name 'start' is not defined
+2025-08-11 23:04:10,278 - INFO - Market closed
+2025-08-11 23:04:10,278 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:04:42,587 - INFO - Running strategy for MSTR at 2025-08-11 16:04:42.587327-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:04:53,471 - ERROR - Error in strategy for MSTR: unhashable type: 'dict'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 119, in get_historical_and_live_data
+    get_historical_data(ticker, timeframe, logger)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 113, in get_historical_data
+    instrument_id = symbology_resolve(dataset, symbol, start_time, end_time)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 80, in symbology_resolve
+    print("Resolved symbol: ", {result})
+                               ^^^^^^^^
+TypeError: unhashable type: 'dict'
+2025-08-11 23:04:53,830 - INFO - Market closed
+2025-08-11 23:04:53,830 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:05:09,562 - INFO - Running strategy for MSTR at 2025-08-11 16:05:09.562393-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:05:56,497 - INFO - Running strategy for MSTR at 2025-08-11 16:05:56.497768-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:06:17,520 - ERROR - Error in strategy for MSTR: unhashable type: 'dict'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 120, in get_historical_and_live_data
+    def get_historical_and_live_data(ticker, timeframe, logger, strategy):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 114, in get_historical_data
+    print("fifi")
+    
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 81, in symbology_resolve
+    print("Resolved symbol: ", {result})
+                               ^^^^^^^^
+TypeError: unhashable type: 'dict'
+2025-08-11 23:06:17,869 - INFO - Market closed
+2025-08-11 23:06:17,869 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:09:55,901 - INFO - Running strategy for MSTR at 2025-08-11 16:09:55.901422-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:09:59,474 - ERROR - Error in strategy for MSTR: unhashable type: 'dict'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 121, in get_historical_and_live_data
+    get_historical_data(ticker, timeframe, logger)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 115, in get_historical_data
+    instrument_id = symbology_resolve(dataset, symbol, start_time, end_time)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 81, in symbology_resolve
+    print("Resolved symbol: ", {result})
+                               ^^^^^^^^
+TypeError: unhashable type: 'dict'
+2025-08-11 23:09:59,806 - INFO - Market closed
+2025-08-11 23:09:59,806 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:11:14,073 - INFO - Running strategy for MSTR at 2025-08-11 16:11:14.073689-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:11:17,313 - ERROR - Error in strategy for MSTR: unhashable type: 'dict'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 120, in get_historical_and_live_data
+    get_historical_data(ticker, timeframe, logger)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 114, in get_historical_data
+    instrument_id = symbology_resolve(dataset, symbol, start_time, end_time)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 81, in symbology_resolve
+    print("Resolved symbol: ", {result})
+                               ^^^^^^^^
+TypeError: unhashable type: 'dict'
+2025-08-11 23:11:17,880 - INFO - Market closed
+2025-08-11 23:11:17,880 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:14:12,008 - INFO - Running strategy for MSTR at 2025-08-11 16:14:12.008902-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:14:25,101 - INFO - Market closed
+2025-08-11 23:14:25,101 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:20:26,404 - INFO - Running strategy for MSTR at 2025-08-11 16:20:26.404080-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:20:29,399 - ERROR - Error in strategy for MSTR: 'dict' object has no attribute 'to_df'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 122, in get_historical_and_live_data
+    get_historical_data(ticker, timeframe, logger)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 116, in get_historical_data
+    instrument_id = symbology_resolve(dataset, symbol, start_time, end_time)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 81, in symbology_resolve
+    df = result.to_df()
+         ^^^^^^^^^^^^
+AttributeError: 'dict' object has no attribute 'to_df'
+2025-08-11 23:20:29,722 - INFO - Market closed
+2025-08-11 23:20:29,722 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:30:48,438 - INFO - Running strategy for MSTR at 2025-08-11 16:30:48.438320-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:30:52,534 - ERROR - Error in strategy for MSTR: 'dict' object has no attribute 'to_df'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 121, in get_historical_and_live_data
+    get_historical_data(ticker, timeframe, logger)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 115, in get_historical_data
+    instrument_id = symbology_resolve(dataset, symbol, start_time, end_time)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 80, in symbology_resolve
+    df = result.to_df()
+         ^^^^^^^^^^^^
+AttributeError: 'dict' object has no attribute 'to_df'
+2025-08-11 23:30:53,056 - INFO - Market closed
+2025-08-11 23:30:53,056 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:58:03,393 - INFO - Running strategy for MSTR at 2025-08-11 16:58:03.393313-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:58:07,106 - ERROR - Error in strategy for MSTR: 'dict' object has no attribute 'to_df'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 121, in get_historical_and_live_data
+    get_historical_data(ticker, timeframe, logger)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 115, in get_historical_data
+    instrument_id = symbology_resolve(dataset, symbol, start_time, end_time)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 80, in symbology_resolve
+    df = result.to_df()
+         ^^^^^^^^^^^^
+AttributeError: 'dict' object has no attribute 'to_df'
+2025-08-11 23:58:07,429 - INFO - Market closed
+2025-08-11 23:58:07,429 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:58:45,994 - INFO - Running strategy for MSTR at 2025-08-11 16:58:45.994946-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:58:49,119 - ERROR - Error in strategy for MSTR: 'dict' object has no attribute 'to_df'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 121, in get_historical_and_live_data
+    get_historical_data(ticker, timeframe, logger)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 115, in get_historical_data
+    instrument_id = symbology_resolve(dataset, symbol, start_time, end_time)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 80, in symbology_resolve
+    df = result.to_df()
+         ^^^^^^^^^^^^
+AttributeError: 'dict' object has no attribute 'to_df'
+2025-08-11 23:58:49,480 - INFO - Market closed
+2025-08-11 23:58:49,480 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
