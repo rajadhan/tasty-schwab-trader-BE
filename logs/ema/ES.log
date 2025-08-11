@@ -70,3 +70,292 @@ Traceback (most recent call last):
     [timeframe, *_] = get_strategy_prarams(ticker, logger)
                       ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
 TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 06:16:43,919 - INFO - Running strategy for /ES at 2025-08-10 23:16:43.919596-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 06:16:48,235 - ERROR - Error in strategy for /ES: configure_logger() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 53, in ema_strategy
+    df = get_historical_data(
+        ticker,
+        timeframe,
+        logger=logger,
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 120, in get_historical_data
+    buffer = TickDataBufferWithRedis(
+        ticker=ticker,
+    ...<3 lines>...
+        max_period=10,
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\tick_producer.py", line 123, in __init__
+    super().__init__(ticker, tick_size, db_api_key)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\tick_buffer.py", line 18, in __init__
+    self.logger = configure_logger(ticker)
+                  ~~~~~~~~~~~~~~~~^^^^^^^^
+TypeError: configure_logger() missing 1 required positional argument: 'strategy'
+2025-08-11 06:16:48,390 - ERROR - Error in main loop for /ES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 09:58:47,293 - INFO - Running strategy for /ES at 2025-08-11 02:58:47.293608-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 09:58:48,110 - ERROR - Error in strategy for /ES: configure_logger() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 52, in ema_strategy
+    df = get_historical_data(
+        ticker,
+        timeframe,
+        logger=logger,
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 82, in get_historical_data
+    if is_tick_timeframe(timeframe):
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 102, in get_tick_based_historical_data
+    # Initialize tick buffer
+                  ^^^^^^^^^^
+    ...<5 lines>...
+        max_period=max_period
+    
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 18, in __init__
+    super().__init__(ticker, tick_size, db_api_key)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\tick_buffer.py", line 18, in __init__
+    self.logger = configure_logger(ticker)
+                  ~~~~~~~~~~~~~~~~^^^^^^^^
+TypeError: configure_logger() missing 1 required positional argument: 'strategy'
+2025-08-11 09:58:48,518 - ERROR - Error in main loop for /ES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 10:03:46,939 - INFO - Running strategy for /ES at 2025-08-11 03:03:46.939313-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 10:03:57,523 - ERROR - Error in strategy for /ES: configure_logger() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 52, in ema_strategy
+    df = get_historical_data(
+        ticker,
+        timeframe,
+        logger=logger,
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 92, in get_historical_data
+    return get_tick_based_historical_data(ticker, timeframe, logger, redis_client, db_api_key, dataset)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 112, in get_tick_based_historical_data
+    tick_buffer = TickDataBufferWithRedis(
+        ticker=ticker_for_data,
+    ...<3 lines>...
+        max_period=max_period
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 18, in __init__
+    super().__init__(ticker, tick_size, db_api_key)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\tick_buffer.py", line 18, in __init__
+    self.logger = configure_logger(ticker)
+                  ~~~~~~~~~~~~~~~~^^^^^^^^
+TypeError: configure_logger() missing 1 required positional argument: 'strategy'
+2025-08-11 10:03:57,680 - ERROR - Error in main loop for /ES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 10:10:24,618 - INFO - Running strategy for /ES at 2025-08-11 03:10:24.618078-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 10:10:24,627 - ERROR - Error in strategy for /ES: The API key is currently set to 'YOUR_API_KEY'. Please replace this value with a key from your user portal https://databento.com/portal/keys
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 52, in ema_strategy
+    df = get_historical_data(
+        ticker,
+        timeframe,
+        logger=logger,
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 82, in get_historical_data
+    return get_tick_based_historical_data(ticker, timeframe, logger, redis_client, db_api_key, dataset)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 93, in get_tick_based_historical_data
+    print(client.metadata.list_datasets())
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\historical\api\metadata.py", line 86, in list_datasets
+    response: Response = self._get(
+                         ~~~~~~~~~^
+        url=self._base_url + ".list_datasets",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        params=params,
+        ^^^^^^^^^^^^^^
+        basic_auth=True,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 59, in _get
+    self._check_api_key()
+    ~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 48, in _check_api_key
+    raise ValueError(
+    ...<2 lines>...
+    )
+ValueError: The API key is currently set to 'YOUR_API_KEY'. Please replace this value with a key from your user portal https://databento.com/portal/keys
+2025-08-11 10:10:25,454 - ERROR - Error in main loop for /ES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 10:11:12,085 - INFO - Running strategy for /ES at 2025-08-11 03:11:12.085829-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 10:11:12,125 - ERROR - Error in strategy for /ES: The API key is currently set to 'YOUR_API_KEY'. Please replace this value with a key from your user portal https://databento.com/portal/keys
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 52, in ema_strategy
+    df = get_historical_data(
+        ticker,
+        timeframe,
+        logger=logger,
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 83, in get_historical_data
+    return get_tick_based_historical_data(ticker, timeframe, logger, redis_client, db_api_key, dataset)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 95, in get_tick_based_historical_data
+    print(client.metadata.list_datasets())
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\historical\api\metadata.py", line 86, in list_datasets
+    response: Response = self._get(
+                         ~~~~~~~~~^
+        url=self._base_url + ".list_datasets",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        params=params,
+        ^^^^^^^^^^^^^^
+        basic_auth=True,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 59, in _get
+    self._check_api_key()
+    ~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 48, in _check_api_key
+    raise ValueError(
+    ...<2 lines>...
+    )
+ValueError: The API key is currently set to 'YOUR_API_KEY'. Please replace this value with a key from your user portal https://databento.com/portal/keys
+2025-08-11 10:11:12,760 - ERROR - Error in main loop for /ES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 10:12:03,838 - INFO - Running strategy for /ES at 2025-08-11 03:12:03.838709-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 10:12:05,899 - ERROR - Error in strategy for /ES: configure_logger() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 52, in ema_strategy
+    df = get_historical_data(
+        ticker,
+        timeframe,
+        logger=logger,
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 83, in get_historical_data
+    return get_tick_based_historical_data(ticker, timeframe, logger, redis_client, db_api_key, dataset)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 108, in get_tick_based_historical_data
+    tick_buffer = TickDataBufferWithRedis(
+        ticker=ticker_for_data,
+    ...<3 lines>...
+        max_period=max_period
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 18, in __init__
+    super().__init__(ticker, tick_size, db_api_key)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\tick_buffer.py", line 18, in __init__
+    self.logger = configure_logger(ticker)
+                  ~~~~~~~~~~~~~~~~^^^^^^^^
+TypeError: configure_logger() missing 1 required positional argument: 'strategy'
+2025-08-11 10:12:06,128 - ERROR - Error in main loop for /ES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 10:54:00,464 - INFO - Running strategy for /ES at 2025-08-11 03:54:00.464042-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 10:54:00,464 - INFO - Running strategy for /ES at 2025-08-11 03:54:00.464042-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 10:54:02,708 - ERROR - Error in strategy for /ES: configure_logger() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 52, in ema_strategy
+    df = get_historical_data(
+        ticker,
+        timeframe,
+        logger=logger,
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 83, in get_historical_data
+    else:
+    
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 108, in get_tick_based_historical_data
+    # Get metadata to determine safe historical end time
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+            safe_historical_end = pd.to_datetime(schema_range["end"]).tz_convert("UTC")
+    
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 18, in __init__
+    super().__init__(ticker, tick_size, db_api_key)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\tick_buffer.py", line 18, in __init__
+    self.logger = configure_logger(ticker)
+                  ~~~~~~~~~~~~~~~~^^^^^^^^
+TypeError: configure_logger() missing 1 required positional argument: 'strategy'
+2025-08-11 10:54:02,708 - ERROR - Error in strategy for /ES: configure_logger() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 52, in ema_strategy
+    df = get_historical_data(
+        ticker,
+        timeframe,
+        logger=logger,
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 83, in get_historical_data
+    else:
+    
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 108, in get_tick_based_historical_data
+    # Get metadata to determine safe historical end time
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+            safe_historical_end = pd.to_datetime(schema_range["end"]).tz_convert("UTC")
+    
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 18, in __init__
+    super().__init__(ticker, tick_size, db_api_key)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\tick_buffer.py", line 18, in __init__
+    self.logger = configure_logger(ticker)
+                  ~~~~~~~~~~~~~~~~^^^^^^^^
+TypeError: configure_logger() missing 1 required positional argument: 'strategy'
+2025-08-11 10:54:02,887 - ERROR - Error in main loop for /ES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 10:54:02,887 - ERROR - Error in main loop for /ES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 11:15:18,994 - INFO - Running strategy for /ES at 2025-08-11 04:15:18.994714-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 11:15:19,933 - ERROR - Error in strategy for /ES: configure_logger() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 52, in ema_strategy
+    df = get_historical_data(
+        ticker,
+        timeframe,
+        logger=logger,
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 82, in get_historical_data
+    return get_tick_based_historical_data(ticker, timeframe, logger, redis_client, db_api_key, dataset)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 99, in get_tick_based_historical_data
+    tick_buffer = TickDataBufferWithRedis(
+        ticker=ticker_for_data,
+    ...<3 lines>...
+        max_period=max_period
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 18, in __init__
+    super().__init__(ticker, tick_size, db_api_key)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\tick_buffer.py", line 18, in __init__
+    self.logger = configure_logger(ticker)
+                  ~~~~~~~~~~~~~~~~^^^^^^^^
+TypeError: configure_logger() missing 1 required positional argument: 'strategy'
+2025-08-11 11:15:20,126 - ERROR - Error in main loop for /ES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'

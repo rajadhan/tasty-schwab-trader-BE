@@ -412,10 +412,6 @@ def get_tick_data(ticker, timeframe, tick_buffers, logger):
 
 
 def get_active_exchange_symbol(symbol):
-    """
-    Given a symbol like '/ES', returns the correct exchange symbol string for subscription,
-    using tastytrade_instruments.csv logic from place_tastytrade_order.
-    """
     if symbol[0] != '/':
         return symbol  # Not a futures symbol, return as is
 

@@ -7,36 +7,46 @@ import pytz
 import os
 import json
 
-# def generate_access_token_for_tastytrade():
-#     """
-#     Generate access token for TastyTrade using username/password authentication.
-#     This is an alternative to OAuth flow for session-based authentication.
-#     """
-#     access_token_url = f"{tastytrade_link}/sessions"
-#     payload = {"login": username, "password": password, "remember-me": True}
-    
-#     try:
-#         response = requests.post(url=access_token_url, json=payload)
-#         response.raise_for_status()
+
+def create_header(token):
+    # Ensure token is properly formatted
+    if not token.startswith("Bearer "):
+        token = f"Bearer {token}"
         
-#         access_token = response.json()["data"]["session-token"]
-        
-#         # Save the access token to file
-#         with open(tastytrade_access_token_path, "w") as f:
-#             f.write(access_token)
-            
-#         print(f"Successfully generated access token for {username}")
-#         return access_token
-        
-#     except requests.exceptions.RequestException as e:
-#         print(f"ERROR! Failed to generate access token for {username}: {e}")
-#         return None
-#     except KeyError as e:
-#         print(f"ERROR! Unexpected response format for {username}: {e}")
-#         return None
-#     except Exception as e:
-#         print(f"ERROR! Unexpected error generating access token for {username}: {e}")
-#         return None
+    return {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": token,
+    }
+
+
+def refresh_tastytrade_token():
+    with open(TASTY_ACCESS_TOKEN_PATH, "r") as f:
+        tokens = json.load(f)
+    tasty_refresh_access_token_url = f"{TASTY_API}/oauth/token"
+    refresh_token = tokens.get("refresh_token")
+    payload = {
+        "grant_type": "refresh_token",
+        "refresh_token": refresh_token,
+        "client_id": TASTY_CLIENT_ID,
+        "client_secret": TASTY_CLIENT_SECRET,
+        "redirect_uri": TASTY_REDIRECT_URI,
+    }
+    response = requests.post(tasty_refresh_access_token_url, data=payload)
+    new_tokens = response.json()
+    print("new_token", new_tokens)
+    if "access_token" in new_tokens and "refresh_token" in new_tokens:
+        tokens = {
+            "access_token": new_tokens.get('access_token'),
+            "refresh_token": new_tokens.get('refresh_token')
+        }
+        print("tokens", tokens)
+        with open(TASTY_ACCESS_TOKEN_PATH, "w") as f:
+            json.dump(tokens, f)
+        return new_tokens["access_token"]
+    else:
+        raise Exception(f"Failed to refresh token: {new_tokens}")
+
 
 def tastytrade_api_request(method, url, **kwargs):
     # Load token
@@ -53,42 +63,36 @@ def tastytrade_api_request(method, url, **kwargs):
         response = requests.request(method, url, headers=headers, **kwargs)
     return response
 
-def refresh_tastytrade_token():
-    with open(TASTY_ACCESS_TOKEN_PATH, "r") as f:
-        tokens = json.load(f)
-    tasty_refresh_access_token_url = f"{TASTY_API}/oauth/token"
-    refresh_token = tokens.get("refresh_token")
-    payload = {
-        "grant_type": "refresh_token",
-        "refresh_token": refresh_token,
-        "client_id": TASTY_CLIENT_ID,
-        "client_secret": TASTY_CLIENT_SECRET,
-        "redirect_uri": TASTY_REDIRECT_URI,
-    }
-    response = requests.post(tasty_refresh_access_token_url, data=payload)
-    new_tokens = response.json()
-    if "access_token" in new_tokens and "refresh_token" in new_tokens:
-        tokens = {
-            "access_token": new_tokens.get('access_token'),
-            "refresh_token": new_tokens.get('refresh_token')
-        }
-        with open(TASTY_ACCESS_TOKEN_PATH, "w") as f:
-            json.dump(tokens, f)
-        return new_tokens["access_token"]
-    else:
-        raise Exception(f"Failed to refresh token: {new_tokens}")
 
-def create_header(token):
+def update_tastytrade_instruments_csv(output_file="tastytrade_instruments.csv"):
+    url = f"{TASTY_API}/instruments/futures"
     
-    # Ensure token is properly formatted
-    if not token.startswith("Bearer "):
-        token = f"Bearer {token}"
-        
-    return {
-        "Accept": "application/json",
-        "Content-Type": "application/json",
-        "Authorization": token,
-    }
+    try:
+        resp = tastytrade_api_request("GET", url)
+            
+        resp.raise_for_status()
+        data = resp.json()
+        print("data", data)
+
+        if "data" not in data or "items" not in data["data"]:
+            raise ValueError("Unexpected API response format.")
+
+        items = data["data"]["items"]
+        print("itmes", items)
+        df = pd.DataFrame(items)
+        pritn("df", df)
+
+        # Save to CSV
+        df.to_csv(output_file, index=False)
+        print(f"[{datetime.now()}] Saved {len(df)} rows to {output_file}")
+
+    except Exception as e:
+        print(f"Error updating Tastytrade instruments: {e}")
+        print("\nTroubleshooting steps:")
+        print("1. Check that your Tastytrade tokens are valid in tokens/tastytrade_tokens.txt")
+        print("2. You may need to re-authenticate with Tastytrade through the main application")
+        print("3. Verify that the TASTY_API endpoint in config.py is correct")
+        print("4. Ensure you have network connectivity to the Tastytrade API servers")
 
 
 def create_order_payload(symbol, qty, action, account_id, logger):

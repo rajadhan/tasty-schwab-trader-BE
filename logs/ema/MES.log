@@ -200,3 +200,373 @@ Traceback (most recent call last):
     [timeframe, *_] = get_strategy_prarams(ticker, logger)
                       ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
 TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 06:16:43,921 - INFO - Running strategy for /MES at 2025-08-10 23:16:43.921421-04:00 with params: Schwab_QTY=3, Tasty_QTY=20 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 06:16:45,957 - ERROR - Error in strategy for /MES: Unsupported timeframe: 5
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 53, in ema_strategy
+    df = get_historical_data(
+        ticker,
+        timeframe,
+        logger=logger,
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 159, in get_historical_data
+    raise ValueError(f"Unsupported timeframe: {timeframe}")
+ValueError: Unsupported timeframe: 5
+2025-08-11 06:16:46,284 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 09:58:47,336 - INFO - Running strategy for /MES at 2025-08-11 02:58:47.336720-04:00 with params: Schwab_QTY=3, Tasty_QTY=20 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 09:58:49,991 - INFO - Resolved symbol: {'result': {'MESU5': [{'d0': '2025-08-06', 'd1': '2025-08-12', 's': '42002651'}]}, 'symbols': ['MESU5'], 'stype_in': 'raw_symbol', 'stype_out': 'instrument_id', 'start_date': '2025-08-06', 'end_date': '2025-08-12', 'partial': [], 'not_found': [], 'message': 'OK', 'status': 0}
+2025-08-11 09:58:51,195 - ERROR - Error getting historical data for /MES: 422 data_end_after_available_end
+The dataset GLBX.MDP3 has data available up to '2025-08-11 06:50:00+00:00'. The `end` in the query ('2025-08-11 06:58:48.109398+00:00') is after the available range. Try requesting with an earlier `end`.
+documentation: https://databento.com/docs/api-reference-historical/basics/datasets
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 184, in get_time_based_historical_data
+    # Get historical data
+           ^^^^^^^^^^^^^^
+    ...<5 lines>...
+        end=end_date
+    
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\historical\api\timeseries.py", line 125, in get_range
+    return self._stream(
+           ~~~~~~~~~~~~^
+        url=self._base_url + ".get_range",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        path=path,
+        ^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 134, in _stream
+    check_http_error(response)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 249, in check_http_error
+    raise BentoClientError(
+    ...<5 lines>...
+    )
+databento.common.error.BentoClientError: 422 data_end_after_available_end
+The dataset GLBX.MDP3 has data available up to '2025-08-11 06:50:00+00:00'. The `end` in the query ('2025-08-11 06:58:48.109398+00:00') is after the available range. Try requesting with an earlier `end`.
+documentation: https://databento.com/docs/api-reference-historical/basics/datasets
+2025-08-11 09:58:51,198 - ERROR - Error in strategy for /MES: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 60, in ema_strategy
+    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+                   ~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-08-11 09:58:51,366 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 10:03:46,935 - INFO - Running strategy for /MES at 2025-08-11 03:03:46.935845-04:00 with params: Schwab_QTY=3, Tasty_QTY=20 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 10:03:55,504 - INFO - Resolved symbol: {'result': {'MESU5': [{'d0': '2025-08-06', 'd1': '2025-08-12', 's': '42002651'}]}, 'symbols': ['MESU5'], 'stype_in': 'raw_symbol', 'stype_out': 'instrument_id', 'start_date': '2025-08-06', 'end_date': '2025-08-12', 'partial': [], 'not_found': [], 'message': 'OK', 'status': 0}
+2025-08-11 10:03:57,178 - ERROR - Error getting historical data for /MES: 422 data_end_after_available_end
+The dataset GLBX.MDP3 has data available up to '2025-08-11 07:00:00+00:00'. The `end` in the query ('2025-08-11 07:03:54.188343+00:00') is after the available range. Try requesting with an earlier `end`.
+documentation: https://databento.com/docs/api-reference-historical/basics/datasets
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 194, in get_time_based_historical_data
+    data = db_client.timeseries.get_range(
+        dataset=dataset,
+    ...<3 lines>...
+        end=end_date
+    )
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\historical\api\timeseries.py", line 125, in get_range
+    return self._stream(
+           ~~~~~~~~~~~~^
+        url=self._base_url + ".get_range",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        path=path,
+        ^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 134, in _stream
+    check_http_error(response)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 249, in check_http_error
+    raise BentoClientError(
+    ...<5 lines>...
+    )
+databento.common.error.BentoClientError: 422 data_end_after_available_end
+The dataset GLBX.MDP3 has data available up to '2025-08-11 07:00:00+00:00'. The `end` in the query ('2025-08-11 07:03:54.188343+00:00') is after the available range. Try requesting with an earlier `end`.
+documentation: https://databento.com/docs/api-reference-historical/basics/datasets
+2025-08-11 10:03:57,241 - ERROR - Error in strategy for /MES: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 60, in ema_strategy
+    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+                   ~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-08-11 10:03:57,503 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 10:10:24,613 - INFO - Running strategy for /MES at 2025-08-11 03:10:24.613230-04:00 with params: Schwab_QTY=3, Tasty_QTY=20 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 10:10:26,738 - INFO - Resolved symbol: {'result': {'MESU5': [{'d0': '2025-08-06', 'd1': '2025-08-12', 's': '42002651'}]}, 'symbols': ['MESU5'], 'stype_in': 'raw_symbol', 'stype_out': 'instrument_id', 'start_date': '2025-08-06', 'end_date': '2025-08-12', 'partial': [], 'not_found': [], 'message': 'OK', 'status': 0}
+2025-08-11 10:10:28,223 - ERROR - Error getting historical data for /MES: 422 data_end_after_available_end
+The dataset GLBX.MDP3 has data available up to '2025-08-11 07:10:00+00:00'. The `end` in the query ('2025-08-11 07:10:25.251745+00:00') is after the available range. Try requesting with an earlier `end`.
+documentation: https://databento.com/docs/api-reference-historical/basics/datasets
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 188, in get_time_based_historical_data
+    data = db_client.timeseries.get_range(
+        dataset=dataset,
+    ...<3 lines>...
+        end=end_date
+    )
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\historical\api\timeseries.py", line 125, in get_range
+    return self._stream(
+           ~~~~~~~~~~~~^
+        url=self._base_url + ".get_range",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        path=path,
+        ^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 134, in _stream
+    check_http_error(response)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 249, in check_http_error
+    raise BentoClientError(
+    ...<5 lines>...
+    )
+databento.common.error.BentoClientError: 422 data_end_after_available_end
+The dataset GLBX.MDP3 has data available up to '2025-08-11 07:10:00+00:00'. The `end` in the query ('2025-08-11 07:10:25.251745+00:00') is after the available range. Try requesting with an earlier `end`.
+documentation: https://databento.com/docs/api-reference-historical/basics/datasets
+2025-08-11 10:10:28,231 - ERROR - Error in strategy for /MES: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 60, in ema_strategy
+    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+                   ~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-08-11 10:10:28,392 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 10:11:12,085 - INFO - Running strategy for /MES at 2025-08-11 03:11:12.085069-04:00 with params: Schwab_QTY=3, Tasty_QTY=20 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 10:11:14,653 - INFO - Resolved symbol: {'result': {'MESU5': [{'d0': '2025-08-06', 'd1': '2025-08-12', 's': '42002651'}]}, 'symbols': ['MESU5'], 'stype_in': 'raw_symbol', 'stype_out': 'instrument_id', 'start_date': '2025-08-06', 'end_date': '2025-08-12', 'partial': [], 'not_found': [], 'message': 'OK', 'status': 0}
+2025-08-11 10:11:15,870 - ERROR - Error getting historical data for /MES: 422 data_end_after_available_end
+The dataset GLBX.MDP3 has data available up to '2025-08-11 07:10:00+00:00'. The `end` in the query ('2025-08-11 07:11:12.934838+00:00') is after the available range. Try requesting with an earlier `end`.
+documentation: https://databento.com/docs/api-reference-historical/basics/datasets
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 190, in get_time_based_historical_data
+    data = db_client.timeseries.get_range(
+        dataset=dataset,
+    ...<3 lines>...
+        end=end_date
+    )
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\historical\api\timeseries.py", line 125, in get_range
+    return self._stream(
+           ~~~~~~~~~~~~^
+        url=self._base_url + ".get_range",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        path=path,
+        ^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 134, in _stream
+    check_http_error(response)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 249, in check_http_error
+    raise BentoClientError(
+    ...<5 lines>...
+    )
+databento.common.error.BentoClientError: 422 data_end_after_available_end
+The dataset GLBX.MDP3 has data available up to '2025-08-11 07:10:00+00:00'. The `end` in the query ('2025-08-11 07:11:12.934838+00:00') is after the available range. Try requesting with an earlier `end`.
+documentation: https://databento.com/docs/api-reference-historical/basics/datasets
+2025-08-11 10:11:15,873 - ERROR - Error in strategy for /MES: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 60, in ema_strategy
+    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+                   ~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-08-11 10:11:16,030 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 10:12:03,826 - INFO - Running strategy for /MES at 2025-08-11 03:12:03.826608-04:00 with params: Schwab_QTY=3, Tasty_QTY=20 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 10:12:05,677 - INFO - Resolved symbol: {'result': {'MESU5': [{'d0': '2025-08-06', 'd1': '2025-08-12', 's': '42002651'}]}, 'symbols': ['MESU5'], 'stype_in': 'raw_symbol', 'stype_out': 'instrument_id', 'start_date': '2025-08-06', 'end_date': '2025-08-12', 'partial': [], 'not_found': [], 'message': 'OK', 'status': 0}
+2025-08-11 10:12:06,941 - ERROR - Error getting historical data for /MES: 422 data_end_after_available_end
+The dataset GLBX.MDP3 has data available up to '2025-08-11 07:10:00+00:00'. The `end` in the query ('2025-08-11 07:12:04.185149+00:00') is after the available range. Try requesting with an earlier `end`.
+documentation: https://databento.com/docs/api-reference-historical/basics/datasets
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 190, in get_time_based_historical_data
+    data = db_client.timeseries.get_range(
+        dataset=dataset,
+    ...<3 lines>...
+        end=end_date
+    )
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\historical\api\timeseries.py", line 125, in get_range
+    return self._stream(
+           ~~~~~~~~~~~~^
+        url=self._base_url + ".get_range",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        path=path,
+        ^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 134, in _stream
+    check_http_error(response)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 249, in check_http_error
+    raise BentoClientError(
+    ...<5 lines>...
+    )
+databento.common.error.BentoClientError: 422 data_end_after_available_end
+The dataset GLBX.MDP3 has data available up to '2025-08-11 07:10:00+00:00'. The `end` in the query ('2025-08-11 07:12:04.185149+00:00') is after the available range. Try requesting with an earlier `end`.
+documentation: https://databento.com/docs/api-reference-historical/basics/datasets
+2025-08-11 10:12:06,986 - ERROR - Error in strategy for /MES: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 60, in ema_strategy
+    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+                   ~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-08-11 10:12:07,247 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 10:54:00,429 - INFO - Running strategy for /MES at 2025-08-11 03:54:00.429316-04:00 with params: Schwab_QTY=3, Tasty_QTY=20 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 10:54:00,429 - INFO - Running strategy for /MES at 2025-08-11 03:54:00.429316-04:00 with params: Schwab_QTY=3, Tasty_QTY=20 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 10:54:02,447 - INFO - Resolved symbol: {'result': {'MESU5': [{'d0': '2025-08-06', 'd1': '2025-08-12', 's': '42002651'}]}, 'symbols': ['MESU5'], 'stype_in': 'raw_symbol', 'stype_out': 'instrument_id', 'start_date': '2025-08-06', 'end_date': '2025-08-12', 'partial': [], 'not_found': [], 'message': 'OK', 'status': 0}
+2025-08-11 10:54:02,447 - INFO - Resolved symbol: {'result': {'MESU5': [{'d0': '2025-08-06', 'd1': '2025-08-12', 's': '42002651'}]}, 'symbols': ['MESU5'], 'stype_in': 'raw_symbol', 'stype_out': 'instrument_id', 'start_date': '2025-08-06', 'end_date': '2025-08-12', 'partial': [], 'not_found': [], 'message': 'OK', 'status': 0}
+2025-08-11 10:54:04,286 - ERROR - Error getting historical data for /MES: 422 data_end_after_available_end
+The dataset GLBX.MDP3 has data available up to '2025-08-11 07:50:00+00:00'. The `end` in the query ('2025-08-11 07:54:00.868479+00:00') is after the available range. Try requesting with an earlier `end`.
+documentation: https://databento.com/docs/api-reference-historical/basics/datasets
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 190, in get_time_based_historical_data
+    if data is None:
+           ^^^^^^^^^
+    ...<5 lines>...
+    if df.empty:
+    ^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\historical\api\timeseries.py", line 125, in get_range
+    return self._stream(
+           ~~~~~~~~~~~~^
+        url=self._base_url + ".get_range",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        path=path,
+        ^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 134, in _stream
+    check_http_error(response)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 249, in check_http_error
+    raise BentoClientError(
+    ...<5 lines>...
+    )
+databento.common.error.BentoClientError: 422 data_end_after_available_end
+The dataset GLBX.MDP3 has data available up to '2025-08-11 07:50:00+00:00'. The `end` in the query ('2025-08-11 07:54:00.868479+00:00') is after the available range. Try requesting with an earlier `end`.
+documentation: https://databento.com/docs/api-reference-historical/basics/datasets
+2025-08-11 10:54:04,286 - ERROR - Error getting historical data for /MES: 422 data_end_after_available_end
+The dataset GLBX.MDP3 has data available up to '2025-08-11 07:50:00+00:00'. The `end` in the query ('2025-08-11 07:54:00.868479+00:00') is after the available range. Try requesting with an earlier `end`.
+documentation: https://databento.com/docs/api-reference-historical/basics/datasets
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 190, in get_time_based_historical_data
+    if data is None:
+           ^^^^^^^^^
+    ...<5 lines>...
+    if df.empty:
+    ^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\historical\api\timeseries.py", line 125, in get_range
+    return self._stream(
+           ~~~~~~~~~~~~^
+        url=self._base_url + ".get_range",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        path=path,
+        ^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 134, in _stream
+    check_http_error(response)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 249, in check_http_error
+    raise BentoClientError(
+    ...<5 lines>...
+    )
+databento.common.error.BentoClientError: 422 data_end_after_available_end
+The dataset GLBX.MDP3 has data available up to '2025-08-11 07:50:00+00:00'. The `end` in the query ('2025-08-11 07:54:00.868479+00:00') is after the available range. Try requesting with an earlier `end`.
+documentation: https://databento.com/docs/api-reference-historical/basics/datasets
+2025-08-11 10:54:04,289 - ERROR - Error in strategy for /MES: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 60, in ema_strategy
+    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+                   ~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-08-11 10:54:04,289 - ERROR - Error in strategy for /MES: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 60, in ema_strategy
+    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+                   ~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-08-11 10:54:04,482 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 10:54:04,482 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 11:15:18,978 - INFO - Running strategy for /MES at 2025-08-11 04:15:18.978192-04:00 with params: Schwab_QTY=3, Tasty_QTY=20 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 11:15:21,440 - INFO - Resolved symbol: {'result': {'MESU5': [{'d0': '2025-08-06', 'd1': '2025-08-12', 's': '42002651'}]}, 'symbols': ['MESU5'], 'stype_in': 'raw_symbol', 'stype_out': 'instrument_id', 'start_date': '2025-08-06', 'end_date': '2025-08-12', 'partial': [], 'not_found': [], 'message': 'OK', 'status': 0}
+2025-08-11 11:15:22,585 - ERROR - Error getting historical data for /MES: 422 data_end_after_available_end
+The dataset GLBX.MDP3 has data available up to '2025-08-11 08:10:00+00:00'. The `end` in the query ('2025-08-11 08:15:19.936093+00:00') is after the available range. Try requesting with an earlier `end`.
+documentation: https://databento.com/docs/api-reference-historical/basics/datasets
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 181, in get_time_based_historical_data
+    data = db_client.timeseries.get_range(
+        dataset=dataset,
+    ...<3 lines>...
+        end=end_date
+    )
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\historical\api\timeseries.py", line 125, in get_range
+    return self._stream(
+           ~~~~~~~~~~~~^
+        url=self._base_url + ".get_range",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        path=path,
+        ^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 134, in _stream
+    check_http_error(response)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 249, in check_http_error
+    raise BentoClientError(
+    ...<5 lines>...
+    )
+databento.common.error.BentoClientError: 422 data_end_after_available_end
+The dataset GLBX.MDP3 has data available up to '2025-08-11 08:10:00+00:00'. The `end` in the query ('2025-08-11 08:15:19.936093+00:00') is after the available range. Try requesting with an earlier `end`.
+documentation: https://databento.com/docs/api-reference-historical/basics/datasets
+2025-08-11 11:15:22,588 - ERROR - Error in strategy for /MES: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 60, in ema_strategy
+    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+                   ~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-08-11 11:15:22,760 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'

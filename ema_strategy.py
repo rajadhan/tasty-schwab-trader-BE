@@ -30,7 +30,6 @@ def ema_strategy(ticker, logger):
         if trade_enabled != "TRUE":
             logger.info(f"Skipping  strategy for {ticker}, trade flag is FALSE.")
             trade_file = get_trade_file_path(ticker, "ema")
-            print("trade_file", trade_file)  # TODO
             try:
                 with open(trade_file, "r") as file:
                     trades = json.load(file)
