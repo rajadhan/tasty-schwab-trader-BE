@@ -118,23 +118,34 @@ def params_parser(params: dict):
 
 
 def sleep_base_on_timeframe(interval_minutes):
+    """Sleep for a duration based on the timeframe.
+    
+    For minute-based timeframes:
+    - 1, 2, 5 minute: check every 10 seconds
+    - 15, 30 minute, 1h, 4h, 1d: check every 60 seconds
+    
+    For tick-based timeframes:
+    - 1-1000 ticks: check every 5 seconds
+    - 1001-1600 ticks: check every 15 seconds
+    - 1601+ ticks: check every 30 seconds
+    """
     if interval_minutes.isdigit():
         interval_minutes = int(interval_minutes)
     if interval_minutes in [1, 2, 5]:
-        next_interval = 10
+        next_interval = 10  # Check every 10 seconds for 1, 2, and 5-minute settings
     elif interval_minutes in [15, 30] or interval_minutes in ['1h', '4h', '1d']:
-        next_interval = 60
+        next_interval = 60  # Check every minute for 15, 30-minute, 1-hour, 4-hour, and daily settings
     else:
         interval_str = str(interval_minutes)
         if interval_str.endswith('t'):
             try:
                 num = int(interval_str[:-1])  # Everything except last char 't'
                 if num <= 1000:
-                    next_interval = 5
-                elif num <= 1600 and num > 1000:
-                    next_interval = 15
-                elif num > 1600:
-                    next_interval = 30
+                    next_interval = 5  # Check every 5 seconds for 1-1000 tick settings
+                elif num <= 1600:
+                    next_interval = 15  # Check every 15 seconds for 1001-1600 tick settings
+                else:  # num > 1600
+                    next_interval = 30  # Check every 30 seconds for 1601+ tick settings
             except ValueError:
                 raise ValueError("Invalid interval")
         else:

@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 import json, os, jwt, datetime
 from functools import wraps
@@ -6,7 +6,7 @@ from main_equities import run_every_week
 from schwab.client import *
 from utils import ticker_data_path_for_strategy
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
 CORS(app)
 
 # ========= Secret Key (keep this secret and safe!) =========
@@ -382,6 +382,198 @@ def start_trading():
             return jsonify({"success": False, "error": "No enabled symbols for trading"}), 400
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route("/manual-trade")
+def manual_trade_page():
+    return send_from_directory(app.static_folder, 'manual_trade.html')
+
+
+@app.route("/trades/<strategy>/<ticker>.json")
+@token_required
+def get_trade_file(strategy, ticker):
+    try:
+        trade_file = f"trades/{strategy}/{ticker}.json"
+        if os.path.exists(trade_file):
+            with open(trade_file, "r") as file:
+                trades = json.load(file)
+            return jsonify(trades), 200
+        else:
+            return jsonify({}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route("/api/manual-trade", methods=["POST"])
+@token_required
+def manual_trade():
+    try:
+        data = request.json
+        if not data:
+            return jsonify({"success": False, "error": "No data provided"}), 400
+            
+        ticker = data.get("ticker")
+        action = data.get("action")  # "BUY" or "SELL"
+        
+        if not ticker or not action or action not in ["BUY", "SELL"]:
+            return jsonify({"success": False, "error": "Invalid ticker or action"}), 400
+            
+        # Configure logger
+        from main_equities import configure_logger
+        logger = configure_logger(ticker)
+        
+        # Get strategy parameters
+        from main_equities import get_strategy_prarams
+        params = get_strategy_prarams("zeroday", ticker, logger)
+        
+        if not params:
+            return jsonify({"success": False, "error": "Strategy parameters not found"}), 404
+            
+        # Extract parameters
+        [timeframe, schwab_qty, trade_enabled, tasty_qty, *_] = params
+        
+        # Convert quantities to integers
+        schwab_qty = int(schwab_qty)
+        tasty_qty = int(tasty_qty)
+        
+        # Check if trading is enabled
+        if trade_enabled != "TRUE":
+            return jsonify({"success": False, "error": "Trading is not enabled for this ticker"}), 400
+            
+        # Create trades directory if it doesn't exist
+        import os
+        os.makedirs(f"trades/zeroday", exist_ok=True)
+        trade_file = f"trades/zeroday/{ticker}.json"
+        
+        # Load existing trades
+        import json
+        try:
+            with open(trade_file, "r") as file:
+                trades = json.load(file)
+        except (FileNotFoundError, json.JSONDecodeError):
+            trades = {}
+            
+        # Get current position
+        current_position = trades.get(ticker, {}).get("action") if ticker in trades else None
+        
+        # Import necessary functions
+        from main_equities import place_order, place_tastytrade_order
+        from config import schwab_account_id, TASTY_ACCOUNT_ID
+        import pytz
+        from datetime import datetime
+        
+        # Execute trade based on action and current position
+        if action == "BUY":
+            if current_position == "LONG":
+                return jsonify({"success": False, "error": "Already in LONG position"}), 400
+                
+            # Close SHORT position if exists
+            if current_position == "SHORT":
+                logger.info(f"Closing SHORT position for {ticker} (manual trigger)")
+                short_order_id_schwab = (
+                    place_order(
+                        ticker,
+                        schwab_qty,
+                        "BUY_TO_COVER",
+                        schwab_account_id,
+                        logger,
+                        "CLOSING",
+                    )
+                    if schwab_qty > 0
+                    else 0
+                )
+                short_order_id_tastytrade = (
+                    place_tastytrade_order(
+                        ticker, tasty_qty, "Buy to Close", TASTY_ACCOUNT_ID, logger
+                    )
+                    if tasty_qty > 0
+                    else 0
+                )
+            
+            # Open LONG position
+            logger.info(f"Opening LONG position for {ticker} (manual trigger)")
+            order_id_schwab = (
+                place_order(
+                    ticker, schwab_qty, "BUY", schwab_account_id, logger, "OPENING"
+                )
+                if schwab_qty > 0
+                else 0
+            )
+            order_id_tastytrade = (
+                place_tastytrade_order(
+                    ticker, tasty_qty, "Buy to Open", TASTY_ACCOUNT_ID, logger
+                )
+                if tasty_qty > 0
+                else 0
+            )
+            trades[ticker] = {
+                "action": "LONG",
+                "order_id_schwab": order_id_schwab,
+                "order_id_tastytrade": order_id_tastytrade,
+                "entry_time": datetime.now(pytz.utc).isoformat(),
+                "entry_type": "manual"
+            }
+            
+        elif action == "SELL":
+            if current_position == "SHORT":
+                return jsonify({"success": False, "error": "Already in SHORT position"}), 400
+                
+            # Close LONG position if exists
+            if current_position == "LONG":
+                logger.info(f"Closing LONG position for {ticker} (manual trigger)")
+                long_order_id_schwab = (
+                    place_order(
+                        ticker, schwab_qty, "SELL", schwab_account_id, logger, "CLOSING"
+                    )
+                    if schwab_qty > 0
+                    else 0
+                )
+                long_order_id_tastytrade = (
+                    place_tastytrade_order(
+                        ticker, tasty_qty, "Sell to Close", TASTY_ACCOUNT_ID, logger
+                    )
+                    if tasty_qty > 0
+                    else 0
+                )
+            
+            # Open SHORT position
+            logger.info(f"Opening SHORT position for {ticker} (manual trigger)")
+            order_id_schwab = (
+                place_order(
+                    ticker, schwab_qty, "SELL_SHORT", schwab_account_id, logger, "OPENING"
+                )
+                if schwab_qty > 0
+                else 0
+            )
+            order_id_tastytrade = (
+                place_tastytrade_order(
+                    ticker, tasty_qty, "Sell to Open", TASTY_ACCOUNT_ID, logger
+                )
+                if tasty_qty > 0
+                else 0
+            )
+            trades[ticker] = {
+                "action": "SHORT",
+                "order_id_schwab": order_id_schwab,
+                "order_id_tastytrade": order_id_tastytrade,
+                "entry_time": datetime.now(pytz.utc).isoformat(),
+                "entry_type": "manual"
+            }
+        
+        # Save trade data
+        with open(trade_file, "w") as file:
+            json.dump(trades, file)
+            
+        return jsonify({
+            "success": True, 
+            "message": f"Manual {action} trade executed for {ticker}",
+            "trade": trades[ticker]
+        }), 200
+        
+    except Exception as e:
+        import traceback
+        traceback_str = traceback.format_exc()
+        return jsonify({"success": False, "error": str(e), "traceback": traceback_str}), 500
 
 
 if __name__ == "__main__":
