@@ -726,3 +726,438 @@ Traceback (most recent call last):
     store_logs(ticker)
     ~~~~~~~~~~^^^^^^^^
 TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:07:48,663 - INFO - Running strategy for NVDA at 2025-08-11 17:07:48.663607-04:00 with params: Schwab_QTY=4, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:07:50,402 - INFO - Market closed
+2025-08-11 23:07:50,402 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:13:41,322 - INFO - Running strategy for NVDA at 2025-08-11 17:13:41.322448-04:00 with params: Schwab_QTY=4, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:13:43,440 - INFO - Market closed
+2025-08-11 23:13:43,440 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:14:59,091 - INFO - Running strategy for NVDA at 2025-08-11 17:14:59.091111-04:00 with params: Schwab_QTY=4, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:15:00,568 - INFO - Market closed
+2025-08-11 23:15:00,611 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:20:24,429 - INFO - Running strategy for NVDA at 2025-08-11 17:20:24.429531-04:00 with params: Schwab_QTY=4, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:20:26,192 - INFO - Market closed
+2025-08-11 23:20:26,192 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:25:13,384 - INFO - Running strategy for NVDA at 2025-08-11 17:25:13.384870-04:00 with params: Schwab_QTY=4, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:25:14,904 - INFO - Market closed
+2025-08-11 23:25:14,917 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:48:28,883 - INFO - Running strategy for NVDA at 2025-08-11 17:48:28.883158-04:00 with params: Schwab_QTY=4, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:48:29,839 - INFO - Market closed
+2025-08-11 23:48:29,839 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:51:36,966 - INFO - Running strategy for NVDA at 2025-08-11 17:51:36.966848-04:00 with params: Schwab_QTY=4, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:51:37,933 - INFO - Market closed
+2025-08-11 23:51:37,933 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:55:15,737 - INFO - Running strategy for NVDA at 2025-08-11 17:55:15.737305-04:00 with params: Schwab_QTY=4, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:55:18,180 - INFO - Market closed
+2025-08-11 23:55:18,180 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:56:15,526 - INFO - Running strategy for NVDA at 2025-08-11 17:56:15.526470-04:00 with params: Schwab_QTY=4, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:56:18,868 - INFO - Market closed
+2025-08-11 23:56:18,869 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:59:16,532 - INFO - Running strategy for NVDA at 2025-08-11 17:59:16.532046-04:00 with params: Schwab_QTY=4, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:59:20,458 - INFO - Market closed
+2025-08-11 23:59:20,459 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 00:01:01,688 - INFO - Running strategy for NVDA at 2025-08-11 18:01:01.688056-04:00 with params: Schwab_QTY=4, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 00:01:06,371 - INFO - Market closed
+2025-08-12 00:01:06,371 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 00:05:05,038 - INFO - Running strategy for NVDA at 2025-08-11 18:05:05.038774-04:00 with params: Schwab_QTY=4, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 00:05:10,846 - INFO - Market closed
+2025-08-12 00:05:10,846 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 00:18:36,447 - INFO - Running strategy for NVDA at 2025-08-11 18:18:36.447456-04:00 with params: Schwab_QTY=4, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 00:18:37,237 - ERROR - Error in strategy for NVDA: get_tick_based_data() takes 5 positional arguments but 6 were given
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 136, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 130, in get_historical_data
+    df = get_tick_based_data(tick_size, dataset, start_time, end_time, instrument_id, symbol)
+TypeError: get_tick_based_data() takes 5 positional arguments but 6 were given
+2025-08-12 00:18:37,960 - INFO - Market closed
+2025-08-12 00:18:37,961 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 00:19:32,043 - INFO - Running strategy for NVDA at 2025-08-11 18:19:32.043539-04:00 with params: Schwab_QTY=4, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 00:19:33,135 - ERROR - Error in strategy for NVDA: get_tick_based_data() takes 5 positional arguments but 6 were given
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 136, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 130, in get_historical_data
+    df = get_tick_based_data(tick_size, dataset, start_time, end_time, instrument_id, symbol)
+TypeError: get_tick_based_data() takes 5 positional arguments but 6 were given
+2025-08-12 00:19:34,302 - INFO - Market closed
+2025-08-12 00:19:34,302 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 00:20:46,446 - INFO - Running strategy for NVDA at 2025-08-11 18:20:46.446268-04:00 with params: Schwab_QTY=4, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 00:20:48,051 - ERROR - Error in strategy for NVDA: get_tick_based_data() takes 5 positional arguments but 6 were given
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 136, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 130, in get_historical_data
+    df = get_tick_based_data(tick_size, dataset, start_time, end_time, instrument_id, symbol)
+TypeError: get_tick_based_data() takes 5 positional arguments but 6 were given
+2025-08-12 00:20:49,781 - INFO - Market closed
+2025-08-12 00:20:49,781 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 03:05:19,226 - INFO - Running strategy for NVDA at 2025-08-11 21:05:19.226601-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 03:05:19,227 - ERROR - Error in strategy for NVDA: 'months' is an invalid keyword argument for __new__()
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 115, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 100, in get_historical_data
+    start_time = get_historical_start_time(ticker, timeframe, end_time)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 74, in get_historical_start_time
+    start_time = end_time - timedelta(months=1)
+TypeError: 'months' is an invalid keyword argument for __new__()
+2025-08-12 03:05:19,687 - INFO - Market closed
+2025-08-12 03:05:19,687 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 03:08:06,174 - INFO - Running strategy for NVDA at 2025-08-11 21:08:06.174671-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 03:08:06,175 - ERROR - Error in strategy for NVDA: 'months' is an invalid keyword argument for __new__()
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 115, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 100, in get_historical_data
+    start_time = get_historical_start_time(ticker, timeframe, end_time)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 74, in get_historical_start_time
+    start_time = end_time - timedelta(months=1)
+TypeError: 'months' is an invalid keyword argument for __new__()
+2025-08-12 03:08:06,625 - INFO - Market closed
+2025-08-12 03:08:06,625 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 03:10:55,152 - INFO - Running strategy for NVDA at 2025-08-11 21:10:55.152186-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 03:10:55,153 - ERROR - Error in strategy for NVDA: 'months' is an invalid keyword argument for __new__()
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 117, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 102, in get_historical_data
+    start_time = get_historical_start_time(ticker, timeframe, end_time)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 74, in get_historical_start_time
+    start_time = end_time - timedelta(months=1)
+TypeError: 'months' is an invalid keyword argument for __new__()
+2025-08-12 03:10:55,605 - INFO - Market closed
+2025-08-12 03:10:55,605 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 03:12:16,325 - INFO - Running strategy for NVDA at 2025-08-11 21:12:16.325162-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 03:12:16,325 - ERROR - Error in strategy for NVDA: 'months' is an invalid keyword argument for __new__()
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 117, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 102, in get_historical_data
+    start_time = get_historical_start_time(ticker, timeframe, end_time)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 74, in get_historical_start_time
+    start_time = end_time - timedelta(months=1)
+TypeError: 'months' is an invalid keyword argument for __new__()
+2025-08-12 03:12:16,871 - INFO - Market closed
+2025-08-12 03:12:16,871 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 03:15:58,311 - INFO - Running strategy for NVDA at 2025-08-11 21:15:58.311468-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 03:15:58,311 - ERROR - Error in strategy for NVDA: 'months' is an invalid keyword argument for __new__()
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 117, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 102, in get_historical_data
+    start_time = get_historical_start_time(ticker, timeframe, end_time)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 74, in get_historical_start_time
+    start_time = end_time - timedelta(months=1)
+TypeError: 'months' is an invalid keyword argument for __new__()
+2025-08-12 03:15:58,811 - INFO - Market closed
+2025-08-12 03:15:58,811 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 03:16:25,712 - INFO - Running strategy for NVDA at 2025-08-11 21:16:25.712302-04:00 with params: Schwab_QTY=0, Tasty_QTY=2 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 03:16:25,712 - INFO - Running strategy for NVDA at 2025-08-11 21:16:25.712302-04:00 with params: Schwab_QTY=0, Tasty_QTY=2 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 03:16:25,713 - ERROR - Error in strategy for NVDA: 'months' is an invalid keyword argument for __new__()
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 117, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 102, in get_historical_data
+    start_time = get_historical_start_time(ticker, timeframe, end_time)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 74, in get_historical_start_time
+    start_time = end_time - timedelta(months=1)
+TypeError: 'months' is an invalid keyword argument for __new__()
+2025-08-12 03:16:25,713 - ERROR - Error in strategy for NVDA: 'months' is an invalid keyword argument for __new__()
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 117, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 102, in get_historical_data
+    start_time = get_historical_start_time(ticker, timeframe, end_time)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 74, in get_historical_start_time
+    start_time = end_time - timedelta(months=1)
+TypeError: 'months' is an invalid keyword argument for __new__()
+2025-08-12 03:16:26,317 - INFO - Market closed
+2025-08-12 03:16:26,317 - INFO - Market closed
+2025-08-12 03:16:26,317 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 03:16:26,317 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 03:16:54,252 - INFO - Running strategy for NVDA at 2025-08-11 21:16:54.252442-04:00 with params: Schwab_QTY=0, Tasty_QTY=2 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 03:16:54,252 - ERROR - Error in strategy for NVDA: 'months' is an invalid keyword argument for __new__()
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 117, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 102, in get_historical_data
+    start_time = get_historical_start_time(ticker, timeframe, end_time)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 74, in get_historical_start_time
+    start_time = end_time - timedelta(months=1)
+TypeError: 'months' is an invalid keyword argument for __new__()
+2025-08-12 03:16:54,829 - INFO - Market closed
+2025-08-12 03:16:54,829 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 03:17:35,486 - INFO - Running strategy for NVDA at 2025-08-11 21:17:35.486176-04:00 with params: Schwab_QTY=0, Tasty_QTY=2 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 03:17:35,487 - ERROR - Error in strategy for NVDA: 'months' is an invalid keyword argument for __new__()
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 119, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 104, in get_historical_data
+    start_time = get_historical_start_time(ticker, timeframe, end_time)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 74, in get_historical_start_time
+    start_time = end_time - timedelta(months=1)
+TypeError: 'months' is an invalid keyword argument for __new__()
+2025-08-12 03:17:36,034 - INFO - Market closed
+2025-08-12 03:17:36,034 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 03:18:18,846 - INFO - Running strategy for NVDA at 2025-08-11 21:18:18.846095-04:00 with params: Schwab_QTY=0, Tasty_QTY=2 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 03:18:18,846 - ERROR - Error in strategy for NVDA: 'months' is an invalid keyword argument for __new__()
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 118, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 103, in get_historical_data
+    start_time = get_historical_start_time(ticker, timeframe, end_time)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 74, in get_historical_start_time
+    start_time = end_time - timedelta(months=1)
+TypeError: 'months' is an invalid keyword argument for __new__()
+2025-08-12 03:18:19,480 - INFO - Market closed
+2025-08-12 03:18:19,480 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 03:19:10,864 - INFO - Running strategy for NVDA at 2025-08-11 21:19:10.864311-04:00 with params: Schwab_QTY=0, Tasty_QTY=2 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 03:19:10,865 - ERROR - Error in strategy for NVDA: 'months' is an invalid keyword argument for __new__()
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 118, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 102, in get_historical_data
+    start_time = get_historical_start_time(ticker, timeframe, end_time)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 74, in get_historical_start_time
+    start_time = end_time - timedelta(months=1)
+TypeError: 'months' is an invalid keyword argument for __new__()
+2025-08-12 03:19:11,354 - INFO - Market closed
+2025-08-12 03:19:11,354 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 03:20:30,175 - INFO - Running strategy for NVDA at 2025-08-11 21:20:30.175079-04:00 with params: Schwab_QTY=0, Tasty_QTY=2 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 03:20:30,177 - ERROR - Error in strategy for NVDA: 'months' is an invalid keyword argument for __new__()
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 119, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 103, in get_historical_data
+    start_time = get_historical_start_time(ticker, timeframe, end_time)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 75, in get_historical_start_time
+    start_time = end_time - timedelta(months=1)
+TypeError: 'months' is an invalid keyword argument for __new__()
+2025-08-12 03:20:30,775 - INFO - Market closed
+2025-08-12 03:20:30,775 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 03:21:17,443 - INFO - Running strategy for NVDA at 2025-08-11 21:21:17.443525-04:00 with params: Schwab_QTY=0, Tasty_QTY=2 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 03:21:17,444 - ERROR - Error in strategy for NVDA: 'months' is an invalid keyword argument for __new__()
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 121, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 105, in get_historical_data
+    start_time = get_historical_start_time(ticker, timeframe, end_time)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 75, in get_historical_start_time
+    start_time = end_time - timedelta(months=1)
+TypeError: 'months' is an invalid keyword argument for __new__()
+2025-08-12 03:21:18,024 - INFO - Market closed
+2025-08-12 03:21:18,024 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 03:22:57,875 - INFO - Running strategy for NVDA at 2025-08-11 21:22:57.875895-04:00 with params: Schwab_QTY=0, Tasty_QTY=2 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 03:22:57,876 - ERROR - Error in strategy for NVDA: 'months' is an invalid keyword argument for __new__()
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 120, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 104, in get_historical_data
+    start_time = get_historical_start_time(ticker, timeframe, end_time)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 75, in get_historical_start_time
+    start_time = end_time - timedelta(months=1)
+TypeError: 'months' is an invalid keyword argument for __new__()
+2025-08-12 03:22:58,347 - INFO - Market closed
+2025-08-12 03:22:58,347 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 03:25:17,626 - INFO - Running strategy for NVDA at 2025-08-11 21:25:17.625077-04:00 with params: Schwab_QTY=0, Tasty_QTY=2 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 03:25:17,626 - ERROR - Error in strategy for NVDA: 'months' is an invalid keyword argument for __new__()
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 121, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 105, in get_historical_data
+    start_time = get_historical_start_time(ticker, timeframe, end_time)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 76, in get_historical_start_time
+    start_time = end_time - timedelta(months=1)
+TypeError: 'months' is an invalid keyword argument for __new__()
+2025-08-12 03:25:18,071 - INFO - Market closed
+2025-08-12 03:25:18,071 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 03:25:59,449 - INFO - Running strategy for NVDA at 2025-08-11 21:25:59.449761-04:00 with params: Schwab_QTY=0, Tasty_QTY=2 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 03:25:59,449 - ERROR - Error in strategy for NVDA: 'months' is an invalid keyword argument for __new__()
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 121, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 105, in get_historical_data
+    start_time = get_historical_start_time(ticker, timeframe, end_time)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 75, in get_historical_start_time
+    start_time = end_time - timedelta(months=1)
+TypeError: 'months' is an invalid keyword argument for __new__()
+2025-08-12 03:25:59,912 - INFO - Market closed
+2025-08-12 03:25:59,913 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 03:27:14,843 - INFO - Running strategy for NVDA at 2025-08-11 21:27:14.843319-04:00 with params: Schwab_QTY=0, Tasty_QTY=2 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 03:29:11,827 - INFO - Running strategy for NVDA at 2025-08-11 21:29:11.827338-04:00 with params: Schwab_QTY=0, Tasty_QTY=2 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 03:29:13,412 - INFO - Market closed
+2025-08-12 03:29:13,412 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 03:30:28,544 - INFO - Running strategy for NVDA at 2025-08-11 21:30:28.544212-04:00 with params: Schwab_QTY=0, Tasty_QTY=2 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 03:31:19,807 - INFO - Market closed
+2025-08-12 03:31:19,807 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'

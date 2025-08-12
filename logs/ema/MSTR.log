@@ -1295,3 +1295,168 @@ Traceback (most recent call last):
     store_logs(ticker)
     ~~~~~~~~~~^^^^^^^^
 TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:07:48,666 - INFO - Running strategy for MSTR at 2025-08-11 17:07:48.666218-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:07:51,144 - ERROR - Error in strategy for MSTR: 'dict' object has no attribute 'to_df'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 121, in get_historical_and_live_data
+    get_historical_data(ticker, timeframe, logger)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 115, in get_historical_data
+    instrument_id = symbology_resolve(dataset, symbol, start_time, end_time)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 80, in symbology_resolve
+    df = result.to_df()
+AttributeError: 'dict' object has no attribute 'to_df'
+2025-08-11 23:07:51,586 - INFO - Market closed
+2025-08-11 23:07:51,586 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:13:41,322 - INFO - Running strategy for MSTR at 2025-08-11 17:13:41.322448-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:13:45,967 - ERROR - Error in strategy for MSTR: 'dict' object has no attribute 'to_df'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 128, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 120, in get_historical_data
+    instrument_id = symbology_resolve(dataset, symbol, start_time, end_time)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 80, in symbology_resolve
+    df = result.to_df()
+AttributeError: 'dict' object has no attribute 'to_df'
+2025-08-11 23:13:46,464 - INFO - Market closed
+2025-08-11 23:13:46,464 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:14:59,091 - INFO - Running strategy for MSTR at 2025-08-11 17:14:59.091652-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:15:00,657 - ERROR - Error in strategy for MSTR: 'dict' object has no attribute 'to_df'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 129, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 121, in get_historical_data
+    instrument_id = symbology_resolve(dataset, symbol, start_time, end_time)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 81, in symbology_resolve
+    df = result.to_df()
+AttributeError: 'dict' object has no attribute 'to_df'
+2025-08-11 23:15:01,235 - INFO - Market closed
+2025-08-11 23:15:01,235 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:20:24,429 - INFO - Running strategy for MSTR at 2025-08-11 17:20:24.429531-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:20:27,036 - INFO - Market closed
+2025-08-11 23:20:27,036 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:25:13,383 - INFO - Running strategy for MSTR at 2025-08-11 17:25:13.383802-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:25:16,495 - INFO - Market closed
+2025-08-11 23:25:16,495 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:48:28,880 - INFO - Running strategy for MSTR at 2025-08-11 17:48:28.880159-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:48:33,341 - INFO - Market closed
+2025-08-11 23:48:33,341 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:51:36,969 - INFO - Running strategy for MSTR at 2025-08-11 17:51:36.969847-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:51:39,851 - INFO - Market closed
+2025-08-11 23:51:39,851 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:55:15,736 - INFO - Running strategy for MSTR at 2025-08-11 17:55:15.736310-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:55:22,386 - INFO - Market closed
+2025-08-11 23:55:22,414 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:56:15,529 - INFO - Running strategy for MSTR at 2025-08-11 17:56:15.529469-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:56:20,907 - INFO - Market closed
+2025-08-11 23:56:20,907 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:59:16,538 - INFO - Running strategy for MSTR at 2025-08-11 17:59:16.538047-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:59:20,149 - INFO - Market closed
+2025-08-11 23:59:20,168 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 00:01:01,692 - INFO - Running strategy for MSTR at 2025-08-11 18:01:01.692053-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 00:01:06,235 - INFO - Market closed
+2025-08-12 00:01:06,235 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 00:05:05,034 - INFO - Running strategy for MSTR at 2025-08-11 18:05:05.034773-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 00:05:08,530 - INFO - Market closed
+2025-08-12 00:05:08,542 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 00:18:36,447 - INFO - Running strategy for MSTR at 2025-08-11 18:18:36.447456-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 00:18:38,799 - ERROR - Error in strategy for MSTR: get_tick_based_data() takes 5 positional arguments but 6 were given
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 136, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 130, in get_historical_data
+    df = get_tick_based_data(tick_size, dataset, start_time, end_time, instrument_id, symbol)
+TypeError: get_tick_based_data() takes 5 positional arguments but 6 were given
+2025-08-12 00:18:39,693 - INFO - Market closed
+2025-08-12 00:18:39,693 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 00:19:32,045 - INFO - Running strategy for MSTR at 2025-08-11 18:19:32.045551-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 00:19:35,138 - ERROR - Error in strategy for MSTR: get_tick_based_data() takes 5 positional arguments but 6 were given
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 136, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 130, in get_historical_data
+    df = get_tick_based_data(tick_size, dataset, start_time, end_time, instrument_id, symbol)
+TypeError: get_tick_based_data() takes 5 positional arguments but 6 were given
+2025-08-12 00:19:35,573 - INFO - Market closed
+2025-08-12 00:19:35,573 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 00:20:46,449 - INFO - Running strategy for MSTR at 2025-08-11 18:20:46.449268-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 00:20:47,445 - ERROR - Error in strategy for MSTR: get_tick_based_data() takes 5 positional arguments but 6 were given
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 136, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 130, in get_historical_data
+    df = get_tick_based_data(tick_size, dataset, start_time, end_time, instrument_id, symbol)
+TypeError: get_tick_based_data() takes 5 positional arguments but 6 were given
+2025-08-12 00:20:48,989 - INFO - Market closed
+2025-08-12 00:20:48,989 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'

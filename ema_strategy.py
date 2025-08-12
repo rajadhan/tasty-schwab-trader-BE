@@ -53,7 +53,7 @@ def ema_strategy(ticker, logger):
             logger=logger,
             strategy="ema"
         )
-        print("df", df)  # TODO
+        # print("df", df)  # TODO
 
         # if trend_line_1 == "EMA":
         #     df["trend1"] = df["close"].ewm(span=int(period_1)).mean()

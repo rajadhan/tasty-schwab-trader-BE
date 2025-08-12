@@ -348,3 +348,135 @@ Traceback (most recent call last):
     store_logs(ticker)
     ~~~~~~~~~~^^^^^^^^
 TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:07:48,670 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 23:07:49,175 - INFO - Market closed
+2025-08-11 23:07:49,175 - ERROR - Error in main loop for TSLA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:13:41,329 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 23:13:41,822 - INFO - Market closed
+2025-08-11 23:13:41,822 - ERROR - Error in main loop for TSLA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:14:59,099 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 23:14:59,621 - INFO - Market closed
+2025-08-11 23:14:59,621 - ERROR - Error in main loop for TSLA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:20:24,437 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 23:20:24,940 - INFO - Market closed
+2025-08-11 23:20:24,940 - ERROR - Error in main loop for TSLA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:25:13,393 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 23:25:13,885 - INFO - Market closed
+2025-08-11 23:25:13,885 - ERROR - Error in main loop for TSLA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:48:28,886 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 23:48:29,359 - INFO - Market closed
+2025-08-11 23:48:29,360 - ERROR - Error in main loop for TSLA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:51:36,973 - INFO - Skipping  strategy for TSLA, trade flag is FALSE.
+2025-08-11 23:51:37,465 - INFO - Market closed
+2025-08-11 23:51:37,465 - ERROR - Error in main loop for TSLA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:55:15,747 - INFO - Running strategy for TSLA at 2025-08-11 17:55:15.747303-04:00 with params: Schwab_QTY=0, Tasty_QTY=4 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:55:20,648 - INFO - Market closed
+2025-08-11 23:55:20,675 - ERROR - Error in main loop for TSLA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:56:15,538 - INFO - Running strategy for TSLA at 2025-08-11 17:56:15.538467-04:00 with params: Schwab_QTY=0, Tasty_QTY=4 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:56:18,719 - INFO - Market closed
+2025-08-11 23:56:18,755 - ERROR - Error in main loop for TSLA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-11 23:59:16,559 - INFO - Running strategy for TSLA at 2025-08-11 17:59:16.559048-04:00 with params: Schwab_QTY=0, Tasty_QTY=4 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:59:20,202 - INFO - Market closed
+2025-08-11 23:59:20,202 - ERROR - Error in main loop for TSLA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 00:01:01,701 - INFO - Running strategy for TSLA at 2025-08-11 18:01:01.701056-04:00 with params: Schwab_QTY=0, Tasty_QTY=4 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 00:01:09,082 - INFO - Market closed
+2025-08-12 00:01:09,082 - ERROR - Error in main loop for TSLA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 00:05:05,044 - INFO - Running strategy for TSLA at 2025-08-11 18:05:05.044775-04:00 with params: Schwab_QTY=0, Tasty_QTY=4 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 00:05:08,736 - INFO - Market closed
+2025-08-12 00:05:08,737 - ERROR - Error in main loop for TSLA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 00:18:36,449 - INFO - Running strategy for TSLA at 2025-08-11 18:18:36.449456-04:00 with params: Schwab_QTY=0, Tasty_QTY=4 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 00:18:37,609 - ERROR - Error in strategy for TSLA: get_tick_based_data() takes 5 positional arguments but 6 were given
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 136, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 130, in get_historical_data
+    df = get_tick_based_data(tick_size, dataset, start_time, end_time, instrument_id, symbol)
+TypeError: get_tick_based_data() takes 5 positional arguments but 6 were given
+2025-08-12 00:18:38,173 - INFO - Market closed
+2025-08-12 00:18:38,173 - ERROR - Error in main loop for TSLA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 00:19:32,056 - INFO - Running strategy for TSLA at 2025-08-11 18:19:32.056340-04:00 with params: Schwab_QTY=0, Tasty_QTY=4 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 00:19:34,321 - ERROR - Error in strategy for TSLA: get_tick_based_data() takes 5 positional arguments but 6 were given
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 136, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 130, in get_historical_data
+    df = get_tick_based_data(tick_size, dataset, start_time, end_time, instrument_id, symbol)
+TypeError: get_tick_based_data() takes 5 positional arguments but 6 were given
+2025-08-12 00:19:34,940 - INFO - Market closed
+2025-08-12 00:19:34,940 - ERROR - Error in main loop for TSLA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 00:20:46,454 - INFO - Running strategy for TSLA at 2025-08-11 18:20:46.454629-04:00 with params: Schwab_QTY=0, Tasty_QTY=4 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 00:20:47,256 - ERROR - Error in strategy for TSLA: get_tick_based_data() takes 5 positional arguments but 6 were given
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 136, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 130, in get_historical_data
+    df = get_tick_based_data(tick_size, dataset, start_time, end_time, instrument_id, symbol)
+TypeError: get_tick_based_data() takes 5 positional arguments but 6 were given
+2025-08-12 00:20:48,447 - INFO - Market closed
+2025-08-12 00:20:48,447 - ERROR - Error in main loop for TSLA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'

@@ -735,3 +735,144 @@ Traceback (most recent call last):
     [timeframe, *_] = get_strategy_prarams(ticker, logger)
                       ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
 TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 23:07:48,666 - INFO - Running strategy for /MES at 2025-08-11 17:07:48.666740-04:00 with params: Schwab_QTY=3, Tasty_QTY=20 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:07:50,341 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 23:13:41,325 - INFO - Running strategy for /MES at 2025-08-11 17:13:41.325724-04:00 with params: Schwab_QTY=3, Tasty_QTY=20 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:13:42,682 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 23:14:59,095 - INFO - Running strategy for /MES at 2025-08-11 17:14:59.095366-04:00 with params: Schwab_QTY=3, Tasty_QTY=20 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:15:01,808 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 23:20:24,432 - INFO - Running strategy for /MES at 2025-08-11 17:20:24.432872-04:00 with params: Schwab_QTY=3, Tasty_QTY=20 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:20:26,555 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 23:25:13,384 - INFO - Running strategy for /MES at 2025-08-11 17:25:13.384334-04:00 with params: Schwab_QTY=3, Tasty_QTY=20 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:25:14,607 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 23:48:28,949 - INFO - Running strategy for /MES at 2025-08-11 17:48:28.949769-04:00 with params: Schwab_QTY=3, Tasty_QTY=20 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:48:30,682 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 23:51:36,970 - INFO - Running strategy for /MES at 2025-08-11 17:51:36.970847-04:00 with params: Schwab_QTY=3, Tasty_QTY=20 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:51:38,129 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 23:55:15,739 - INFO - Running strategy for /MES at 2025-08-11 17:55:15.739303-04:00 with params: Schwab_QTY=3, Tasty_QTY=20 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:55:28,398 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 23:56:15,533 - INFO - Running strategy for /MES at 2025-08-11 17:56:15.533468-04:00 with params: Schwab_QTY=3, Tasty_QTY=20 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:56:27,158 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-11 23:59:16,540 - INFO - Running strategy for /MES at 2025-08-11 17:59:16.540048-04:00 with params: Schwab_QTY=3, Tasty_QTY=20 TRENDS=(1, EMA), (1, EMA)
+2025-08-11 23:59:36,544 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-12 00:01:01,693 - INFO - Running strategy for /MES at 2025-08-11 18:01:01.693054-04:00 with params: Schwab_QTY=3, Tasty_QTY=20 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 00:01:18,538 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-12 00:05:05,041 - INFO - Running strategy for /MES at 2025-08-11 18:05:05.041786-04:00 with params: Schwab_QTY=3, Tasty_QTY=20 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 00:05:18,297 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-12 00:18:36,448 - INFO - Running strategy for /MES at 2025-08-11 18:18:36.448455-04:00 with params: Schwab_QTY=3, Tasty_QTY=20 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 00:18:38,544 - ERROR - Error in strategy for /MES: get_tick_based_data() takes 5 positional arguments but 6 were given
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 136, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 130, in get_historical_data
+    df = get_tick_based_data(tick_size, dataset, start_time, end_time, instrument_id, symbol)
+TypeError: get_tick_based_data() takes 5 positional arguments but 6 were given
+2025-08-12 00:18:38,989 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-12 00:19:32,046 - INFO - Running strategy for /MES at 2025-08-11 18:19:32.045551-04:00 with params: Schwab_QTY=3, Tasty_QTY=20 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 00:19:33,101 - ERROR - Error in strategy for /MES: get_tick_based_data() takes 5 positional arguments but 6 were given
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 136, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 130, in get_historical_data
+    df = get_tick_based_data(tick_size, dataset, start_time, end_time, instrument_id, symbol)
+TypeError: get_tick_based_data() takes 5 positional arguments but 6 were given
+2025-08-12 00:19:33,717 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-12 00:20:46,453 - INFO - Running strategy for /MES at 2025-08-11 18:20:46.453625-04:00 with params: Schwab_QTY=3, Tasty_QTY=20 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 00:20:47,411 - ERROR - Error in strategy for /MES: get_tick_based_data() takes 5 positional arguments but 6 were given
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 136, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 130, in get_historical_data
+    df = get_tick_based_data(tick_size, dataset, start_time, end_time, instrument_id, symbol)
+TypeError: get_tick_based_data() takes 5 positional arguments but 6 were given
+2025-08-12 00:20:48,001 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-12 03:05:19,225 - INFO - Running strategy for /MES at 2025-08-11 21:05:19.225574-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 03:05:20,449 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-12 03:08:06,174 - INFO - Running strategy for /MES at 2025-08-11 21:08:06.174671-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 03:08:07,575 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-12 03:10:55,152 - INFO - Running strategy for /MES at 2025-08-11 21:10:55.152186-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 03:10:56,779 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-12 03:12:16,324 - INFO - Running strategy for /MES at 2025-08-11 21:12:16.324133-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 03:12:28,262 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
