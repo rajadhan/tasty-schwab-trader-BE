@@ -1295,3 +1295,672 @@ Traceback (most recent call last):
     store_logs(ticker)
     ~~~~~~~~~~^^^^^^^^
 TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 01:26:03,793 - INFO - Running strategy for MSTR at 2025-08-11 18:26:03.793423-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 01:26:06,447 - ERROR - Error in strategy for MSTR: get_tick_based_data() takes 5 positional arguments but 6 were given
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 134, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 128, in get_historical_data
+    df = get_tick_based_data(tick_size, dataset, start_time, end_time, instrument_id, symbol)
+TypeError: get_tick_based_data() takes 5 positional arguments but 6 were given
+2025-08-12 01:26:06,780 - INFO - Market closed
+2025-08-12 01:26:06,780 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 01:27:57,343 - INFO - Running strategy for MSTR at 2025-08-11 18:27:57.343640-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 01:28:01,035 - ERROR - Error in strategy for MSTR: get_tick_based_data() takes 5 positional arguments but 6 were given
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 134, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 128, in get_historical_data
+    df = get_tick_based_data(tick_size, dataset, start_time, end_time, instrument_id, symbol)
+TypeError: get_tick_based_data() takes 5 positional arguments but 6 were given
+2025-08-12 01:28:02,177 - INFO - Market closed
+2025-08-12 01:28:02,177 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 01:28:44,490 - INFO - Running strategy for MSTR at 2025-08-11 18:28:44.490066-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 01:28:47,791 - ERROR - Error in strategy for MSTR: get_tick_based_data() takes 5 positional arguments but 6 were given
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 134, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 128, in get_historical_data
+    df = get_tick_based_data(tick_size, dataset, start_time, end_time, instrument_id, symbol)
+TypeError: get_tick_based_data() takes 5 positional arguments but 6 were given
+2025-08-12 01:28:48,138 - INFO - Market closed
+2025-08-12 01:28:48,138 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 01:29:46,956 - INFO - Running strategy for MSTR at 2025-08-11 18:29:46.956930-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 01:29:52,531 - INFO - Market closed
+2025-08-12 01:29:52,531 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 01:35:31,716 - INFO - Running strategy for MSTR at 2025-08-11 18:35:31.716489-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 01:35:33,636 - ERROR - Error in strategy for MSTR: cannot access local variable 'df' where it is not associated with a value
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 106, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 101, in get_historical_data
+    return df
+           ^^
+UnboundLocalError: cannot access local variable 'df' where it is not associated with a value
+2025-08-12 01:35:35,347 - INFO - Market closed
+2025-08-12 01:35:35,347 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 01:36:10,161 - INFO - Running strategy for MSTR at 2025-08-11 18:36:10.161340-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 01:36:12,084 - ERROR - Error in strategy for MSTR: cannot access local variable 'df' where it is not associated with a value
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 106, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 101, in get_historical_data
+    return df
+           ^^
+UnboundLocalError: cannot access local variable 'df' where it is not associated with a value
+2025-08-12 01:36:13,193 - INFO - Market closed
+2025-08-12 01:36:13,193 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 01:44:47,574 - INFO - Running strategy for MSTR at 2025-08-11 18:44:47.574618-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 01:44:48,985 - ERROR - Error in strategy for MSTR: name 'start_date' is not defined
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 116, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 108, in get_historical_data
+    start=start_date,
+          ^^^^^^^^^^
+NameError: name 'start_date' is not defined. Did you mean: 'start_time'?
+2025-08-12 01:44:49,702 - INFO - Market closed
+2025-08-12 01:44:49,702 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 01:46:57,756 - INFO - Running strategy for MSTR at 2025-08-11 18:46:57.756951-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 01:46:59,123 - ERROR - Error in strategy for MSTR: name 'start_date' is not defined
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 115, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 107, in get_historical_data
+    start=start_date,
+          ^^^^^^^^^^
+NameError: name 'start_date' is not defined. Did you mean: 'start_time'?
+2025-08-12 01:47:00,237 - INFO - Market closed
+2025-08-12 01:47:00,237 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 02:28:56,936 - INFO - Running strategy for MSTR at 2025-08-11 19:28:56.936027-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 02:29:01,744 - INFO - Market closed
+2025-08-12 02:29:01,744 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 02:29:35,837 - INFO - Running strategy for MSTR at 2025-08-11 19:29:35.837643-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 02:29:40,503 - INFO - Market closed
+2025-08-12 02:29:40,503 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 02:34:55,063 - INFO - Running strategy for MSTR at 2025-08-11 19:34:55.063070-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 02:34:59,131 - INFO - Market closed
+2025-08-12 02:34:59,132 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 02:35:30,470 - INFO - Running strategy for MSTR at 2025-08-11 19:35:30.470812-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 02:35:32,153 - ERROR - Error in strategy for MSTR: SymbologyHttpAPI.resolve() missing 1 required positional argument: 'start_date'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 123, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 102, in get_historical_data
+    res = DATABENTO_CLIENT.symbology.resolve(
+        dataset="XNAS.ITCH",
+    ...<2 lines>...
+        stype_out="instrument_id"
+    )
+TypeError: SymbologyHttpAPI.resolve() missing 1 required positional argument: 'start_date'
+2025-08-12 02:35:32,858 - INFO - Market closed
+2025-08-12 02:35:32,858 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 02:35:50,513 - INFO - Running strategy for MSTR at 2025-08-11 19:35:50.513074-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 02:35:52,391 - ERROR - Error in strategy for MSTR: SymbologyHttpAPI.resolve() missing 1 required positional argument: 'start_date'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 123, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 102, in get_historical_data
+    res = DATABENTO_CLIENT.symbology.resolve(
+        dataset="XNAS.ITCH",
+    ...<2 lines>...
+        stype_out="instrument_id"
+    )
+TypeError: SymbologyHttpAPI.resolve() missing 1 required positional argument: 'start_date'
+2025-08-12 02:35:52,852 - INFO - Market closed
+2025-08-12 02:35:52,852 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 02:37:29,710 - INFO - Running strategy for MSTR at 2025-08-11 19:37:29.710313-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 02:37:31,183 - ERROR - Error in strategy for MSTR: SymbologyHttpAPI.resolve() missing 1 required positional argument: 'start_date'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 128, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 102, in get_historical_data
+    res = DATABENTO_CLIENT.symbology.resolve(
+        dataset="XNAS.ITCH",
+    ...<2 lines>...
+        stype_out="instrument_id"
+    )
+TypeError: SymbologyHttpAPI.resolve() missing 1 required positional argument: 'start_date'
+2025-08-12 02:37:32,181 - INFO - Market closed
+2025-08-12 02:37:32,181 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 02:38:13,858 - INFO - Running strategy for MSTR at 2025-08-11 19:38:13.858171-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 02:38:15,269 - ERROR - Error in strategy for MSTR: 'MetadataHttpAPI' object has no attribute 'get_dataset'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 130, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 102, in get_historical_data
+    meta = DATABENTO_CLIENT.metadata.get_dataset("XNAS.ITCH")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MetadataHttpAPI' object has no attribute 'get_dataset'. Did you mean: 'list_datasets'?
+2025-08-12 02:38:15,902 - INFO - Market closed
+2025-08-12 02:38:15,902 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 02:39:14,295 - INFO - Running strategy for MSTR at 2025-08-11 19:39:14.295801-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 02:39:16,328 - ERROR - Error in strategy for MSTR: 'MetadataHttpAPI' object has no attribute 'get_dataset'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 131, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 103, in get_historical_data
+    meta = DATABENTO_CLIENT.metadata.get_dataset("XNAS.ITCH")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MetadataHttpAPI' object has no attribute 'get_dataset'. Did you mean: 'list_datasets'?
+2025-08-12 02:39:16,773 - INFO - Market closed
+2025-08-12 02:39:16,773 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 02:40:09,743 - INFO - Running strategy for MSTR at 2025-08-11 19:40:09.743452-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 02:40:11,110 - ERROR - Error in strategy for MSTR: cannot access local variable 'res' where it is not associated with a value
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 140, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 122, in get_historical_data
+    instrument_id = res[symbol][0]
+                    ^^^
+UnboundLocalError: cannot access local variable 'res' where it is not associated with a value
+2025-08-12 02:40:11,794 - INFO - Market closed
+2025-08-12 02:40:11,794 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 02:42:03,447 - INFO - Running strategy for MSTR at 2025-08-11 19:42:03.447614-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 02:42:06,501 - ERROR - Error in strategy for MSTR: string indices must be integers, not 'str'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 141, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 109, in get_historical_data
+    meta = next(d for d in datasets if d["name"] == dataset)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 109, in <genexpr>
+    meta = next(d for d in datasets if d["name"] == dataset)
+                                       ~^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+2025-08-12 02:42:06,836 - INFO - Market closed
+2025-08-12 02:42:06,836 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 02:43:08,270 - INFO - Running strategy for MSTR at 2025-08-11 19:43:08.270086-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 02:43:10,734 - ERROR - Error in strategy for MSTR: cannot access local variable 'res' where it is not associated with a value
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 140, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 122, in get_historical_data
+    instrument_id = res[symbol][0]
+                    ^^^
+UnboundLocalError: cannot access local variable 'res' where it is not associated with a value
+2025-08-12 02:43:11,608 - INFO - Market closed
+2025-08-12 02:43:11,608 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 02:45:58,215 - INFO - Running strategy for MSTR at 2025-08-11 19:45:58.215245-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 02:46:03,271 - ERROR - Error in strategy for MSTR: cannot access local variable 'df' where it is not associated with a value
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 146, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 141, in get_historical_data
+    return df
+           ^^
+UnboundLocalError: cannot access local variable 'df' where it is not associated with a value
+2025-08-12 02:46:03,618 - INFO - Market closed
+2025-08-12 02:46:03,618 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 02:49:35,958 - INFO - Running strategy for MSTR at 2025-08-11 19:49:35.958891-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 02:49:43,645 - ERROR - Error in strategy for MSTR: 422 symbology_invalid_request
+None of the symbols could be resolved
+documentation: https://databento.com/docs/api-reference-historical/basics/symbology
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 147, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 130, in get_historical_data
+    df = DATABENTO_CLIENT.timeseries.get_range(
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dataset="XNAS.ITCH",
+        ^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        end="2024-08-01T16:00:00"
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ).to_df()
+    ^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\historical\api\timeseries.py", line 125, in get_range
+    return self._stream(
+           ~~~~~~~~~~~~^
+        url=self._base_url + ".get_range",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        path=path,
+        ^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 134, in _stream
+    check_http_error(response)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 249, in check_http_error
+    raise BentoClientError(
+    ...<5 lines>...
+    )
+databento.common.error.BentoClientError: 422 symbology_invalid_request
+None of the symbols could be resolved
+documentation: https://databento.com/docs/api-reference-historical/basics/symbology
+2025-08-12 02:49:43,998 - INFO - Market closed
+2025-08-12 02:49:43,998 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 02:51:55,244 - INFO - Running strategy for MSTR at 2025-08-11 19:51:55.244796-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 02:52:01,631 - ERROR - Error in strategy for MSTR: 422 symbology_invalid_request
+None of the symbols could be resolved
+documentation: https://databento.com/docs/api-reference-historical/basics/symbology
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 147, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 130, in get_historical_data
+    df = DATABENTO_CLIENT.timeseries.get_range(
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dataset="XNAS.ITCH",
+        ^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        end="2024-08-01T16:00:00"
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ).to_df()
+    ^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\historical\api\timeseries.py", line 125, in get_range
+    return self._stream(
+           ~~~~~~~~~~~~^
+        url=self._base_url + ".get_range",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        path=path,
+        ^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 134, in _stream
+    check_http_error(response)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 249, in check_http_error
+    raise BentoClientError(
+    ...<5 lines>...
+    )
+databento.common.error.BentoClientError: 422 symbology_invalid_request
+None of the symbols could be resolved
+documentation: https://databento.com/docs/api-reference-historical/basics/symbology
+2025-08-12 02:52:01,990 - INFO - Market closed
+2025-08-12 02:52:01,990 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 02:53:36,014 - INFO - Running strategy for MSTR at 2025-08-11 19:53:36.014626-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 02:53:42,380 - ERROR - Error in strategy for MSTR: 422 symbology_invalid_request
+None of the symbols could be resolved
+documentation: https://databento.com/docs/api-reference-historical/basics/symbology
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 148, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 131, in get_historical_data
+    df = DATABENTO_CLIENT.timeseries.get_range(
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dataset="XNAS.ITCH",
+        ^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        end="2024-08-01T16:00:00"
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ).to_df()
+    ^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\historical\api\timeseries.py", line 125, in get_range
+    return self._stream(
+           ~~~~~~~~~~~~^
+        url=self._base_url + ".get_range",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        path=path,
+        ^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 134, in _stream
+    check_http_error(response)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 249, in check_http_error
+    raise BentoClientError(
+    ...<5 lines>...
+    )
+databento.common.error.BentoClientError: 422 symbology_invalid_request
+None of the symbols could be resolved
+documentation: https://databento.com/docs/api-reference-historical/basics/symbology
+2025-08-12 02:53:43,178 - INFO - Market closed
+2025-08-12 02:53:43,178 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 03:00:37,669 - INFO - Running strategy for MSTR at 2025-08-11 20:00:37.669717-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 03:00:46,065 - ERROR - Error in strategy for MSTR: 422 symbology_invalid_request
+None of the symbols could be resolved
+documentation: https://databento.com/docs/api-reference-historical/basics/symbology
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 149, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 132, in get_historical_data
+    df = DATABENTO_CLIENT.timeseries.get_range(
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dataset="XNAS.ITCH",
+        ^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        end="2024-08-01T16:00:00"
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ).to_df()
+    ^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\historical\api\timeseries.py", line 125, in get_range
+    return self._stream(
+           ~~~~~~~~~~~~^
+        url=self._base_url + ".get_range",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        path=path,
+        ^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 134, in _stream
+    check_http_error(response)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\databento\common\http.py", line 249, in check_http_error
+    raise BentoClientError(
+    ...<5 lines>...
+    )
+databento.common.error.BentoClientError: 422 symbology_invalid_request
+None of the symbols could be resolved
+documentation: https://databento.com/docs/api-reference-historical/basics/symbology
+2025-08-12 03:00:46,409 - INFO - Market closed
+2025-08-12 03:00:46,409 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 03:15:12,602 - INFO - Running strategy for MSTR at 2025-08-11 20:15:12.602628-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 03:15:20,313 - ERROR - Error in strategy for MSTR: cannot access local variable 'df' where it is not associated with a value
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 150, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 141, in get_historical_data
+    print("df", df)
+                ^^
+UnboundLocalError: cannot access local variable 'df' where it is not associated with a value
+2025-08-12 03:15:20,690 - INFO - Market closed
+2025-08-12 03:15:20,690 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 03:18:56,316 - INFO - Running strategy for MSTR at 2025-08-11 20:18:56.316283-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 03:19:04,016 - INFO - Market closed
+2025-08-12 03:19:04,016 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 03:19:46,619 - INFO - Running strategy for MSTR at 2025-08-11 20:19:46.619078-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 03:19:55,880 - INFO - Market closed
+2025-08-12 03:19:55,880 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 03:20:28,296 - INFO - Running strategy for MSTR at 2025-08-11 20:20:28.296335-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 03:22:19,170 - INFO - Running strategy for MSTR at 2025-08-11 20:22:19.170039-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 03:22:26,401 - INFO - Market closed
+2025-08-12 03:22:26,401 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 03:25:31,187 - INFO - Running strategy for MSTR at 2025-08-11 20:25:31.187522-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 03:25:37,449 - ERROR - Error in strategy for MSTR: cannot access local variable 'df' where it is not associated with a value
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 148, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 143, in get_historical_data
+    return df
+           ^^
+UnboundLocalError: cannot access local variable 'df' where it is not associated with a value
+2025-08-12 03:25:38,133 - INFO - Market closed
+2025-08-12 03:25:38,133 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-12 03:26:17,521 - INFO - Running strategy for MSTR at 2025-08-11 20:26:17.521469-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 03:26:31,940 - INFO - Market closed
+2025-08-12 03:26:31,940 - ERROR - Error in main loop for MSTR: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+    ~~~~~~~~~~^^^^^^^^
+TypeError: store_logs() missing 1 required positional argument: 'strategy'

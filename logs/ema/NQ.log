@@ -1,0 +1,74 @@
+2025-08-12 01:27:57,352 - INFO - Running strategy for /NQ at 2025-08-11 18:27:57.352272-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 01:28:01,480 - ERROR - Error in strategy for /NQ: get_tick_based_data() takes 5 positional arguments but 6 were given
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 134, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 128, in get_historical_data
+    df = get_tick_based_data(tick_size, dataset, start_time, end_time, instrument_id, symbol)
+TypeError: get_tick_based_data() takes 5 positional arguments but 6 were given
+2025-08-12 01:28:01,916 - ERROR - Error in main loop for /NQ: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-12 01:28:44,500 - INFO - Running strategy for /NQ at 2025-08-11 18:28:44.500876-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 01:28:48,329 - ERROR - Error in strategy for /NQ: get_tick_based_data() takes 5 positional arguments but 6 were given
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 134, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 128, in get_historical_data
+    df = get_tick_based_data(tick_size, dataset, start_time, end_time, instrument_id, symbol)
+TypeError: get_tick_based_data() takes 5 positional arguments but 6 were given
+2025-08-12 01:28:48,730 - ERROR - Error in main loop for /NQ: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-12 01:29:46,966 - INFO - Running strategy for /NQ at 2025-08-11 18:29:46.966032-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 01:30:04,607 - ERROR - Error in main loop for /NQ: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-12 01:35:31,727 - INFO - Running strategy for /NQ at 2025-08-11 18:35:31.727698-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 01:35:34,318 - ERROR - Error in strategy for /NQ: get_tick_based_data() takes 4 positional arguments but 5 were given
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+        ticker=ticker,
+    ...<2 lines>...
+        strategy="ema"
+    )
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 106, in get_historical_and_live_data
+    return get_historical_data(ticker, timeframe, logger)
+  File "D:\work\work\Tim McKenna\Tim\backend\get_historical_data.py", line 99, in get_historical_data
+    df = get_tick_based_data(tick_size, dataset, start_time, end_time, symbol)
+TypeError: get_tick_based_data() takes 4 positional arguments but 5 were given
+2025-08-12 01:35:35,314 - ERROR - Error in main loop for /NQ: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-12 01:36:10,164 - INFO - Running strategy for /NQ at 2025-08-11 18:36:10.164946-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-12 01:36:23,011 - ERROR - Error in main loop for /NQ: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
