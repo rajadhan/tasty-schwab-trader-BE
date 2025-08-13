@@ -8,3 +8,14 @@
 2025-08-08 22:28:30,220 - ERROR - Error in getting historical data for $SPX: Unsupported time frame: 3
 2025-08-08 22:28:35,224 - INFO - Fetching historical data for $SPX
 2025-08-08 22:28:35,225 - ERROR - Error in getting historical data for $SPX: Unsupported time frame: 3
+2025-08-12 03:46:49,802 - ERROR - Error in zeroday strategy for SPX: name 'datetime' is not defined
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\zeroday_strategy.py", line 7, in zeroday_strategy
+    logger.info(f"{ticker} zeroday strategy started at {datetime.now(pytz.utc)}")
+NameError: name 'datetime' is not defined
+2025-08-12 03:46:50,235 - INFO - Market closed
+2025-08-12 03:46:50,235 - ERROR - Error in main loop for SPX: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
