@@ -1,0 +1,335 @@
+2025-08-13 21:42:23,176 - INFO - Running strategy for /MES at 2025-08-13 15:42:23.176741-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-13 21:42:23,178 - INFO - Starting Tick Producer...
+2025-08-13 21:42:23,179 - ERROR - Error in strategy for /MES: local variable 'time_frame' referenced before assignment
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 434, in get_historical_and_live_data
+    producer.run(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 90, in run
+    live_symbols_config = self.setup_tick_buffers(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 37, in setup_tick_buffers
+    ticker, time_frame, safe_historical_end
+UnboundLocalError: local variable 'time_frame' referenced before assignment
+2025-08-13 21:42:23,649 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-13 21:44:16,761 - INFO - Running strategy for /MES at 2025-08-13 15:44:16.761610-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-13 21:44:16,764 - INFO - Starting Tick Producer...
+2025-08-13 21:44:16,764 - ERROR - Error in strategy for /MES: local variable 'time_frame' referenced before assignment
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 435, in get_historical_and_live_data
+    producer.run(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 90, in run
+    live_symbols_config = self.setup_tick_buffers(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 37, in setup_tick_buffers
+    ticker, time_frame, safe_historical_end
+UnboundLocalError: local variable 'time_frame' referenced before assignment
+2025-08-13 21:44:17,216 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-13 21:47:28,424 - INFO - Running strategy for /MES at 2025-08-13 15:47:28.424289-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-13 21:47:28,427 - INFO - Starting Tick Producer...
+2025-08-13 21:47:28,427 - ERROR - Error in strategy for /MES: local variable 'time_frame' referenced before assignment
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 436, in get_historical_and_live_data
+    producer.run(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 90, in run
+    live_symbols_config = self.setup_tick_buffers(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 37, in setup_tick_buffers
+    ticker, time_frame, safe_historical_end
+UnboundLocalError: local variable 'time_frame' referenced before assignment
+2025-08-13 21:47:28,916 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-13 21:48:37,708 - INFO - Running strategy for /MES at 2025-08-13 15:48:37.708628-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-13 21:48:37,712 - INFO - Starting Tick Producer...
+2025-08-13 21:48:37,712 - ERROR - Error in strategy for /MES: local variable 'time_frame' referenced before assignment
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 435, in get_historical_and_live_data
+    producer.run(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 91, in run
+    live_symbols_config = self.setup_tick_buffers(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 38, in setup_tick_buffers
+    ticker, time_frame, safe_historical_end
+UnboundLocalError: local variable 'time_frame' referenced before assignment
+2025-08-13 21:48:38,392 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-13 21:53:53,585 - INFO - Running strategy for /MES at 2025-08-13 15:53:53.585726-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-13 21:53:53,588 - INFO - Starting Tick Producer...
+2025-08-13 21:53:53,588 - ERROR - Error in strategy for /MES: local variable 'time_frame' referenced before assignment
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 435, in get_historical_and_live_data
+    producer.run(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 91, in run
+    live_symbols_config = self.setup_tick_buffers(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 38, in setup_tick_buffers
+    ticker, time_frame, safe_historical_end
+UnboundLocalError: local variable 'time_frame' referenced before assignment
+2025-08-13 21:53:54,060 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-13 22:09:17,609 - INFO - Running strategy for /MES at 2025-08-13 16:09:17.609939-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-13 22:09:17,612 - INFO - Starting Tick Producer...
+2025-08-13 22:09:17,613 - ERROR - Error in strategy for /MES: local variable 'time_frame' referenced before assignment
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 437, in get_historical_and_live_data
+    producer.run(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 92, in run
+    live_symbols_config = self.setup_tick_buffers(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 38, in setup_tick_buffers
+    ticker, time_frame, safe_historical_end
+UnboundLocalError: local variable 'time_frame' referenced before assignment
+2025-08-13 22:09:18,092 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-13 22:12:18,318 - INFO - Running strategy for /MES at 2025-08-13 16:12:18.318207-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-13 22:12:18,320 - INFO - Starting Tick Producer...
+2025-08-13 22:12:18,321 - ERROR - Error in strategy for /MES: local variable 'time_frame' referenced before assignment
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 437, in get_historical_and_live_data
+    producer.run(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 92, in run
+    live_symbols_config = self.setup_tick_buffers(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 38, in setup_tick_buffers
+    ticker, time_frame, safe_historical_end
+UnboundLocalError: local variable 'time_frame' referenced before assignment
+2025-08-13 22:12:18,712 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-13 22:15:06,778 - INFO - Running strategy for /MES at 2025-08-13 16:15:06.778495-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-13 22:15:06,780 - INFO - Starting Tick Producer...
+2025-08-13 22:15:06,780 - ERROR - Error in strategy for /MES: local variable 'time_frame' referenced before assignment
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 438, in get_historical_and_live_data
+    producer.run(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 93, in run
+    live_symbols_config = self.setup_tick_buffers(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 39, in setup_tick_buffers
+    ticker, time_frame, safe_historical_end
+UnboundLocalError: local variable 'time_frame' referenced before assignment
+2025-08-13 22:15:07,164 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-13 22:16:26,412 - INFO - Running strategy for /MES at 2025-08-13 16:16:26.412475-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-13 22:16:26,412 - INFO - Running strategy for /MES at 2025-08-13 16:16:26.412475-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-13 22:16:26,414 - INFO - Starting Tick Producer...
+2025-08-13 22:16:26,414 - INFO - Starting Tick Producer...
+2025-08-13 22:16:26,414 - ERROR - Error in strategy for /MES: local variable 'time_frame' referenced before assignment
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 438, in get_historical_and_live_data
+    producer.run(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 93, in run
+    live_symbols_config = self.setup_tick_buffers(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 39, in setup_tick_buffers
+    ticker, time_frame, safe_historical_end
+UnboundLocalError: local variable 'time_frame' referenced before assignment
+2025-08-13 22:16:26,414 - ERROR - Error in strategy for /MES: local variable 'time_frame' referenced before assignment
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 438, in get_historical_and_live_data
+    producer.run(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 93, in run
+    live_symbols_config = self.setup_tick_buffers(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 39, in setup_tick_buffers
+    ticker, time_frame, safe_historical_end
+UnboundLocalError: local variable 'time_frame' referenced before assignment
+2025-08-13 22:16:26,897 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-13 22:16:26,897 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-13 22:20:23,118 - INFO - Running strategy for /MES at 2025-08-13 16:20:23.118675-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-13 22:20:23,120 - INFO - Starting Tick Producer...
+2025-08-13 22:20:23,121 - ERROR - Error in strategy for /MES: local variable 'time_frame' referenced before assignment
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 438, in get_historical_and_live_data
+    producer.run(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 93, in run
+    live_symbols_config = self.setup_tick_buffers(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 39, in setup_tick_buffers
+    ticker, time_frame, safe_historical_end
+UnboundLocalError: local variable 'time_frame' referenced before assignment
+2025-08-13 22:20:23,617 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-13 22:21:19,449 - INFO - Running strategy for /MES at 2025-08-13 16:21:19.449908-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-13 22:21:19,451 - INFO - Starting Tick Producer...
+2025-08-13 22:21:19,453 - ERROR - Error in strategy for /MES: local variable 'time_frame' referenced before assignment
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 437, in get_historical_and_live_data
+    producer.run(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 92, in run
+    live_symbols_config = self.setup_tick_buffers(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 38, in setup_tick_buffers
+    ticker, time_frame, safe_historical_end
+UnboundLocalError: local variable 'time_frame' referenced before assignment
+2025-08-13 22:21:19,817 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-13 22:21:56,664 - INFO - Running strategy for /MES at 2025-08-13 16:21:56.664703-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-13 22:21:56,667 - INFO - Starting Tick Producer...
+2025-08-13 22:21:56,668 - ERROR - Error in strategy for /MES: local variable 'time_frame' referenced before assignment
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 437, in get_historical_and_live_data
+    producer.run(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 92, in run
+    live_symbols_config = self.setup_tick_buffers(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 37, in setup_tick_buffers
+    ticker, time_frame, safe_historical_end
+UnboundLocalError: local variable 'time_frame' referenced before assignment
+2025-08-13 22:21:57,216 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-13 22:22:55,674 - INFO - Running strategy for /MES at 2025-08-13 16:22:55.674623-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-13 22:22:55,676 - INFO - Starting Tick Producer...
+2025-08-13 22:22:55,676 - ERROR - Error in strategy for /MES: local variable 'time_frame' referenced before assignment
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 439, in get_historical_and_live_data
+    producer.run(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 92, in run
+    live_symbols_config = self.setup_tick_buffers(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 37, in setup_tick_buffers
+    ticker, time_frame, safe_historical_end
+UnboundLocalError: local variable 'time_frame' referenced before assignment
+2025-08-13 22:22:56,065 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-13 22:24:29,428 - INFO - Running strategy for /MES at 2025-08-13 16:24:29.428285-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-13 22:24:29,430 - INFO - Starting Tick Producer...
+2025-08-13 22:24:29,431 - ERROR - Error fetching historical end time for dataset GLBX.MDP3: name 'self' is not defined
+2025-08-13 22:24:30,029 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-14 00:11:58,897 - INFO - Running strategy for /MES at 2025-08-13 18:11:58.897859-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-14 00:11:58,899 - ERROR - Error in strategy for /MES: 'TickProducer' object has no attribute 'setup_tick_buffers_for_ticker'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 457, in get_historical_and_live_data
+    tick_buffer = producer.setup_tick_buffers_for_ticker(ticker, tickers_config)
+AttributeError: 'TickProducer' object has no attribute 'setup_tick_buffers_for_ticker'
+2025-08-14 00:11:59,353 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 46, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-14 01:59:01,196 - INFO - Running strategy for /MES at 2025-08-13 19:59:01.196195-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-14 01:59:01,201 - ERROR - Error in strategy for /MES: 'TickProducer' object has no attribute 'setup_tick_buffers_for_ticker'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 458, in get_historical_and_live_data
+    tick_buffer = producer.setup_tick_buffers_for_ticker(ticker, tickers_config)
+AttributeError: 'TickProducer' object has no attribute 'setup_tick_buffers_for_ticker'
+2025-08-14 01:59:01,900 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 47, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-14 02:05:26,837 - INFO - Running strategy for /MES at 2025-08-13 20:05:26.837646-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-14 02:05:26,840 - ERROR - Error fetching historical end time for dataset GLBX.MDP3: name 'historical_client' is not defined
+2025-08-14 02:05:26,841 - ERROR - Failed to get data for /MES
+2025-08-14 02:05:26,841 - ERROR - Error in strategy for /MES: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 60, in ema_strategy
+    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+TypeError: 'NoneType' object is not subscriptable
+2025-08-14 02:05:27,327 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 47, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-14 02:49:10,502 - INFO - Running strategy for /MES at 2025-08-13 20:49:10.502619-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-14 02:49:10,516 - ERROR - Error getting data for /MES: [Errno 2] No such file or directory: 'jsons/tickers.json'
+2025-08-14 02:49:10,517 - ERROR - Error in strategy for /MES: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 60, in ema_strategy
+    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+TypeError: 'NoneType' object is not subscriptable
+2025-08-14 02:49:11,122 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 47, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-14 07:26:46,235 - INFO - Running strategy for /MES at 2025-08-14 01:26:46.235288-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-14 07:26:46,235 - INFO - Running strategy for /MES at 2025-08-14 01:26:46.235288-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-14 07:26:46,250 - ERROR - Error getting data for /MES: [Errno 2] No such file or directory: 'jsons/tickers.json'
+2025-08-14 07:26:46,250 - ERROR - Error getting data for /MES: [Errno 2] No such file or directory: 'jsons/tickers.json'
+2025-08-14 07:26:46,269 - ERROR - Error in strategy for /MES: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 60, in ema_strategy
+    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+TypeError: 'NoneType' object is not subscriptable
+2025-08-14 07:26:46,269 - ERROR - Error in strategy for /MES: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 60, in ema_strategy
+    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+TypeError: 'NoneType' object is not subscriptable
+2025-08-14 07:26:46,851 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 47, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-14 07:26:46,851 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 47, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'

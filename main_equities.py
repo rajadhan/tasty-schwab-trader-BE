@@ -35,6 +35,7 @@ def main_strategy_loop(ticker):
     else:
         logger.error(f"No strategy configured for {ticker}")
 
+
     try:
         while is_within_time_range():
             _, today_date = get_current_datetime()
@@ -46,7 +47,7 @@ def main_strategy_loop(ticker):
                     [timeframe, *_] = get_strategy_prarams(ticker, logger)
                     # sleep_until_next_interval(ticker, timeframe)
                     sleep_base_on_timeframe(timeframe)
-                    ema_strategy(ticker, logger)
+                    # ema_strategy(ticker, logger)
             else:
                 market_hours, status = get_market_hours(today_date)
                 if not market_hours:
@@ -60,7 +61,7 @@ def main_strategy_loop(ticker):
                             [timeframe, *_] = get_strategy_prarams(ticker, logger)
                             # sleep_until_next_interval(ticker, timeframe)
                             sleep_base_on_timeframe(timeframe)
-                            ema_strategy(ticker, logger)
+                            # ema_strategy(ticker, logger)
                         else:
                             if current_time >= market_hours[1]:
                                 logger.info("Market closed")

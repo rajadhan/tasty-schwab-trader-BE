@@ -1,0 +1,339 @@
+2025-08-13 21:42:23,175 - INFO - Running strategy for NVDA at 2025-08-13 15:42:23.175626-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-13 21:42:23,178 - INFO - Starting Tick Producer...
+2025-08-13 21:42:23,178 - ERROR - Error in strategy for NVDA: local variable 'time_frame' referenced before assignment
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 434, in get_historical_and_live_data
+    producer.run(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 90, in run
+    live_symbols_config = self.setup_tick_buffers(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 37, in setup_tick_buffers
+    ticker, time_frame, safe_historical_end
+UnboundLocalError: local variable 'time_frame' referenced before assignment
+2025-08-13 21:42:23,862 - ERROR - Error in main loop for NVDA: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-13 21:44:16,760 - INFO - Running strategy for NVDA at 2025-08-13 15:44:16.760380-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-13 21:44:16,763 - INFO - Starting Tick Producer...
+2025-08-13 21:44:16,763 - ERROR - Error in strategy for NVDA: local variable 'time_frame' referenced before assignment
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 435, in get_historical_and_live_data
+    producer.run(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 90, in run
+    live_symbols_config = self.setup_tick_buffers(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 37, in setup_tick_buffers
+    ticker, time_frame, safe_historical_end
+UnboundLocalError: local variable 'time_frame' referenced before assignment
+2025-08-13 21:44:17,560 - ERROR - Error in main loop for NVDA: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-13 21:47:28,423 - INFO - Running strategy for NVDA at 2025-08-13 15:47:28.423742-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-13 21:47:28,427 - INFO - Starting Tick Producer...
+2025-08-13 21:47:28,427 - ERROR - Error in strategy for NVDA: local variable 'time_frame' referenced before assignment
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 436, in get_historical_and_live_data
+    producer.run(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 90, in run
+    live_symbols_config = self.setup_tick_buffers(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 37, in setup_tick_buffers
+    ticker, time_frame, safe_historical_end
+UnboundLocalError: local variable 'time_frame' referenced before assignment
+2025-08-13 21:47:29,154 - ERROR - Error in main loop for NVDA: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-13 21:48:37,707 - INFO - Running strategy for NVDA at 2025-08-13 15:48:37.707499-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-13 21:48:37,712 - INFO - Starting Tick Producer...
+2025-08-13 21:48:37,712 - ERROR - Error in strategy for NVDA: local variable 'time_frame' referenced before assignment
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 435, in get_historical_and_live_data
+    producer.run(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 91, in run
+    live_symbols_config = self.setup_tick_buffers(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 38, in setup_tick_buffers
+    ticker, time_frame, safe_historical_end
+UnboundLocalError: local variable 'time_frame' referenced before assignment
+2025-08-13 21:48:38,466 - ERROR - Error in main loop for NVDA: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-13 21:53:53,586 - INFO - Running strategy for NVDA at 2025-08-13 15:53:53.586278-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-13 21:53:53,588 - INFO - Starting Tick Producer...
+2025-08-13 21:53:53,588 - ERROR - Error in strategy for NVDA: local variable 'time_frame' referenced before assignment
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 435, in get_historical_and_live_data
+    producer.run(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 91, in run
+    live_symbols_config = self.setup_tick_buffers(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 38, in setup_tick_buffers
+    ticker, time_frame, safe_historical_end
+UnboundLocalError: local variable 'time_frame' referenced before assignment
+2025-08-13 21:53:54,429 - ERROR - Error in main loop for NVDA: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 60, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-13 22:09:17,609 - INFO - Running strategy for NVDA at 2025-08-13 16:09:17.609939-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-13 22:09:17,612 - INFO - Starting Tick Producer...
+2025-08-13 22:09:17,612 - ERROR - Error in strategy for NVDA: local variable 'time_frame' referenced before assignment
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 437, in get_historical_and_live_data
+    producer.run(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 92, in run
+    live_symbols_config = self.setup_tick_buffers(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 38, in setup_tick_buffers
+    ticker, time_frame, safe_historical_end
+UnboundLocalError: local variable 'time_frame' referenced before assignment
+2025-08-13 22:09:18,373 - INFO - Market closed
+2025-08-13 22:09:18,373 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-13 22:12:18,318 - INFO - Running strategy for NVDA at 2025-08-13 16:12:18.317626-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-13 22:12:18,319 - INFO - Starting Tick Producer...
+2025-08-13 22:12:18,320 - ERROR - Error in strategy for NVDA: local variable 'time_frame' referenced before assignment
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 437, in get_historical_and_live_data
+    producer.run(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 92, in run
+    live_symbols_config = self.setup_tick_buffers(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 38, in setup_tick_buffers
+    ticker, time_frame, safe_historical_end
+UnboundLocalError: local variable 'time_frame' referenced before assignment
+2025-08-13 22:12:19,004 - INFO - Market closed
+2025-08-13 22:12:19,004 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-13 22:15:06,778 - INFO - Running strategy for NVDA at 2025-08-13 16:15:06.778495-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-13 22:15:06,780 - INFO - Starting Tick Producer...
+2025-08-13 22:15:06,781 - ERROR - Error in strategy for NVDA: local variable 'time_frame' referenced before assignment
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 438, in get_historical_and_live_data
+    producer.run(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 93, in run
+    live_symbols_config = self.setup_tick_buffers(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 39, in setup_tick_buffers
+    ticker, time_frame, safe_historical_end
+UnboundLocalError: local variable 'time_frame' referenced before assignment
+2025-08-13 22:15:07,475 - INFO - Market closed
+2025-08-13 22:15:07,475 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-13 22:16:26,411 - INFO - Running strategy for NVDA at 2025-08-13 16:16:26.411938-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-13 22:16:26,411 - INFO - Running strategy for NVDA at 2025-08-13 16:16:26.411938-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-13 22:16:26,413 - INFO - Starting Tick Producer...
+2025-08-13 22:16:26,413 - INFO - Starting Tick Producer...
+2025-08-13 22:16:26,414 - ERROR - Error in strategy for NVDA: local variable 'time_frame' referenced before assignment
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 438, in get_historical_and_live_data
+    producer.run(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 93, in run
+    live_symbols_config = self.setup_tick_buffers(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 39, in setup_tick_buffers
+    ticker, time_frame, safe_historical_end
+UnboundLocalError: local variable 'time_frame' referenced before assignment
+2025-08-13 22:16:26,414 - ERROR - Error in strategy for NVDA: local variable 'time_frame' referenced before assignment
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 438, in get_historical_and_live_data
+    producer.run(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 93, in run
+    live_symbols_config = self.setup_tick_buffers(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 39, in setup_tick_buffers
+    ticker, time_frame, safe_historical_end
+UnboundLocalError: local variable 'time_frame' referenced before assignment
+2025-08-13 22:16:27,190 - INFO - Market closed
+2025-08-13 22:16:27,190 - INFO - Market closed
+2025-08-13 22:16:27,190 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-13 22:16:27,190 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-13 22:20:23,119 - INFO - Running strategy for NVDA at 2025-08-13 16:20:23.118675-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-13 22:20:23,120 - INFO - Starting Tick Producer...
+2025-08-13 22:20:23,121 - ERROR - Error in strategy for NVDA: local variable 'time_frame' referenced before assignment
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 438, in get_historical_and_live_data
+    producer.run(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 93, in run
+    live_symbols_config = self.setup_tick_buffers(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 39, in setup_tick_buffers
+    ticker, time_frame, safe_historical_end
+UnboundLocalError: local variable 'time_frame' referenced before assignment
+2025-08-13 22:20:23,839 - INFO - Market closed
+2025-08-13 22:20:23,839 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-13 22:21:19,449 - INFO - Running strategy for NVDA at 2025-08-13 16:21:19.448829-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-13 22:21:19,451 - INFO - Starting Tick Producer...
+2025-08-13 22:21:19,452 - ERROR - Error in strategy for NVDA: local variable 'time_frame' referenced before assignment
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 437, in get_historical_and_live_data
+    producer.run(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 92, in run
+    live_symbols_config = self.setup_tick_buffers(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 38, in setup_tick_buffers
+    ticker, time_frame, safe_historical_end
+UnboundLocalError: local variable 'time_frame' referenced before assignment
+2025-08-13 22:21:20,108 - INFO - Market closed
+2025-08-13 22:21:20,108 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-13 22:21:56,665 - INFO - Running strategy for NVDA at 2025-08-13 16:21:56.665227-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-13 22:21:56,668 - INFO - Starting Tick Producer...
+2025-08-13 22:21:56,668 - ERROR - Error in strategy for NVDA: local variable 'time_frame' referenced before assignment
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 437, in get_historical_and_live_data
+    producer.run(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 92, in run
+    live_symbols_config = self.setup_tick_buffers(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 37, in setup_tick_buffers
+    ticker, time_frame, safe_historical_end
+UnboundLocalError: local variable 'time_frame' referenced before assignment
+2025-08-13 22:21:57,391 - INFO - Market closed
+2025-08-13 22:21:57,391 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-13 22:22:55,674 - INFO - Running strategy for NVDA at 2025-08-13 16:22:55.674623-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-13 22:22:55,676 - INFO - Starting Tick Producer...
+2025-08-13 22:22:55,676 - ERROR - Error in strategy for NVDA: local variable 'time_frame' referenced before assignment
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 439, in get_historical_and_live_data
+    producer.run(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 92, in run
+    live_symbols_config = self.setup_tick_buffers(tickers_config)
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 37, in setup_tick_buffers
+    ticker, time_frame, safe_historical_end
+UnboundLocalError: local variable 'time_frame' referenced before assignment
+2025-08-13 22:22:56,367 - INFO - Market closed
+2025-08-13 22:22:56,367 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-13 22:24:29,428 - INFO - Running strategy for NVDA at 2025-08-13 16:24:29.428285-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-13 22:24:29,430 - INFO - Starting Tick Producer...
+2025-08-13 22:24:29,431 - ERROR - Error fetching historical end time for dataset GLBX.MDP3: name 'self' is not defined
+2025-08-13 22:24:30,129 - INFO - Market closed
+2025-08-13 22:24:30,129 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-14 00:11:58,897 - INFO - Running strategy for NVDA at 2025-08-13 18:11:58.897859-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-14 00:11:58,900 - ERROR - Error in strategy for NVDA: 'TickProducer' object has no attribute 'setup_tick_buffers_for_ticker'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 457, in get_historical_and_live_data
+    tick_buffer = producer.setup_tick_buffers_for_ticker(ticker, tickers_config)
+AttributeError: 'TickProducer' object has no attribute 'setup_tick_buffers_for_ticker'
+2025-08-14 00:11:59,563 - INFO - Market closed
+2025-08-14 00:11:59,563 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 67, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-14 01:59:01,196 - INFO - Running strategy for NVDA at 2025-08-13 19:59:01.196122-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-14 01:59:01,200 - ERROR - Error in strategy for NVDA: 'TickProducer' object has no attribute 'setup_tick_buffers_for_ticker'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 50, in ema_strategy
+    df = get_historical_and_live_data(
+  File "D:\sde\Tim\tasty-schwab-trader-BE\get_historical_data.py", line 458, in get_historical_and_live_data
+    tick_buffer = producer.setup_tick_buffers_for_ticker(ticker, tickers_config)
+AttributeError: 'TickProducer' object has no attribute 'setup_tick_buffers_for_ticker'
+2025-08-14 01:59:02,144 - INFO - Market closed
+2025-08-14 01:59:02,144 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 68, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-14 02:05:26,836 - INFO - Running strategy for NVDA at 2025-08-13 20:05:26.836460-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-14 02:05:26,839 - ERROR - Error fetching historical end time for dataset GLBX.MDP3: name 'historical_client' is not defined
+2025-08-14 02:05:26,840 - ERROR - Failed to get data for NVDA
+2025-08-14 02:05:26,840 - ERROR - Error in strategy for NVDA: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 60, in ema_strategy
+    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+TypeError: 'NoneType' object is not subscriptable
+2025-08-14 02:05:27,624 - INFO - Market closed
+2025-08-14 02:05:27,624 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 68, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-14 02:49:10,502 - INFO - Running strategy for NVDA at 2025-08-13 20:49:10.501952-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-14 02:49:10,502 - ERROR - Error getting data for NVDA: [Errno 2] No such file or directory: 'jsons/tickers.json'
+2025-08-14 02:49:10,502 - ERROR - Error in strategy for NVDA: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 60, in ema_strategy
+    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+TypeError: 'NoneType' object is not subscriptable
+2025-08-14 02:49:11,225 - INFO - Market closed
+2025-08-14 02:49:11,225 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 68, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-14 07:26:46,234 - INFO - Running strategy for NVDA at 2025-08-14 01:26:46.234765-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-14 07:26:46,234 - INFO - Running strategy for NVDA at 2025-08-14 01:26:46.234765-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-14 07:26:46,235 - ERROR - Error getting data for NVDA: [Errno 2] No such file or directory: 'jsons/tickers.json'
+2025-08-14 07:26:46,235 - ERROR - Error getting data for NVDA: [Errno 2] No such file or directory: 'jsons/tickers.json'
+2025-08-14 07:26:46,235 - ERROR - Error in strategy for NVDA: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 60, in ema_strategy
+    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+TypeError: 'NoneType' object is not subscriptable
+2025-08-14 07:26:46,235 - ERROR - Error in strategy for NVDA: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 60, in ema_strategy
+    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+TypeError: 'NoneType' object is not subscriptable

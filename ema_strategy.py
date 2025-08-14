@@ -9,7 +9,7 @@ import json
 from datetime import datetime
 import pytz
 from config import *
-from get_historical_data import get_historical_and_live_data
+from tick_producer import get_historical_and_live_data
 
 
 def ema_strategy(ticker, logger):
@@ -55,19 +55,20 @@ def ema_strategy(ticker, logger):
         )
         # print("df", df)  # TODO
 
-        # if trend_line_1 == "EMA":
-        #     df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
-        # elif trend_line_1 == "SMA":
-        #     df["trend1"] = df["close"].rolling(window=int(period_1)).mean()
-        # elif trend_line_1 == "WilderSmoother":
-        #     df["trend1"] = wilders_smoothing(df, length=int(period_1))
 
-        # if trend_line_2 == "EMA":
-        #     df["trend2"] = df["close"].ewm(span=int(period_2)).mean()
-        # elif trend_line_2 == "SMA":
-        #     df["trend2"] = df["close"].rolling(window=int(period_2)).mean()
-        # elif trend_line_2 == "WilderSmoother":
-        #     df["trend2"] = wilders_smoothing(df, length=int(period_2))
+        if trend_line_1 == "EMA":
+            df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+        elif trend_line_1 == "SMA":
+            df["trend1"] = df["close"].rolling(window=int(period_1)).mean()
+        elif trend_line_1 == "WilderSmoother":
+            df["trend1"] = wilders_smoothing(df, length=int(period_1))
+
+        if trend_line_2 == "EMA":
+            df["trend2"] = df["close"].ewm(span=int(period_2)).mean()
+        elif trend_line_2 == "SMA":
+            df["trend2"] = df["close"].rolling(window=int(period_2)).mean()
+        elif trend_line_2 == "WilderSmoother":
+            df["trend2"] = wilders_smoothing(df, length=int(period_2))
 
         # Long_condition = (
         #     df.iloc[-1]["trend1"] > df.iloc[-1]["trend2"]
