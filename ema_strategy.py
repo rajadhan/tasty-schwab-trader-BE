@@ -49,7 +49,6 @@ def ema_strategy(ticker, logger):
         trades = load_json(trade_file)
         df = get_historical_and_live_data(
             ticker=ticker,
-            timeframe=timeframe,
             logger=logger,
             strategy="ema"
         )

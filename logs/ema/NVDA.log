@@ -337,3 +337,115 @@ Traceback (most recent call last):
   File "D:\sde\Tim\tasty-schwab-trader-BE\ema_strategy.py", line 60, in ema_strategy
     df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
 TypeError: 'NoneType' object is not subscriptable
+2025-08-14 09:16:27,183 - INFO - Running strategy for NVDA at 2025-08-14 02:16:27.183157-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-14 09:16:27,184 - ERROR - Error getting data for NVDA: name 'tickers_config' is not defined
+2025-08-14 09:16:27,185 - ERROR - Error in strategy for NVDA: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 60, in ema_strategy
+    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+                   ~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-08-14 12:31:26,700 - INFO - Running strategy for NVDA at 2025-08-14 05:31:26.700211-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-14 12:31:28,616 - ERROR - Ticker NVDA not found in buffers
+2025-08-14 12:31:28,617 - ERROR - Error in strategy for NVDA: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 60, in ema_strategy
+    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+                   ~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-08-14 12:49:23,103 - INFO - Running strategy for NVDA at 2025-08-14 05:49:23.103705-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-14 12:49:24,378 - ERROR - Ticker NVDA not found in buffers
+2025-08-14 12:49:24,378 - ERROR - Error in strategy for NVDA: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 60, in ema_strategy
+    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+                   ~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-08-14 12:50:05,311 - INFO - Running strategy for NVDA at 2025-08-14 05:50:05.311763-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-14 12:50:06,997 - ERROR - Ticker NVDA not found in buffers
+2025-08-14 12:50:06,998 - ERROR - Error in strategy for NVDA: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 60, in ema_strategy
+    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+                   ~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-08-14 12:50:30,182 - INFO - Running strategy for NVDA at 2025-08-14 05:50:30.182203-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-14 12:50:30,183 - ERROR - Error getting data for NVDA: too many values to unpack (expected 2)
+2025-08-14 12:50:30,183 - ERROR - Error in strategy for NVDA: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 60, in ema_strategy
+    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+                   ~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-08-14 12:51:30,924 - INFO - Running strategy for NVDA at 2025-08-14 05:51:30.924710-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-14 12:51:30,926 - ERROR - Error getting data for NVDA: too many values to unpack (expected 2)
+2025-08-14 12:51:30,926 - ERROR - Error in strategy for NVDA: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 60, in ema_strategy
+    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+                   ~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-08-14 12:53:27,367 - INFO - Running strategy for NVDA at 2025-08-14 05:53:27.367725-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-14 12:53:29,053 - ERROR - Ticker NVDA not found in buffers
+2025-08-14 12:53:29,054 - ERROR - Error in strategy for NVDA: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 60, in ema_strategy
+    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+                   ~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-08-14 13:06:14,103 - INFO - Running strategy for NVDA at 2025-08-14 06:06:14.103531-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-14 13:06:16,377 - ERROR - Error getting data for NVDA: 'TickProducer' object has no attribute 'get_available_schema_end_time'
+2025-08-14 13:06:16,378 - ERROR - Error in strategy for NVDA: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 59, in ema_strategy
+    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+                   ~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-08-14 14:24:44,487 - INFO - Running strategy for NVDA at 2025-08-14 07:24:44.487229-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-14 14:24:46,040 - ERROR - Ticker NVDA not found in buffers
+2025-08-14 14:24:46,040 - ERROR - Error in strategy for NVDA: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 59, in ema_strategy
+    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+                   ~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-08-14 14:39:01,879 - INFO - Running strategy for NVDA at 2025-08-14 07:39:01.879332-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-14 14:39:01,880 - ERROR - Error getting data for NVDA: configure_logger() missing 1 required positional argument: 'strategy'
+2025-08-14 14:39:01,880 - ERROR - Error in strategy for NVDA: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 59, in ema_strategy
+    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+                   ~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-08-14 14:40:57,279 - INFO - Running strategy for NVDA at 2025-08-14 07:40:57.279926-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-14 14:40:57,280 - ERROR - Error getting data for NVDA: configure_logger() missing 1 required positional argument: 'strategy'
+2025-08-14 14:40:57,281 - ERROR - Error in strategy for NVDA: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 59, in ema_strategy
+    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+                   ~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-08-14 14:41:44,691 - INFO - Running strategy for NVDA at 2025-08-14 07:41:44.691604-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-14 14:41:44,693 - ERROR - Error getting data for NVDA: configure_logger() missing 1 required positional argument: 'strategy'
+2025-08-14 14:41:44,694 - ERROR - Error in strategy for NVDA: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 59, in ema_strategy
+    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+                   ~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-08-14 14:41:53,433 - INFO - Running strategy for NVDA at 2025-08-14 07:41:53.433293-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-14 14:41:53,434 - ERROR - Error getting data for NVDA: configure_logger() missing 1 required positional argument: 'strategy'
+2025-08-14 14:41:53,434 - ERROR - Error in strategy for NVDA: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 59, in ema_strategy
+    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+                   ~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-08-14 14:42:41,065 - INFO - Running strategy for NVDA at 2025-08-14 07:42:41.065223-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-14 14:42:41,067 - ERROR - Error getting data for NVDA: name 'tick_size' is not defined
+2025-08-14 14:42:41,067 - ERROR - Error in strategy for NVDA: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 59, in ema_strategy
+    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+                   ~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable

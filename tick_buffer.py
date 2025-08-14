@@ -1,33 +1,39 @@
-import threading
-import pandas as pd
-import databento as db
 import asyncio
+import databento as db
+import json
 import logging
-from datetime import datetime, timedelta, timezone
+import os
+import pandas as pd
 import pytz
+import threading
+from datetime import datetime, timedelta, timezone
 from utils import configure_logger  # Ensure this is correctly imported from your utils module
 
+
 class TickDataBuffer:
-    def __init__(self, ticker, tick_size, db_api_key=None):
+    def __init__(self, ticker, time_frame, redis_client, max_period, logger):
         self.ticker = ticker
-        self.tick_size = tick_size
+        self.time_frame = time_frame
+        self.redis_client = redis_client
+        self.max_period = max_period
+        self.logger = logger
         self.buffer = []
         self.processed_bars = []
         self.lock = threading.Lock()
-        # Note: configure_logger needs to be imported from utils
-        self.logger = configure_logger(ticker)
         self.new_bar_event = threading.Event()
         self.historical_loaded = False
-        self.live_client = None
         self.live_session = None
-
+        
+        # Initialize Databento clients
+        db_api_key = os.getenv("DATABENTO_API_KEY")
         if db_api_key:
             self.db_client = db.Historical(key=db_api_key)
             self.live_client = db.Live(key=db_api_key)
-            print(f"Live clienttt {self.live_client} initialized with API key.")
+            self.logger.info(f"Initialized Databento clients with API key")
         else:
             self.db_client = db.Historical()
             self.live_client = db.Live()
+            self.logger.info(f"Initialized Databento clients without API key")
 
 
     def warmup_with_historical_ticks(self, symbol, dataset, start, end, schema='trades'):
@@ -101,7 +107,7 @@ class TickDataBuffer:
                 self.logger.info(f"Using intraday replay starting from {start_time}")
             
             # Create live session
-            self.live_session = self.live_client
+            self.live_session = self.live_client.create_session()
             
             # Subscribe to the symbol with optional start time for intraday replay
             self.live_session.subscribe(
@@ -178,6 +184,39 @@ class TickDataBuffer:
             'close': prices[-1],
             'volume': sum(volumes)
         }
+        bar = self.tick_buffer._create_bar_from_ticks()
+
+        if bar:
+            bar_data = {
+                "symbol": self.ticker,
+                "timestamp": bar["timestamp"].isoformat(),
+                "open": bar["open"],
+                "high": bar["high"],
+                "low": bar["low"],
+                "close": bar["close"],
+                "volume": bar["volume"],
+            }
+
+            # ---- Publish to Redis Pub/Sub channel ----
+            channel = f"tick_bars:{self.ticker}"
+            self.redis_client.publish(channel, json.dumps(bar_data))
+
+            # ---- Store in Redis ZSET for count-based access ----
+            zset_key = f"bars_history:{self.ticker}"
+            timestamp_score = int(
+                pd.Timestamp(bar["timestamp"]).timestamp()
+            )  # seconds since epoch
+            self.redis_client.zadd(zset_key, {json.dumps(bar_data): timestamp_score})
+
+            # ---- Trim ZSET to only keep the latest max_period items ----
+            # Remove all but the latest max_period items (highest scores)
+            self.redis_client.zremrangebyrank(zset_key, 0, -(self.max_period + 2))
+
+            self.logger.info(
+                f"ZSET updated for {self.ticker} with timestamp {timestamp_score}"
+            )
+
+        return bar
 
     def get_dataframe(self, min_bars=5):
         with self.lock:

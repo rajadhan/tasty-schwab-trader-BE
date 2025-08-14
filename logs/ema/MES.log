@@ -333,3 +333,199 @@ Traceback (most recent call last):
   File "D:\sde\Tim\tasty-schwab-trader-BE\main_equities.py", line 47, in main_strategy_loop
     [timeframe, *_] = get_strategy_prarams(ticker, logger)
 TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-14 09:16:27,183 - INFO - Running strategy for /MES at 2025-08-14 02:16:27.183620-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-14 09:16:27,185 - ERROR - Error getting data for /MES: name 'tickers_config' is not defined
+2025-08-14 09:16:27,186 - ERROR - Error in strategy for /MES: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 60, in ema_strategy
+    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+                   ~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-08-14 09:16:29,145 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 47, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-14 12:31:26,700 - INFO - Running strategy for /MES at 2025-08-14 05:31:26.700776-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-14 12:31:28,420 - ERROR - Ticker /MES not found in buffers
+2025-08-14 12:31:28,420 - ERROR - Error in strategy for /MES: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 60, in ema_strategy
+    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+                   ~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-08-14 12:31:28,615 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 47, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-14 12:49:23,104 - INFO - Running strategy for /MES at 2025-08-14 05:49:23.103976-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-14 12:49:24,760 - ERROR - Ticker /MES not found in buffers
+2025-08-14 12:49:24,760 - ERROR - Error in strategy for /MES: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 60, in ema_strategy
+    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+                   ~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-08-14 12:49:24,936 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 47, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-14 12:50:05,312 - INFO - Running strategy for /MES at 2025-08-14 05:50:05.312021-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-14 12:50:06,830 - ERROR - Ticker /MES not found in buffers
+2025-08-14 12:50:06,830 - ERROR - Error in strategy for /MES: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 60, in ema_strategy
+    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+                   ~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-08-14 12:50:06,993 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 47, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-14 12:50:30,181 - INFO - Running strategy for /MES at 2025-08-14 05:50:30.181814-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-14 12:50:30,182 - ERROR - Error getting data for /MES: too many values to unpack (expected 2)
+2025-08-14 12:50:30,183 - ERROR - Error in strategy for /MES: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 60, in ema_strategy
+    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+                   ~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-08-14 12:50:30,521 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 47, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-14 12:51:30,925 - INFO - Running strategy for /MES at 2025-08-14 05:51:30.925316-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-14 12:51:30,926 - ERROR - Error getting data for /MES: too many values to unpack (expected 2)
+2025-08-14 12:51:30,926 - ERROR - Error in strategy for /MES: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 60, in ema_strategy
+    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+                   ~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-08-14 12:51:31,247 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 47, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-14 12:53:27,367 - INFO - Running strategy for /MES at 2025-08-14 05:53:27.367292-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-14 12:53:30,172 - ERROR - Ticker /MES not found in buffers
+2025-08-14 12:53:30,173 - ERROR - Error in strategy for /MES: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 60, in ema_strategy
+    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+                   ~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-08-14 12:53:30,338 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 47, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-14 13:06:14,104 - INFO - Running strategy for /MES at 2025-08-14 06:06:14.104057-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-14 13:06:15,624 - ERROR - Error getting data for /MES: 'TickProducer' object has no attribute 'get_available_schema_end_time'
+2025-08-14 13:06:15,624 - ERROR - Error in strategy for /MES: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 59, in ema_strategy
+    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+                   ~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-08-14 13:06:15,796 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 47, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-14 14:24:44,487 - INFO - Running strategy for /MES at 2025-08-14 07:24:44.487590-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-14 14:24:46,402 - ERROR - Ticker /MES not found in buffers
+2025-08-14 14:24:46,418 - ERROR - Error in strategy for /MES: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 59, in ema_strategy
+    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+                   ~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-08-14 14:24:46,616 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 47, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-14 14:39:01,880 - INFO - Running strategy for /MES at 2025-08-14 07:39:01.879971-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-14 14:39:01,906 - ERROR - Error getting data for /MES: configure_logger() missing 1 required positional argument: 'strategy'
+2025-08-14 14:39:01,906 - ERROR - Error in strategy for /MES: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 59, in ema_strategy
+    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+                   ~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-08-14 14:39:02,265 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 47, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-14 14:40:57,280 - INFO - Running strategy for /MES at 2025-08-14 07:40:57.280054-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-14 14:40:57,280 - ERROR - Error getting data for /MES: configure_logger() missing 1 required positional argument: 'strategy'
+2025-08-14 14:40:57,281 - ERROR - Error in strategy for /MES: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 59, in ema_strategy
+    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+                   ~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-08-14 14:40:57,611 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 47, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-14 14:41:44,692 - INFO - Running strategy for /MES at 2025-08-14 07:41:44.692110-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-14 14:41:44,693 - ERROR - Error getting data for /MES: configure_logger() missing 1 required positional argument: 'strategy'
+2025-08-14 14:41:44,693 - ERROR - Error in strategy for /MES: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 59, in ema_strategy
+    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+                   ~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-08-14 14:41:45,090 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 47, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-14 14:41:53,433 - INFO - Running strategy for /MES at 2025-08-14 07:41:53.433673-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-14 14:41:53,434 - ERROR - Error getting data for /MES: configure_logger() missing 1 required positional argument: 'strategy'
+2025-08-14 14:41:53,434 - ERROR - Error in strategy for /MES: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 59, in ema_strategy
+    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+                   ~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-08-14 14:41:53,721 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 47, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-14 14:42:41,065 - INFO - Running strategy for /MES at 2025-08-14 07:42:41.065473-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-14 14:42:41,067 - ERROR - Error getting data for /MES: name 'tick_size' is not defined
+2025-08-14 14:42:41,067 - ERROR - Error in strategy for /MES: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 59, in ema_strategy
+    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+                   ~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-08-14 14:42:41,435 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 47, in main_strategy_loop
+    [timeframe, *_] = get_strategy_prarams(ticker, logger)
+                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'

@@ -550,3 +550,17 @@ def validate_strategy_config(ticker, strategy_type, config):
         return True, "Configuration is valid"
     except Exception as e:
         return False, f"Error validating config: {str(e)}"
+
+
+def get_dataset(ticker):
+    if ticker.startswith("/"):  # for CME futures
+        return "GLBX.MDP3"
+    else:  # for stocks
+        return "XNAS.ITCH"
+
+
+def get_symbol_for_data(ticker):
+    if ticker.startswith("/"):
+        return get_active_exchange_symbol(ticker)
+    else:
+        return ticker
