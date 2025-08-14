@@ -449,3 +449,11 @@ Traceback (most recent call last):
     df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
                    ~~^^^^^^^^^
 TypeError: 'NoneType' object is not subscriptable
+2025-08-14 14:46:23,816 - INFO - Running strategy for NVDA at 2025-08-14 07:46:23.816609-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-14 14:46:28,221 - ERROR - Historical data not loaded for NVDA
+2025-08-14 14:46:28,222 - ERROR - Error in strategy for NVDA: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "D:\work\work\Tim McKenna\Tim\backend\ema_strategy.py", line 59, in ema_strategy
+    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+                   ~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
