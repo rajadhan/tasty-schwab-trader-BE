@@ -59,7 +59,7 @@ class TickProducer:
             safe_historical_start_time = get_historical_start_time(ticker,time_frame, safe_historical_end_time)
             historical_end_time = safe_historical_end_time.isoformat()
             historical_start_time = safe_historical_start_time.isoformat()
-            ticker_for_data = get_active_exchange_symbol(ticker) if ticker.startswith('/') else ticker
+            ticker_for_data = get_symbol_for_data(ticker)
             
             if is_tick_timeframe(time_frame):
                 self._setup_tick_based_buffer(
@@ -81,9 +81,8 @@ class TickProducer:
             buffer = TickDataBufferWithRedis(
                 ticker=ticker_for_data,
                 tick_size=tick_size,
-                redis_client=REDIS_CLIENT,
-                db_api_key=DB_API_KEY,
-                max_period=max_period
+                max_period=max_period,
+                logger=self.logger
             )
             self.tick_buffers[ticker_for_data] = buffer
             print(f"Initialized TICK-BASED buffer for {ticker_for_data} with tick size {tick_size}")
@@ -183,9 +182,9 @@ class TickProducer:
 class TickDataBufferWithRedis(TickDataBuffer):
     """Extended TickDataBuffer that publishes bars to Redis"""
 
-    def __init__(self, ticker, tick_size, redis_client, db_api_key, max_period):
-        super().__init__(ticker, tick_size, db_api_key)
-        self.redis_client = redis_client
+    def __init__(self, ticker, tick_size, max_period, logger):
+        super().__init__(ticker, tick_size, max_period, logger)
+        self.redis_client = REDIS_CLIENT
         self.max_period = max_period
 
     def _create_bar_from_ticks(self):

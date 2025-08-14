@@ -5,18 +5,33 @@ import logging
 import os
 import pandas as pd
 import pytz
+import redis
 import threading
 from datetime import datetime, timedelta, timezone
-from utils import configure_logger  # Ensure this is correctly imported from your utils module
+from utils import configure_logger, extract_tick_count
+
+
+# Global clients - created once and reused
+DB_API_KEY = os.getenv("DATABENTO_API_KEY")
+REDIS_HOST = os.getenv("REDIS_HOST", "localhost")
+REDIS_PORT = int(os.getenv("REDIS_PORT", 6379))
+REDIS_DB = int(os.getenv("REDIS_DB", 0))
+
+# Global Redis client
+REDIS_CLIENT = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, db=REDIS_DB)
+
+# Global Databento clients
+HISTORICAL_CLIENT = db.Historical(DB_API_KEY)
+LIVE_CLIENT = db.Live(key=DB_API_KEY)
 
 
 class TickDataBuffer:
-    def __init__(self, ticker, time_frame, redis_client, historical_client, live_client, max_period, logger):
+    def __init__(self, ticker, tick_size, max_period, logger):
         self.ticker = ticker
-        self.time_frame = time_frame
-        self.redis_client = redis_client
-        self.historical_client = historical_client
-        self.live_client = live_client
+        self.tick_size = tick_size
+        self.redis_client = REDIS_CLIENT
+        self.historical_client = HISTORICAL_CLIENT
+        self.live_client = LIVE_CLIENT
         self.max_period = max_period
         self.logger = logger
         self.buffer = []
@@ -29,7 +44,6 @@ class TickDataBuffer:
 
     def warmup_with_historical_ticks(self, symbol, dataset, start, end, schema='trades'):
         try:
-            print("ffififi", symbol, dataset, start, end)
             self.logger.info(f"Fetching historical tick data for warmup: {symbol} [{start} to {end}]")
             print(f"Fetching historical tick data for warmup: {symbol} [{start} to {end}]")
             # Fetch raw trade ticks
@@ -44,7 +58,7 @@ class TickDataBuffer:
             print(f"Resolved symbol: {result}")
 
             try:
-                data = self.historical_client.timeseries.getrange(
+                data = self.historical_client.timeseries.get_range(
                     dataset=dataset,
                     symbols=[symbol],
                     schema=schema,
@@ -56,12 +70,6 @@ class TickDataBuffer:
                 data = pd.DataFrame()
             df = data.to_df()
             print(f"Data fetched for {symbol}: {df}")
-            if df.empty:
-                self.logger.warning(f"No historical data returned for {symbol}")
-                return
-
-            # Only print the first row if DataFrame is not empty
-            print(df.iloc[0].to_json(indent=4))
             if df.empty:
                 self.logger.warning(f"No historical data returned for {symbol}")
                 return
