@@ -95,7 +95,6 @@ class TickProducer:
             end=historical_end_time,
             schema="trades"
         )
-        print("tick buffers", self.tick_buffers[ticker_for_data])
 
         # Setup live feed
         bars = self.tick_buffers[ticker_for_data].processed_bars
@@ -160,12 +159,11 @@ class TickProducer:
     async def start_live_feeds(self, live_symbols_config):
         """Start live data feeds"""
         if live_symbols_config:
-            self.live_manager = DatabentoLiveManager(
-                db_api_key=os.getenv("DATABENTO_API_KEY")
-            )
+            self.live_manager = DatabentoLiveManager()
             self.logger.info(
                 f"Starting live feeds for: {list(live_symbols_config.keys())}"
             )
+            
             await self.live_manager.start_live_feeds(
                 live_symbols_config, self.tick_buffers
             )
@@ -217,7 +215,7 @@ class TickDataBufferWithRedis(TickDataBuffer):
             # Remove all but the latest max_period items (highest scores)
             self.redis_client.zremrangebyrank(zset_key, 0, -(self.max_period + 2))
 
-            self.logger.info(f"ZSET updated for {self.ticker} with timestamp {timestamp_score}")
+            # self.logger.info(f"ZSET updated for {self.ticker} with timestamp {timestamp_score}")
 
         return bar
 
@@ -379,6 +377,7 @@ def get_historical_and_live_data(ticker, logger, strategy):
 
             if tick_buffer.historical_loaded:
                 # Return the DataFrame from the tick buffer
+                print("fifififif")
                 df = tick_buffer.get_dataframe(min_bars=50)  # Get at least 50 bars
                 logger.info(f"Successfully retrieved {len(df)} bars for {ticker}")
                 return df
