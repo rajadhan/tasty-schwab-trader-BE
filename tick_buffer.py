@@ -111,7 +111,7 @@ class TickDataBuffer:
                 self.logger.info(f"Using intraday replay starting from {start_time}")
             
             # Create live session
-            self.live_session = self.live_client.create_session()
+            self.live_session = self.live_client
             
             # Subscribe to the symbol with optional start time for intraday replay
             self.live_session.subscribe(
