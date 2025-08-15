@@ -684,3 +684,59 @@ Traceback (most recent call last):
     [timeframe, *_] = get_strategy_prarams(ticker, logger)
                       ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
 TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-15 07:55:23,091 - INFO - Running strategy for NVDA at 2025-08-14 18:55:23.090552-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-15 07:57:07,831 - INFO - Successfully retrieved 50 bars for NVDA
+2025-08-15 07:57:08,820 - INFO - Market closed
+2025-08-15 07:57:08,820 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/main_equities.py", line 68, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-15 08:09:55,689 - INFO - Running strategy for NVDA at 2025-08-14 19:09:55.689247-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-15 08:10:53,698 - INFO - Successfully retrieved 50 bars for NVDA
+2025-08-15 08:10:54,153 - INFO - Market closed
+2025-08-15 08:10:54,154 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/main_equities.py", line 68, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-15 08:20:15,652 - INFO - Running strategy for NVDA at 2025-08-14 19:20:15.652631-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-15 08:21:12,392 - INFO - Successfully retrieved 50 bars for NVDA
+2025-08-15 08:21:12,979 - INFO - Market closed
+2025-08-15 08:21:12,979 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/main_equities.py", line 68, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-15 09:06:20,337 - INFO - Running strategy for NVDA at 2025-08-14 20:06:20.337671-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-15 09:07:26,080 - INFO - Successfully retrieved 50 bars for NVDA
+2025-08-15 09:07:27,047 - INFO - Market closed
+2025-08-15 09:07:27,048 - ERROR - Error in main loop for NVDA: store_logs() missing 1 required positional argument: 'strategy'
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/main_equities.py", line 68, in main_strategy_loop
+    store_logs(ticker)
+TypeError: store_logs() missing 1 required positional argument: 'strategy'
+2025-08-15 16:11:49,517 - INFO - Running strategy for NVDA at 2025-08-15 03:11:49.517482-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-15 16:12:42,915 - INFO - Successfully retrieved 50 bars for NVDA
+2025-08-15 16:14:28,434 - INFO - Running strategy for NVDA at 2025-08-15 03:14:28.434300-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-15 16:14:46,216 - INFO - Running strategy for NVDA at 2025-08-15 03:14:46.216260-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-15 16:15:42,137 - INFO - Successfully retrieved 50 bars for NVDA
+2025-08-15 16:37:38,231 - INFO - Running strategy for NVDA at 2025-08-15 03:37:38.231503-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-15 16:38:34,514 - ERROR - Error getting data for NVDA: name 'tick_buffers' is not defined
+2025-08-15 16:38:34,520 - ERROR - Error in strategy for NVDA: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 58, in ema_strategy
+    df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
+TypeError: 'NoneType' object is not subscriptable
+2025-08-15 16:46:36,424 - INFO - Running strategy for NVDA at 2025-08-15 03:46:36.424848-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-15 16:47:26,133 - INFO - Successfully retrieved 50 bars for NVDA
+2025-08-15 16:48:45,275 - INFO - Running strategy for NVDA at 2025-08-15 03:48:45.275398-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-15 16:49:35,706 - INFO - Successfully retrieved 50 bars for NVDA
+2025-08-15 17:13:09,391 - INFO - Running strategy for NVDA at 2025-08-15 04:13:09.391217-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-15 17:14:02,205 - INFO - Successfully retrieved 50 bars for NVDA
+2025-08-15 17:17:23,825 - INFO - Running strategy for NVDA at 2025-08-15 04:17:23.825428-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-15 17:18:19,357 - INFO - Successfully retrieved 50 bars for NVDA
+2025-08-15 17:39:03,124 - INFO - Running strategy for NVDA at 2025-08-15 04:39:03.124026-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-15 17:40:02,037 - INFO - Successfully retrieved 50 bars for NVDA
+2025-08-15 17:50:18,031 - INFO - Running strategy for NVDA at 2025-08-15 04:50:18.031558-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(1, EMA), (1, EMA)
+2025-08-15 17:51:11,852 - INFO - Successfully retrieved 50 bars for NVDA

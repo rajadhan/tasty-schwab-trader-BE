@@ -98,32 +98,30 @@ class TickDataBuffer:
 
             self.buffer = []  # clear residuals
             self.historical_loaded = True
-            self.logger.info(f"Historical warmup completed for {symbol}: {len(self.processed_bars)} bars created.")
+            # self.logger.info(f"Historical warmup completed for {symbol}: {len(self.processed_bars)} bars created.")
 
         except Exception as e:
             self.logger.error(f"Databento historical warmup failed for {symbol}: {e}", exc_info=True)
 
-    async def start_live_subscription(self, symbol, dataset, schema='trades', start_time=0):
+
+    async def start_live_subscription(self, symbol, dataset, schema, start_time=0):
         """Start live tick data subscription using Databento Live API with optional replay"""
         try:
             self.logger.info(f"Starting live tick subscription for {symbol} on dataset {dataset}")
             if start_time:
                 self.logger.info(f"Using intraday replay starting from {start_time}")
-            
             # Create live session
-            self.live_session = self.live_client.create_session()
-            
+            self.live_session = self.live_client
             # Subscribe to the symbol with optional start time for intraday replay
             self.live_session.subscribe(
                 dataset=dataset,
                 schema=schema,
                 symbols=[symbol],
                 stype_in="raw_symbol",
-                start=0  # This enables intraday replay from specified time
+                start=start_time
             )
             
             self.logger.info(f"Successfully subscribed to live data for {symbol}")
-            
             # Start the session to begin receiving data
             # self.live_session.start()
             
@@ -190,13 +188,16 @@ class TickDataBuffer:
         }
         
 
-    def get_dataframe(self, min_bars=5):
+    def get_dataframe(self, min_bars):
         with self.lock:
             if len(self.processed_bars) < min_bars:
                 return None
             df = pd.DataFrame(self.processed_bars[-min_bars:])
+            print("df - 50", df)
             df['timestamp'] = pd.to_datetime(df['timestamp'])
+            print("df timestamp", df['timestamp'])
             df.set_index('timestamp', inplace=True)
+            print("df", df)
             return df
 
     def wait_for_new_bar(self, timeout=None):
@@ -209,8 +210,7 @@ class TickDataBuffer:
 class DatabentoLiveManager:
     """Manages live Databento subscriptions for multiple symbols"""
     
-    def __init__(self, db_api_key=None):
-        self.db_api_key = db_api_key
+    def __init__(self):
         self.live_tasks = {}
         self.logger = logging.getLogger('DatabentoLiveManager')
         
@@ -221,7 +221,6 @@ class DatabentoLiveManager:
         tick_buffers: dict of ticker -> TickDataBuffer instances
         """
         tasks = []
-        
         for symbol, config in symbols_config.items():
             if symbol in tick_buffers:
                 dataset = config.get('dataset', 'GLBX.MDP3')
