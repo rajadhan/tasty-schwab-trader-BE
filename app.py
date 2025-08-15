@@ -7,6 +7,7 @@ from flask_cors import CORS
 from functools import wraps
 from main_equities import run_every_week
 from utils import ticker_data_path_for_strategy
+from config import *
 
 app = Flask(__name__, static_folder="static")
 CORS(app)
