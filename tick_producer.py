@@ -397,51 +397,17 @@ def get_historical_start_time(ticker, timeframe, end_time):
         return start_time
 
 
-def get_historical_and_live_data(ticker, logger, strategy):
+def run_historical_and_live_data(strategy):
     """Get historical data for a specific ticker and return as DataFrame"""
-    try:
-        # Load ticker configuration
-        ticker_data_path = ticker_data_path_for_strategy(strategy)
-        tickers_config = load_json(ticker_data_path)
+    # Load ticker configuration
+    ticker_data_path = ticker_data_path_for_strategy(strategy)
+    tickers_config = load_json(ticker_data_path)
+
+    # Create producer
+    producer = TickProducer()
+    producer.run(tickers_config)
         
-        if ticker not in tickers_config:
-            logger.error(f"Ticker {ticker} not found in configuration")
-            return None
 
-        # Create producer
-        producer = TickProducer()
-        producer.run(tickers_config)
-        # Get the tick buffer for this ticker
-        ticker_for_data = get_symbol_for_data(ticker)
-        if ticker_for_data in producer.tick_buffers:
-            buffer = producer.tick_buffers[ticker_for_data]
-            
-            # Get processed bars from the buffer
-            if hasattr(buffer, 'processed_bars') and buffer.processed_bars:
-                # Convert bars to DataFrame
-                df = pd.DataFrame(buffer.processed_bars)
-                if not df.empty:
-                    # Ensure we have the required columns
-                    required_columns = ['timestamp', 'open', 'high', 'low', 'close', 'volume']
-                    for col in required_columns:
-                        if col not in df.columns:
-                            logger.error(f"Missing required column: {col}")
-                            return None
-                    
-                    # Sort by timestamp
-                    df = df.sort_values('timestamp').reset_index(drop=True)
-                    logger.info(f"Retrieved {len(df)} bars for {ticker}")
-                    return df
-                else:
-                    logger.warning(f"No bars available for {ticker}")
-                    return None
-            else:
-                logger.warning(f"No processed bars available for {ticker}")
-                return None
-        else:
-            logger.error(f"No tick buffer found for {ticker}")
-            return None
-
-    except Exception as e:
-        logger.error(f"Error getting data for {ticker}: {e}")
-        return None
+def get_historical_and_live_data(ticker, logger, strategy):
+    producer = TickProducer()
+    producer.tick_buffers

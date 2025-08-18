@@ -99,7 +99,7 @@ class TickDataBuffer:
 
             self.buffer = []  # clear residuals
             self.historical_loaded = True
-            # self.logger.info(f"Historical warmup completed for {symbol}: {len(self.processed_bars)} bars created.")
+            self.logger.info(f"Historical warmup completed for {symbol}: {len(self.processed_bars)} bars created.")
 
         except Exception as e:
             self.logger.error(f"Databento historical warmup failed for {symbol}: {e}", exc_info=True)
@@ -123,18 +123,15 @@ class TickDataBuffer:
             )
             
             self.logger.info(f"Successfully subscribed to live data for {symbol}")
-            # Start the session to begin receiving data
-            await self.live_session.start()
             
             # Start consuming live data
             async for record in self.live_session:
-                print("real time record", record)
                 try:
                     # Only process trade messages (rtype == "Trade" or check type)
                     if hasattr(record, "price") and hasattr(record, "size"):
                         tick_data = {
                             'timestamp': pd.to_datetime(record.ts_event, unit='ns'),
-                            'price': record.price,
+                            'price': record.price / 1e9,
                             'volume': record.size,
                             'symbol': symbol
                         }

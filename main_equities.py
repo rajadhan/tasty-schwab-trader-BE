@@ -1,6 +1,7 @@
 import threading
 import json
 from time import sleep
+from tick_producer import run_historical_and_live_data
 from utils import (
     is_holiday,
     is_within_time_range,
@@ -23,8 +24,9 @@ def main_strategy_loop(ticker):
     """Main loop for running the strategy for a specific ticker."""
     strategy, config = get_strategy_for_ticker(ticker)
     logger = configure_logger(ticker, strategy)
-    # ema_strategy(ticker, logger)
-    
+    run_historical_and_live_data(strategy)
+
+    print(f"Starting main loop for {ticker} with strategy {strategy}")
     try:
         while is_within_time_range():
             _, today_date = get_current_datetime()
