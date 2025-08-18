@@ -9,3 +9,5 @@ TA-Lib
 schedule
 databento
 redis
+pandas_ta
+nympy

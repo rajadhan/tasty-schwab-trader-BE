@@ -250,7 +250,7 @@ class TickDataBufferWithRedis(TickDataBuffer):
             # Remove all but the latest max_period items (highest scores)
             self.redis_client.zremrangebyrank(zset_key, 0, -(self.max_period + 2))
 
-            # self.logger.info(f"ZSET updated for {self.ticker} with timestamp {timestamp_score}")
+            self.logger.info(f"ZSET updated for {self.ticker} with timestamp {timestamp_score}")
 
         return bar
 
@@ -395,19 +395,4 @@ def get_historical_start_time(ticker, timeframe, end_time):
     else:
         start_time = end_time - timedelta(days=3)
         return start_time
-
-
-def run_historical_and_live_data(strategy):
-    """Get historical data for a specific ticker and return as DataFrame"""
-    # Load ticker configuration
-    ticker_data_path = ticker_data_path_for_strategy(strategy)
-    tickers_config = load_json(ticker_data_path)
-
-    # Create producer
-    producer = TickProducer()
-    producer.run(tickers_config)
         
-
-def get_historical_and_live_data(ticker, logger, strategy):
-    producer = TickProducer()
-    producer.tick_buffers

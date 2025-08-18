@@ -1,18 +1,20 @@
 from utils import (
     get_strategy_prarams,
-    wilders_smoothing,
     get_trade_file_path,
-    load_json
+    is_tick_timeframe,
+    load_json,
+    wilders_smoothing,
 )
 
 import json
 from datetime import datetime
 import pytz
 from config import *
-from tick_producer import get_historical_and_live_data
+from strategy_consumer import StrategyConsumer
 
 
 def ema_strategy(ticker, logger):
+    strategy_consumer = StrategyConsumer()
     """Runs the trading strategy for the specified ticker."""
     try:
         [
@@ -47,11 +49,21 @@ def ema_strategy(ticker, logger):
         tasty_qty = int(tasty_qty)
         trade_file = get_trade_file_path(ticker, "ema")
         trades = load_json(trade_file)
-        df = get_historical_and_live_data(
-            ticker=ticker,
-            logger=logger,
-            strategy="ema"
-        )
+
+        if is_tick_timeframe(timeframe):
+            logger.info(f"Using tick data for {ticker}")
+            df = strategy_consumer.get_tick_dataframe(ticker, int(period_1), int(period_2))  # This returns DataFrame and updated number of bars needed for each period
+
+            if df is None:
+                logger.warning(f"No tick data available for {ticker}")
+                return
+        else:
+            logger.info(f"Using historical data for {ticker}")
+            df = historical_data(ticker, timeframe, logger=logger)
+
+        if df is None or len(df) < max(int(period_1), int(period_2)):
+            logger.warning(f"Insufficient data for {ticker}")
+            return
 
         # Calculate trend lines
         ## Trend Line 1

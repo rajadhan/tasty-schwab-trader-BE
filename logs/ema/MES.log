@@ -2375,3 +2375,304 @@ Traceback (most recent call last):
   File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 59, in ema_strategy
     df["trend1"] = df["close"].ewm(span=int(period_1)).mean()
 TypeError: 'NoneType' object is not subscriptable
+2025-08-18 20:06:10,109 - INFO - MAIN STRATEGY STARTED for /MES
+2025-08-18 20:06:10,122 - ERROR - Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/strategy_consumer.py", line 214, in main_strategy_loop
+    time_frame, *_ = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-18 21:13:18,456 - INFO - MAIN STRATEGY STARTED for /MES
+2025-08-18 21:13:23,812 - INFO - Running strategy ema for /MES
+2025-08-18 21:13:23,814 - INFO - Running strategy for /MES at 2025-08-18 08:13:23.814715-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:13:23,815 - ERROR - Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:13:28,989 - INFO - Running strategy ema for /MES
+2025-08-18 21:13:28,990 - INFO - Running strategy for /MES at 2025-08-18 08:13:28.990107-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:13:28,990 - ERROR - Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:13:34,166 - INFO - Running strategy ema for /MES
+2025-08-18 21:13:34,166 - INFO - Running strategy for /MES at 2025-08-18 08:13:34.166693-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:13:34,166 - ERROR - Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:13:39,332 - INFO - Running strategy ema for /MES
+2025-08-18 21:13:39,333 - INFO - Running strategy for /MES at 2025-08-18 08:13:39.333581-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:13:39,333 - ERROR - Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:13:44,508 - INFO - Running strategy ema for /MES
+2025-08-18 21:13:44,509 - INFO - Running strategy for /MES at 2025-08-18 08:13:44.509530-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:13:44,510 - ERROR - Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:13:49,699 - INFO - Running strategy ema for /MES
+2025-08-18 21:13:49,703 - INFO - Running strategy for /MES at 2025-08-18 08:13:49.703062-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:13:49,704 - ERROR - Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:13:54,881 - INFO - Running strategy ema for /MES
+2025-08-18 21:13:54,882 - INFO - Running strategy for /MES at 2025-08-18 08:13:54.882581-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:13:54,883 - ERROR - Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:14:00,060 - INFO - Running strategy ema for /MES
+2025-08-18 21:14:00,061 - INFO - Running strategy for /MES at 2025-08-18 08:14:00.061460-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:14:00,061 - ERROR - Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:14:05,259 - INFO - Running strategy ema for /MES
+2025-08-18 21:14:05,262 - INFO - Running strategy for /MES at 2025-08-18 08:14:05.262187-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:14:05,262 - ERROR - Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:14:10,596 - INFO - Running strategy ema for /MES
+2025-08-18 21:14:10,600 - INFO - Running strategy for /MES at 2025-08-18 08:14:10.600339-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:14:10,601 - ERROR - Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:14:15,797 - INFO - Running strategy ema for /MES
+2025-08-18 21:14:15,801 - INFO - Running strategy for /MES at 2025-08-18 08:14:15.800955-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:14:15,802 - ERROR - Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:14:21,031 - INFO - Running strategy ema for /MES
+2025-08-18 21:14:21,034 - INFO - Running strategy for /MES at 2025-08-18 08:14:21.034028-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:14:21,034 - ERROR - Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:14:26,241 - INFO - Running strategy ema for /MES
+2025-08-18 21:14:26,243 - INFO - Running strategy for /MES at 2025-08-18 08:14:26.243601-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:14:26,244 - ERROR - Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:14:31,429 - INFO - Running strategy ema for /MES
+2025-08-18 21:14:31,432 - INFO - Running strategy for /MES at 2025-08-18 08:14:31.432620-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:14:31,433 - ERROR - Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:14:36,608 - INFO - Running strategy ema for /MES
+2025-08-18 21:14:36,609 - INFO - Running strategy for /MES at 2025-08-18 08:14:36.609916-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:14:36,610 - ERROR - Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:14:41,794 - INFO - Running strategy ema for /MES
+2025-08-18 21:14:41,798 - INFO - Running strategy for /MES at 2025-08-18 08:14:41.798122-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:14:41,799 - ERROR - Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:14:46,967 - INFO - Running strategy ema for /MES
+2025-08-18 21:14:46,968 - INFO - Running strategy for /MES at 2025-08-18 08:14:46.968426-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:14:46,969 - ERROR - Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:14:52,191 - INFO - Running strategy ema for /MES
+2025-08-18 21:14:52,194 - INFO - Running strategy for /MES at 2025-08-18 08:14:52.194182-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:14:52,195 - ERROR - Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:14:57,399 - INFO - Running strategy ema for /MES
+2025-08-18 21:14:57,400 - INFO - Running strategy for /MES at 2025-08-18 08:14:57.400280-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:14:57,400 - ERROR - Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:15:02,557 - INFO - Running strategy ema for /MES
+2025-08-18 21:15:02,561 - INFO - Running strategy for /MES at 2025-08-18 08:15:02.561001-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:15:02,562 - ERROR - Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:15:07,738 - INFO - Running strategy ema for /MES
+2025-08-18 21:15:07,739 - INFO - Running strategy for /MES at 2025-08-18 08:15:07.739244-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:15:07,739 - ERROR - Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:15:12,904 - INFO - Running strategy ema for /MES
+2025-08-18 21:15:12,909 - INFO - Running strategy for /MES at 2025-08-18 08:15:12.909616-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:15:12,912 - ERROR - Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:15:18,105 - INFO - Running strategy ema for /MES
+2025-08-18 21:15:18,106 - INFO - Running strategy for /MES at 2025-08-18 08:15:18.106220-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:15:18,106 - ERROR - Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:15:23,270 - INFO - Running strategy ema for /MES
+2025-08-18 21:15:23,271 - INFO - Running strategy for /MES at 2025-08-18 08:15:23.270998-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:15:23,271 - ERROR - Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:15:28,499 - INFO - Running strategy ema for /MES
+2025-08-18 21:15:28,501 - INFO - Running strategy for /MES at 2025-08-18 08:15:28.501642-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:15:28,502 - ERROR - Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:17:17,317 - INFO - MAIN STRATEGY STARTED for /MES
+2025-08-18 21:17:22,696 - INFO - Running strategy ema for /MES
+2025-08-18 21:17:22,697 - INFO - Running strategy for /MES at 2025-08-18 08:17:22.697274-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:17:22,697 - ERROR - Error in strategy for /MES: name 'time_frame' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 54, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'time_frame' is not defined
+2025-08-18 21:17:27,891 - INFO - Running strategy ema for /MES
+2025-08-18 21:17:27,894 - INFO - Running strategy for /MES at 2025-08-18 08:17:27.894174-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:17:27,894 - ERROR - Error in strategy for /MES: name 'time_frame' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 54, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'time_frame' is not defined
+2025-08-18 21:17:33,070 - INFO - Running strategy ema for /MES
+2025-08-18 21:17:33,071 - INFO - Running strategy for /MES at 2025-08-18 08:17:33.071450-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:17:33,072 - ERROR - Error in strategy for /MES: name 'time_frame' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 54, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'time_frame' is not defined
+2025-08-18 21:17:38,247 - INFO - Running strategy ema for /MES
+2025-08-18 21:17:38,249 - INFO - Running strategy for /MES at 2025-08-18 08:17:38.249241-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:17:38,249 - ERROR - Error in strategy for /MES: name 'time_frame' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 54, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'time_frame' is not defined
+2025-08-18 21:17:43,417 - INFO - Running strategy ema for /MES
+2025-08-18 21:17:43,418 - INFO - Running strategy for /MES at 2025-08-18 08:17:43.418372-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:17:43,418 - ERROR - Error in strategy for /MES: name 'time_frame' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 54, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'time_frame' is not defined
+2025-08-18 21:17:48,607 - INFO - Running strategy ema for /MES
+2025-08-18 21:17:48,609 - INFO - Running strategy for /MES at 2025-08-18 08:17:48.609043-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:17:48,609 - ERROR - Error in strategy for /MES: name 'time_frame' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 54, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'time_frame' is not defined
+2025-08-18 21:17:53,785 - INFO - Running strategy ema for /MES
+2025-08-18 21:17:53,786 - INFO - Running strategy for /MES at 2025-08-18 08:17:53.786722-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:17:53,787 - ERROR - Error in strategy for /MES: name 'time_frame' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 54, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'time_frame' is not defined
+2025-08-18 21:17:58,964 - INFO - Running strategy ema for /MES
+2025-08-18 21:17:58,970 - INFO - Running strategy for /MES at 2025-08-18 08:17:58.970327-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:17:58,971 - ERROR - Error in strategy for /MES: name 'time_frame' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 54, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'time_frame' is not defined
+2025-08-18 21:18:04,261 - INFO - Running strategy ema for /MES
+2025-08-18 21:18:04,262 - INFO - Running strategy for /MES at 2025-08-18 08:18:04.262676-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:18:04,262 - ERROR - Error in strategy for /MES: name 'time_frame' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 54, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'time_frame' is not defined
+2025-08-18 21:18:23,607 - INFO - MAIN STRATEGY STARTED for /MES
+2025-08-18 21:18:28,919 - INFO - Running strategy ema for /MES
+2025-08-18 21:18:28,923 - INFO - Running strategy for /MES at 2025-08-18 08:18:28.923539-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:18:28,923 - INFO - Using tick data for /MES
+2025-08-18 21:18:28,948 - WARNING - Insufficient data for /MES
+2025-08-18 21:18:34,139 - INFO - Running strategy ema for /MES
+2025-08-18 21:18:34,140 - INFO - Running strategy for /MES at 2025-08-18 08:18:34.140852-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:18:34,141 - INFO - Using tick data for /MES
+2025-08-18 21:18:34,142 - WARNING - Insufficient data for /MES
+2025-08-18 21:18:39,337 - INFO - Running strategy ema for /MES
+2025-08-18 21:18:39,338 - INFO - Running strategy for /MES at 2025-08-18 08:18:39.338521-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:18:39,338 - INFO - Using tick data for /MES
+2025-08-18 21:18:39,340 - WARNING - Insufficient data for /MES
+2025-08-18 21:18:44,507 - INFO - Running strategy ema for /MES
+2025-08-18 21:18:44,508 - INFO - Running strategy for /MES at 2025-08-18 08:18:44.508433-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:18:44,508 - INFO - Using tick data for /MES
+2025-08-18 21:18:44,511 - WARNING - Insufficient data for /MES
+2025-08-18 21:18:49,701 - INFO - Running strategy ema for /MES
+2025-08-18 21:18:49,702 - INFO - Running strategy for /MES at 2025-08-18 08:18:49.702391-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:18:49,702 - INFO - Using tick data for /MES
+2025-08-18 21:18:49,703 - WARNING - Insufficient data for /MES
+2025-08-18 21:20:26,505 - INFO - MAIN STRATEGY STARTED for /MES
+2025-08-18 21:20:31,794 - INFO - Running strategy ema for /MES
+2025-08-18 21:20:31,795 - INFO - Running strategy for /MES at 2025-08-18 08:20:31.795400-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:20:31,796 - INFO - Using tick data for /MES
+2025-08-18 21:20:31,799 - WARNING - Insufficient data for /MES
+2025-08-18 21:20:36,999 - INFO - Running strategy ema for /MES
+2025-08-18 21:20:37,000 - INFO - Running strategy for /MES at 2025-08-18 08:20:37.000360-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:20:37,000 - INFO - Using tick data for /MES
+2025-08-18 21:20:37,002 - WARNING - Insufficient data for /MES
+2025-08-18 21:20:42,177 - INFO - Running strategy ema for /MES
+2025-08-18 21:20:42,178 - INFO - Running strategy for /MES at 2025-08-18 08:20:42.178202-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:20:42,179 - INFO - Using tick data for /MES
+2025-08-18 21:20:42,180 - WARNING - Insufficient data for /MES
+2025-08-18 21:30:44,751 - INFO - MAIN STRATEGY STARTED for /MES
+2025-08-18 21:30:50,064 - INFO - Running strategy ema for /MES
+2025-08-18 21:30:50,065 - INFO - Running strategy for /MES at 2025-08-18 08:30:50.065251-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:30:50,065 - INFO - Using tick data for /MES
+2025-08-18 21:30:50,066 - WARNING - Insufficient data for /MES
+2025-08-18 21:30:55,253 - INFO - Running strategy ema for /MES
+2025-08-18 21:30:55,254 - INFO - Running strategy for /MES at 2025-08-18 08:30:55.254240-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:30:55,254 - INFO - Using tick data for /MES
+2025-08-18 21:30:55,257 - WARNING - Insufficient data for /MES
+2025-08-18 21:31:00,432 - INFO - Running strategy ema for /MES
+2025-08-18 21:31:00,436 - INFO - Running strategy for /MES at 2025-08-18 08:31:00.435963-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:31:00,437 - INFO - Using tick data for /MES
+2025-08-18 21:31:00,442 - WARNING - Insufficient data for /MES
+2025-08-18 21:31:05,642 - INFO - Running strategy ema for /MES
+2025-08-18 21:31:05,643 - INFO - Running strategy for /MES at 2025-08-18 08:31:05.643810-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:31:05,644 - INFO - Using tick data for /MES
+2025-08-18 21:31:05,645 - WARNING - Insufficient data for /MES
+2025-08-18 21:31:10,842 - INFO - Running strategy ema for /MES
+2025-08-18 21:31:10,843 - INFO - Running strategy for /MES at 2025-08-18 08:31:10.843701-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:31:10,844 - INFO - Using tick data for /MES
+2025-08-18 21:31:10,845 - WARNING - Insufficient data for /MES

@@ -1,0 +1,610 @@
+2025-08-18 20:05:01,112 INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2025-08-18 20:05:01,113 INFO:werkzeug: * Restarting with stat
+2025-08-18 20:05:06,435 INFO:werkzeug:127.0.0.1 - - [18/Aug/2025 20:05:06] "OPTIONS /api/start-trading?strategy=ema HTTP/1.1" 200 -
+2025-08-18 20:05:06,466 INFO:werkzeug:127.0.0.1 - - [18/Aug/2025 20:05:06] "GET /api/start-trading?strategy=ema HTTP/1.1" 200 -
+2025-08-18 20:06:05,814 INFO:werkzeug: * Detected change in '/home/haruki/Documents/tasty-schwab-trader-BE/strategy_consumer.py', reloading
+2025-08-18 20:06:06,012 INFO:werkzeug: * Restarting with stat
+2025-08-18 20:06:10,099 INFO:werkzeug:127.0.0.1 - - [18/Aug/2025 20:06:10] "OPTIONS /api/start-trading?strategy=ema HTTP/1.1" 200 -
+2025-08-18 20:06:10,109 INFO:/MES:MAIN STRATEGY STARTED for /MES
+2025-08-18 20:06:10,122 ERROR:/MES:Error in main loop for /MES: get_strategy_prarams() missing 1 required positional argument: 'logger'
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/strategy_consumer.py", line 214, in main_strategy_loop
+    time_frame, *_ = get_strategy_prarams(ticker, logger)
+TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-18 20:06:10,124 INFO:werkzeug:127.0.0.1 - - [18/Aug/2025 20:06:10] "GET /api/start-trading?strategy=ema HTTP/1.1" 200 -
+2025-08-18 20:08:35,936 INFO:werkzeug: * Detected change in '/home/haruki/Documents/tasty-schwab-trader-BE/strategy_consumer.py', reloading
+2025-08-18 20:08:36,160 INFO:werkzeug: * Restarting with stat
+2025-08-18 20:08:40,537 INFO:werkzeug: * Restarting with stat
+2025-08-18 20:08:42,376 INFO:werkzeug: * Restarting with stat
+2025-08-18 21:11:15,750 INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2025-08-18 21:11:15,751 INFO:werkzeug: * Restarting with stat
+2025-08-18 21:11:20,566 INFO:werkzeug:127.0.0.1 - - [18/Aug/2025 21:11:20] "OPTIONS /api/start-trading?strategy=ema HTTP/1.1" 200 -
+2025-08-18 21:11:20,581 INFO:werkzeug:127.0.0.1 - - [18/Aug/2025 21:11:20] "GET /api/start-trading?strategy=ema HTTP/1.1" 200 -
+2025-08-18 21:13:15,509 INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2025-08-18 21:13:15,510 INFO:werkzeug: * Restarting with stat
+2025-08-18 21:13:18,435 INFO:werkzeug:127.0.0.1 - - [18/Aug/2025 21:13:18] "OPTIONS /api/start-trading?strategy=ema HTTP/1.1" 200 -
+2025-08-18 21:13:18,456 INFO:/MES:MAIN STRATEGY STARTED for /MES
+2025-08-18 21:13:23,812 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:13:23,814 INFO:/MES:Running strategy for /MES at 2025-08-18 08:13:23.814715-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:13:23,815 ERROR:/MES:Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:13:28,989 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:13:28,990 INFO:/MES:Running strategy for /MES at 2025-08-18 08:13:28.990107-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:13:28,990 ERROR:/MES:Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:13:34,166 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:13:34,166 INFO:/MES:Running strategy for /MES at 2025-08-18 08:13:34.166693-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:13:34,166 ERROR:/MES:Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:13:39,332 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:13:39,333 INFO:/MES:Running strategy for /MES at 2025-08-18 08:13:39.333581-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:13:39,333 ERROR:/MES:Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:13:44,508 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:13:44,509 INFO:/MES:Running strategy for /MES at 2025-08-18 08:13:44.509530-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:13:44,510 ERROR:/MES:Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:13:49,699 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:13:49,703 INFO:/MES:Running strategy for /MES at 2025-08-18 08:13:49.703062-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:13:49,704 ERROR:/MES:Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:13:54,881 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:13:54,882 INFO:/MES:Running strategy for /MES at 2025-08-18 08:13:54.882581-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:13:54,883 ERROR:/MES:Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:14:00,060 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:14:00,061 INFO:/MES:Running strategy for /MES at 2025-08-18 08:14:00.061460-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:14:00,061 ERROR:/MES:Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:14:05,259 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:14:05,262 INFO:/MES:Running strategy for /MES at 2025-08-18 08:14:05.262187-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:14:05,262 ERROR:/MES:Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:14:10,596 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:14:10,600 INFO:/MES:Running strategy for /MES at 2025-08-18 08:14:10.600339-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:14:10,601 ERROR:/MES:Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:14:15,797 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:14:15,801 INFO:/MES:Running strategy for /MES at 2025-08-18 08:14:15.800955-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:14:15,802 ERROR:/MES:Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:14:21,031 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:14:21,034 INFO:/MES:Running strategy for /MES at 2025-08-18 08:14:21.034028-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:14:21,034 ERROR:/MES:Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:14:26,241 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:14:26,243 INFO:/MES:Running strategy for /MES at 2025-08-18 08:14:26.243601-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:14:26,244 ERROR:/MES:Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:14:31,429 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:14:31,432 INFO:/MES:Running strategy for /MES at 2025-08-18 08:14:31.432620-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:14:31,433 ERROR:/MES:Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:14:36,608 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:14:36,609 INFO:/MES:Running strategy for /MES at 2025-08-18 08:14:36.609916-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:14:36,610 ERROR:/MES:Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:14:41,794 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:14:41,798 INFO:/MES:Running strategy for /MES at 2025-08-18 08:14:41.798122-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:14:41,799 ERROR:/MES:Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:14:46,967 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:14:46,968 INFO:/MES:Running strategy for /MES at 2025-08-18 08:14:46.968426-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:14:46,969 ERROR:/MES:Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:14:52,191 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:14:52,194 INFO:/MES:Running strategy for /MES at 2025-08-18 08:14:52.194182-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:14:52,195 ERROR:/MES:Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:14:57,399 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:14:57,400 INFO:/MES:Running strategy for /MES at 2025-08-18 08:14:57.400280-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:14:57,400 ERROR:/MES:Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:15:02,557 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:15:02,561 INFO:/MES:Running strategy for /MES at 2025-08-18 08:15:02.561001-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:15:02,562 ERROR:/MES:Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:15:07,738 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:15:07,739 INFO:/MES:Running strategy for /MES at 2025-08-18 08:15:07.739244-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:15:07,739 ERROR:/MES:Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:15:12,904 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:15:12,909 INFO:/MES:Running strategy for /MES at 2025-08-18 08:15:12.909616-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:15:12,912 ERROR:/MES:Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:15:18,105 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:15:18,106 INFO:/MES:Running strategy for /MES at 2025-08-18 08:15:18.106220-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:15:18,106 ERROR:/MES:Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:15:23,270 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:15:23,271 INFO:/MES:Running strategy for /MES at 2025-08-18 08:15:23.270998-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:15:23,271 ERROR:/MES:Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:15:28,499 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:15:28,501 INFO:/MES:Running strategy for /MES at 2025-08-18 08:15:28.501642-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:15:28,502 ERROR:/MES:Error in strategy for /MES: name 'is_tick_timeframe' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 53, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'is_tick_timeframe' is not defined
+2025-08-18 21:15:30,831 INFO:werkzeug: * Detected change in '/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py', reloading
+2025-08-18 21:15:31,041 INFO:werkzeug: * Restarting with stat
+2025-08-18 21:15:33,896 INFO:werkzeug: * Detected change in '/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py', reloading
+2025-08-18 21:15:34,161 INFO:werkzeug: * Restarting with stat
+2025-08-18 21:15:41,483 INFO:werkzeug: * Detected change in '/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py', reloading
+2025-08-18 21:15:41,674 INFO:werkzeug: * Restarting with stat
+2025-08-18 21:15:47,723 INFO:werkzeug: * Restarting with stat
+2025-08-18 21:15:53,509 INFO:databento.live.client:terminating live client
+2025-08-18 21:15:53,509 INFO:databento.live.client:terminating live client
+2025-08-18 21:17:09,325 INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2025-08-18 21:17:09,326 INFO:werkzeug: * Restarting with stat
+2025-08-18 21:17:17,309 INFO:werkzeug:127.0.0.1 - - [18/Aug/2025 21:17:17] "OPTIONS /api/start-trading?strategy=ema HTTP/1.1" 200 -
+2025-08-18 21:17:17,317 INFO:/MES:MAIN STRATEGY STARTED for /MES
+2025-08-18 21:17:22,696 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:17:22,697 INFO:/MES:Running strategy for /MES at 2025-08-18 08:17:22.697274-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:17:22,697 ERROR:/MES:Error in strategy for /MES: name 'time_frame' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 54, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'time_frame' is not defined
+2025-08-18 21:17:27,891 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:17:27,894 INFO:/MES:Running strategy for /MES at 2025-08-18 08:17:27.894174-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:17:27,894 ERROR:/MES:Error in strategy for /MES: name 'time_frame' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 54, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'time_frame' is not defined
+2025-08-18 21:17:33,070 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:17:33,071 INFO:/MES:Running strategy for /MES at 2025-08-18 08:17:33.071450-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:17:33,072 ERROR:/MES:Error in strategy for /MES: name 'time_frame' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 54, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'time_frame' is not defined
+2025-08-18 21:17:38,247 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:17:38,249 INFO:/MES:Running strategy for /MES at 2025-08-18 08:17:38.249241-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:17:38,249 ERROR:/MES:Error in strategy for /MES: name 'time_frame' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 54, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'time_frame' is not defined
+2025-08-18 21:17:43,417 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:17:43,418 INFO:/MES:Running strategy for /MES at 2025-08-18 08:17:43.418372-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:17:43,418 ERROR:/MES:Error in strategy for /MES: name 'time_frame' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 54, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'time_frame' is not defined
+2025-08-18 21:17:48,607 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:17:48,609 INFO:/MES:Running strategy for /MES at 2025-08-18 08:17:48.609043-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:17:48,609 ERROR:/MES:Error in strategy for /MES: name 'time_frame' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 54, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'time_frame' is not defined
+2025-08-18 21:17:53,785 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:17:53,786 INFO:/MES:Running strategy for /MES at 2025-08-18 08:17:53.786722-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:17:53,787 ERROR:/MES:Error in strategy for /MES: name 'time_frame' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 54, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'time_frame' is not defined
+2025-08-18 21:17:58,964 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:17:58,970 INFO:/MES:Running strategy for /MES at 2025-08-18 08:17:58.970327-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:17:58,971 ERROR:/MES:Error in strategy for /MES: name 'time_frame' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 54, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'time_frame' is not defined
+2025-08-18 21:18:04,261 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:18:04,262 INFO:/MES:Running strategy for /MES at 2025-08-18 08:18:04.262676-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:18:04,262 ERROR:/MES:Error in strategy for /MES: name 'time_frame' is not defined
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py", line 54, in ema_strategy
+    if is_tick_timeframe(time_frame):
+NameError: name 'time_frame' is not defined
+2025-08-18 21:18:08,175 INFO:werkzeug: * Detected change in '/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py', reloading
+2025-08-18 21:18:08,405 INFO:werkzeug: * Restarting with stat
+2025-08-18 21:18:16,527 INFO:werkzeug: * Detected change in '/home/haruki/Documents/tasty-schwab-trader-BE/ema_strategy.py', reloading
+2025-08-18 21:18:16,718 INFO:werkzeug: * Restarting with stat
+2025-08-18 21:18:23,601 INFO:werkzeug:127.0.0.1 - - [18/Aug/2025 21:18:23] "OPTIONS /api/start-trading?strategy=ema HTTP/1.1" 200 -
+2025-08-18 21:18:23,607 INFO:/MES:MAIN STRATEGY STARTED for /MES
+2025-08-18 21:18:28,919 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:18:28,923 INFO:/MES:Running strategy for /MES at 2025-08-18 08:18:28.923539-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:18:28,923 INFO:/MES:Using tick data for /MES
+2025-08-18 21:18:28,948 WARNING:/MES:Insufficient data for /MES
+2025-08-18 21:18:34,139 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:18:34,140 INFO:/MES:Running strategy for /MES at 2025-08-18 08:18:34.140852-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:18:34,141 INFO:/MES:Using tick data for /MES
+2025-08-18 21:18:34,142 WARNING:/MES:Insufficient data for /MES
+2025-08-18 21:18:39,337 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:18:39,338 INFO:/MES:Running strategy for /MES at 2025-08-18 08:18:39.338521-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:18:39,338 INFO:/MES:Using tick data for /MES
+2025-08-18 21:18:39,340 WARNING:/MES:Insufficient data for /MES
+2025-08-18 21:18:44,507 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:18:44,508 INFO:/MES:Running strategy for /MES at 2025-08-18 08:18:44.508433-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:18:44,508 INFO:/MES:Using tick data for /MES
+2025-08-18 21:18:44,511 WARNING:/MES:Insufficient data for /MES
+2025-08-18 21:18:49,701 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:18:49,702 INFO:/MES:Running strategy for /MES at 2025-08-18 08:18:49.702391-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:18:49,702 INFO:/MES:Using tick data for /MES
+2025-08-18 21:18:49,703 WARNING:/MES:Insufficient data for /MES
+2025-08-18 21:18:53,942 INFO:databento.live.client:terminating live client
+2025-08-18 21:18:53,942 INFO:databento.live.client:terminating live client
+2025-08-18 21:20:23,796 INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2025-08-18 21:20:23,797 INFO:werkzeug: * Restarting with stat
+2025-08-18 21:20:26,493 INFO:werkzeug:127.0.0.1 - - [18/Aug/2025 21:20:26] "OPTIONS /api/start-trading?strategy=ema HTTP/1.1" 200 -
+2025-08-18 21:20:26,505 INFO:/MES:MAIN STRATEGY STARTED for /MES
+2025-08-18 21:20:31,794 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:20:31,795 INFO:/MES:Running strategy for /MES at 2025-08-18 08:20:31.795400-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:20:31,796 INFO:/MES:Using tick data for /MES
+2025-08-18 21:20:31,799 WARNING:/MES:Insufficient data for /MES
+2025-08-18 21:20:36,999 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:20:37,000 INFO:/MES:Running strategy for /MES at 2025-08-18 08:20:37.000360-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:20:37,000 INFO:/MES:Using tick data for /MES
+2025-08-18 21:20:37,002 WARNING:/MES:Insufficient data for /MES
+2025-08-18 21:20:42,177 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:20:42,178 INFO:/MES:Running strategy for /MES at 2025-08-18 08:20:42.178202-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:20:42,179 INFO:/MES:Using tick data for /MES
+2025-08-18 21:20:42,180 WARNING:/MES:Insufficient data for /MES
+2025-08-18 21:20:42,638 INFO:werkzeug: * Detected change in '/home/haruki/Documents/tasty-schwab-trader-BE/strategy_consumer.py', reloading
+2025-08-18 21:20:42,886 INFO:werkzeug: * Restarting with stat
+2025-08-18 21:27:59,417 INFO:werkzeug: * Detected change in '/home/haruki/Documents/tasty-schwab-trader-BE/main_equities.py', reloading
+2025-08-18 21:27:59,696 INFO:werkzeug: * Restarting with stat
+2025-08-18 21:28:14,393 INFO:werkzeug: * Detected change in '/home/haruki/Documents/tasty-schwab-trader-BE/main_equities.py', reloading
+2025-08-18 21:28:14,599 INFO:werkzeug: * Restarting with stat
+2025-08-18 21:28:41,443 INFO:werkzeug: * Detected change in '/home/haruki/Documents/tasty-schwab-trader-BE/tick_producer.py', reloading
+2025-08-18 21:28:41,723 INFO:werkzeug: * Restarting with stat
+2025-08-18 21:28:45,000 INFO:werkzeug: * Restarting with stat
+2025-08-18 21:28:47,346 INFO:werkzeug: * Restarting with stat
+2025-08-18 21:29:41,750 INFO:databento.live.client:terminating live client
+2025-08-18 21:29:41,750 INFO:databento.live.client:terminating live client
+2025-08-18 21:30:38,536 INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2025-08-18 21:30:38,537 INFO:werkzeug: * Restarting with stat
+2025-08-18 21:30:44,735 INFO:werkzeug:127.0.0.1 - - [18/Aug/2025 21:30:44] "OPTIONS /api/start-trading?strategy=ema HTTP/1.1" 200 -
+2025-08-18 21:30:44,751 INFO:/MES:MAIN STRATEGY STARTED for /MES
+2025-08-18 21:30:50,064 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:30:50,065 INFO:/MES:Running strategy for /MES at 2025-08-18 08:30:50.065251-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:30:50,065 INFO:/MES:Using tick data for /MES
+2025-08-18 21:30:50,066 WARNING:/MES:Insufficient data for /MES
+2025-08-18 21:30:55,253 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:30:55,254 INFO:/MES:Running strategy for /MES at 2025-08-18 08:30:55.254240-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:30:55,254 INFO:/MES:Using tick data for /MES
+2025-08-18 21:30:55,257 WARNING:/MES:Insufficient data for /MES
+2025-08-18 21:31:00,432 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:31:00,436 INFO:/MES:Running strategy for /MES at 2025-08-18 08:31:00.435963-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:31:00,437 INFO:/MES:Using tick data for /MES
+2025-08-18 21:31:00,442 WARNING:/MES:Insufficient data for /MES
+2025-08-18 21:31:05,642 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:31:05,643 INFO:/MES:Running strategy for /MES at 2025-08-18 08:31:05.643810-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:31:05,644 INFO:/MES:Using tick data for /MES
+2025-08-18 21:31:05,645 WARNING:/MES:Insufficient data for /MES
+2025-08-18 21:31:10,842 INFO:/MES:Running strategy ema for /MES
+2025-08-18 21:31:10,843 INFO:/MES:Running strategy for /MES at 2025-08-18 08:31:10.843701-04:00 with params: Schwab_QTY=0, Tasty_QTY=0 TRENDS=(9, EMA), (50, EMA)
+2025-08-18 21:31:10,844 INFO:/MES:Using tick data for /MES
+2025-08-18 21:31:10,845 WARNING:/MES:Insufficient data for /MES
+2025-08-18 21:33:54,713 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 21:33:54,715 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 21:33:54,725 INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2025-08-18 21:33:54,727 INFO:werkzeug: * Restarting with stat
+2025-08-18 21:33:55,831 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 21:33:55,833 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 21:34:19,497 INFO:werkzeug:127.0.0.1 - - [18/Aug/2025 21:34:19] "OPTIONS /api/start-trading?strategy=ema HTTP/1.1" 200 -
+2025-08-18 21:34:19,504 INFO:TickProducer:Starting Tick Producer...
+2025-08-18 21:34:21,184 INFO:TickProducer:/MES's schema range: {'start': '2010-06-06T00:00:00.000000000Z', 'end': '2025-08-18T12:30:00.000000000Z'}
+2025-08-18 21:34:21,216 INFO:TickProducer:Fetching historical tick data for warmup: MESU5 [2025-08-17T12:30:00+00:00 to 2025-08-18T12:30:00+00:00]
+2025-08-18 21:34:27,065 INFO:TickProducer:Fetched and parsed 38534 ticks for MESU5
+2025-08-18 21:34:27,067 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755468042
+2025-08-18 21:34:27,068 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755468120
+2025-08-18 21:34:27,069 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755468303
+2025-08-18 21:34:27,070 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755468444
+2025-08-18 21:34:27,071 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755468768
+2025-08-18 21:34:27,072 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755469109
+2025-08-18 21:34:27,072 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755469648
+2025-08-18 21:34:27,073 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755470326
+2025-08-18 21:34:27,074 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755471154
+2025-08-18 21:34:27,075 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755471920
+2025-08-18 21:34:27,075 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755473082
+2025-08-18 21:34:27,076 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755473855
+2025-08-18 21:34:27,077 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755474250
+2025-08-18 21:34:27,078 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755474605
+2025-08-18 21:34:27,078 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755475263
+2025-08-18 21:34:27,079 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755475870
+2025-08-18 21:34:27,080 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755476507
+2025-08-18 21:34:27,080 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755477679
+2025-08-18 21:34:27,083 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755478750
+2025-08-18 21:34:27,084 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755479927
+2025-08-18 21:34:27,085 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755480753
+2025-08-18 21:34:27,086 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755481821
+2025-08-18 21:34:27,086 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755482922
+2025-08-18 21:34:27,087 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755484035
+2025-08-18 21:34:27,088 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755486144
+2025-08-18 21:34:27,088 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755487918
+2025-08-18 21:34:27,089 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755489247
+2025-08-18 21:34:27,090 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755490399
+2025-08-18 21:34:27,091 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755491661
+2025-08-18 21:34:27,092 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755493498
+2025-08-18 21:34:27,092 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755494841
+2025-08-18 21:34:27,093 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755496718
+2025-08-18 21:34:27,094 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755497531
+2025-08-18 21:34:27,094 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755497976
+2025-08-18 21:34:27,095 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755498381
+2025-08-18 21:34:27,096 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755498841
+2025-08-18 21:34:27,097 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755499335
+2025-08-18 21:34:27,098 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755499404
+2025-08-18 21:34:27,098 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755499654
+2025-08-18 21:34:27,099 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755500152
+2025-08-18 21:34:27,100 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755500607
+2025-08-18 21:34:27,100 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755500959
+2025-08-18 21:34:27,101 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755501386
+2025-08-18 21:34:27,102 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755501774
+2025-08-18 21:34:27,103 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755502258
+2025-08-18 21:34:27,105 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755502430
+2025-08-18 21:34:27,106 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755502710
+2025-08-18 21:34:27,107 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755503237
+2025-08-18 21:34:27,108 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755504023
+2025-08-18 21:34:27,110 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755504412
+2025-08-18 21:34:27,111 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755504888
+2025-08-18 21:34:27,112 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755505414
+2025-08-18 21:34:27,112 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755505613
+2025-08-18 21:34:27,113 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755505950
+2025-08-18 21:34:27,114 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755506470
+2025-08-18 21:34:27,114 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755507037
+2025-08-18 21:34:27,115 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755507655
+2025-08-18 21:34:27,116 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755508676
+2025-08-18 21:34:27,118 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755508997
+2025-08-18 21:34:27,119 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755509361
+2025-08-18 21:34:27,120 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755510050
+2025-08-18 21:34:27,121 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755511038
+2025-08-18 21:34:27,122 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755511718
+2025-08-18 21:34:27,123 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755512956
+2025-08-18 21:34:27,124 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755513757
+2025-08-18 21:34:27,125 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755514576
+2025-08-18 21:34:27,125 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755515216
+2025-08-18 21:34:27,126 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755516055
+2025-08-18 21:34:27,127 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755516779
+2025-08-18 21:34:27,127 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755517440
+2025-08-18 21:34:27,128 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755518298
+2025-08-18 21:34:27,129 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755518666
+2025-08-18 21:34:27,130 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755519031
+2025-08-18 21:34:27,130 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755519692
+2025-08-18 21:34:27,131 INFO:TickProducer:Historical warmup completed for MESU5: 74 bars created.
+2025-08-18 21:34:27,135 INFO:TickProducer:Starting live feeds for: ['MESU5']
+2025-08-18 21:34:27,135 INFO:DatabentoLiveManager:Started live feed task for MESU5 with start_time: 1755519692964922698
+2025-08-18 21:34:27,135 INFO:TickProducer:Starting live tick subscription for MESU5 on dataset GLBX.MDP3
+2025-08-18 21:34:27,136 INFO:TickProducer:Using intraday replay starting from 1755519692964922698
+2025-08-18 21:34:27,136 INFO:databento.live.client:subscribing to trades:raw_symbol ['MESU5'] start=1755519692964922698 snapshot=False
+2025-08-18 21:34:27,136 INFO:databento.live.session:connecting to remote gateway
+2025-08-18 21:34:28,360 INFO:databento.live.session:authenticated session 1755795091
+2025-08-18 21:34:28,360 INFO:databento.live.protocol:sending subscription to trades:raw_symbol ['MESU5'] start=1755519692964922698 snapshot=False
+2025-08-18 21:34:28,361 INFO:TickProducer:Successfully subscribed to live data for MESU5
+2025-08-18 21:34:28,361 INFO:databento.live.client:starting live client
+2025-08-18 21:34:28,922 INFO:databento.live.protocol:gateway message: Subscription request 1 for trades data succeeded
+2025-08-18 21:34:28,923 INFO:databento.live.client:added symbology mapping MESU5 to 42002651
+2025-08-18 21:34:28,986 INFO:TickProducer:ZSET updated for MESU5 with timestamp 1755520307
+2025-08-18 21:34:28,986 INFO:TickProducer:Created new tick‐bar for MESU5: open=6464.75, high=6465.75, low=6463.0, close=6463.0, volume=1871
+2025-08-18 21:34:29,085 INFO:databento.live.protocol:gateway message: Finished trades replay
+2025-08-18 21:37:38,514 ERROR:TickProducer:Error in live subscription for MESU5: cannot schedule new futures after shutdown
+Traceback (most recent call last):
+  File "/home/haruki/.local/lib/python3.10/site-packages/databento/live/client.py", line 660, in __anext__
+    return self._dbn_queue.get_nowait()
+_queue.Empty
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/haruki/Documents/tasty-schwab-trader-BE/tick_buffer.py", line 128, in start_live_subscription
+    async for record in self.live_session:
+  File "/home/haruki/.local/lib/python3.10/site-packages/databento/live/client.py", line 664, in __anext__
+    return await loop.run_in_executor(
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 821, in run_in_executor
+    executor.submit(func, *args), loop=self)
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 167, in submit
+    raise RuntimeError('cannot schedule new futures after shutdown')
+RuntimeError: cannot schedule new futures after shutdown
+2025-08-18 21:54:54,077 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 21:54:54,079 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 21:54:54,090 INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2025-08-18 21:54:54,091 INFO:werkzeug: * Restarting with stat
+2025-08-18 21:54:55,241 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 21:54:55,242 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 21:55:00,258 INFO:werkzeug:127.0.0.1 - - [18/Aug/2025 21:55:00] "OPTIONS /api/start-trading?strategy=ema HTTP/1.1" 200 -
+2025-08-18 21:55:00,265 INFO:werkzeug:127.0.0.1 - - [18/Aug/2025 21:55:00] "[35m[1mGET /api/start-trading?strategy=ema HTTP/1.1[0m" 500 -
+2025-08-18 21:55:51,388 INFO:databento.live.client:terminating live client
+2025-08-18 21:55:51,389 INFO:databento.live.client:terminating live client
+2025-08-18 21:55:58,592 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 21:55:58,594 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 21:55:58,660 INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2025-08-18 21:55:58,661 INFO:werkzeug: * Restarting with stat
+2025-08-18 21:55:59,876 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 21:55:59,878 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 21:56:14,465 INFO:werkzeug:127.0.0.1 - - [18/Aug/2025 21:56:14] "OPTIONS /api/start-trading?strategy=ema HTTP/1.1" 200 -
+2025-08-18 21:56:14,494 INFO:werkzeug:127.0.0.1 - - [18/Aug/2025 21:56:14] "[35m[1mGET /api/start-trading?strategy=ema HTTP/1.1[0m" 500 -
+2025-08-18 21:57:10,061 INFO:werkzeug:127.0.0.1 - - [18/Aug/2025 21:57:10] "OPTIONS /api/start-trading?strategy=ema HTTP/1.1" 200 -
+2025-08-18 21:57:10,065 INFO:werkzeug:127.0.0.1 - - [18/Aug/2025 21:57:10] "[35m[1mGET /api/start-trading?strategy=ema HTTP/1.1[0m" 500 -
+2025-08-18 21:57:43,752 INFO:werkzeug: * Detected change in '/home/haruki/Documents/tasty-schwab-trader-BE/main_equities.py', reloading
+2025-08-18 21:57:44,425 INFO:werkzeug: * Restarting with stat
+2025-08-18 21:57:45,718 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 21:57:45,720 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 21:57:46,076 INFO:werkzeug: * Detected change in '/home/haruki/Documents/tasty-schwab-trader-BE/main_equities.py', reloading
+2025-08-18 21:57:46,269 INFO:werkzeug: * Restarting with stat
+2025-08-18 21:57:47,574 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 21:57:47,576 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 21:57:51,659 INFO:werkzeug: * Detected change in '/home/haruki/Documents/tasty-schwab-trader-BE/main_equities.py', reloading
+2025-08-18 21:57:52,013 INFO:werkzeug: * Restarting with stat
+2025-08-18 21:57:53,578 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 21:57:53,580 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 21:57:53,907 INFO:werkzeug:127.0.0.1 - - [18/Aug/2025 21:57:53] "OPTIONS /api/start-trading?strategy=ema HTTP/1.1" 200 -
+2025-08-18 21:57:53,916 INFO:werkzeug:127.0.0.1 - - [18/Aug/2025 21:57:53] "[35m[1mGET /api/start-trading?strategy=ema HTTP/1.1[0m" 500 -
+2025-08-18 21:58:02,624 INFO:werkzeug: * Detected change in '/home/haruki/Documents/tasty-schwab-trader-BE/main_equities.py', reloading
+2025-08-18 21:58:02,843 INFO:werkzeug: * Restarting with stat
+2025-08-18 21:58:04,051 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 21:58:04,054 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 21:58:50,674 INFO:werkzeug: * Detected change in '/home/haruki/Documents/tasty-schwab-trader-BE/main_equities.py', reloading
+2025-08-18 21:58:50,919 INFO:werkzeug: * Restarting with stat
+2025-08-18 21:58:51,640 INFO:databento.live.client:terminating live client
+2025-08-18 21:58:51,641 INFO:databento.live.client:terminating live client
+2025-08-18 21:58:55,060 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 21:58:55,064 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 21:58:55,079 INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2025-08-18 21:58:55,080 INFO:werkzeug: * Restarting with stat
+2025-08-18 21:58:56,295 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 21:58:56,298 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 21:58:57,471 INFO:werkzeug:127.0.0.1 - - [18/Aug/2025 21:58:57] "OPTIONS /api/start-trading?strategy=ema HTTP/1.1" 200 -
+2025-08-18 21:58:57,482 INFO:werkzeug:127.0.0.1 - - [18/Aug/2025 21:58:57] "[35m[1mGET /api/start-trading?strategy=ema HTTP/1.1[0m" 500 -
+2025-08-18 22:00:31,548 INFO:werkzeug: * Detected change in '/home/haruki/Documents/tasty-schwab-trader-BE/main_equities.py', reloading
+2025-08-18 22:00:31,799 INFO:werkzeug: * Restarting with stat
+2025-08-18 22:00:33,200 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 22:00:33,202 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 22:00:33,814 INFO:werkzeug: * Detected change in '/home/haruki/Documents/tasty-schwab-trader-BE/main_equities.py', reloading
+2025-08-18 22:00:34,141 INFO:werkzeug: * Restarting with stat
+2025-08-18 22:00:35,654 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 22:00:35,655 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 22:00:36,701 INFO:werkzeug:127.0.0.1 - - [18/Aug/2025 22:00:36] "OPTIONS /api/start-trading?strategy=ema HTTP/1.1" 200 -
+2025-08-18 22:00:36,712 INFO:werkzeug:127.0.0.1 - - [18/Aug/2025 22:00:36] "[35m[1mGET /api/start-trading?strategy=ema HTTP/1.1[0m" 500 -
+2025-08-18 22:09:16,714 INFO:werkzeug: * Detected change in '/home/haruki/Documents/tasty-schwab-trader-BE/main_equities.py', reloading
+2025-08-18 22:09:16,913 INFO:werkzeug: * Restarting with stat
+2025-08-18 22:09:18,125 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 22:09:18,126 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 22:09:20,994 INFO:werkzeug: * Detected change in '/home/haruki/Documents/tasty-schwab-trader-BE/main_equities.py', reloading
+2025-08-18 22:09:21,178 INFO:werkzeug: * Restarting with stat
+2025-08-18 22:09:22,196 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 22:09:22,197 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 22:09:29,091 INFO:werkzeug: * Detected change in '/home/haruki/Documents/tasty-schwab-trader-BE/main_equities.py', reloading
+2025-08-18 22:09:29,296 INFO:werkzeug: * Restarting with stat
+2025-08-18 22:09:30,492 INFO:werkzeug: * Restarting with stat
+2025-08-18 22:09:31,565 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 22:09:31,566 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 22:09:35,799 INFO:werkzeug: * Detected change in '/home/haruki/Documents/tasty-schwab-trader-BE/main_equities.py', reloading
+2025-08-18 22:09:35,992 INFO:werkzeug: * Restarting with stat
+2025-08-18 22:09:37,198 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 22:09:37,199 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 22:09:55,030 INFO:werkzeug: * Detected change in '/home/haruki/Documents/tasty-schwab-trader-BE/main_equities.py', reloading
+2025-08-18 22:09:55,228 INFO:werkzeug: * Restarting with stat
+2025-08-18 22:09:57,764 INFO:werkzeug: * Restarting with stat
+2025-08-18 22:09:59,227 INFO:werkzeug: * Restarting with stat
+2025-08-18 22:10:00,481 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 22:10:00,483 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 22:10:06,353 INFO:werkzeug: * Detected change in '/home/haruki/Documents/tasty-schwab-trader-BE/main_equities.py', reloading
+2025-08-18 22:10:06,741 INFO:werkzeug: * Restarting with stat
+2025-08-18 22:10:07,896 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 22:10:07,899 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 22:10:09,439 INFO:werkzeug: * Detected change in '/home/haruki/Documents/tasty-schwab-trader-BE/main_equities.py', reloading
+2025-08-18 22:10:09,727 INFO:werkzeug: * Restarting with stat
+2025-08-18 22:10:10,797 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 22:10:10,798 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 22:10:12,257 INFO:werkzeug: * Detected change in '/home/haruki/Documents/tasty-schwab-trader-BE/main_equities.py', reloading
+2025-08-18 22:10:12,566 INFO:werkzeug: * Restarting with stat
+2025-08-18 22:10:13,696 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 22:10:13,698 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 22:10:14,141 INFO:werkzeug: * Detected change in '/home/haruki/Documents/tasty-schwab-trader-BE/main_equities.py', reloading
+2025-08-18 22:10:14,358 INFO:werkzeug: * Restarting with stat
+2025-08-18 22:10:15,467 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 22:10:15,470 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 22:10:17,998 INFO:werkzeug: * Detected change in '/home/haruki/Documents/tasty-schwab-trader-BE/main_equities.py', reloading
+2025-08-18 22:10:18,195 INFO:werkzeug: * Restarting with stat
+2025-08-18 22:10:19,447 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 22:10:19,449 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 22:10:23,278 INFO:werkzeug: * Detected change in '/home/haruki/Documents/tasty-schwab-trader-BE/main_equities.py', reloading
+2025-08-18 22:10:23,497 INFO:werkzeug: * Restarting with stat
+2025-08-18 22:10:24,855 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 22:10:24,856 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 22:10:26,357 INFO:werkzeug: * Detected change in '/home/haruki/Documents/tasty-schwab-trader-BE/main_equities.py', reloading
+2025-08-18 22:10:26,569 INFO:werkzeug: * Restarting with stat
+2025-08-18 22:10:30,115 INFO:werkzeug: * Restarting with stat
+2025-08-18 22:10:31,440 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 22:10:31,443 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 22:10:35,147 INFO:werkzeug: * Detected change in '/home/haruki/Documents/tasty-schwab-trader-BE/main_equities.py', reloading
+2025-08-18 22:10:35,395 INFO:werkzeug: * Restarting with stat
+2025-08-18 22:10:38,339 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 22:10:38,341 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 22:10:39,544 INFO:werkzeug: * Detected change in '/home/haruki/Documents/tasty-schwab-trader-BE/main_equities.py', reloading
+2025-08-18 22:10:39,767 INFO:werkzeug: * Restarting with stat
+2025-08-18 22:10:41,254 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 22:10:41,256 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 22:10:43,880 INFO:werkzeug: * Detected change in '/home/haruki/Documents/tasty-schwab-trader-BE/main_equities.py', reloading
+2025-08-18 22:10:44,125 INFO:werkzeug: * Restarting with stat
+2025-08-18 22:10:45,236 INFO:databento.live.client:terminating live client
+2025-08-18 22:10:45,236 INFO:databento.live.client:terminating live client
+2025-08-18 22:10:47,331 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 22:10:47,334 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 22:10:47,345 INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2025-08-18 22:10:47,345 INFO:werkzeug: * Restarting with stat
+2025-08-18 22:10:48,843 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 22:10:48,844 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-08-18 22:10:51,571 INFO:werkzeug:127.0.0.1 - - [18/Aug/2025 22:10:51] "OPTIONS /api/start-trading?strategy=ema HTTP/1.1" 200 -
+2025-08-18 22:10:51,618 INFO:werkzeug:127.0.0.1 - - [18/Aug/2025 22:10:51] "[35m[1mGET /api/start-trading?strategy=ema HTTP/1.1[0m" 500 -
+2025-08-18 22:12:29,786 INFO:databento.live.client:terminating live client
+2025-08-18 22:12:29,786 INFO:databento.live.client:terminating live client
