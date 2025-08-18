@@ -42,6 +42,7 @@ class TickDataBuffer:
         self.live_session = None
 
 
+    # Get historical data - ticks and then convert ticks into bars, then save bars into processed_bars
     def warmup_with_historical_ticks(self, symbol, dataset, start, end, schema='trades'):
         try:
             self.logger.info(f"Fetching historical tick data for warmup: {symbol} [{start} to {end}]")
@@ -78,7 +79,7 @@ class TickDataBuffer:
             df.reset_index(drop=True, inplace=True)
 
             # Normalize price and construct tick dicts
-            df['price'] = df['price'] / 1e9
+            df['price'] = df['price']
             df['timestamp'] = pd.to_datetime(df['ts_event'], unit='ns')
             df['volume'] = df['size']
 
@@ -123,16 +124,17 @@ class TickDataBuffer:
             
             self.logger.info(f"Successfully subscribed to live data for {symbol}")
             # Start the session to begin receiving data
-            # self.live_session.start()
+            await self.live_session.start()
             
             # Start consuming live data
             async for record in self.live_session:
+                print("real time record", record)
                 try:
                     # Only process trade messages (rtype == "Trade" or check type)
                     if hasattr(record, "price") and hasattr(record, "size"):
                         tick_data = {
                             'timestamp': pd.to_datetime(record.ts_event, unit='ns'),
-                            'price': record.price / 1e9,
+                            'price': record.price,
                             'volume': record.size,
                             'symbol': symbol
                         }

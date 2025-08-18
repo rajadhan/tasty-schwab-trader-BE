@@ -46,7 +46,7 @@ def get_strategy_prarams(strategy, ticker, logger):
     except Exception as e:
         logger.error(f"Error in getting strategy params: {str(e)}")
         sleep(10)
-        strategy_params = get_strategy_prarams(ticker, logger)
+        strategy_params = get_strategy_prarams(strategy, ticker, logger)
         return strategy_params
 
 

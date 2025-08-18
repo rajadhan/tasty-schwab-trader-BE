@@ -1,12 +1,1 @@
-2025-08-14 21:16:46,904 - ERROR - Error in zeroday strategy for SPX: name 'datetime' is not defined
-Traceback (most recent call last):
-  File "D:\work\work\Tim McKenna\Tim\backend\zeroday_strategy.py", line 7, in zeroday_strategy
-    logger.info(f"{ticker} zeroday strategy started at {datetime.now(pytz.utc)}")
-                                                        ^^^^^^^^
-NameError: name 'datetime' is not defined. Did you forget to import 'datetime'?
-2025-08-14 21:16:47,273 - ERROR - Error in main loop for SPX: get_strategy_prarams() missing 1 required positional argument: 'logger'
-Traceback (most recent call last):
-  File "D:\work\work\Tim McKenna\Tim\backend\main_equities.py", line 61, in main_strategy_loop
-    [timeframe, *_] = get_strategy_prarams(ticker, logger)
-                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
-TypeError: get_strategy_prarams() missing 1 required positional argument: 'logger'
+2025-08-18 10:43:23,401 - ERROR - Error in getting strategy params: 'SPX'
