@@ -1,13 +1,44 @@
-flask
-flask-cors
-python-dotenv
-PyJWT
+# Core Flask and Web Framework
+Flask==3.0.0
+Flask-CORS==4.0.0
+gunicorn==21.2.0
+
+# Authentication and Security
+PyJWT==2.8.0
+python-dotenv==1.0.0
+
+# Data Processing and Analysis
 pandas==1.5.3
-pandas-market-calendars
-requests
-TA-Lib
-schedule
-databento
-redis
-pandas_ta
-numpy
+pandas-market-calendars==4.3.1
+pandas-ta==0.3.14b0
+numpy==1.24.3
+
+# Technical Analysis
+TA-Lib==0.4.28
+
+# HTTP Requests and API
+requests==2.31.0
+
+# Database and Caching
+redis==5.0.1
+
+# Scheduling and Time Management
+schedule==1.2.0
+
+# Market Data
+databento==0.32.0
+
+# Time and Date Handling
+pytz==2023.3
+
+# Environment and Configuration
+python-dotenv==1.0.0
+
+# Production Server (for deployment)
+gunicorn==21.2.0
+
+# Additional utilities that might be needed
+urllib3==2.0.7
+certifi==2023.11.17
+charset-normalizer==3.3.2
+idna==3.6
