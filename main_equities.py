@@ -15,17 +15,18 @@ def run_every_week(strategy):
     with open(TICKER_DATA_PATH, "r") as file:
         tickers_config = json.load(file)
 
-    print("1")
     producer = TickProducer()
-    producer_thread = threading.Thread(target=producer.run, arg=(tickers_config,))
+    producer_thread = threading.Thread(target=producer.run, args=(tickers_config, strategy,))
     consumer = StrategyConsumer()
-    consumer_thread = threading.Thread(target=consumer.run, arg=(tickers_config, strategy,))
-    Print('e')
+    consumer_thread = threading.Thread(target=consumer.run, args=(tickers_config, strategy,))
+    
     producer_thread.start()
-    print("2")
-    time.sleep(30)
-    print("3")
+    sleep(15)
     consumer_thread.start()
+    
+    # Wait for both threads to complete
+    producer_thread.join()
+    consumer_thread.join()
 
 
 def main():

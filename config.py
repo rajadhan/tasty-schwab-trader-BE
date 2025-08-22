@@ -10,6 +10,7 @@ schwab_account_id = "13241612"
 #------------------------------#
 # Tasty Trade credentials
 TASTY_API = "https://api.tastyworks.com"
+# TASTY_API = "https://api.cert.tastyworks.com"
 
 TASTY_USERNAME = "tmckenna@boardwalkag.com"    # tastytrade
 TASTY_PASSWORD = "Boardwalk2024!"              # tastytrade
@@ -17,27 +18,18 @@ TASTY_PASSWORD = "Boardwalk2024!"              # tastytrade
 TASTY_CLIENT_SECRET = "8283d5bbbb61c1e58b5e1b5b913ffc775e12d46a"
 TASTY_CLIENT_ID = "f1ff7542-2fa9-446c-a57e-22f95108e02c"
 
+# TASTY_CLIENT_SECRET = "9fb238518d48e77f966cf87d7474876b0e6f760a"
+# TASTY_CLIENT_ID = "011d2533-2c97-402c-a360-6aba494cc8c9"
+
 TASTY_MY_APP_URL = "https://my.tastytrade.com/auth.html"
 TASTY_REDIRECT_URI = "https://api.tastyworks.com"
 
 TASTY_ACCESS_TOKEN_PATH = os.path.join("tokens", "tastytrade_tokens.txt")
 
-TASTY_ACCOUNT_ID = "5WW38442"
-#------------------------------#
+TASTY_ACCOUNT_ID = "5WW38442"  # Business ID
+# TASTY_ACCOUNT_ID = "5WX28756"  # Individual ID
 
-
-# MSTR, TSLA, NVDA, /MES, /ES, /MNQ, /NQ, /MRTY, /RTY
-symbols = [
-    "MSTR",
-    "TSLA",
-    "NVDA",
-    "/MES",
-    "/ES",
-    "/MNQ",
-    "/NQ",
-    "/M2K",
-    "/RTY",
-]   # removed
+TASTY_ACCOUNT_ID = "5WU58822"
 
 # TOKEN PATHS
 access_token_path = "tokens/access_token.txt"
@@ -64,3 +56,9 @@ TIME_ZONE = "US/Eastern"
 EMA_TICKER_DATA_PATH = os.path.join('settings', 'ema_ticker_data.json')
 SUPER_TICKER_DATA_PATH = os.path.join('settings', 'super_ticker_data.json')
 ZERODAY_TICKER_DATA_PATH = os.path.join('settings', 'zeroday_ticker_data.json')
+
+
+{
+    "access_token": "eyJhbGciOiJFZERTQSIsInR5cCI6ImF0K2p3dCIsImtpZCI6IkZqVTdUT25qVEQ2WnVySlg2cVlwWmVPbzBDQzQ5TnIzR1pUN1E4MTc0cUkiLCJqa3UiOiJodHRwczovL2ludGVyaW9yLWFwaS5jaDIudGFzdHl3b3Jrcy5jb20vb2F1dGgvandrcyJ9.eyJpc3MiOiJodHRwczovL2FwaS50YXN0eXRyYWRlLmNvbSIsInN1YiI6IlUwMDAyNTY5ODQzIiwiaWF0IjoxNzU0OTA0ODY3LCJleHAiOjE3NTU3Mzk1MTMsImF1ZCI6ImYxZmY3NTQyLTJmYTktNDQ2Yy1hNTdlLTIyZjk1MTA4ZTAyYyIsImdyYW50X2lkIjoiR2Q0OTM1ZGZjLTQ5ZDMtNGVjYy05Y2ViLWY1NzZiYjc5NmM2YiIsImtpZCI6IkZqVTdUT25qVEQ2WnVySlg2cVlwWmVPbzBDQzQ5TnIzR1pUN1E4MTc0cUkiLCJzY29wZSI6InJlYWQgdHJhZGUgb3BlbmlkIiwiY2xpZW50X2RvbWFpbiI6IkMiLCJ0d3VtIjoiZDFFMlNqZG9UVFJPWjFkb1FrVnZkRVp4U0UxVVJVaG1TMDQwZUVwaVJFSlFaVEExVUhWRlZISXJjRGRhVVZBMmVHRXlSR3hPTmpCbmRUaG1WMDVSWnpJM01VUldhRTVwZDNSRlVTOVVOM2QxZDB4VmIzbFNNRkExVGl0cWIzSkplR3RtTkdwRldGcDJVMDlJYjNkWVIxbDRMelZNSzNKa1UxWjZNa3QwUldOVVVXbEtUWGwzYUhsUlNYbGxSREJaY0VSbmQyTjVMMVpPYVdZek0yZEtNbEIzVW5JeVkyUnZXWEpGYlhOWk9YRk1MMlpOY2xKUk4xSmFRVGMxVld4VGNYSlJjR1JHUVVwdWVIbEJZU3RJZVhSelN6ZDRaejA5TFMwd2JuaGxlbkYwYkZoS1pYVkZWVFZ0YVc5amN6QlJQVDA9LS01OTliMjZjYjZiOTkyZjM1NjZkZGM1ZDE1YmI3ZWJmZmVhNjcwODNmIn0.pPpboPpPLKxzGFhjCgwr-beRO8hvx6isaw1rcjzNJJjADNZRYgD5JyCAfNk1Ee2vy-NyN0bYK3YI4EPwbZg1CA",
+    "refresh_token": "eyJhbGciOiJFZERTQSIsInR5cCI6InJ0K2p3dCIsImtpZCI6IkZqVTdUT25qVEQ2WnVySlg2cVlwWmVPbzBDQzQ5TnIzR1pUN1E4MTc0cUkiLCJqa3UiOiJodHRwczovL2ludGVyaW9yLWFwaS5jaDIudGFzdHl3b3Jrcy5jb20vb2F1dGgvandrcyJ9.eyJpc3MiOiJodHRwczovL2FwaS50YXN0eXRyYWRlLmNvbSIsInN1YiI6IlUwMDAyNTY5ODQzIiwiaWF0IjoxNzU0OTA0ODY3LCJhdWQiOiJmMWZmNzU0Mi0yZmE5LTQ0NmMtYTU3ZS0yMmY5NTEwOGUwMmMiLCJncmFudF9pZCI6IkdkNDkzNWRmYy00OWQzLTRlY2MtOWNlYi1mNTc2YmI3OTZjNmIiLCJraWQiOiJGalU3VE9ualRENlp1ckpYNnFZcFplT28wQ0M0OU5yM0daVDdRODE3NHFJIiwic2NvcGUiOiJyZWFkIHRyYWRlIG9wZW5pZCJ9.etO9nmMCddlwJ4YJhIT7h-fBcxWwrbwY-l5n6tWCjJahBefrkf9Syyua8HB47Rw0-d5pAEmZAfg3ZfUlWrgNBg"
+}

@@ -1,10 +1,12 @@
 import json
 import os
 import jwt
+import requests
 from datetime import timedelta, datetime, timezone
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from functools import wraps
+import redis
 from main_equities import run_every_week
 from utils import ticker_data_path_for_strategy
 from config import *
@@ -21,6 +23,7 @@ ADMIN_CREDENTIALS_PATH = os.path.join("credentials", "admin_credentials.json")
 SYMBOL_DATA_PATH = os.path.join("consts", "symbol.json")
 TREND_DATA_PATH = os.path.join("consts", "trend_line.json")
 REFRESH_TOKEN_LINK = os.path.join("jsons", "refresh_token_link.json")
+REDIS_CLIENT = redis.Redis(host=os.getenv("REDIS_HOST", "localhost"), port=int(os.getenv("REDIS_PORT", 6379)), db=int(os.getenv("REDIS_DB", 0)))
 
 
 # ================== JSON Utilities ===============
@@ -79,7 +82,6 @@ def token_required(f):
 
 
 # ================== Routes ==================
-
 
 @app.route("/api/login", methods=["POST"])
 def login():
@@ -176,6 +178,117 @@ def tasty_access_token():
         return jsonify(
             {"success": False, "message": "Failed to establish Tastytrade connection"}
         )
+
+
+@app.route("/api/tasty/refresh-token", methods=["POST"])
+@token_required
+def tasty_refresh_token():
+    """Refresh TastyTrade access token using existing refresh token"""
+    try:
+        # Load existing refresh token
+        try:
+            with open(TASTY_ACCESS_TOKEN_PATH, "r") as f:
+                tokens = json.load(f)
+                refresh_token = tokens.get("refresh_token", "")
+        except Exception:
+            return jsonify({"success": False, "error": "No refresh token found"}), 400
+
+        if not refresh_token:
+            return jsonify({"success": False, "error": "No refresh token available"}), 400
+
+        # Exchange refresh token for new access token
+        refresh_url = f"{TASTY_API}/oauth/token"
+        payload = {
+            "grant_type": "refresh_token",
+            "refresh_token": refresh_token,
+            "client_id": TASTY_CLIENT_ID,
+            "client_secret": TASTY_CLIENT_SECRET,
+        }
+        headers = {"Accept": "application/json", "Content-Type": "application/json"}
+        
+        response = requests.post(refresh_url, data=payload, headers=headers)
+        
+        if response.status_code != 200:
+            return jsonify({
+                "success": False, 
+                "error": f"Failed to refresh token: {response.status_code}",
+                "details": response.text
+            }), 400
+
+        new_tokens = response.json()
+        new_access_token = new_tokens.get("access_token")
+        new_refresh_token = new_tokens.get("refresh_token", refresh_token)  # Keep old if not provided
+
+        if not new_access_token:
+            return jsonify({"success": False, "error": "No access token received"}), 400
+
+        # Save new tokens
+        tokens_to_save = {
+            "access_token": new_access_token,
+            "refresh_token": new_refresh_token
+        }
+        
+        with open(TASTY_ACCESS_TOKEN_PATH, "w") as f:
+            json.dump(tokens_to_save, f)
+
+        return jsonify({
+            "success": True,
+            "message": "TastyTrade tokens refreshed successfully",
+            "access_token": new_access_token
+        }), 200
+
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route("/api/update-credentials", methods=["POST"])
+@token_required
+def update_credentials():
+    try:
+        data = request.json
+        if not data:
+            return jsonify({"success": False, "error": "No data provided"}), 400
+
+        current_password = data.get("currentPassword")
+        new_email = data.get("newEmail")
+        new_password = data.get("newPassword")
+
+        # Basic validation
+        if not current_password:
+            return jsonify({"success": False, "error": "Current password is required"}), 400
+
+        # Verify current password
+        if current_password != admin_credentials.get("password"):
+            return jsonify({"success": False, "error": "Current password is incorrect"}), 401
+
+        # Apply updates in-memory
+        updated = False
+        if new_email and isinstance(new_email, str):
+            admin_credentials["email"] = new_email
+            updated = True
+        if new_password and isinstance(new_password, str):
+            admin_credentials["password"] = new_password
+            updated = True
+
+        if not updated:
+            return jsonify({"success": False, "error": "Nothing to update"}), 400
+
+        # Persist to disk
+        save_json(ADMIN_CREDENTIALS_PATH, admin_credentials)
+
+        # Issue a fresh token with potentially updated email/password
+        fresh_email = admin_credentials.get("email")
+        fresh_password = admin_credentials.get("password")
+        token = generate_token(fresh_email, fresh_password)
+
+        return jsonify({
+            "success": True,
+            "message": "Credentials updated successfully",
+            "token": token,
+            "email": fresh_email,
+        }), 200
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
 
 
 @app.route("/api/add-ticker", methods=["POST"])
@@ -350,6 +463,11 @@ def start_trading():
                 trade_enabled_symbols.append(symbol)
         results = {}
         if trade_enabled_symbols:
+            # Clear stop flag for this strategy
+            try:
+                REDIS_CLIENT.delete(f"trading:stop:{strategy}")
+            except Exception:
+                pass
             print("Loading trading parameters ... ")
             run_every_week(strategy)
             # result = requests.get('https://api.schwabapi.com/v1/oauth/authorize?response_type=code&client_id=1iSr8ykD9qh2M2HoQv56wM2R1kWgQYZI&redirect_uri=https://127.0.0.1', allow_redirects=True)
@@ -390,6 +508,19 @@ def start_trading():
         return jsonify({"success": False, "error": str(e)}), 500
 
 
+@app.route("/api/stop-trading", methods=["GET"])
+@token_required
+def stop_trading():
+    try:
+        strategy = request.args.get("strategy")
+        if not strategy:
+            return jsonify({"success": False, "error": "strategy is required"}), 400
+        REDIS_CLIENT.set(f"trading:stop:{strategy}", "1")
+        return jsonify({"success": True, "message": f"Stop signal sent for {strategy}"}), 200
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
 @app.route("/manual-trade")
 def manual_trade_page():
     return send_from_directory(app.static_folder, "manual_trade.html")
@@ -425,12 +556,12 @@ def manual_trade():
             return jsonify({"success": False, "error": "Invalid ticker or action"}), 400
 
         # Configure logger
-        from main_equities import configure_logger
+        from utils import configure_logger
 
-        logger = configure_logger(ticker)
+        logger = configure_logger(ticker, "zeroday")
 
         # Get strategy parameters
-        from main_equities import get_strategy_prarams
+        from utils import get_strategy_prarams
 
         params = get_strategy_prarams("zeroday", ticker, logger)
 
@@ -499,7 +630,8 @@ def manual_trade():
         )
 
         # Import necessary functions
-        from main_equities import place_order, place_tastytrade_order
+        from schwab import place_order
+        from tastytrade import place_tastytrade_order
         from config import schwab_account_id, TASTY_ACCOUNT_ID
         import pytz
         from datetime import datetime
@@ -667,12 +799,12 @@ def manual_spx_trigger():
             )
 
         # Configure logger
-        from main_equities import configure_logger
+        from utils import configure_logger
 
-        logger = configure_logger(symbol)
+        logger = configure_logger(symbol, "zeroday")
 
         # Get strategy parameters
-        from main_equities import get_strategy_prarams
+        from utils import get_strategy_prarams
 
         params = get_strategy_prarams("zeroday", symbol, logger)
 
@@ -683,7 +815,12 @@ def manual_spx_trigger():
             )
 
         # Extract parameters
-        [timeframe, schwab_qty, trade_enabled, tasty_qty, *_] = params
+        timeframe = params[0]
+        schwab_qty = params[1]
+        trade_enabled = params[2]
+        tasty_qty = params[3]
+        call_enabled = params[8] if len(params) > 8 else True
+        put_enabled = params[9] if len(params) > 9 else True
 
         # Convert quantities to integers
         schwab_qty = int(schwab_qty)
@@ -717,10 +854,22 @@ def manual_spx_trigger():
         )
 
         # Import necessary functions
-        from main_equities import place_order, place_tastytrade_order
+        from schwab import place_order
+        from tastytrade import (
+            place_tastytrade_order,
+            get_option_chain,
+            find_atm_option_symbol,
+            place_tastytrade_option_order,
+            get_spx_current_price,
+            calculate_atm_strike,
+        )
         from config import schwab_account_id, TASTY_ACCOUNT_ID
         import pytz
         from datetime import datetime
+
+        # Optional overrides for strike/expiration
+        strike_override = data.get("strike")
+        expiration_override = data.get("expiration")
 
         # Execute trade based on action
         if action == "buy_call":
@@ -735,6 +884,7 @@ def manual_spx_trigger():
                     ),
                     400,
                 )
+            
             # Close any existing position first
             if current_position == "LONG_CALL":
                 return (
@@ -781,31 +931,43 @@ def manual_spx_trigger():
                     else 0
                 )
 
-            # Open LONG CALL position
+            # Get current SPX price and calculate ATM strike if not provided
+            if not strike_override:
+                spx_price = get_spx_current_price(logger)
+                if spx_price:
+                    strike_override = calculate_atm_strike(spx_price, logger)
+                    logger.info(f"Auto-calculated ATM strike: {strike_override}")
+
+            # Resolve ATM 0DTE option symbol (SPXW) and open LONG CALL
             logger.info(f"Opening LONG CALL position for {symbol}")
-            order_id_schwab = (
-                place_order(
-                    f"{symbol}_CALL",
-                    schwab_qty,
-                    "BUY",
-                    schwab_account_id,
-                    logger,
-                    "OPENING",
-                )
-                if schwab_qty > 0
-                else 0
+            option_symbol = find_atm_option_symbol(
+                symbol, 
+                option_type="CALL", 
+                strike=strike_override, 
+                expiration=expiration_override,
+                logger=logger
             )
+            
+            if not option_symbol:
+                return jsonify({
+                    "success": False, 
+                    "error": f"Could not find suitable CALL option for {symbol}"
+                }), 400
+
+            order_id_schwab = 0  # Schwab option routing not implemented in this endpoint
             order_id_tastytrade = (
-                place_tastytrade_order(
-                    f"{symbol}_CALL", tasty_qty, "Buy to Open", TASTY_ACCOUNT_ID, logger
-                )
-                if tasty_qty > 0
-                else 0
+                place_tastytrade_option_order(
+                    option_symbol, tasty_qty, "Buy to Open", TASTY_ACCOUNT_ID, logger
+                ) if tasty_qty > 0 and option_symbol else 0
             )
+            
             trades[symbol] = {
                 "action": "LONG_CALL",
                 "order_id_schwab": order_id_schwab,
                 "order_id_tastytrade": order_id_tastytrade,
+                "option_symbol": option_symbol,  # Store the actual option symbol
+                "strike": strike_override,
+                "expiration": expiration_override or "0DTE",
                 "entry_time": datetime.now(pytz.utc).isoformat(),
                 "entry_type": "manual",
             }
@@ -822,6 +984,7 @@ def manual_spx_trigger():
                     ),
                     400,
                 )
+            
             # Close any existing position first
             if current_position == "LONG_PUT":
                 return (
@@ -868,31 +1031,43 @@ def manual_spx_trigger():
                     else 0
                 )
 
-            # Open LONG PUT position
+            # Get current SPX price and calculate ATM strike if not provided
+            if not strike_override:
+                spx_price = get_spx_current_price(logger)
+                if spx_price:
+                    strike_override = calculate_atm_strike(spx_price, logger)
+                    logger.info(f"Auto-calculated ATM strike: {strike_override}")
+
+            # Resolve ATM 0DTE option symbol (SPXW) and open LONG PUT
             logger.info(f"Opening LONG PUT position for {symbol}")
-            order_id_schwab = (
-                place_order(
-                    f"{symbol}_PUT",
-                    schwab_qty,
-                    "BUY",
-                    schwab_account_id,
-                    logger,
-                    "OPENING",
-                )
-                if schwab_qty > 0
-                else 0
+            option_symbol = find_atm_option_symbol(
+                symbol, 
+                option_type="PUT", 
+                strike=strike_override, 
+                expiration=expiration_override,
+                logger=logger
             )
+            
+            if not option_symbol:
+                return jsonify({
+                    "success": False, 
+                    "error": f"Could not find suitable PUT option for {symbol}"
+                }), 400
+
+            order_id_schwab = 0
             order_id_tastytrade = (
-                place_tastytrade_order(
-                    f"{symbol}_PUT", tasty_qty, "Buy to Open", TASTY_ACCOUNT_ID, logger
-                )
-                if tasty_qty > 0
-                else 0
+                place_tastytrade_option_order(
+                    option_symbol, tasty_qty, "Buy to Open", TASTY_ACCOUNT_ID, logger
+                ) if tasty_qty > 0 and option_symbol else 0
             )
+            
             trades[symbol] = {
                 "action": "LONG_PUT",
                 "order_id_schwab": order_id_schwab,
                 "order_id_tastytrade": order_id_tastytrade,
+                "option_symbol": option_symbol,  # Store the actual option symbol
+                "strike": strike_override,
+                "expiration": expiration_override or "0DTE",
                 "entry_time": datetime.now(pytz.utc).isoformat(),
                 "entry_type": "manual",
             }
@@ -914,12 +1089,15 @@ def manual_spx_trigger():
                 schwab_action = "BUY_TO_COVER"
                 tasty_action = "Buy to Close"
 
-            # Get the actual symbol with suffix if needed
-            actual_symbol = symbol
-            if current_position == "LONG_CALL":
-                actual_symbol = f"{symbol}_CALL"
-            elif current_position == "LONG_PUT":
-                actual_symbol = f"{symbol}_PUT"
+            # Get the actual option symbol if stored
+            actual_symbol = trades.get(symbol, {}).get("option_symbol") if symbol in trades else None
+            if not actual_symbol:
+                # Fallback to generic symbol
+                actual_symbol = symbol
+                if current_position == "LONG_CALL":
+                    actual_symbol = f"{symbol}_CALL"
+                elif current_position == "LONG_PUT":
+                    actual_symbol = f"{symbol}_PUT"
 
             # Execute closing orders
             close_order_id_schwab = (
@@ -969,6 +1147,36 @@ def manual_spx_trigger():
             jsonify({"success": False, "error": str(e), "traceback": traceback_str}),
             500,
         )
+
+
+@app.route("/api/spx-price", methods=["GET"])
+@token_required
+def get_spx_price():
+    """Get current SPX price for frontend display"""
+    try:
+        from tastytrade import get_spx_current_price
+        from utils import configure_logger
+        
+        logger = configure_logger("SPX", "zeroday")
+        price = get_spx_current_price(logger)
+        
+        if price:
+            return jsonify({
+                "success": True,
+                "price": price,
+                "timestamp": datetime.now(timezone.utc).isoformat()
+            }), 200
+        else:
+            return jsonify({
+                "success": False,
+                "error": "Unable to fetch SPX price"
+            }), 500
+            
+    except Exception as e:
+        return jsonify({
+            "success": False,
+            "error": str(e)
+        }), 500
 
 
 if __name__ == "__main__":

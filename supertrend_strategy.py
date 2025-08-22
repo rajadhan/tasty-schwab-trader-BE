@@ -1,3 +1,22 @@
+import numpy as np
+import pandas as pd
+import os
+
+from utils import (
+    get_strategy_prarams,
+    get_trade_file_path,
+    is_tick_timeframe,
+    load_json,
+    wilders_smoothing,
+)
+
+import json
+from datetime import datetime
+import pytz
+from config import *
+from strategy_consumer import StrategyConsumer
+from tastytrade import place_tastytrade_order
+
 def supertrend_strategy(
     ticker,
     logger,
@@ -23,34 +42,12 @@ def supertrend_strategy(
             fibonacci_enabled,
             support_demand_enabled
         ] = get_strategy_prarams("supertrend", ticker, logger)
-        # # Example expected params (can be adjusted):
-        # timeframe = params.get("timeframe", "15min")
-        # trade_enabled = params.get("trade_enabled", True)
-        # qty_schwab = int(params.get("schwab_quantity", 10))
-        # qty_tastytrade = int(params.get("tastytrade_quantity", 10))
-        # # MA params
-        # short_ma_len = int(params.get("short_ma_length", 9))
-        # short_ma_type = params.get("short_ma_type", "EMA")
-        # mid_ma_len = int(params.get("mid_ma_length", 14))
-        # mid_ma_type = params.get("mid_ma_type", "EMA")
-        # long_ma_len = int(params.get("long_ma_length", 21))
-        # long_ma_type = params.get("long_ma_type", "EMA")
-        # # ZigZag/ATR params
-        # zigzag_percent_reversal = float(
-        #     params.get("zigzag_percent_reversal", 1.0)
-        # )  # in percent, e.g. 1.0 for 1%
-        # atr_length = int(params.get("atr_length", 14))
-        # atr_reversal_mult = float(params.get("zigzag_atr_multiple", 2.0))
-        # # Fibonacci & Support/Demand
-        # fibonacci_enabled = bool(params.get("fibonacci_enabled", False))
-        # support_demand_enabled = bool(params.get("support_demand_enabled", False))
-        # # timezone_str = params.get("timezone", "America/New_York")
-        # # show_volume_bubbles = bool(params.get("show_volume_bubbles", False))
-        # # show_bubbles_price = bool(params.get("show_bubbles_price", False))
 
+        # Create trades directory if it doesn't exist
+        os.makedirs("trades/supertrend", exist_ok=True)
         trades_file = f"trades/supertrend/{ticker[1:] if ticker.startswith('/') else ticker}.json"
 
-        if not trade_enabled:
+        if trade_enabled != "TRUE":
             logger.info(
                 f"Trade disabled for {ticker}, skipping execution and clearing trades file if any."
             )
@@ -72,17 +69,50 @@ def supertrend_strategy(
         except (FileNotFoundError, json.JSONDecodeError):
             trades = {}
 
-        # 3. Get historical data
-        df = get_historical_data(ticker, timeframe, logger)
+        # Normalize and validate parameter types
+        try:
+            short_ma_len = int(short_ma_len)
+            mid_ma_len = int(mid_ma_len)
+            long_ma_len = int(long_ma_len)
+            atr_length = int(atr_length)
+            # zigzag threshold as percent (e.g., "1.5")
+            zigzag_percent_reversal = float(zigzag_percent_reversal)
+            atr_reversal_mult = float(atr_reversal_mult)
+            fibonacci_enabled = (
+                fibonacci_enabled if isinstance(fibonacci_enabled, bool) else str(fibonacci_enabled).lower() == "true"
+            )
+            support_demand_enabled = (
+                support_demand_enabled if isinstance(support_demand_enabled, bool) else str(support_demand_enabled).lower() == "true"
+            )
+        except Exception as e:
+            logger.error(f"Invalid supertrend parameters for {ticker}: {e}")
+            return
+
+        # 3. Get historical data using the strategy consumer
+        from strategy_consumer import StrategyConsumer
+        strategy_consumer = StrategyConsumer()
+
+        # Get tick data for the strategy
+        df = strategy_consumer.get_tick_dataframe(ticker, short_ma_len, long_ma_len)
+
+        if df is None or len(df) < max(short_ma_len, long_ma_len):
+            logger.warning(f"Insufficient data for {ticker}")
+            return
+
         # Ensure required columns exist
         for col in ["open", "high", "low", "close", "volume"]:
             if col not in df.columns:
-                raise ValueError(
-                    f"Missing required price/volume column '{col}' in historical data"
-                )
+                logger.error(f"Missing required price/volume column '{col}' in historical data")
+                return
 
         # 4. Define helper: Moving Average calculators
         def calc_ma(series, length, ma_type):
+            # ensure numeric length
+            try:
+                length = int(length)
+            except Exception:
+                logger.error(f"Non-integer MA length encountered: {length}")
+                return series
             if ma_type.upper() == "EMA":
                 return series.ewm(span=length, adjust=False).mean()
             elif ma_type.upper() == "SMA":
@@ -172,16 +202,18 @@ def supertrend_strategy(
 
         percent_thresh = zigzag_percent_reversal / 100.0
 
+        # Initialize first row
+        swing_highs.append(np.nan)
+        swing_lows.append(np.nan)
+        swing_indices.append(np.nan)
+        swing_directions.append(np.nan)
+
         for i in range(1, len(df)):
-            price = df["high"].iloc[i] if last_swing_dir != 1 else df["low"].iloc[i]
+            price = df["high"].iloc[i] if last_extreme_price is None or last_swing_dir != 1 else df["low"].iloc[i]
             if last_extreme_price is None:
                 last_extreme_price = df["close"].iloc[0]
                 last_extreme_index = 0
                 last_swing_dir = 1  # start arbitrarily up
-                swing_highs.append(np.nan)
-                swing_lows.append(np.nan)
-                swing_indices.append(np.nan)
-                swing_directions.append(np.nan)
                 continue
 
             atr_val = df["ATR"].iloc[i]
@@ -221,6 +253,13 @@ def supertrend_strategy(
                     swing_lows.append(np.nan)
                     swing_indices.append(np.nan)
                     swing_directions.append(np.nan)
+
+        # Ensure arrays have the same length as DataFrame
+        while len(swing_highs) < len(df):
+            swing_highs.append(np.nan)
+            swing_lows.append(np.nan)
+            swing_indices.append(np.nan)
+            swing_directions.append(np.nan)
 
         df["swing_high"] = pd.Series(swing_highs, index=df.index)
         df["swing_low"] = pd.Series(swing_lows, index=df.index)
@@ -302,13 +341,13 @@ def supertrend_strategy(
         if ticker not in trades:
             if last_buy_signal:
                 logger.info(f"Buy signal for {ticker}: Placing LONG orders.")
-                order_id_schwab = (
-                    place_order(
-                        ticker, qty_schwab, "BUY", schwab_account_id, logger, "OPENING"
-                    )
-                    if qty_schwab > 0
-                    else 0
-                )
+                # order_id_schwab = (
+                #     place_order(
+                #         ticker, qty_schwab, "BUY", schwab_account_id, logger, "OPENING"
+                #     )
+                #     if qty_schwab > 0
+                #     else 0
+                # )
                 order_id_tasty = (
                     place_tastytrade_order(
                         ticker, qty_tastytrade, "Buy to Open", TASTY_ACCOUNT_ID, logger
@@ -318,17 +357,17 @@ def supertrend_strategy(
                 )
                 trades[ticker] = {
                     "position": "LONG",
-                    "order_id_schwab": order_id_schwab,
+                    # "order_id_schwab": order_id_schwab,
                     "order_id_tastytrade": order_id_tasty,
                 }
             elif last_sell_signal:
                 logger.info(f"Sell signal for {ticker}: Placing SHORT orders.")
                 order_id_schwab = (
-                    place_order(
-                        ticker, qty_schwab, "SELL_SHORT", schwab_account_id, logger, "OPENING"
-                    )
-                    if qty_schwab > 0
-                    else 0
+                    # place_order(
+                    #     ticker, qty_schwab, "SELL_SHORT", schwab_account_id, logger, "OPENING"
+                    # )
+                    # if qty_schwab > 0
+                    # else 0
                 )
                 order_id_tasty = (
                     place_tastytrade_order(
@@ -339,7 +378,7 @@ def supertrend_strategy(
                 )
                 trades[ticker] = {
                     "position": "SHORT",
-                    "order_id_schwab": order_id_schwab,
+                    # "order_id_schwab": order_id_schwab,
                     "order_id_tastytrade": order_id_tasty,
                 }
         else:
@@ -348,13 +387,13 @@ def supertrend_strategy(
                 logger.info(
                     f"Reversing LONG to SHORT for {ticker}: Closing LONG, opening SHORT"
                 )
-                close_id_schwab = (
-                    place_order(
-                        ticker, qty_schwab, "SELL", schwab_account_id, logger, "CLOSING"
-                    )
-                    if qty_schwab > 0
-                    else 0
-                )
+                # close_id_schwab = (
+                #     place_order(
+                #         ticker, qty_schwab, "SELL", schwab_account_id, logger, "CLOSING"
+                #     )
+                #     if qty_schwab > 0
+                #     else 0
+                # )
                 close_id_tasty = (
                     place_tastytrade_order(
                         ticker, qty_tastytrade, "Sell to Close", TASTY_ACCOUNT_ID, logger
@@ -362,13 +401,13 @@ def supertrend_strategy(
                     if qty_tastytrade > 0
                     else 0
                 )
-                open_id_schwab = (
-                    place_order(
-                        ticker, qty_schwab, "SELL_SHORT", schwab_account_id, logger, "OPENING"
-                    )
-                    if qty_schwab > 0
-                    else 0
-                )
+                # open_id_schwab = (
+                #     place_order(
+                #         ticker, qty_schwab, "SELL_SHORT", schwab_account_id, logger, "OPENING"
+                #     )
+                #     if qty_schwab > 0
+                #     else 0
+                # )
                 open_id_tasty = (
                     place_tastytrade_order(
                         ticker, qty_tastytrade, "Sell to Open", TASTY_ACCOUNT_ID, logger
@@ -378,7 +417,7 @@ def supertrend_strategy(
                 )
                 trades[ticker] = {
                     "position": "SHORT",
-                    "order_id_schwab": open_id_schwab,
+                    # "order_id_schwab": open_id_schwab,
                     "order_id_tastytrade": open_id_tasty,
                 }
 
@@ -386,18 +425,18 @@ def supertrend_strategy(
                 logger.info(
                     f"Reversing SHORT to LONG for {ticker}: Closing SHORT, opening LONG"
                 )
-                close_id_schwab = (
-                    place_order(
-                        ticker,
-                        qty_schwab,
-                        "BUY_TO_COVER",
-                        schwab_account_id,
-                        logger,
-                        "CLOSING",
-                    )
-                    if qty_schwab > 0
-                    else 0
-                )
+                # close_id_schwab = (
+                #     place_order(
+                #         ticker,
+                #         qty_schwab,
+                #         "BUY_TO_COVER",
+                #         schwab_account_id,
+                #         logger,
+                #         "CLOSING",
+                #     )
+                #     if qty_schwab > 0
+                #     else 0
+                # )
                 close_id_tasty = (
                     place_tastytrade_order(
                         ticker, qty_tastytrade, "Buy to Close", TASTY_ACCOUNT_ID, logger
@@ -405,13 +444,13 @@ def supertrend_strategy(
                     if qty_tastytrade > 0
                     else 0
                 )
-                open_id_schwab = (
-                    place_order(
-                        ticker, qty_schwab, "BUY", schwab_account_id, logger, "OPENING"
-                    )
-                    if qty_schwab > 0
-                    else 0
-                )
+                # open_id_schwab = (
+                #     place_order(
+                #         ticker, qty_schwab, "BUY", schwab_account_id, logger, "OPENING"
+                #     )
+                #     if qty_schwab > 0
+                #     else 0
+                # )
                 open_id_tasty = (
                     place_tastytrade_order(
                         ticker, qty_tastytrade, "Buy to Open", TASTY_ACCOUNT_ID, logger
@@ -421,7 +460,7 @@ def supertrend_strategy(
                 )
                 trades[ticker] = {
                     "position": "LONG",
-                    "order_id_schwab": open_id_schwab,
+                    # "order_id_schwab": open_id_schwab,
                     "order_id_tastytrade": open_id_tasty,
                 }
 

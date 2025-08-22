@@ -7,7 +7,7 @@ import pandas as pd
 import redis
 from datetime import datetime, timedelta, timezone
 from dotenv import load_dotenv
-from tick_buffer import DatabentoLiveManager, TickDataBuffer
+from tick_buffer import DatabentoLiveManager, TickDataBuffer, TimeBasedBarBufferWithRedis
 from utils import (
     extract_tick_count,
     get_active_exchange_symbol,
@@ -16,6 +16,8 @@ from utils import (
     is_tick_timeframe,
     load_json,
     ticker_data_path_for_strategy,
+    get_schema,
+    parse_strategy_params,
 )
 
 load_dotenv()  # Load environment variables from .env
@@ -38,24 +40,48 @@ class TickProducer:
     def __init__(self):
         # Import here to avoid circular imports
         self.TickDataBuffer = TickDataBuffer  # Store the class, not an instance
+        self.strategy = None
         self.tick_buffers = {}
         self.live_manager = DatabentoLiveManager()
         self.logger = logging.getLogger("TickProducer")
         logging.basicConfig(level=logging.INFO)
 
     def setup_tick_buffers(self, tickers_config):
-        """Setup tick buffers for all tick-based symbols"""
+        """Setup buffers for all symbols (tick- or time-based)."""
         live_symbols_config = {}
 
         for ticker, config in tickers_config.items():
-            time_frame = config[0]
-            period1 = config[5]
-            period2 = config[7]
+            # Parse the config safely based on the active strategy to avoid index/type errors
+            parsed = parse_strategy_params(config, self.strategy)
+            if not parsed:
+                self.logger.error(f"Failed to parse config for {ticker} with strategy {self.strategy}")
+                continue
 
-            max_period = max(int(period1), int(period2))
+            time_frame = parsed.get('timeframe')
+            # Determine a conservative warmup window (max_period)
+            if self.strategy in ['ema', 'zeroday']:
+                try:
+                    max_period = max(int(parsed.get('period_1', 1)), int(parsed.get('period_2', 1)))
+                except Exception:
+                    self.logger.error(f"Invalid periods for {ticker}: {parsed.get('period_1')}, {parsed.get('period_2')}")
+                    max_period = 1
+            elif self.strategy == 'supertrend':
+                try:
+                    max_period = max(
+                        int(parsed.get('short_ma_len', 1)),
+                        int(parsed.get('mid_ma_len', 1)),
+                        int(parsed.get('long_ma_len', 1)),
+                        int(parsed.get('atr_length', 1)),
+                    )
+                except Exception:
+                    self.logger.error(f"Invalid supertrend params for {ticker}: {parsed}")
+                    max_period = 1
+            else:
+                max_period = 1
             dataset = get_dataset(ticker)
+            schema = get_schema(time_frame)
             safe_historical_end_time = get_historical_end_time(
-                ticker, dataset, self.logger
+                ticker, dataset, self.logger, schema
             )
             safe_historical_start_time = get_historical_start_time(
                 ticker, time_frame, safe_historical_end_time
@@ -64,30 +90,19 @@ class TickProducer:
             historical_start_time = safe_historical_start_time.isoformat()
             ticker_for_data = get_symbol_for_data(ticker)
 
-            if is_tick_timeframe(time_frame):
-                self._setup_tick_based_buffer(
-                    ticker_for_data,
-                    time_frame,
-                    max_period,
-                    historical_end_time,
-                    historical_start_time,
-                    live_symbols_config,
-                    dataset,
-                )
-            else:
-                self._setup_time_based_buffer(
-                    ticker_for_data,
-                    time_frame,
-                    max_period,
-                    historical_end_time,
-                    historical_start_time,
-                    live_symbols_config,
-                    dataset,
-                )
-
+            self._setup_symbol_buffer(
+                ticker_for_data,
+                time_frame,
+                max_period,
+                historical_end_time,
+                historical_start_time,
+                live_symbols_config,
+                dataset,
+                schema,
+            )
         return live_symbols_config
 
-    def _setup_tick_based_buffer(
+    def _setup_symbol_buffer(
         self,
         ticker_for_data,
         time_frame,
@@ -96,30 +111,46 @@ class TickProducer:
         historical_start_time,
         live_symbols_config,
         dataset,
+        schema,
     ):
-        """Setup buffer for tick-based timeframes (e.g., 512t)"""
-        print(f"Setting up TICK_BASED buffer for {ticker_for_data}: {time_frame}")
         if ticker_for_data not in self.tick_buffers:
-            tick_size = extract_tick_count(time_frame)
-            buffer = TickDataBufferWithRedis(
-                ticker=ticker_for_data,
-                tick_size=tick_size,
-                max_period=max_period,
-                logger=self.logger,
-            )
+            if is_tick_timeframe(time_frame):
+                buffer = TickDataBufferWithRedis(
+                    ticker=ticker_for_data,
+                    strategy=self.strategy,
+                    time_frame=time_frame,
+                    max_period=max_period,
+                    logger=self.logger,
+                )
+            else:
+                buffer = TimeBasedBarBufferWithRedis(
+                    ticker=ticker_for_data,
+                    strategy=self.strategy,
+                    time_frame=time_frame,
+                    max_period=max_period,
+                    logger=self.logger,
+                )
             self.tick_buffers[ticker_for_data] = buffer
             print(
-                f"Initialized TICK-BASED buffer for {ticker_for_data} with tick size {tick_size}"
+                f"Initialized buffer for {ticker_for_data} of {self.strategy} with timeframe {time_frame}"
             )
 
-        # Warmup with historical data
-        self.tick_buffers[ticker_for_data].warmup_with_historical_ticks(
-            symbol=ticker_for_data,
-            dataset=dataset,
-            start=historical_start_time,
-            end=historical_end_time,
-            schema="trades",
-        )
+        if is_tick_timeframe(time_frame):
+            self.tick_buffers[ticker_for_data].warmup_with_historical_ticks(
+                symbol=ticker_for_data,
+                dataset=dataset,
+                start=historical_start_time,
+                end=historical_end_time,
+                schema=schema,
+            )
+        else:
+            self.tick_buffers[ticker_for_data].warmup_with_historical_timebars(
+                symbol=ticker_for_data,
+                dataset=dataset,
+                start=historical_start_time,
+                end=historical_end_time,
+                base_schema=schema,
+            )
 
         # Setup live feed
         bars = self.tick_buffers[ticker_for_data].processed_bars
@@ -131,90 +162,50 @@ class TickProducer:
 
         live_symbols_config[ticker_for_data] = {
             "dataset": dataset,
-            "schema": "trades",
-            "start_time": replay_start_time,
-        }
-        print("replay start time===", replay_start_time)
-
-    def _setup_time_based_buffer(
-        self,
-        ticker_for_data,
-        time_frame,
-        max_period,
-        historical_end_time,
-        historical_start_time,
-        live_symbols_config,
-        dataset,
-    ):
-        """Setup buffer for time-based timeframes (e.g., 30min, 4h)"""
-        print(f"Setting up TIME-BASED buffer for {ticker_for_data}: {time_frame}")
-        if ticker_for_data not in self.tick_buffers:
-            # For time-based, we'll use a small tick size and resample
-            tick_size = 100  # Use 100 ticks as base, then resample
-
-            buffer = TimeBasedDataBuffer(  # New class for time-based
-                ticker=ticker_for_data,
-                tick_size=tick_size,
-                target_timeframe=time_frame,  # e.g., "30m", "4h"
-                max_period=max_period,
-                logger=self.logger,
-            )
-            self.tick_buffers[ticker_for_data] = buffer
-
-            print(
-                f"Initialized TIME-BASED buffer for {ticker_for_data} targeting {time_frame}"
-            )
-
-        dataset = "GLBX.MDP3"
-
-        # Warmup with historical data (will be resampled to target timeframe)
-        self.tick_buffers[ticker_for_data].warmup_with_historical_ticks(
-            symbol=ticker_for_data,
-            dataset=dataset,
-            start=historical_start_time,
-            end=historical_end_time,
-            schema="trades",
-        )
-
-        # Setup live feed
-        bars = self.tick_buffers[ticker_for_data].processed_bars
-        if bars:
-            last_ts = pd.Timestamp(bars[-1]["timestamp"])
-            replay_start_time = last_ts.value + 1
-        else:
-            replay_start_time = 0
-
-        live_symbols_config[ticker_for_data] = {
-            "dataset": dataset,
-            "schema": "trades",
+            "schema": get_schema(time_frame) if not is_tick_timeframe(time_frame) else 'trades',
             "start_time": replay_start_time,
         }
 
+    
     async def start_live_feeds(self, live_symbols_config):
         """Start live data feeds"""
         if live_symbols_config:
-            self.live_manager = DatabentoLiveManager()
-            self.logger.info(
-                f"Starting live feeds for: {list(live_symbols_config.keys())}"
-            )
+            # Handle SPXW separately with Tastytrade
+            spxw_symbols = {k: v for k, v in live_symbols_config.items() if k == "SPXW"}
+            other_symbols = {k: v for k, v in live_symbols_config.items() if k != "SPXW"}
+            
+            # Start Tastytrade feeds for SPXW
+            if spxw_symbols:
+                self.logger.info(f"Starting Tastytrade feeds for SPXW symbols")
+                for symbol, config in spxw_symbols.items():
+                    if symbol in self.tick_buffers:
+                        self.tick_buffers[symbol].start_live_subscription(
+                            symbol, config.get("dataset"), config.get("schema")
+                        )
+            
+            # Start Databento feeds for other symbols
+            if other_symbols:
+                self.live_manager = DatabentoLiveManager()
+                self.logger.info(
+                    f"Starting Databento live feeds for: {list(other_symbols.keys())}"
+                )
+                await self.live_manager.start_live_feeds(
+                    other_symbols, self.tick_buffers
+                )
 
-            await self.live_manager.start_live_feeds(
-                live_symbols_config, self.tick_buffers
-            )
-
-    def run(self, tickers_config):
+    def run(self, tickers_config, strategy):
         """Main run method"""
-        print("tickers config", tickers_config)
+        self.strategy = strategy
         self.logger.info("Starting Tick Producer...")
         live_symbols_config = self.setup_tick_buffers(tickers_config)
-        asyncio.run(self.start_live_feeds(live_symbols_config))  # TODO
+        asyncio.run(self.start_live_feeds(live_symbols_config))
 
 
 class TickDataBufferWithRedis(TickDataBuffer):
     """Extended TickDataBuffer that publishes bars to Redis"""
 
-    def __init__(self, ticker, tick_size, max_period, logger):
-        super().__init__(ticker, tick_size, max_period, logger)
+    def __init__(self, ticker, strategy, time_frame, max_period, logger):
+        super().__init__(ticker, strategy, time_frame, max_period, logger)
         self.redis_client = REDIS_CLIENT
         self.max_period = max_period
 
@@ -240,159 +231,74 @@ class TickDataBufferWithRedis(TickDataBuffer):
             self.redis_client.publish(channel, json.dumps(bar_data))
 
             # ---- Store in Redis ZSET for count-based access ----
-            zset_key = f"bars_history:{self.ticker}"
+            zset_key_strategy = f"bars_history:{self.strategy}{self.ticker}"
+            zset_key_plain = f"bars_history:{self.ticker}"
             timestamp_score = int(
                 pd.Timestamp(bar["timestamp"]).timestamp()
             )  # seconds since epoch
-            self.redis_client.zadd(zset_key, {json.dumps(bar_data): timestamp_score})
+            payload = json.dumps(bar_data)
+            self.redis_client.zadd(zset_key_strategy, {payload: timestamp_score})
+            self.redis_client.zadd(zset_key_plain, {payload: timestamp_score})
 
             # ---- Trim ZSET to only keep the latest max_period items ----
             # Remove all but the latest max_period items (highest scores)
-            self.redis_client.zremrangebyrank(zset_key, 0, -(self.max_period + 2))
+            self.redis_client.zremrangebyrank(zset_key_strategy, 0, -(self.max_period + 2))
+            self.redis_client.zremrangebyrank(zset_key_plain, 0, -(self.max_period + 2))
 
-            self.logger.info(f"ZSET updated for {self.ticker} with timestamp {timestamp_score}")
+            # self.logger.info(f"ZSET updated for {self.ticker} with timestamp {timestamp_score}")
 
         return bar
 
 
-class TimeBasedDataBuffer(TickDataBuffer):
-    """Buffer that resamples tick data to time-based bars"""
-
-    def __init__(self, ticker, tick_size, target_timeframe, **kwargs):
-        super().__init__(ticker, tick_size, **kwargs)
-        self.target_timeframe = target_timeframe
-        self.raw_ticks = []  # Store raw ticks for resampling
-
-    def warmup_with_historical_ticks(
-        self, symbol, dataset, start, end, schema="trades"
-    ):
-        """Fetch historical data and resample to target timeframe"""
-        try:
-            self.logger.info(
-                f"Fetching historical data for {symbol} targeting {self.target_timeframe}"
+def get_historical_end_time(ticker, dataset, logger, schema):
+    try:
+        metadata = HISTORICAL_CLIENT.metadata.get_dataset_range(dataset=dataset)
+        schema_range = metadata.get("schema", {}).get(schema, {})
+        logger.info(f"{ticker}'s schema range for {schema}: {schema_range}")
+        if "end" in schema_range:
+            safe_historical_end = pd.to_datetime(schema_range["end"]).tz_convert(
+                "UTC"
             )
-
-            # Fetch raw tick data
-            data = self.db_client.timeseries.get_range(
-                dataset=dataset, symbols=[symbol], schema=schema, start=start, end=end
-            )
-
-            df = data.to_df()
-            if df.empty:
-                self.logger.warning(f"No historical data returned for {symbol}")
-                return
-
-            # Process and store raw ticks
-            df["price"] = df["price"]
-            df["timestamp"] = pd.to_datetime(df["ts_event"], unit="ns")
-            df["volume"] = df["size"]
-
-            # Resample to target timeframe
-            resampled_bars = self._resample_to_timeframe(df)
-
-            # Store resampled bars
-            self.processed_bars = resampled_bars
-            self.historical_loaded = True
-
-            self.logger.info(
-                f"Created {len(self.processed_bars)} {self.target_timeframe} bars for {symbol}"
-            )
-
-        except Exception as e:
-            self.logger.error(f"Historical warmup failed for {symbol}: {e}")
-
-    def _resample_to_timeframe(self, df):
-        """Resample tick data to target timeframe"""
-        # Convert timeframe to pandas offset
-        timeframe_offset = self._convert_to_pandas_offset(self.target_timeframe)
-
-        # Resample to target timeframe
-        ohlcv = df["price"].resample(timeframe_offset).ohlc()
-        volume = df["volume"].resample(timeframe_offset).sum()
-
-        result = pd.concat([ohlcv, volume], axis=1)
-        result.columns = ["open", "high", "low", "close", "volume"]
-        result.dropna(inplace=True)
-
-        # Convert to list of dictionaries
-        bars = []
-        for timestamp, row in result.iterrows():
-            bar = {
-                "timestamp": timestamp,
-                "open": row["open"],
-                "high": row["high"],
-                "low": row["low"],
-                "close": row["close"],
-                "volume": row["volume"],
-            }
-            bars.append(bar)
-
-        return bars
-
-    def _convert_to_pandas_offset(self, timeframe):
-        """Convert timeframe string to pandas offset"""
-        if timeframe == "1m":
-            return "1T"
-        elif timeframe == "5m":
-            return "5T"
-        elif timeframe == "15m":
-            return "15T"
-        elif timeframe == "30m":
-            return "30T"
-        elif timeframe == "1h":
-            return "1H"
-        elif timeframe == "4h":
-            return "4H"
-        elif timeframe == "1d":
-            return "1D"
         else:
-            return "1T"  # Default to 1 minute
-
-
-def get_historical_end_time(ticker, dataset, logger):
-    if ticker.startswith("/"):
-        try:
-            metadata = HISTORICAL_CLIENT.metadata.get_dataset_range(dataset=dataset)
-            schema_range = metadata.get("schema", {}).get("trades", {})
-            logger.info(f"{ticker}'s schema range: {schema_range}")
-            if "end" in schema_range:
-                safe_historical_end = pd.to_datetime(schema_range["end"]).tz_convert(
-                    "UTC"
-                )
-            else:
-                safe_historical_end = datetime.now(timezone.utc) - timedelta(minutes=10)
-            return safe_historical_end
-        except Exception as e:
-            logger.error(
-                f"Error fetching historical end time for dataset {dataset}: {e}"
-            )
             safe_historical_end = datetime.now(timezone.utc) - timedelta(minutes=10)
-            return safe_historical_end
-    else:
-        safe_historical_end = datetime.now(timezone.utc) - timedelta(days=1)
+        return safe_historical_end
+    except Exception as e:
+        logger.error(
+            f"Error fetching historical end time for dataset {dataset} and schema {schema}: {e}"
+        )
+        safe_historical_end = datetime.now(timezone.utc) - timedelta(minutes=10)
         return safe_historical_end
 
 
 def get_historical_start_time(ticker, timeframe, end_time):
-    if ticker.startswith("/"):
-        if timeframe == "1":
-            start_time = end_time - timedelta(days=1)
-        elif timeframe == "5":
-            start_time = end_time - timedelta(days=2)
-        elif timeframe == "15":
-            start_time = end_time - timedelta(days=3)
-        elif timeframe == "30":
-            start_time = end_time - timedelta(days=5)
-        elif timeframe == "1h":
-            start_time = end_time - timedelta(days=10)
-        elif timeframe == "4h":
-            start_time = end_time - timedelta(days=30)
-        elif timeframe == "1d":
-            start_time = end_time - timedelta(days=60)
-        elif timeframe.endswith("t"):
-            start_time = end_time - timedelta(days=1)
-        return start_time
-    else:
+    start_time = end_time
+    if timeframe == "1":
+        start_time = end_time - timedelta(days=1)
+    elif timeframe == "2":
+        start_time = end_time - timedelta(days=1)
+    elif timeframe == "5":
+        start_time = end_time - timedelta(days=2)
+    elif timeframe == "15":
         start_time = end_time - timedelta(days=3)
-        return start_time
+    elif timeframe == "30":
+        start_time = end_time - timedelta(days=5)
+    elif timeframe == "1h":
+        start_time = end_time - timedelta(days=10)
+    elif timeframe == "4h":
+        start_time = end_time - timedelta(days=30)
+    elif timeframe == "1d":
+        start_time = end_time - timedelta(days=60)
+    elif timeframe == "516t":
+        start_time = end_time - timedelta(days=1)
+    elif timeframe == "1160t":
+        start_time = end_time - timedelta(days=2)
+    elif timeframe == "1600t":
+        start_time = end_time - timedelta(days=3)
+    
+    # Ensure minimum time difference to avoid Databento errors
+    min_diff = timedelta(days=1)
+    if (end_time - start_time) < min_diff:
+        start_time = end_time - min_diff
+    
+    return start_time
         

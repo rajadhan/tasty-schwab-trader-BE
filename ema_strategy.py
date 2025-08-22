@@ -11,6 +11,7 @@ from datetime import datetime
 import pytz
 from config import *
 from strategy_consumer import StrategyConsumer
+from tastytrade import place_tastytrade_order
 
 
 def ema_strategy(ticker, logger):
@@ -50,21 +51,16 @@ def ema_strategy(ticker, logger):
         trade_file = get_trade_file_path(ticker, "ema")
         trades = load_json(trade_file)
 
-        if is_tick_timeframe(timeframe):
-            logger.info(f"Using tick data for {ticker}")
-            df = strategy_consumer.get_tick_dataframe(ticker, int(period_1), int(period_2))  # This returns DataFrame and updated number of bars needed for each period
+        logger.info(f"Using tick data for {ticker}")
+        df = strategy_consumer.get_tick_dataframe(ticker, int(period_1), int(period_2))  # This returns DataFrame and updated number of bars needed for each period
 
-            if df is None:
-                logger.warning(f"No tick data available for {ticker}")
-                return
-        else:
-            logger.info(f"Using historical data for {ticker}")
-            df = historical_data(ticker, timeframe, logger=logger)
+        if df is None:
+            logger.warning(f"No tick data available for {ticker}")
+            return
 
         if df is None or len(df) < max(int(period_1), int(period_2)):
             logger.warning(f"Insufficient data for {ticker}")
             return
-
         # Calculate trend lines
         ## Trend Line 1
         if trend_line_1 == "EMA":
@@ -73,8 +69,7 @@ def ema_strategy(ticker, logger):
             df["trend1"] = df["close"].rolling(window=int(period_1)).mean()
         elif trend_line_1 == "WilderSmoother":
             df["trend1"] = wilders_smoothing(df, length=int(period_1))
-        print("trend1", df["trend1"]) # TODO
-
+        print("df", df.iloc[-1]["close"]) # TODO
         ## Trend Line 2
         if trend_line_2 == "EMA":
             df["trend2"] = df["close"].ewm(span=int(period_2)).mean()
@@ -82,7 +77,8 @@ def ema_strategy(ticker, logger):
             df["trend2"] = df["close"].rolling(window=int(period_2)).mean()
         elif trend_line_2 == "WilderSmoother":
             df["trend2"] = wilders_smoothing(df, length=int(period_2))
-        print("trend2", df["trend2"]) # TODO
+        print("trend1", df.iloc[-1]["trend1"], df.iloc[-2]["trend1"]) # TODO
+        print("trend2", df.iloc[-1]["trend2"], df.iloc[-2]["trend2"]) # TODO
 
         Long_condition = (
             df.iloc[-1]["trend1"] > df.iloc[-1]["trend2"]

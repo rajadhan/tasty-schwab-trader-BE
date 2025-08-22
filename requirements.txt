@@ -10,4 +10,4 @@ schedule
 databento
 redis
 pandas_ta
-nympy
+numpy

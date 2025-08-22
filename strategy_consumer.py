@@ -29,21 +29,28 @@ class StrategyConsumer:
         self.logger = logging.getLogger('StrategyConsumer')
         # Remove self.tick_dataframes - use Redis only for tick data
         self.pending_strategies = defaultdict(threading.Event)  # For triggering strategy on new bars
-        
+
 
     def get_tick_dataframe(self, symbol, period1, period2):
-        zset_key = f"bars_history:{symbol}"
+        ticker_for_data = get_active_exchange_symbol(symbol)
+        zset_key = f"bars_history:{ticker_for_data}"
         max_bars = max(period1, period2)
-
         # Fetch latest bars by rank (newest to oldest), then reverse for oldest → newest
-        latest_bars = self.redis_client.zrevrange(zset_key, 0, max_bars)
+        latest_bars = self.redis_client.zrevrange(zset_key, 0, max_bars - 1)
         bars = [json.loads(bar.decode('utf-8')) for bar in reversed(latest_bars)]
-
+        print("bars", bars[-1])
         if not bars:
             return pd.DataFrame()
 
         df = pd.DataFrame(bars)
-        df['timestamp'] = pd.to_datetime(df['timestamp'])
+        # Robust ISO8601 parsing with ns precision and no timezone
+        parsed_ts = pd.to_datetime(df['timestamp'], format='ISO8601', utc=True, errors='coerce')
+        # Drop rows we couldn't parse
+        valid_mask = ~parsed_ts.isna()
+        if not valid_mask.any():
+            return pd.DataFrame()
+        df = df.loc[valid_mask].copy()
+        df['timestamp'] = parsed_ts.loc[valid_mask]
         df.set_index('timestamp', inplace=True)
         df.sort_index(inplace=True)
 
@@ -101,7 +108,20 @@ class StrategyConsumer:
 
         try:
             while True:
+                # Check stop flag per strategy
+                try:
+                    if self.redis_client.get(f"trading:stop:{strategy}"):
+                        self.logger.info(f"Stop signal detected for {strategy}; exiting {ticker} loop")
+                        break
+                except Exception:
+                    pass
                 while is_within_time_range():
+                    try:
+                        if self.redis_client.get(f"trading:stop:{strategy}"):
+                            self.logger.info(f"Stop signal detected for {strategy}; breaking trading window for {ticker}")
+                            break
+                    except Exception:
+                        pass
                     _, today_date = get_current_datetime()
                     time_frame, *_ = get_strategy_prarams(strategy, ticker, logger)
 

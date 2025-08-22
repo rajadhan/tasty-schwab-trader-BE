@@ -135,7 +135,7 @@ def sleep_base_on_timeframe(interval_minutes):
                 elif num <= 1600:
                     next_interval = 15  # Check every 15 seconds for 1001-1600 tick settings
                 else:  # num > 1600
-                    next_interval = 30  # Check every 30 seconds for 1601+ tick settings
+                    next_interval = 15  # Check every 15 seconds for 1601+ tick settings (per requirement)
             except ValueError:
                 raise ValueError("Invalid interval")
         else:
@@ -253,7 +253,7 @@ def extract_tick_count(timeframe):
     """Extract number of ticks from timeframe string."""
     if is_tick_timeframe(timeframe):
         return int(timeframe[:-1])
-    return None
+    return 0
 
 
 def get_tick_data(ticker, timeframe, tick_buffers, logger):
@@ -415,8 +415,21 @@ def validate_strategy_config(ticker, strategy_type, config):
 def get_dataset(ticker):
     if ticker.startswith("/"):  # for CME futures
         return "GLBX.MDP3"
-    else:  # for stocks
+    elif ticker != "SPX":  # for stocks
         return "XNAS.ITCH"
+    else:
+        return "OPRA.PILLAR"
+
+
+def get_schema(timeframe):
+    if timeframe in ["1", "2", "5", "15", "30"]:
+        return "ohlcv-1m"
+    elif timeframe in ["1h", "4h"]:
+        return "ohlcv-1h"
+    elif timeframe == "1d":
+        return "ohlcv-1d"
+    else:
+        return "trades"
 
 
 def get_symbol_for_data(ticker):
