@@ -9,24 +9,24 @@ schwab_account_id = "13241612"
 
 #------------------------------#
 # Tasty Trade credentials
-TASTY_API = "https://api.tastyworks.com"
-# TASTY_API = "https://api.cert.tastyworks.com"
+# TASTY_API = "https://api.tastyworks.com"
+TASTY_API = "https://api.cert.tastyworks.com"
 
 TASTY_USERNAME = "tmckenna@boardwalkag.com"    # tastytrade
 TASTY_PASSWORD = "Boardwalk2024!"              # tastytrade
 
-TASTY_CLIENT_SECRET = "8283d5bbbb61c1e58b5e1b5b913ffc775e12d46a"
-TASTY_CLIENT_ID = "f1ff7542-2fa9-446c-a57e-22f95108e02c"
+# TASTY_CLIENT_SECRET = "8283d5bbbb61c1e58b5e1b5b913ffc775e12d46a"
+# TASTY_CLIENT_ID = "f1ff7542-2fa9-446c-a57e-22f95108e02c"
 
-# TASTY_CLIENT_SECRET = "9fb238518d48e77f966cf87d7474876b0e6f760a"
-# TASTY_CLIENT_ID = "011d2533-2c97-402c-a360-6aba494cc8c9"
+TASTY_CLIENT_SECRET = "9fb238518d48e77f966cf87d7474876b0e6f760a"
+TASTY_CLIENT_ID = "011d2533-2c97-402c-a360-6aba494cc8c9"
 
 TASTY_MY_APP_URL = "https://my.tastytrade.com/auth.html"
 TASTY_REDIRECT_URI = "https://api.tastyworks.com"
 
 TASTY_ACCESS_TOKEN_PATH = os.path.join("tokens", "tastytrade_tokens.txt")
 
-TASTY_ACCOUNT_ID = "5WW38442"  # Business ID
+# TASTY_ACCOUNT_ID = "5WW38442"  # Business ID
 # TASTY_ACCOUNT_ID = "5WX28756"  # Individual ID
 
 TASTY_ACCOUNT_ID = "5WU58822"
