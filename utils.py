@@ -131,11 +131,11 @@ def sleep_base_on_timeframe(interval_minutes):
             try:
                 num = int(interval_str[:-1])  # Everything except last char 't'
                 if num <= 1000:
-                    next_interval = 5  # Check every 5 seconds for 1-1000 tick settings
+                    next_interval = 5
                 elif num <= 1600:
-                    next_interval = 15  # Check every 15 seconds for 1001-1600 tick settings
+                    next_interval = 15
                 else:  # num > 1600
-                    next_interval = 15  # Check every 15 seconds for 1601+ tick settings (per requirement)
+                    next_interval = 30
             except ValueError:
                 raise ValueError("Invalid interval")
         else:

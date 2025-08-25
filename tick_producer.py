@@ -272,28 +272,32 @@ def get_historical_end_time(ticker, dataset, logger, schema):
 
 def get_historical_start_time(ticker, timeframe, end_time):
     start_time = end_time
-    if timeframe == "1":
-        start_time = end_time - timedelta(days=1)
-    elif timeframe == "2":
-        start_time = end_time - timedelta(days=1)
-    elif timeframe == "5":
-        start_time = end_time - timedelta(days=2)
-    elif timeframe == "15":
-        start_time = end_time - timedelta(days=3)
-    elif timeframe == "30":
-        start_time = end_time - timedelta(days=5)
-    elif timeframe == "1h":
-        start_time = end_time - timedelta(days=10)
-    elif timeframe == "4h":
-        start_time = end_time - timedelta(days=30)
-    elif timeframe == "1d":
-        start_time = end_time - timedelta(days=60)
-    elif timeframe == "516t":
-        start_time = end_time - timedelta(days=1)
-    elif timeframe == "1160t":
-        start_time = end_time - timedelta(days=2)
-    elif timeframe == "1600t":
-        start_time = end_time - timedelta(days=3)
+    timeframe = str(timeframe)
+    if is_tick_timeframe(timeframe):
+        tick_timeframe = int(timeframe[:-1])
+        if tick_timeframe <= 1000:
+            start_time = end_time - timedelta(days=1)
+        elif tick_timeframe <= 1600:
+            start_time = end_time - timedelta(days=2)
+        else:
+            start_time = end_time - timedelta(days=4)
+    else:
+        if timeframe == "1":
+            start_time = end_time - timedelta(days=1)
+        elif timeframe == "2":
+            start_time = end_time - timedelta(days=1)
+        elif timeframe == "5":
+            start_time = end_time - timedelta(days=2)
+        elif timeframe == "15":
+            start_time = end_time - timedelta(days=3)
+        elif timeframe == "30":
+            start_time = end_time - timedelta(days=5)
+        elif timeframe == "1h":
+            start_time = end_time - timedelta(days=10)
+        elif timeframe == "4h":
+            start_time = end_time - timedelta(days=30)
+        elif timeframe == "1d":
+            start_time = end_time - timedelta(days=60)
     
     # Ensure minimum time difference to avoid Databento errors
     min_diff = timedelta(days=1)
