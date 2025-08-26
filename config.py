@@ -26,8 +26,8 @@ TASTY_REDIRECT_URI = "https://api.tastyworks.com"
 
 TASTY_ACCESS_TOKEN_PATH = os.path.join("tokens", "tastytrade_tokens.txt")
 
-TASTY_ACCOUNT_ID = "5WW38442"  # Business ID
-# TASTY_ACCOUNT_ID = "5WX28756"  # Individual ID
+TASTY_ACCOUNT_ID = "5WX28756"  # Business ID
+# TASTY_ACCOUNT_ID = "5WW38442"  # Individual ID
 
 TASTY_ACCOUNT_ID = "5WU58822" # Test ID
 
