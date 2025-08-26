@@ -360,17 +360,7 @@ def add_ticker():
                 str(data.get("schwab_quantity")),
                 str(data.get("trade_enabled")).upper(),
                 str(data.get("tastytrade_quantity")),
-                str(data.get("short_ma_length")),
-                str(data.get("short_ma_type")),
-                str(data.get("mid_ma_length")),
-                str(data.get("mid_ma_type")),
-                str(data.get("long_ma_length")),
-                str(data.get("long_ma_type")),
-                str(data.get("zigzag_percent_reversal")),
-                str(data.get("atr_length")),
-                str(data.get("zigzag_atr_multiple")),
-                str(data.get("fibonacci_enabled")),
-                str(data.get("support_demand_enabled")),
+                str(data.get("zigzag_method")),
             ]
         # Load current data
         strategy = data.get("strategy")
