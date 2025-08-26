@@ -979,4 +979,4 @@ def start_spxw_tick_streaming(symbol: str = "SPXW", interval: int = 1, logger=No
         return None, None
 
 if __name__ == "__main__":
-    print("tastu_data", get_spxw_historical_data("2025-08-15", "2025-08-22"))
+    print("tastu_data", get_account_info())
