@@ -324,17 +324,7 @@ def parse_strategy_params(config, strategy_type):
                 'schwab_qty': int(config[1]) if config[1].isdigit() else 0,
                 'trade_enabled': config[2] == "TRUE",
                 'tasty_qty': int(config[3]) if config[3].isdigit() else 0,
-                'short_ma_len': int(config[4]),
-                'short_ma_type': config[5],
-                'mid_ma_len': int(config[6]),
-                'mid_ma_type': config[7],
-                'long_ma_len': int(config[8]),
-                'long_ma_type': config[9],
-                'atr_length': int(config[10]),
-                'zigzag_percent': float(config[11]),
-                'atr_multiple': float(config[12]),
-                'fibonacci_enabled': config[13] == "True",
-                'support_demand_enabled': config[14] == "True"
+                'zigzag_method': config[4]
             }
         elif strategy_type == 'zeroday':
             # Handle case where config might not have call/put enabled fields yet

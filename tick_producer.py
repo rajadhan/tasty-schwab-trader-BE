@@ -66,16 +66,7 @@ class TickProducer:
                     self.logger.error(f"Invalid periods for {ticker}: {parsed.get('period_1')}, {parsed.get('period_2')}")
                     max_period = 1
             elif self.strategy == 'supertrend':
-                try:
-                    max_period = max(
-                        int(parsed.get('short_ma_len', 1)),
-                        int(parsed.get('mid_ma_len', 1)),
-                        int(parsed.get('long_ma_len', 1)),
-                        int(parsed.get('atr_length', 1)),
-                    )
-                except Exception:
-                    self.logger.error(f"Invalid supertrend params for {ticker}: {parsed}")
-                    max_period = 1
+                max_period = 50
             else:
                 max_period = 1
             dataset = get_dataset(ticker)

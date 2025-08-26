@@ -25,8 +25,8 @@ def run_every_week(strategy):
     consumer_thread.start()
     
     # Wait for both threads to complete
-    producer_thread.join()
-    consumer_thread.join()
+    # producer_thread.join()
+    # consumer_thread.join()
 
 
 def main():

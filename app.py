@@ -483,8 +483,8 @@ def start_trading():
                     {
                         "success": True,
                         "message": "Trading has started",
-                        "enabled_symbols": trade_enabled_symbols,
-                        "results": results,
+                        # "enabled_symbols": trade_enabled_symbols,
+                        # "results": results,
                     }
                 ),
                 200,

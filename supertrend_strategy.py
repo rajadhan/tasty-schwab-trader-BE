@@ -265,7 +265,7 @@ def supertrend_strategy(
                     place_tastytrade_order(
                         ticker, qty_tastytrade, "Buy to Open", TASTY_ACCOUNT_ID, logger
                     )
-                    if qty_tastytrade > 0
+                    if int(qty_tastytrade) > 0
                     else 0
                 )
                 trades[ticker] = {
@@ -283,7 +283,7 @@ def supertrend_strategy(
                     place_tastytrade_order(
                         ticker, qty_tastytrade, "Sell to Open", TASTY_ACCOUNT_ID, logger
                     )
-                    if qty_tastytrade > 0
+                    if int(qty_tastytrade) > 0
                     else 0
                 )
                 trades[ticker] = {
@@ -310,7 +310,7 @@ def supertrend_strategy(
                         place_tastytrade_order(
                             ticker, qty_tastytrade, "Sell to Close", TASTY_ACCOUNT_ID, logger
                         )
-                        if qty_tastytrade > 0
+                        if int(qty_tastytrade) > 0
                         else 0
                     )
                     
@@ -319,7 +319,7 @@ def supertrend_strategy(
                         place_tastytrade_order(
                             ticker, qty_tastytrade, "Sell to Open", TASTY_ACCOUNT_ID, logger
                         )
-                        if qty_tastytrade > 0
+                        if int(qty_tastytrade) > 0
                         else 0
                     )
                     
@@ -342,7 +342,7 @@ def supertrend_strategy(
                         place_tastytrade_order(
                             ticker, qty_tastytrade, "Sell to Close", TASTY_ACCOUNT_ID, logger
                         )
-                        if qty_tastytrade > 0
+                        if int(qty_tastytrade) > 0
                         else 0
                     )
                     
@@ -351,7 +351,7 @@ def supertrend_strategy(
                         place_tastytrade_order(
                             ticker, qty_tastytrade, "Sell to Open", TASTY_ACCOUNT_ID, logger
                         )
-                        if qty_tastytrade > 0
+                        if int(qty_tastytrade) > 0
                         else 0
                     )
                     
@@ -375,7 +375,7 @@ def supertrend_strategy(
                         place_tastytrade_order(
                             ticker, qty_tastytrade, "Buy to Close", TASTY_ACCOUNT_ID, logger
                         )
-                        if qty_tastytrade > 0
+                        if int(qty_tastytrade) > 0
                         else 0
                     )
                     
@@ -384,7 +384,7 @@ def supertrend_strategy(
                         place_tastytrade_order(
                             ticker, qty_tastytrade, "Buy to Open", TASTY_ACCOUNT_ID, logger
                         )
-                        if qty_tastytrade > 0
+                        if int(qty_tastytrade) > 0
                         else 0
                     )
                     
@@ -407,7 +407,7 @@ def supertrend_strategy(
                         place_tastytrade_order(
                             ticker, qty_tastytrade, "Buy to Close", TASTY_ACCOUNT_ID, logger
                         )
-                        if qty_tastytrade > 0
+                        if int(qty_tastytrade) > 0
                         else 0
                     )
                     
@@ -416,7 +416,7 @@ def supertrend_strategy(
                         place_tastytrade_order(
                             ticker, qty_tastytrade, "Buy to Open", TASTY_ACCOUNT_ID, logger
                         )
-                        if qty_tastytrade > 0
+                        if int(qty_tastytrade) > 0
                         else 0
                     )
                     
