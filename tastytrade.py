@@ -124,6 +124,7 @@ def create_order_payload(symbol, qty, action, account_id, logger):
 
 def place_order(order_payload, account_id, logger):
     place_order_url = f"{TASTY_API}/accounts/{account_id}/orders"
+    print("place order url", place_order_url)
     try:
         response = tastytrade_api_request("POST", place_order_url, json=order_payload)
         order = response.json()
@@ -142,7 +143,7 @@ def check_order_status(order_id, account_id, logger):
         check_order_status_url = f"{TASTY_API}/accounts/{account_id}/orders/{order_id}"
         response = tastytrade_api_request("GET", check_order_status_url)
         order_history = response.json()
-
+        
         logger.info(f"order_history for user {account_id} = {order_history}")
         order_status = order_history["data"]["status"]
         traded_qty = int(order_history["data"]["size"])
@@ -164,13 +165,16 @@ def check_order_status(order_id, account_id, logger):
 
 
 def place_tastytrade_order(symbol, qty, action, account_id, logger):
+    print("place tastytrade order", symbol, qty, action, account_id, logger)
     try:
         symbol = "/" + get_active_exchange_symbol(symbol)
         if symbol[-1].isdigit():
             symbol = f"/{symbol.lstrip('/')}"
         order_payload = create_order_payload(symbol, qty, action, account_id, logger)
+        print("order payload", order_payload)
         order_id = place_order(order_payload, account_id, logger)
         is_filled, _ = check_order_status(order_id, account_id, logger)
+        print("is filled", is_filled)
         if is_filled:
             return order_id
         else:
