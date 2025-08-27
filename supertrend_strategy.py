@@ -257,6 +257,9 @@ def supertrend_strategy(
         logger.info(f"{ticker} - Momentum Down: {last_momentum_down}, Momentum Up: {last_momentum_up}")
 
         # Trading Logic: Execute orders immediately when reversal candles are printed
+        
+        df.to_csv(f"logs/supertrend/{ticker[1:] if ticker[0] == '/' else ticker}.csv", index=True, index_label="timestamp")
+
         if ticker not in trades:
             # No existing position - check for new signals
             if last_buy_signal and current_colorbars == 1:  # Green badge - Buy signal

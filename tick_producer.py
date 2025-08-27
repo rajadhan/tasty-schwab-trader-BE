@@ -233,8 +233,8 @@ class TickDataBufferWithRedis(TickDataBuffer):
 
             # ---- Trim ZSET to only keep the latest max_period items ----
             # Remove all but the latest max_period items (highest scores)
-            self.redis_client.zremrangebyrank(zset_key_strategy, 0, -(self.max_period + 2))
-            self.redis_client.zremrangebyrank(zset_key_plain, 0, -(self.max_period + 2))
+            self.redis_client.zremrangebyrank(zset_key_strategy, 0, -(self.max_period * 10))
+            self.redis_client.zremrangebyrank(zset_key_plain, 0, -(self.max_period * 10))
 
             # self.logger.info(f"ZSET updated for {self.ticker} with timestamp {timestamp_score}")
 

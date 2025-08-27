@@ -69,7 +69,6 @@ def ema_strategy(ticker, logger):
             df["trend1"] = df["close"].rolling(window=int(period_1)).mean()
         elif trend_line_1 == "WilderSmoother":
             df["trend1"] = wilders_smoothing(df, length=int(period_1))
-        print("df", df.iloc[-1]["close"]) # TODO
         ## Trend Line 2
         if trend_line_2 == "EMA":
             df["trend2"] = df["close"].ewm(span=int(period_2)).mean()
@@ -77,8 +76,6 @@ def ema_strategy(ticker, logger):
             df["trend2"] = df["close"].rolling(window=int(period_2)).mean()
         elif trend_line_2 == "WilderSmoother":
             df["trend2"] = wilders_smoothing(df, length=int(period_2))
-        print("trend1", df.iloc[-1]["trend1"], df.iloc[-2]["trend1"]) # TODO
-        print("trend2", df.iloc[-1]["trend2"], df.iloc[-2]["trend2"]) # TODO
 
         Long_condition = (
             df.iloc[-1]["trend1"] > df.iloc[-1]["trend2"]
@@ -90,6 +87,19 @@ def ema_strategy(ticker, logger):
             and df.iloc[-2]["trend1"] > df.iloc[-2]["trend2"]
         )
         logger.info(f"Short condition for {ticker}: {Short_condition}")
+
+        # Shift previous values of trend1 and trend2
+        prev_trend1 = df["trend1"].shift(1)
+        prev_trend2 = df["trend2"].shift(1)
+        df["method"] = ""
+        df.loc[(df['trend1'] > df['trend2']) & (prev_trend1 < prev_trend2), 'method'] = "LONG"
+        df.loc[(df['trend1'] < df['trend2']) & (prev_trend1 > prev_trend2), 'method'] = "SHORT"
+        df.to_csv(
+            f"logs/ema/{ticker[1:] if '/' == ticker[0] else ticker}.csv",
+            index=True,
+            index_label="timestamp"
+            )
+
         if ticker not in trades.copy():
             if Long_condition:
                 logger.info(f"Long condition triggered for {ticker}")

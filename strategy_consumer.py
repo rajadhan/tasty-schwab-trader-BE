@@ -34,6 +34,8 @@ class StrategyConsumer:
     def get_tick_dataframe(self, symbol, period1, period2):
         ticker_for_data = get_active_exchange_symbol(symbol)
         zset_key = f"bars_history:{ticker_for_data}"
+        bars_count = self.redis_client.zcard(zset_key)
+        print(f"{zset_key} has {bars_count} bars saved")
         max_bars = max(period1, period2)
         # Fetch latest bars by rank (newest to oldest), then reverse for oldest → newest
         latest_bars = self.redis_client.zrevrange(zset_key, 0, max_bars - 1)
