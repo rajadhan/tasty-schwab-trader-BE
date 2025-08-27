@@ -38,7 +38,7 @@ class StrategyConsumer:
         print(f"{zset_key} has {bars_count} bars saved")
         max_bars = max(period1, period2)
         # Fetch latest bars by rank (newest to oldest), then reverse for oldest → newest
-        latest_bars = self.redis_client.zrevrange(zset_key, 0, max_bars - 1)
+        latest_bars = self.redis_client.zrevrange(zset_key, 0, max_bars * 10)
         bars = [json.loads(bar.decode('utf-8')) for bar in reversed(latest_bars)]
         print("bars", bars[-1])
         if not bars:
