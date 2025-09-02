@@ -324,7 +324,6 @@ def parse_strategy_params(config, strategy_type):
                 'schwab_qty': int(config[1]) if config[1].isdigit() else 0,
                 'trade_enabled': config[2] == "TRUE",
                 'tasty_qty': int(config[3]) if config[3].isdigit() else 0,
-                'zigzag_method': config[4]
             }
         elif strategy_type == 'zeroday':
             # Handle case where config might not have call/put enabled fields yet
