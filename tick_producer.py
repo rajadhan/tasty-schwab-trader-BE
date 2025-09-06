@@ -7,7 +7,7 @@ import pandas as pd
 import redis
 from datetime import datetime, timedelta, timezone
 from dotenv import load_dotenv
-from tick_buffer import DatabentoLiveManager, TickDataBuffer, TimeBasedBarBufferWithRedis
+from tick_buffer import DatabentoLiveManager, TickDataBuffer, TimeBasedBarBufferWithRedis, SPXTickBufferWithRedis
 from utils import (
     extract_tick_count,
     get_active_exchange_symbol,
@@ -60,11 +60,7 @@ class TickProducer:
             time_frame = parsed.get('timeframe')
             # Determine a conservative warmup window (max_period)
             if self.strategy in ['ema', 'zeroday']:
-                try:
-                    max_period = max(int(parsed.get('period_1', 1)), int(parsed.get('period_2', 1)))
-                except Exception:
-                    self.logger.error(f"Invalid periods for {ticker}: {parsed.get('period_1')}, {parsed.get('period_2')}")
-                    max_period = 1
+                max_period = 50
             elif self.strategy == 'supertrend':
                 max_period = 50
             else:
@@ -105,7 +101,17 @@ class TickProducer:
         schema,
     ):
         if ticker_for_data not in self.tick_buffers:
-            if is_tick_timeframe(time_frame):
+            # Use SPX buffer for SPX/SPXW symbols
+            if ticker_for_data in ["SPX", "SPXW"]:
+                buffer = SPXTickBufferWithRedis(
+                    ticker=ticker_for_data,
+                    strategy=self.strategy,
+                    time_frame=time_frame,
+                    max_period=max_period,
+                    logger=self.logger,
+                )
+                print(f"Initialized SPX buffer for {ticker_for_data} of {self.strategy} with timeframe {time_frame}")
+            elif is_tick_timeframe(time_frame):
                 buffer = TickDataBufferWithRedis(
                     ticker=ticker_for_data,
                     strategy=self.strategy,
@@ -161,16 +167,17 @@ class TickProducer:
     async def start_live_feeds(self, live_symbols_config):
         """Start live data feeds"""
         if live_symbols_config:
-            # Handle SPXW separately with Tastytrade
-            spxw_symbols = {k: v for k, v in live_symbols_config.items() if k == "SPXW"}
-            other_symbols = {k: v for k, v in live_symbols_config.items() if k != "SPXW"}
+            # Handle SPX/SPXW separately with Tastytrade
+            spx_symbols = {k: v for k, v in live_symbols_config.items() if k in ["SPX", "SPXW"]}
+            other_symbols = {k: v for k, v in live_symbols_config.items() if k not in ["SPX", "SPXW"]}
             
-            # Start Tastytrade feeds for SPXW
-            if spxw_symbols:
-                self.logger.info(f"Starting Tastytrade feeds for SPXW symbols")
-                for symbol, config in spxw_symbols.items():
+            # Start Tastytrade feeds for SPX symbols
+            if spx_symbols:
+                self.logger.info(f"Starting Tastytrade feeds for SPX symbols: {list(spx_symbols.keys())}")
+                for symbol, config in spx_symbols.items():
                     if symbol in self.tick_buffers:
-                        self.tick_buffers[symbol].start_live_subscription(
+                        # Use the SPX buffer's specialized live subscription
+                        await self.tick_buffers[symbol].start_live_subscription(
                             symbol, config.get("dataset"), config.get("schema")
                         )
             

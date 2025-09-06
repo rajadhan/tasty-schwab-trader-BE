@@ -30,7 +30,6 @@ def supertrend_strategy(
             qty_schwab,
             trade_enabled,
             qty_tastytrade,
-            zigzag_method, # average, high_low
         ] = get_strategy_prarams("supertrend", ticker, logger)
 
         # Create trades directory if it doesn't exist

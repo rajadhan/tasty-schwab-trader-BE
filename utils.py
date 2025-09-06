@@ -326,10 +326,6 @@ def parse_strategy_params(config, strategy_type):
                 'tasty_qty': int(config[3]) if config[3].isdigit() else 0,
             }
         elif strategy_type == 'zeroday':
-            # Handle case where config might not have call/put enabled fields yet
-            call_enabled = config[8] == "TRUE" if len(config) > 8 else True
-            put_enabled = config[9] == "TRUE" if len(config) > 9 else True
-
             return {
                 'timeframe': config[0],
                 'schwab_qty': int(config[1]) if config[1].isdigit() else 0,
@@ -339,8 +335,6 @@ def parse_strategy_params(config, strategy_type):
                 'period_1': int(config[5]),
                 'trend_line_2': config[6],
                 'period_2': int(config[7]),
-                'call_enabled': call_enabled,
-                'put_enabled': put_enabled
             }
         else:
             return None

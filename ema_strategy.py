@@ -1,7 +1,7 @@
+from pathlib import Path
 from utils import (
     get_strategy_prarams,
     get_trade_file_path,
-    is_tick_timeframe,
     load_json,
     wilders_smoothing,
 )
@@ -19,15 +19,13 @@ def ema_strategy(ticker, logger):
     """Runs the trading strategy for the specified ticker."""
     try:
         [
-            timeframe,
-            schwab_qty,
             trade_enabled,
             tasty_qty,
             trend_line_1,
             period_1,
             trend_line_2,
             period_2,
-        ] = get_strategy_prarams("ema", ticker, logger)
+        ] = get_strategy_prarams("ema", ticker, logger)[2:8]  # Skip unused timeframe and schwab_qty
 
         if trade_enabled != "TRUE":
             logger.info(f"Skipping  strategy for {ticker}, trade flag is FALSE.")
@@ -44,9 +42,8 @@ def ema_strategy(ticker, logger):
             return
 
         logger.info(
-            f"Running strategy for {ticker} at {datetime.now(tz=pytz.timezone(TIME_ZONE))} with params: Schwab_QTY={schwab_qty}, Tasty_QTY={tasty_qty} TRENDS=({period_1}, {trend_line_1}), ({period_2}, {trend_line_2})"
+            f"Running strategy for {ticker} at {datetime.now(tz=pytz.timezone(TIME_ZONE))} with params: Tasty_QTY={tasty_qty} TRENDS=({period_1}, {trend_line_1}), ({period_2}, {trend_line_2})"
         )
-        schwab_qty = int(schwab_qty)
         tasty_qty = int(tasty_qty)
         trade_file = get_trade_file_path(ticker, "ema")
         trades = load_json(trade_file)
@@ -77,6 +74,17 @@ def ema_strategy(ticker, logger):
         elif trend_line_2 == "WilderSmoother":
             df["trend2"] = wilders_smoothing(df, length=int(period_2))
 
+        latest = {
+            "time": df.index[-1],
+            "trend1": df.iloc[-1]["trend1"],
+            "trend2": df.iloc[-1]["trend2"],
+        }
+        prev = {
+            "time": df.index[-2],
+            "trend1": df.iloc[-2]["trend1"],
+            "trend2": df.iloc[-2]["trend2"],
+        }
+        logger.info(f"latest data {ticker}: {latest}, {prev}")
         Long_condition = (
             df.iloc[-1]["trend1"] > df.iloc[-1]["trend2"]
             and df.iloc[-2]["trend1"] < df.iloc[-2]["trend2"]

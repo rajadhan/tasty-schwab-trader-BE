@@ -8,8 +8,7 @@ import pytz
 import redis
 import threading
 from datetime import timedelta, datetime
-from tastytrade import get_latest_bars_from_redis, start_spxw_tick_streaming
-from utils import configure_logger, extract_tick_count
+from utils import extract_tick_count
 
 
 # Global clients - created once and reused
@@ -252,6 +251,106 @@ class DatabentoLiveManager:
             buffer.stop_live_subscription()
 
 
+class SPXTickBufferWithRedis(TickDataBuffer):
+    """Specialized tick buffer for SPX data from TastyTrade"""
+    
+    def __init__(self, ticker, strategy, time_frame, max_period, logger):
+        super().__init__(ticker, strategy, time_frame, max_period, logger)
+        self.redis_client = REDIS_CLIENT
+        self.spx_fetcher = None
+        self.is_streaming = False
+        
+    def start_spx_tick_streaming(self, interval=1):
+        """Start SPX tick data streaming from TastyTrade"""
+        try:
+            from tastytrade import SPXTickDataFetcher
+            self.spx_fetcher = SPXTickDataFetcher(self.redis_client, self.logger)
+            self.spx_fetcher.start_spx_tick_streaming(interval)
+            self.is_streaming = True
+            self.logger.info(f"Started SPX tick streaming for {self.ticker}")
+            
+            # Start Redis subscription for SPX ticks
+            self._start_redis_subscription()
+            
+        except Exception as e:
+            self.logger.error(f"Failed to start SPX tick streaming: {e}")
+    
+    def _start_redis_subscription(self):
+        """Subscribe to Redis pub/sub for SPX tick updates"""
+        def redis_subscriber():
+            pubsub = self.redis_client.pubsub()
+            pubsub.subscribe(f"spx_ticks:{self.ticker}")
+            
+            for message in pubsub.listen():
+                if message['type'] == 'message':
+                    try:
+                        tick_data = json.loads(message['data'])
+                        # Convert timestamp back to datetime
+                        tick_data['timestamp'] = pd.to_datetime(tick_data['timestamp'])
+                        self.add_tick(tick_data)
+                    except Exception as e:
+                        self.logger.error(f"Error processing Redis SPX tick: {e}")
+        
+        # Start Redis subscription in a separate thread
+        redis_thread = threading.Thread(target=redis_subscriber, daemon=True)
+        redis_thread.start()
+    
+    def stop_spx_tick_streaming(self):
+        """Stop SPX tick data streaming"""
+        if self.spx_fetcher:
+            self.spx_fetcher.stop_spx_tick_streaming()
+            self.is_streaming = False
+            self.logger.info(f"Stopped SPX tick streaming for {self.ticker}")
+    
+    def warmup_with_historical_ticks(self, symbol, dataset, start, end, schema):
+        """Override to use TastyTrade historical data for SPX"""
+        try:
+            self.logger.info(f"Fetching SPX historical data for warmup: {symbol}")
+            
+            # For SPX, we'll use a simple warmup with current price
+            # In a real implementation, you might want to fetch historical SPX data
+            current_price = None
+            try:
+                from tastytrade import get_spx_current_price
+                current_price = get_spx_current_price(self.logger)
+            except Exception as e:
+                self.logger.warning(f"Could not get current SPX price for warmup: {e}")
+            
+            if current_price:
+                # Create a minimal warmup with current price
+                current_time = pd.Timestamp.now(tz='UTC')
+                warmup_tick = {
+                    'timestamp': current_time,
+                    'price': current_price,
+                    'volume': 1,
+                    'symbol': symbol
+                }
+                self.buffer = [warmup_tick]
+                bar = self._create_bar_from_ticks()
+                if bar:
+                    self.processed_bars.append(bar)
+                    self.logger.info(f"SPX warmup completed with current price: {current_price}")
+            
+            self.historical_loaded = True
+            
+        except Exception as e:
+            self.logger.error(f"SPX historical warmup failed: {e}")
+            self.historical_loaded = True  # Continue anyway
+    
+    async def start_live_subscription(self, symbol, dataset, schema, start_time=0):
+        """Override to use SPX tick streaming instead of Databento"""
+        if symbol == "SPXW" or symbol == "SPX":
+            self.logger.info(f"Starting SPX live subscription for {symbol}")
+            self.start_spx_tick_streaming(interval=1)
+            
+            # Keep the thread alive
+            while self.is_streaming:
+                await asyncio.sleep(1)
+        else:
+            # Fall back to parent implementation for non-SPX symbols
+            await super().start_live_subscription(symbol, dataset, schema, start_time)
+
+
 class TimeBasedBarBufferWithRedis:
     """Aggregate trades into time-based OHLCV bars with optional resampling and persist to Redis."""
 
@@ -286,6 +385,7 @@ class TimeBasedBarBufferWithRedis:
 
     def _bars_to_df(self, data):
         df = data.to_df()
+        print("df=================", df)
         if df.empty:
             return df
         # Expect OHLCV schema: ts_event, open, high, low, close, volume
