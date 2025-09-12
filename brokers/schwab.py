@@ -1,154 +1,156 @@
-import requests
 from config import *
+from datetime import datetime, timedelta
+from flask import jsonify
+from pytz import timezone as pytz_timezone
+from time import sleep
+from urllib.parse import unquote
 from utils import *
-import pandas as pd
 import base64
 import os
-from time import sleep
-from datetime import datetime, timezone, timedelta
-from pytz import timezone as pytz_timezone
+import pandas as pd
+import requests
 import json
-from urllib.parse import unquote
 
-def create_header(auth_type, logger=None):
-    try:
-        if auth_type == "Basic":
-            credentials = f"{api_key}:{api_secret}"
-            encoded_credentials = base64.b64encode(credentials.encode("utf-8")).decode('utf-8')
-            return {
-                "Authorization": f'Basic {encoded_credentials}',
-                "Content-Type": "application/x-www-form-urlencoded",
-            }
-        elif auth_type == "Bearer":
-            if not os.path.exists(access_token_path):
-                if logger:
-                    logger.error(f"Access token file not found at {access_token_path}")
-                raise FileNotFoundError(f"Access token file not found at {access_token_path}")
-            
-            with open(access_token_path, "r") as file:
-                token = file.read().strip()
-            
-            if not token:
-                if logger:
-                    logger.error("Access token is empty")
-                raise ValueError("Access token is empty")
-                
-            return {"Accept": "application/json", "Authorization": f"Bearer {token}"}
-        else:
-            raise ValueError(f"Unsupported auth_type: {auth_type}")
-    except Exception as e:
-        if logger:
-            logger.error(f"Error in creating header: {str(e)}")
-        raise
+SCHWAB_API_KEY = os.getenv("SCHWAB_API_KEY")
+SCHWAB_API_SECRET = os.getenv("SCHWAB_API_SECRET")
+SCHWAB_API = "https://api.schwabapi.com"
+SCHWAB_CALLBACK_URL = "https://127.0.0.1"
+logger = logging.getLogger(__name__)
+
+def authorize_url():
+    params = {
+        "client_id": SCHWAB_API_KEY,
+        "redirect_uri": SCHWAB_CALLBACK_URL
+    }
+    request_url = (
+        requests.Request("GET", f"{SCHWAB_API}/v1/oauth/authorize", params=params).prepare().url
+    )
+    return request_url
+
+def create_api_header(access_token):
+    # Ensure token is properly formatted
+    if not access_token.startswith("Bearer "):
+        token = f"Bearer {access_token}"
+    return {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": token,
+    }
+
+def create_auth_header():
+    credentials = f"{SCHWAB_API_KEY}:{SCHWAB_API_SECRET}"
+    encoded_credentials = base64.b64encode(credentials.encode("utf-8")).decode("utf-8")
+    return {
+        "Authorization": f"Basic {encoded_credentials}",
+        "Content-Type": "application/x-www-form-urlencoded",
+    }
 
 def get_refresh_token(redirect_link):
-    try:
-        # Fix the code extraction logic
-        if "code=" not in redirect_link:
-            print("No authorization code found in link")
-            return False
-            
-        # Extract the authorization code properly
-        code_start = redirect_link.index("code=") + 5
-        code_end = redirect_link.find("&", code_start)
-        if code_end == -1:
-            code_end = len(redirect_link)
-        code = redirect_link[code_start:code_end]
-        code = unquote(code)
-
-        data = {
-            "grant_type": "authorization_code",
-            "code": code,
-            "redirect_uri": api_callback_url,
-        }
-
-        response = requests.post(
-            authtoken_link, data=data, headers=create_header("Basic")
-        )
-        
-        # Check HTTP status code first
-        if response.status_code != 200:
-            print(f"API request failed with status {response.status_code}: {response.text}")
-            return False
-            
-        response_data = response.json()
-        
-        # Check for error in response
-        if "error" in response_data:
-            print(f"API returned error: {response_data['error']}")
-            return False
-            
-        refresh_token = response_data.get("refresh_token")
-        access_token = response_data.get("access_token")
-        
-        if not refresh_token or not access_token:
-            print("Missing tokens in response")
-            return False
-
-        with open(refresh_token_path, "w") as file:
-            file.write(refresh_token)
-
-        with open(access_token_path, "w") as file:
-            file.write(access_token)
-
-        return True
-
-    except Exception as e:
-        print(f"Error in getting refresh token = {str(e)}")
+    # Fix the code extraction logic
+    if "code=" not in redirect_link:
+        print("No authorization code found in link")
         return False
 
-def refresh_access_token(logger=None):
-    """Refresh the access token using the stored refresh token"""
+    # Extract the authorization code properly
+    code_start = redirect_link.index("code=") + 5
+    code_end = redirect_link.find("&", code_start)
+    if code_end == -1:
+        code_end = len(redirect_link)
+    code = redirect_link[code_start:code_end]
+    code = unquote(code)
+
+    payload = {
+        "grant_type": "authorization_code",
+        "code": code,
+        "redirect_uri": SCHWAB_CALLBACK_URL,
+    }
+    authtoken_link = f"{SCHWAB_API}/v1/oauth/authorize"
+
+    response = requests.post(authtoken_link, data=payload, headers=create_auth_header())
+
+    # Check HTTP status code first
+    if response.status_code != 200:
+        print(f"API request failed with status {response.status_code}: {response.text}")
+        return False
+
+    response_data = response.json()
+    refresh_token = response_data.get("refresh_token")
+    access_token = response_data.get("access_token")
+
+    if access_token and refresh_token:
+        tokens_to_save = {"access_token": access_token, "refresh_token": refresh_token}
+        with open(SCHWAB_ACCESS_TOKEN_PATH, "w") as f:
+            json.dump(tokens_to_save, f)
+        return True
+    else:
+        return False
+
+def refresh_access_token():
+    """Refresh Charles Schwab access token using existing refresh token"""
     try:
-        if not os.path.exists(refresh_token_path):
-            if logger:
-                logger.error(f"Refresh token file not found at {refresh_token_path}")
-            return False
-            
-        with open(refresh_token_path, "r") as file:
-            refresh_token = file.read().strip()
-            
+        # Load existing refresh token
+        try:
+            with open(SCHWAB_ACCESS_TOKEN_PATH, "r") as f:
+                tokens = json.load(f)
+                refresh_token = tokens.get("refresh_token", "")
+        except Exception:
+            return jsonify({"success": False, "error": "No refresh token found"}), 400
+
         if not refresh_token:
-            if logger:
-                logger.error("Refresh token is empty")
-            return False
-            
-        data = {
+            return (
+                jsonify({"success": False, "error": "No refresh token available"}),
+                400,
+            )
+
+        schwab_refresh_access_token_url = f"{SCHWAB_API}/v1/oauth/token"
+        payload = {
             "grant_type": "refresh_token",
             "refresh_token": refresh_token,
         }
-        
         response = requests.post(
-            authtoken_link, 
-            headers=create_header("Basic"), 
-            data=data
+            schwab_refresh_access_token_url, headers=create_auth_header(), data=payload
         )
-        
+
         if response.status_code != 200:
-            if logger:
-                logger.error(f"Failed to refresh token: {response.status_code} - {response.text}")
-            return False
-            
+            return (
+                jsonify(
+                    {
+                        "success": False,
+                        "error": f"Failed to refresh token: {response.status_code}",
+                        "details": response.text,
+                    }
+                ),
+                400,
+            )
+
         response_data = response.json()
         new_access_token = response_data.get("access_token")
-        new_refresh_token = response_data.get("refresh_token")
-        
-        if new_access_token:
-            with open(access_token_path, "w") as file:
-                file.write(new_access_token)
-                
-        if new_refresh_token:
-            with open(refresh_token_path, "w") as file:
-                file.write(new_refresh_token)
-                
-        if logger:
-            logger.info("Access token refreshed successfully")
-        return True
-        
+        new_refresh_token = response_data.get("refresh_token", refresh_token)
+
+        if not new_access_token:
+            return jsonify({"success": False, "error": "No access token received"}), 400
+
+        tokens_to_save = {
+            "access_token": new_access_token,
+            "refresh_token": new_refresh_token,
+        }
+
+        with open(SCHWAB_ACCESS_TOKEN_PATH, "w") as f:
+            json.dump(tokens_to_save, f)
+
+        return (
+            jsonify(
+                {
+                    "success": True,
+                    "message": "Charles Schwab tokens refreshed successfully",
+                    "access_token": new_access_token,
+                }
+            ),
+            200,
+        )
+
     except Exception as e:
-        if logger:
-            logger.error(f"Error refreshing access token: {str(e)}")
-        return False
+        return jsonify({"success": False, "error": str(e)}), 500
 
 def _time_convert(dt=None, form="8601"):
     """
@@ -173,10 +175,11 @@ def _time_convert(dt=None, form="8601"):
     else:
         return dt
 
+
 def historical_data(symbol, time_frame, logger):
     try:
-        if symbol in ['SPX']:
-            symbol = f'${symbol}'
+        if symbol in ["SPX"]:
+            symbol = f"${symbol}"
         logger.info(f"Fetching historical data for {symbol}")
         current_datetime = datetime.now(tz=pytz_timezone(time_zone))
         endtime = current_datetime + timedelta(seconds=85)
@@ -264,10 +267,10 @@ def historical_data(symbol, time_frame, logger):
         # API Request
         response = requests.get(
             f"{base_api_url}/marketdata/v1/pricehistory",
-            headers=create_header("Bearer", logger),
+            headers=create_api_header("Bearer", logger),
             params=params_parser(params),
         )
-        
+
         # Check if response is successful
         if response.status_code == 401:
             logger.warning("Access token expired, attempting to refresh...")
@@ -275,31 +278,39 @@ def historical_data(symbol, time_frame, logger):
                 # Retry the request with new token
                 response = requests.get(
                     f"{base_api_url}/marketdata/v1/pricehistory",
-                    headers=create_header("Bearer", logger),
+                    headers=create_api_header("Bearer", logger),
                     params=params_parser(params),
                 )
                 if response.status_code != 200:
-                    logger.error(f"API request failed after token refresh: {response.status_code}: {response.text}")
-                    raise ValueError(f"API request failed with status code {response.status_code}")
+                    logger.error(
+                        f"API request failed after token refresh: {response.status_code}: {response.text}"
+                    )
+                    raise ValueError(
+                        f"API request failed with status code {response.status_code}"
+                    )
             else:
                 logger.error("Failed to refresh access token")
                 raise ValueError("Authentication failed and token refresh failed")
         elif response.status_code != 200:
-            logger.error(f"API request failed with status code {response.status_code}: {response.text}")
-            raise ValueError(f"API request failed with status code {response.status_code}")
-        
+            logger.error(
+                f"API request failed with status code {response.status_code}: {response.text}"
+            )
+            raise ValueError(
+                f"API request failed with status code {response.status_code}"
+            )
+
         # Try to parse JSON response
         try:
             response_data = response.json()
         except ValueError as json_error:
             logger.error(f"Failed to parse JSON response: {response.text[:200]}...")
             raise ValueError(f"Invalid JSON response from API: {str(json_error)}")
-        
+
         # Check for error in response
         if "error" in response_data:
             logger.error(f"API returned error: {response_data['error']}")
             raise ValueError(f"API error: {response_data['error']}")
-        
+
         data = response_data.get("candles", [])
         if not data:
             raise ValueError("No data returned from API.")
@@ -366,7 +377,10 @@ def historical_data(symbol, time_frame, logger):
         except Exception as retry_error:
             logger.error(f"Retry failed for {symbol}: {str(retry_error)}")
             # Return empty DataFrame as fallback
-            return pd.DataFrame(columns=["datetime", "symbol", "open", "high", "low", "close"])
+            return pd.DataFrame(
+                columns=["datetime", "symbol", "open", "high", "low", "close"]
+            )
+
 
 def place_order(symbol, quantity, action, account_id, logger, position_effect):
     try:
@@ -393,7 +407,7 @@ def place_order(symbol, quantity, action, account_id, logger, position_effect):
         response = requests.post(
             url=place_order_url,
             json=order_payload,
-            headers=create_header("Bearer", logger),
+            headers=create_api_header("Bearer", logger),
         )
 
         order_id = dict(response.headers)["Location"].split("/")[-1]
@@ -404,18 +418,21 @@ def place_order(symbol, quantity, action, account_id, logger, position_effect):
         else:
             logger.warning(f"Order not filled for {symbol}. Order ID: {order_id}")
             logger.warning(f"Placing order again for {symbol}. Order ID: {order_id}")
-            order_id = place_order(symbol, quantity, action, account_id, logger, position_effect)
+            order_id = place_order(
+                symbol, quantity, action, account_id, logger, position_effect
+            )
             return order_id
 
     except Exception as e:
         logger.error(f"Error in placing order for {symbol}: {str(e)}")
         return None
 
+
 def get_encrypted_account_id(schwab_account_id, logger):
     try:
         get_encrypted_account_id_url = f"{schwab_trader_link}/accounts/accountNumbers"
         response = requests.get(
-            url=get_encrypted_account_id_url, headers=create_header("Bearer", logger)
+            url=get_encrypted_account_id_url, headers=create_api_header("Bearer", logger)
         )
         encrypted_account_id = response.json()[0]["hashValue"]
         return encrypted_account_id
@@ -427,6 +444,7 @@ def get_encrypted_account_id(schwab_account_id, logger):
         encrypted_account_id = get_encrypted_account_id(schwab_account_id, logger)
         return encrypted_account_id
 
+
 def check_position_status(symbol, account_id, logger):
     try:
         logger.info(f"Checking position status for {symbol}")
@@ -434,7 +452,7 @@ def check_position_status(symbol, account_id, logger):
         response = requests.get(
             url=position_url,
             params={"fields": "positions"},
-            headers=create_header("Bearer", logger),
+            headers=create_api_header("Bearer", logger),
         )
         positions = response.json()[0]["securitiesAccount"]["positions"]
         for position in positions:
@@ -448,6 +466,7 @@ def check_position_status(symbol, account_id, logger):
         logger.error(f"Error in checking position status for {symbol}: {str(e)}")
         return False
 
+
 def check_order_status(order_id, logger):
     try:
         logger.info(f"Checking order status for Order ID: {order_id}")
@@ -456,7 +475,7 @@ def check_order_status(order_id, logger):
             f"{schwab_trader_link}/accounts/{encrypted_account_id}/orders/{order_id}"
         )
         response = requests.get(
-            url=check_order_status_url, headers=create_header("Bearer", logger)
+            url=check_order_status_url, headers=create_api_header("Bearer", logger)
         )
         order_history = response.json()
         order_status = order_history["status"]
@@ -482,6 +501,7 @@ def check_order_status(order_id, logger):
         is_filled, traded_qty = check_order_status(order_id, logger)
         return is_filled, traded_qty
 
+
 def cancel_order(order_id, account_id, schwab_account_id, logger):
     try:
         logger.info(f"Cancelling order with Order ID: {order_id}")
@@ -489,11 +509,12 @@ def cancel_order(order_id, account_id, schwab_account_id, logger):
             f"{schwab_trader_link}/accounts/{account_id}/orders/{order_id}"
         )
         response = requests.delete(
-            url=cancel_order_url, headers=create_header("Bearer", logger)
+            url=cancel_order_url, headers=create_api_header("Bearer", logger)
         )
         logger.info(f"Order ID {order_id} cancelled successfully")
     except Exception as e:
         logger.error(f"Error in cancelling order with Order ID {order_id}: {str(e)}")
+
 
 def validate_refresh_link(link, REFRESH_TOKEN_LINK):
     """
@@ -505,10 +526,10 @@ def validate_refresh_link(link, REFRESH_TOKEN_LINK):
         # Validate link format
         if not link or not isinstance(link, str):
             return False, "Invalid link format"
-            
+
         if "code=" not in link:
             return False, "No authorization code found in link"
-            
+
         is_valid = get_refresh_token(link)
         if is_valid:
             # Save the link as JSON with proper structure

@@ -7,8 +7,8 @@ import logging
 from collections import defaultdict
 from config import *
 from utils import *
-from schwab import historical_data, place_order
-from tastytrade import place_tastytrade_order
+from brokers.schwab import historical_data, place_order
+from brokers.tastytrade import place_tastytrade_order
 from utils import is_tick_timeframe, get_active_exchange_symbol
 from datetime import datetime,timedelta,timezone
 import logging

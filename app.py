@@ -1,16 +1,21 @@
-import json
-import os
-import jwt
-import requests
+from config import *
 from datetime import timedelta, datetime, timezone
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from functools import wraps
-import redis
 from main_equities import run_every_week
+from brokers.schwab import (
+    refresh_access_token as schwab_refresh_access_token,
+    get_refresh_token as schwab_get_refresh_token,
+    authorize_url as schwab_authorization_url,
+)
+from brokers.tastytrade import manual_trigger_action
 from utils import ticker_data_path_for_strategy, configure_logger
-from config import *
-from tastytrade import manual_trigger_action
+import json
+import jwt
+import os
+import requests
+import redis
 
 app = Flask(__name__, static_folder="static")
 CORS(app)
@@ -24,7 +29,11 @@ ADMIN_CREDENTIALS_PATH = os.path.join("credentials", "admin_credentials.json")
 SYMBOL_DATA_PATH = os.path.join("consts", "symbol.json")
 TREND_DATA_PATH = os.path.join("consts", "trend_line.json")
 REFRESH_TOKEN_LINK = os.path.join("jsons", "refresh_token_link.json")
-REDIS_CLIENT = redis.Redis(host=os.getenv("REDIS_HOST", "localhost"), port=int(os.getenv("REDIS_PORT", 6379)), db=int(os.getenv("REDIS_DB", 0)))
+REDIS_CLIENT = redis.Redis(
+    host=os.getenv("REDIS_HOST", "localhost"),
+    port=int(os.getenv("REDIS_PORT", 6379)),
+    db=int(os.getenv("REDIS_DB", 0)),
+)
 
 
 # ================== JSON Utilities ===============
@@ -83,6 +92,7 @@ def token_required(f):
 
 
 # ================== Routes ==================
+
 
 @app.route("/api/login", methods=["POST"])
 def login():
@@ -195,7 +205,10 @@ def tasty_refresh_token():
             return jsonify({"success": False, "error": "No refresh token found"}), 400
 
         if not refresh_token:
-            return jsonify({"success": False, "error": "No refresh token available"}), 400
+            return (
+                jsonify({"success": False, "error": "No refresh token available"}),
+                400,
+            )
 
         # Exchange refresh token for new access token
         refresh_url = f"{TASTY_API}/oauth/token"
@@ -206,19 +219,26 @@ def tasty_refresh_token():
             "client_secret": TASTY_CLIENT_SECRET,
         }
         headers = {"Accept": "application/json", "Content-Type": "application/json"}
-        
+
         response = requests.post(refresh_url, data=payload, headers=headers)
-        
+
         if response.status_code != 200:
-            return jsonify({
-                "success": False, 
-                "error": f"Failed to refresh token: {response.status_code}",
-                "details": response.text
-            }), 400
+            return (
+                jsonify(
+                    {
+                        "success": False,
+                        "error": f"Failed to refresh token: {response.status_code}",
+                        "details": response.text,
+                    }
+                ),
+                400,
+            )
 
         new_tokens = response.json()
         new_access_token = new_tokens.get("access_token")
-        new_refresh_token = new_tokens.get("refresh_token", refresh_token)  # Keep old if not provided
+        new_refresh_token = new_tokens.get(
+            "refresh_token", refresh_token
+        )  # Keep old if not provided
 
         if not new_access_token:
             return jsonify({"success": False, "error": "No access token received"}), 400
@@ -226,20 +246,61 @@ def tasty_refresh_token():
         # Save new tokens
         tokens_to_save = {
             "access_token": new_access_token,
-            "refresh_token": new_refresh_token
+            "refresh_token": new_refresh_token,
         }
-        
+
         with open(TASTY_ACCESS_TOKEN_PATH, "w") as f:
             json.dump(tokens_to_save, f)
 
-        return jsonify({
-            "success": True,
-            "message": "TastyTrade tokens refreshed successfully",
-            "access_token": new_access_token
-        }), 200
+        return (
+            jsonify(
+                {
+                    "success": True,
+                    "message": "TastyTrade tokens refreshed successfully",
+                    "access_token": new_access_token,
+                }
+            ),
+            200,
+        )
 
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route("/api/schwab/authorize-url", methods=["GET"])
+@token_required
+def schwab_authorize_url():
+    request_url = schwab_authorization_url()
+    return request_url
+
+
+@app.route("/api/schwab/access-token", methods=["POST"])
+@token_required
+def schwab_access_token():
+    data = request.json
+    authorization_link = data.get("authorizationLink")
+    response = schwab_get_refresh_token(authorization_link)
+    print("respnse", response)
+    if response:
+        return jsonify(
+            {
+                "success": True,
+                "message": "Charles Schwab connection established successfully",
+            }
+        )
+    else:
+        return jsonify(
+            {
+                "success": False,
+                "message": "Failed to establish Charles Schwab connection",
+            }
+        )
+
+
+@app.route("/api/schwab/refresh-token", methods=["POST"])
+@token_required
+def refresh_schwab_token():
+    return schwab_refresh_access_token()
 
 
 @app.route("/api/update-credentials", methods=["POST"])
@@ -256,11 +317,17 @@ def update_credentials():
 
         # Basic validation
         if not current_password:
-            return jsonify({"success": False, "error": "Current password is required"}), 400
+            return (
+                jsonify({"success": False, "error": "Current password is required"}),
+                400,
+            )
 
         # Verify current password
         if current_password != admin_credentials.get("password"):
-            return jsonify({"success": False, "error": "Current password is incorrect"}), 401
+            return (
+                jsonify({"success": False, "error": "Current password is incorrect"}),
+                401,
+            )
 
         # Apply updates in-memory
         updated = False
@@ -282,12 +349,17 @@ def update_credentials():
         fresh_password = admin_credentials.get("password")
         token = generate_token(fresh_email, fresh_password)
 
-        return jsonify({
-            "success": True,
-            "message": "Credentials updated successfully",
-            "token": token,
-            "email": fresh_email,
-        }), 200
+        return (
+            jsonify(
+                {
+                    "success": True,
+                    "message": "Credentials updated successfully",
+                    "token": token,
+                    "email": fresh_email,
+                }
+            ),
+            200,
+        )
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
 
@@ -489,7 +561,10 @@ def stop_trading():
         if not strategy:
             return jsonify({"success": False, "error": "strategy is required"}), 400
         REDIS_CLIENT.set(f"trading:stop:{strategy}", "1")
-        return jsonify({"success": True, "message": f"Stop signal sent for {strategy}"}), 200
+        return (
+            jsonify({"success": True, "message": f"Stop signal sent for {strategy}"}),
+            200,
+        )
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
 

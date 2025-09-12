@@ -7,7 +7,7 @@ import pandas as pd
 import redis
 from datetime import datetime, timedelta, timezone
 from dotenv import load_dotenv
-from tick_buffer import DatabentoLiveManager, TickDataBuffer, TimeBasedBarBufferWithRedis, SPXTickBufferWithRedis
+from tick_buffer import DatabentoLiveManager, TickDataBuffer, TimeBasedBarBufferWithRedis
 from utils import (
     extract_tick_count,
     get_active_exchange_symbol,
@@ -101,17 +101,7 @@ class TickProducer:
         schema,
     ):
         if ticker_for_data not in self.tick_buffers:
-            # Use SPX buffer for SPX/SPXW symbols
-            if ticker_for_data in ["SPX", "SPXW"]:
-                buffer = SPXTickBufferWithRedis(
-                    ticker=ticker_for_data,
-                    strategy=self.strategy,
-                    time_frame=time_frame,
-                    max_period=max_period,
-                    logger=self.logger,
-                )
-                print(f"Initialized SPX buffer for {ticker_for_data} of {self.strategy} with timeframe {time_frame}")
-            elif is_tick_timeframe(time_frame):
+            if is_tick_timeframe(time_frame):
                 buffer = TickDataBufferWithRedis(
                     ticker=ticker_for_data,
                     strategy=self.strategy,

@@ -1,0 +1,526 @@
+2025-09-08 02:55:28,280 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-08 02:55:28,282 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-08 02:55:28,521 INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-09-08 02:55:28,522 INFO:werkzeug:[33mPress CTRL+C to quit[0m
+2025-09-08 02:56:28,442 INFO:werkzeug:127.0.0.1 - - [08/Sep/2025 02:56:28] "OPTIONS /api/login HTTP/1.1" 200 -
+2025-09-08 02:56:28,472 INFO:werkzeug:127.0.0.1 - - [08/Sep/2025 02:56:28] "POST /api/login HTTP/1.1" 200 -
+2025-09-08 03:05:56,684 INFO:werkzeug:127.0.0.1 - - [08/Sep/2025 03:05:56] "OPTIONS /api/login HTTP/1.1" 200 -
+2025-09-08 03:05:56,709 INFO:werkzeug:127.0.0.1 - - [08/Sep/2025 03:05:56] "POST /api/login HTTP/1.1" 200 -
+2025-09-08 03:05:59,441 INFO:werkzeug:127.0.0.1 - - [08/Sep/2025 03:05:59] "OPTIONS /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-08 03:05:59,445 INFO:werkzeug:127.0.0.1 - - [08/Sep/2025 03:05:59] "OPTIONS /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-08 03:05:59,452 INFO:werkzeug:127.0.0.1 - - [08/Sep/2025 03:05:59] "GET /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-08 03:05:59,455 INFO:werkzeug:127.0.0.1 - - [08/Sep/2025 03:05:59] "GET /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-08 03:06:04,990 INFO:werkzeug:127.0.0.1 - - [08/Sep/2025 03:06:04] "OPTIONS /api/get-ticker?strategy=zeroday HTTP/1.1" 200 -
+2025-09-08 03:06:04,991 INFO:werkzeug:127.0.0.1 - - [08/Sep/2025 03:06:04] "OPTIONS /api/get-ticker?strategy=zeroday HTTP/1.1" 200 -
+2025-09-08 03:06:04,996 INFO:werkzeug:127.0.0.1 - - [08/Sep/2025 03:06:04] "GET /api/get-ticker?strategy=zeroday HTTP/1.1" 200 -
+2025-09-08 03:06:04,999 INFO:werkzeug:127.0.0.1 - - [08/Sep/2025 03:06:04] "GET /api/get-ticker?strategy=zeroday HTTP/1.1" 200 -
+2025-09-08 04:08:42,375 INFO:werkzeug:127.0.0.1 - - [08/Sep/2025 04:08:42] "OPTIONS /api/manual-trigger HTTP/1.1" 200 -
+2025-09-08 04:08:42,403 INFO:SPX:Manual trigger received for SPX with action long
+2025-09-08 04:08:42,421 ERROR:app:Exception on /api/manual-trigger [POST]
+Traceback (most recent call last):
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\app.py", line 80, in decorator
+    return f(*args, **kwargs)
+  File "D:\work\work\Tim McKenna\Tim\backend\app.py", line 506, in manual_trigger
+    manual_trigger_action(ticker, action, logger)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\tastytrade.py", line 616, in manual_trigger_action
+    if tasty_qty > 0
+       ^^^^^^^^^^^^^
+TypeError: '>' not supported between instances of 'str' and 'int'
+2025-09-08 04:08:42,545 INFO:werkzeug:127.0.0.1 - - [08/Sep/2025 04:08:42] "[35m[1mPOST /api/manual-trigger HTTP/1.1[0m" 500 -
+2025-09-08 04:08:45,600 INFO:werkzeug:127.0.0.1 - - [08/Sep/2025 04:08:45] "OPTIONS /api/start-trading?strategy=zeroday HTTP/1.1" 200 -
+2025-09-08 04:08:47,636 INFO:TickProducer:Starting Tick Producer...
+2025-09-08 04:08:49,281 INFO:TickProducer:SPX's schema range for ohlcv-1m: {'start': '2013-04-01T00:00:00.000000000Z', 'end': '2025-09-06T00:00:00.000000000Z'}
+2025-09-08 04:09:02,641 INFO:werkzeug:127.0.0.1 - - [08/Sep/2025 04:09:02] "GET /api/start-trading?strategy=zeroday HTTP/1.1" 200 -
+2025-09-08 04:09:02,641 INFO:SPX:MAIN STRATEGY STARTED for SPX
+2025-09-08 04:09:06,696 INFO:SPX:Market closed on weekends
+2025-09-08 04:10:08,731 INFO:SPX:Market closed on weekends
+2025-09-08 04:11:10,764 INFO:SPX:Market closed on weekends
+2025-09-08 04:12:12,796 INFO:SPX:Market closed on weekends
+2025-09-08 04:13:14,822 INFO:SPX:Market closed on weekends
+2025-09-08 04:14:16,857 INFO:SPX:Market closed on weekends
+2025-09-08 04:15:18,899 INFO:SPX:Market closed on weekends
+2025-09-08 04:16:20,930 INFO:SPX:Market closed on weekends
+2025-09-08 04:17:22,979 INFO:SPX:Market closed on weekends
+2025-09-08 04:18:25,090 INFO:SPX:Market closed on weekends
+2025-09-08 04:19:27,142 INFO:SPX:Market closed on weekends
+2025-09-08 04:20:29,208 INFO:SPX:Market closed on weekends
+2025-09-08 04:21:31,261 INFO:SPX:Market closed on weekends
+2025-09-08 04:22:33,317 INFO:SPX:Market closed on weekends
+2025-09-08 04:23:35,344 INFO:SPX:Market closed on weekends
+2025-09-08 04:24:37,394 INFO:SPX:Market closed on weekends
+2025-09-08 04:25:39,421 INFO:SPX:Market closed on weekends
+2025-09-08 04:26:41,457 INFO:SPX:Market closed on weekends
+2025-09-11 23:20:19,370 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-11 23:20:19,371 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-11 23:20:19,520 INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-09-11 23:20:19,520 INFO:werkzeug:[33mPress CTRL+C to quit[0m
+2025-09-12 01:28:18,158 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-12 01:28:18,160 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-12 01:28:18,329 INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-09-12 01:28:18,330 INFO:werkzeug:[33mPress CTRL+C to quit[0m
+2025-09-12 01:28:27,046 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 01:28:27] "OPTIONS /api/login HTTP/1.1" 200 -
+2025-09-12 01:28:27,087 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 01:28:27] "POST /api/login HTTP/1.1" 200 -
+2025-09-12 01:28:47,563 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 01:28:47] "OPTIONS /api/login HTTP/1.1" 200 -
+2025-09-12 01:28:47,568 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 01:28:47] "POST /api/login HTTP/1.1" 200 -
+2025-09-12 01:28:51,501 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 01:28:51] "OPTIONS /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 01:28:51,506 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 01:28:51] "GET /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 01:28:51,510 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 01:28:51] "GET /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 01:33:17,634 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 01:33:17] "OPTIONS /api/login HTTP/1.1" 200 -
+2025-09-12 01:33:17,640 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 01:33:17] "POST /api/login HTTP/1.1" 200 -
+2025-09-12 01:33:19,133 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 01:33:19] "OPTIONS /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 01:33:19,144 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 01:33:19] "GET /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 01:33:19,172 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 01:33:19] "GET /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 01:33:22,774 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 01:33:22] "OPTIONS /api/tasty/authorize-url HTTP/1.1" 200 -
+2025-09-12 01:33:22,777 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 01:33:22] "OPTIONS /api/schwab/authorize-url HTTP/1.1" 200 -
+2025-09-12 01:33:22,779 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 01:33:22] "OPTIONS /api/tasty/authorize-url HTTP/1.1" 200 -
+2025-09-12 01:33:22,779 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 01:33:22] "OPTIONS /api/schwab/authorize-url HTTP/1.1" 200 -
+2025-09-12 01:33:22,883 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 01:33:22] "GET /api/tasty/authorize-url HTTP/1.1" 200 -
+2025-09-12 01:33:22,885 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 01:33:22] "GET /api/schwab/authorize-url HTTP/1.1" 200 -
+2025-09-12 01:33:22,891 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 01:33:22] "GET /api/tasty/authorize-url HTTP/1.1" 200 -
+2025-09-12 01:33:22,899 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 01:33:22] "GET /api/schwab/authorize-url HTTP/1.1" 200 -
+2025-09-12 06:32:16,792 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-12 06:32:16,793 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-12 06:32:17,397 INFO:databento.live.client:terminating live client
+2025-09-12 06:34:57,241 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-12 06:34:57,242 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-12 06:34:57,285 INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-09-12 06:34:57,285 INFO:werkzeug:[33mPress CTRL+C to quit[0m
+2025-09-12 06:36:05,362 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 06:36:05] "OPTIONS /api/tasty/access-token HTTP/1.1" 200 -
+2025-09-12 06:36:06,860 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 06:36:06] "POST /api/tasty/access-token HTTP/1.1" 200 -
+2025-09-12 06:37:04,675 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 06:37:04] "OPTIONS /api/tasty/access-token HTTP/1.1" 200 -
+2025-09-12 06:37:07,017 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 06:37:07] "POST /api/tasty/access-token HTTP/1.1" 200 -
+2025-09-12 06:38:43,529 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 06:38:43] "OPTIONS /api/tasty/access-token HTTP/1.1" 200 -
+2025-09-12 06:38:45,671 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 06:38:45] "POST /api/tasty/access-token HTTP/1.1" 200 -
+2025-09-12 06:39:18,113 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 06:39:18] "OPTIONS /api/tasty/access-token HTTP/1.1" 200 -
+2025-09-12 06:39:19,233 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 06:39:19] "POST /api/tasty/access-token HTTP/1.1" 200 -
+2025-09-12 06:39:20,385 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 06:39:20] "POST /api/tasty/access-token HTTP/1.1" 200 -
+2025-09-12 06:39:22,987 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 06:39:22] "POST /api/tasty/access-token HTTP/1.1" 200 -
+2025-09-12 06:39:33,665 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 06:39:33] "OPTIONS /api/tasty/access-token HTTP/1.1" 200 -
+2025-09-12 06:39:34,817 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 06:39:34] "POST /api/tasty/access-token HTTP/1.1" 200 -
+2025-09-12 06:40:21,041 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 06:40:21] "OPTIONS /api/login HTTP/1.1" 200 -
+2025-09-12 06:40:21,181 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 06:40:21] "POST /api/login HTTP/1.1" 200 -
+2025-09-12 06:40:21,902 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 06:40:21] "OPTIONS /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 06:40:21,926 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 06:40:21] "GET /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 06:40:21,930 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 06:40:21] "GET /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 06:40:23,417 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 06:40:23] "OPTIONS /api/tasty/authorize-url HTTP/1.1" 200 -
+2025-09-12 06:40:23,419 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 06:40:23] "OPTIONS /api/schwab/authorize-url HTTP/1.1" 200 -
+2025-09-12 06:40:23,421 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 06:40:23] "OPTIONS /api/tasty/authorize-url HTTP/1.1" 200 -
+2025-09-12 06:40:23,424 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 06:40:23] "OPTIONS /api/schwab/authorize-url HTTP/1.1" 200 -
+2025-09-12 06:40:23,438 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 06:40:23] "GET /api/tasty/authorize-url HTTP/1.1" 200 -
+2025-09-12 06:40:23,440 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 06:40:23] "GET /api/schwab/authorize-url HTTP/1.1" 200 -
+2025-09-12 06:40:23,454 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 06:40:23] "GET /api/tasty/authorize-url HTTP/1.1" 200 -
+2025-09-12 06:40:23,461 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 06:40:23] "GET /api/schwab/authorize-url HTTP/1.1" 200 -
+2025-09-12 06:40:34,745 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 06:40:34] "OPTIONS /api/schwab/access-token HTTP/1.1" 200 -
+2025-09-12 06:40:36,859 ERROR:app:Exception on /api/schwab/access-token [POST]
+Traceback (most recent call last):
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 920, in full_dispatch_request
+    return self.finalize_request(rv)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 939, in finalize_request
+    response = self.make_response(rv)
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1212, in make_response
+    raise TypeError(
+    ...<3 lines>...
+    )
+TypeError: The view function for 'schwab_access_token' did not return a valid response. The function either returned None or ended without a return statement.
+2025-09-12 06:40:36,893 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 06:40:36] "[35m[1mPOST /api/schwab/access-token HTTP/1.1[0m" 500 -
+2025-09-12 06:43:15,441 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 06:43:15] "OPTIONS /api/schwab/access-token HTTP/1.1" 200 -
+2025-09-12 06:43:18,019 ERROR:app:Exception on /api/schwab/access-token [POST]
+Traceback (most recent call last):
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 920, in full_dispatch_request
+    return self.finalize_request(rv)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 939, in finalize_request
+    response = self.make_response(rv)
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1212, in make_response
+    raise TypeError(
+    ...<3 lines>...
+    )
+TypeError: The view function for 'schwab_access_token' did not return a valid response. The function either returned None or ended without a return statement.
+2025-09-12 06:43:18,021 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 06:43:18] "[35m[1mPOST /api/schwab/access-token HTTP/1.1[0m" 500 -
+2025-09-12 06:47:41,949 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 06:47:41] "OPTIONS /api/schwab/access-token HTTP/1.1" 200 -
+2025-09-12 06:47:44,821 ERROR:app:Exception on /api/schwab/access-token [POST]
+Traceback (most recent call last):
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 920, in full_dispatch_request
+    return self.finalize_request(rv)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 939, in finalize_request
+    response = self.make_response(rv)
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1212, in make_response
+    raise TypeError(
+    ...<3 lines>...
+    )
+TypeError: The view function for 'schwab_access_token' did not return a valid response. The function either returned None or ended without a return statement.
+2025-09-12 06:47:44,824 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 06:47:44] "[35m[1mPOST /api/schwab/access-token HTTP/1.1[0m" 500 -
+2025-09-12 06:48:45,089 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 06:48:45] "OPTIONS /api/schwab/access-token HTTP/1.1" 200 -
+2025-09-12 06:48:47,283 ERROR:app:Exception on /api/schwab/access-token [POST]
+Traceback (most recent call last):
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 920, in full_dispatch_request
+    return self.finalize_request(rv)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 939, in finalize_request
+    response = self.make_response(rv)
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1212, in make_response
+    raise TypeError(
+    ...<3 lines>...
+    )
+TypeError: The view function for 'schwab_access_token' did not return a valid response. The function either returned None or ended without a return statement.
+2025-09-12 06:48:47,285 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 06:48:47] "[35m[1mPOST /api/schwab/access-token HTTP/1.1[0m" 500 -
+2025-09-12 06:49:22,304 INFO:databento.live.client:terminating live client
+2025-09-12 06:49:30,435 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-12 06:49:30,436 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-12 06:49:30,457 INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-09-12 06:49:30,457 INFO:werkzeug:[33mPress CTRL+C to quit[0m
+2025-09-12 06:49:33,532 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 06:49:33] "OPTIONS /api/schwab/access-token HTTP/1.1" 200 -
+2025-09-12 06:49:35,699 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 06:49:35] "POST /api/schwab/access-token HTTP/1.1" 200 -
+2025-09-12 06:49:57,944 INFO:databento.live.client:terminating live client
+2025-09-12 06:50:04,672 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-12 06:50:04,673 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-12 06:50:04,693 INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-09-12 06:50:04,693 INFO:werkzeug:[33mPress CTRL+C to quit[0m
+2025-09-12 06:50:08,602 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 06:50:08] "OPTIONS /api/schwab/access-token HTTP/1.1" 200 -
+2025-09-12 06:50:10,814 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 06:50:10] "POST /api/schwab/access-token HTTP/1.1" 200 -
+2025-09-12 06:51:02,906 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 06:51:02] "OPTIONS /api/schwab/access-token HTTP/1.1" 200 -
+2025-09-12 06:51:05,043 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 06:51:05] "POST /api/schwab/access-token HTTP/1.1" 200 -
+2025-09-12 07:06:21,106 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-12 07:06:21,107 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-12 07:06:21,129 INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-09-12 07:06:21,130 INFO:werkzeug:[33mPress CTRL+C to quit[0m
+2025-09-12 07:07:04,147 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 07:07:04] "OPTIONS /api/login HTTP/1.1" 200 -
+2025-09-12 07:07:04,152 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 07:07:04] "POST /api/login HTTP/1.1" 200 -
+2025-09-12 07:07:04,667 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 07:07:04] "OPTIONS /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 07:07:04,679 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 07:07:04] "GET /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 07:07:04,682 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 07:07:04] "GET /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 07:07:05,795 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 07:07:05] "OPTIONS /api/tasty/authorize-url HTTP/1.1" 200 -
+2025-09-12 07:07:05,798 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 07:07:05] "OPTIONS /api/schwab/authorize-url HTTP/1.1" 200 -
+2025-09-12 07:07:05,799 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 07:07:05] "OPTIONS /api/tasty/authorize-url HTTP/1.1" 200 -
+2025-09-12 07:07:05,801 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 07:07:05] "OPTIONS /api/schwab/authorize-url HTTP/1.1" 200 -
+2025-09-12 07:07:05,813 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 07:07:05] "GET /api/schwab/authorize-url HTTP/1.1" 200 -
+2025-09-12 07:07:05,814 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 07:07:05] "GET /api/tasty/authorize-url HTTP/1.1" 200 -
+2025-09-12 07:07:05,822 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 07:07:05] "GET /api/schwab/authorize-url HTTP/1.1" 200 -
+2025-09-12 07:07:05,831 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 07:07:05] "GET /api/tasty/authorize-url HTTP/1.1" 200 -
+2025-09-12 07:08:46,139 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 07:08:46] "OPTIONS /api/schwab/refresh-token HTTP/1.1" 200 -
+2025-09-12 07:08:48,398 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 07:08:48] "POST /api/schwab/refresh-token HTTP/1.1" 200 -
+2025-09-12 07:09:25,995 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 07:09:25] "OPTIONS /api/login HTTP/1.1" 200 -
+2025-09-12 07:09:25,999 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 07:09:25] "POST /api/login HTTP/1.1" 200 -
+2025-09-12 07:09:26,202 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 07:09:26] "OPTIONS /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 07:09:26,204 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 07:09:26] "OPTIONS /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 07:09:26,214 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 07:09:26] "GET /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 07:09:26,219 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 07:09:26] "GET /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 07:09:27,211 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 07:09:27] "OPTIONS /api/tasty/authorize-url HTTP/1.1" 200 -
+2025-09-12 07:09:27,215 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 07:09:27] "OPTIONS /api/schwab/authorize-url HTTP/1.1" 200 -
+2025-09-12 07:09:27,216 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 07:09:27] "OPTIONS /api/tasty/authorize-url HTTP/1.1" 200 -
+2025-09-12 07:09:27,219 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 07:09:27] "OPTIONS /api/schwab/authorize-url HTTP/1.1" 200 -
+2025-09-12 07:09:27,230 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 07:09:27] "GET /api/tasty/authorize-url HTTP/1.1" 200 -
+2025-09-12 07:09:27,232 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 07:09:27] "GET /api/schwab/authorize-url HTTP/1.1" 200 -
+2025-09-12 07:09:27,241 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 07:09:27] "GET /api/schwab/authorize-url HTTP/1.1" 200 -
+2025-09-12 07:09:27,245 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 07:09:27] "GET /api/tasty/authorize-url HTTP/1.1" 200 -
+2025-09-12 07:09:28,042 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 07:09:28] "OPTIONS /api/schwab/refresh-token HTTP/1.1" 200 -
+2025-09-12 07:09:30,061 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 07:09:30] "POST /api/schwab/refresh-token HTTP/1.1" 200 -
+2025-09-12 07:11:10,443 INFO:databento.live.client:terminating live client
+2025-09-12 07:11:14,590 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-12 07:11:14,592 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-12 07:11:14,615 INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-09-12 07:11:14,615 INFO:werkzeug:[33mPress CTRL+C to quit[0m
+2025-09-12 07:11:20,099 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 07:11:20] "OPTIONS /api/schwab/refresh-token HTTP/1.1" 200 -
+2025-09-12 07:11:25,559 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 07:11:25] "POST /api/schwab/refresh-token HTTP/1.1" 200 -
+2025-09-12 09:43:02,249 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 09:43:02] "OPTIONS /api/login HTTP/1.1" 200 -
+2025-09-12 09:43:02,261 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 09:43:02] "POST /api/login HTTP/1.1" 200 -
+2025-09-12 09:43:02,490 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 09:43:02] "OPTIONS /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 09:43:02,500 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 09:43:02] "OPTIONS /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 09:43:02,511 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 09:43:02] "GET /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 09:43:02,517 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 09:43:02] "GET /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 09:43:03,571 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 09:43:03] "OPTIONS /api/tasty/authorize-url HTTP/1.1" 200 -
+2025-09-12 09:43:03,574 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 09:43:03] "OPTIONS /api/schwab/authorize-url HTTP/1.1" 200 -
+2025-09-12 09:43:03,578 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 09:43:03] "OPTIONS /api/tasty/authorize-url HTTP/1.1" 200 -
+2025-09-12 09:43:03,582 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 09:43:03] "OPTIONS /api/schwab/authorize-url HTTP/1.1" 200 -
+2025-09-12 09:43:03,596 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 09:43:03] "GET /api/schwab/authorize-url HTTP/1.1" 200 -
+2025-09-12 09:43:03,597 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 09:43:03] "GET /api/tasty/authorize-url HTTP/1.1" 200 -
+2025-09-12 09:43:03,601 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 09:43:03] "GET /api/schwab/authorize-url HTTP/1.1" 200 -
+2025-09-12 09:43:03,607 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 09:43:03] "GET /api/tasty/authorize-url HTTP/1.1" 200 -
+2025-09-12 09:44:04,515 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 09:44:04] "OPTIONS /api/login HTTP/1.1" 200 -
+2025-09-12 09:44:04,520 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 09:44:04] "POST /api/login HTTP/1.1" 200 -
+2025-09-12 09:44:04,767 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 09:44:04] "OPTIONS /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 09:44:04,768 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 09:44:04] "OPTIONS /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 09:44:04,777 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 09:44:04] "GET /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 09:44:04,783 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 09:44:04] "GET /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 09:44:06,126 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 09:44:06] "OPTIONS /api/tasty/authorize-url HTTP/1.1" 200 -
+2025-09-12 09:44:06,129 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 09:44:06] "OPTIONS /api/schwab/authorize-url HTTP/1.1" 200 -
+2025-09-12 09:44:06,130 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 09:44:06] "OPTIONS /api/tasty/authorize-url HTTP/1.1" 200 -
+2025-09-12 09:44:06,131 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 09:44:06] "OPTIONS /api/schwab/authorize-url HTTP/1.1" 200 -
+2025-09-12 09:44:06,140 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 09:44:06] "GET /api/tasty/authorize-url HTTP/1.1" 200 -
+2025-09-12 09:44:06,142 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 09:44:06] "GET /api/schwab/authorize-url HTTP/1.1" 200 -
+2025-09-12 09:44:06,152 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 09:44:06] "GET /api/schwab/authorize-url HTTP/1.1" 200 -
+2025-09-12 09:44:06,152 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 09:44:06] "GET /api/tasty/authorize-url HTTP/1.1" 200 -
+2025-09-12 12:20:59,944 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-12 12:20:59,961 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-12 12:21:00,206 INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-09-12 12:21:00,207 INFO:werkzeug:[33mPress CTRL+C to quit[0m
+2025-09-12 12:25:25,817 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-12 12:25:25,818 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-12 12:25:25,840 INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-09-12 12:25:25,841 INFO:werkzeug:[33mPress CTRL+C to quit[0m
+2025-09-12 12:25:32,765 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:25:32] "OPTIONS /api/login HTTP/1.1" 200 -
+2025-09-12 12:25:32,772 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:25:32] "POST /api/login HTTP/1.1" 200 -
+2025-09-12 12:25:33,486 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:25:33] "OPTIONS /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 12:25:33,492 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:25:33] "GET /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 12:25:33,496 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:25:33] "GET /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 12:25:37,427 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:25:37] "OPTIONS /api/tasty/authorize-url HTTP/1.1" 200 -
+2025-09-12 12:25:37,432 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:25:37] "OPTIONS /api/schwab/authorize-url HTTP/1.1" 200 -
+2025-09-12 12:25:37,434 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:25:37] "OPTIONS /api/tasty/authorize-url HTTP/1.1" 200 -
+2025-09-12 12:25:37,435 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:25:37] "OPTIONS /api/schwab/authorize-url HTTP/1.1" 200 -
+2025-09-12 12:25:37,441 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:25:37] "GET /api/tasty/authorize-url HTTP/1.1" 200 -
+2025-09-12 12:25:37,451 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:25:37] "GET /api/schwab/authorize-url HTTP/1.1" 200 -
+2025-09-12 12:25:37,456 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:25:37] "GET /api/tasty/authorize-url HTTP/1.1" 200 -
+2025-09-12 12:25:37,457 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:25:37] "GET /api/schwab/authorize-url HTTP/1.1" 200 -
+2025-09-12 12:28:00,725 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:28:00] "OPTIONS /api/schwab/access-token HTTP/1.1" 200 -
+2025-09-12 12:28:04,734 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:28:04] "POST /api/schwab/access-token HTTP/1.1" 200 -
+2025-09-12 12:28:37,677 INFO:databento.live.client:terminating live client
+2025-09-12 12:28:58,253 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-12 12:28:58,254 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-12 12:28:58,277 INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-09-12 12:28:58,277 INFO:werkzeug:[33mPress CTRL+C to quit[0m
+2025-09-12 12:29:19,773 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:29:19] "OPTIONS /api/schwab/access-token HTTP/1.1" 200 -
+2025-09-12 12:29:21,974 ERROR:app:Exception on /api/schwab/access-token [POST]
+Traceback (most recent call last):
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 920, in full_dispatch_request
+    return self.finalize_request(rv)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 939, in finalize_request
+    response = self.make_response(rv)
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1212, in make_response
+    raise TypeError(
+    ...<3 lines>...
+    )
+TypeError: The view function for 'schwab_access_token' did not return a valid response. The function either returned None or ended without a return statement.
+2025-09-12 12:29:21,976 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:29:21] "[35m[1mPOST /api/schwab/access-token HTTP/1.1[0m" 500 -
+2025-09-12 12:30:34,101 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-12 12:30:34,102 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-12 12:30:34,125 INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-09-12 12:30:34,125 INFO:werkzeug:[33mPress CTRL+C to quit[0m
+2025-09-12 12:34:00,933 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:34:00] "OPTIONS /api/login HTTP/1.1" 200 -
+2025-09-12 12:34:00,942 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:34:00] "POST /api/login HTTP/1.1" 200 -
+2025-09-12 12:34:02,520 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:34:02] "OPTIONS /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 12:34:02,524 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:34:02] "OPTIONS /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 12:34:02,530 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:34:02] "GET /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 12:34:02,535 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:34:02] "GET /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 12:34:05,953 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:34:05] "OPTIONS /api/tasty/authorize-url HTTP/1.1" 200 -
+2025-09-12 12:34:05,956 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:34:05] "OPTIONS /api/schwab/authorize-url HTTP/1.1" 200 -
+2025-09-12 12:34:05,957 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:34:05] "OPTIONS /api/tasty/authorize-url HTTP/1.1" 200 -
+2025-09-12 12:34:05,959 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:34:05] "OPTIONS /api/schwab/authorize-url HTTP/1.1" 200 -
+2025-09-12 12:34:05,964 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:34:05] "GET /api/tasty/authorize-url HTTP/1.1" 200 -
+2025-09-12 12:34:05,967 ERROR:app:Exception on /api/schwab/authorize-url [GET]
+Traceback (most recent call last):
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\app.py", line 90, in decorator
+    return f(*args, **kwargs)
+  File "D:\work\work\Tim McKenna\Tim\backend\app.py", line 276, in schwab_authorize_url
+    "redirect_uri": SCHWAB_CALLBACK_URL,
+                    ^^^^^^^^^^^^^^^^^^^
+NameError: name 'SCHWAB_CALLBACK_URL' is not defined
+2025-09-12 12:34:05,972 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:34:05] "GET /api/tasty/authorize-url HTTP/1.1" 200 -
+2025-09-12 12:34:06,039 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:34:06] "[35m[1mGET /api/schwab/authorize-url HTTP/1.1[0m" 500 -
+2025-09-12 12:34:06,043 ERROR:app:Exception on /api/schwab/authorize-url [GET]
+Traceback (most recent call last):
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\work\work\Tim McKenna\Tim\backend\app.py", line 90, in decorator
+    return f(*args, **kwargs)
+  File "D:\work\work\Tim McKenna\Tim\backend\app.py", line 276, in schwab_authorize_url
+    "redirect_uri": SCHWAB_CALLBACK_URL,
+                    ^^^^^^^^^^^^^^^^^^^
+NameError: name 'SCHWAB_CALLBACK_URL' is not defined
+2025-09-12 12:34:06,057 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:34:06] "[35m[1mGET /api/schwab/authorize-url HTTP/1.1[0m" 500 -
+2025-09-12 12:34:47,787 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-12 12:34:47,788 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-12 12:34:47,811 INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-09-12 12:34:47,811 INFO:werkzeug:[33mPress CTRL+C to quit[0m
+2025-09-12 12:41:26,195 INFO:databento.live.client:terminating live client
+2025-09-12 12:41:31,334 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-12 12:41:31,336 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-12 12:41:31,359 INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-09-12 12:41:31,359 INFO:werkzeug:[33mPress CTRL+C to quit[0m
+2025-09-12 12:41:39,303 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:41:39] "OPTIONS /api/login HTTP/1.1" 200 -
+2025-09-12 12:41:39,307 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:41:39] "POST /api/login HTTP/1.1" 200 -
+2025-09-12 12:41:39,655 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:41:39] "OPTIONS /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 12:41:39,661 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:41:39] "GET /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 12:41:39,667 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:41:39] "GET /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 12:41:41,350 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:41:41] "OPTIONS /api/tasty/authorize-url HTTP/1.1" 200 -
+2025-09-12 12:41:41,352 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:41:41] "OPTIONS /api/schwab/authorize-url HTTP/1.1" 200 -
+2025-09-12 12:41:41,353 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:41:41] "OPTIONS /api/tasty/authorize-url HTTP/1.1" 200 -
+2025-09-12 12:41:41,356 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:41:41] "OPTIONS /api/schwab/authorize-url HTTP/1.1" 200 -
+2025-09-12 12:41:41,367 ERROR:app:Exception on /api/schwab/authorize-url [GET]
+Traceback (most recent call last):
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 920, in full_dispatch_request
+    return self.finalize_request(rv)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 939, in finalize_request
+    response = self.make_response(rv)
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1212, in make_response
+    raise TypeError(
+    ...<3 lines>...
+    )
+TypeError: The view function for 'schwab_authorize_url' did not return a valid response. The function either returned None or ended without a return statement.
+2025-09-12 12:41:41,368 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:41:41] "GET /api/tasty/authorize-url HTTP/1.1" 200 -
+2025-09-12 12:41:41,375 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:41:41] "[35m[1mGET /api/schwab/authorize-url HTTP/1.1[0m" 500 -
+2025-09-12 12:41:41,389 ERROR:app:Exception on /api/schwab/authorize-url [GET]
+Traceback (most recent call last):
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 920, in full_dispatch_request
+    return self.finalize_request(rv)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 939, in finalize_request
+    response = self.make_response(rv)
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1212, in make_response
+    raise TypeError(
+    ...<3 lines>...
+    )
+TypeError: The view function for 'schwab_authorize_url' did not return a valid response. The function either returned None or ended without a return statement.
+2025-09-12 12:41:41,397 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:41:41] "GET /api/tasty/authorize-url HTTP/1.1" 200 -
+2025-09-12 12:41:41,400 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:41:41] "[35m[1mGET /api/schwab/authorize-url HTTP/1.1[0m" 500 -
+2025-09-12 12:43:53,373 INFO:databento.live.client:terminating live client
+2025-09-12 12:44:00,434 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-12 12:44:00,437 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-12 12:44:00,466 INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-09-12 12:44:00,466 INFO:werkzeug:[33mPress CTRL+C to quit[0m
+2025-09-12 12:44:13,743 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:44:13] "OPTIONS /api/login HTTP/1.1" 200 -
+2025-09-12 12:44:13,749 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:44:13] "POST /api/login HTTP/1.1" 200 -
+2025-09-12 12:44:14,099 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:44:14] "OPTIONS /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 12:44:14,108 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:44:14] "GET /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 12:44:14,112 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:44:14] "GET /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 12:44:15,361 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:44:15] "OPTIONS /api/tasty/authorize-url HTTP/1.1" 200 -
+2025-09-12 12:44:15,363 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:44:15] "OPTIONS /api/schwab/authorize-url HTTP/1.1" 200 -
+2025-09-12 12:44:15,366 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:44:15] "OPTIONS /api/tasty/authorize-url HTTP/1.1" 200 -
+2025-09-12 12:44:15,369 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:44:15] "OPTIONS /api/schwab/authorize-url HTTP/1.1" 200 -
+2025-09-12 12:44:15,380 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:44:15] "GET /api/tasty/authorize-url HTTP/1.1" 200 -
+2025-09-12 12:44:15,383 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:44:15] "GET /api/schwab/authorize-url HTTP/1.1" 200 -
+2025-09-12 12:44:15,395 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:44:15] "GET /api/tasty/authorize-url HTTP/1.1" 200 -
+2025-09-12 12:44:15,405 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:44:15] "GET /api/schwab/authorize-url HTTP/1.1" 200 -
+2025-09-12 12:46:56,605 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:46:56] "OPTIONS /api/schwab/access-token HTTP/1.1" 200 -
+2025-09-12 12:46:59,855 ERROR:app:Exception on /api/schwab/access-token [POST]
+Traceback (most recent call last):
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 920, in full_dispatch_request
+    return self.finalize_request(rv)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 939, in finalize_request
+    response = self.make_response(rv)
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1212, in make_response
+    raise TypeError(
+    ...<3 lines>...
+    )
+TypeError: The view function for 'schwab_access_token' did not return a valid response. The function either returned None or ended without a return statement.
+2025-09-12 12:46:59,858 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:46:59] "[35m[1mPOST /api/schwab/access-token HTTP/1.1[0m" 500 -
+2025-09-12 12:48:02,557 INFO:databento.live.client:terminating live client
+2025-09-12 12:48:08,717 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-12 12:48:08,719 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-12 12:48:08,743 INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-09-12 12:48:08,744 INFO:werkzeug:[33mPress CTRL+C to quit[0m
+2025-09-12 12:48:13,814 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:48:13] "OPTIONS /api/schwab/access-token HTTP/1.1" 200 -
+2025-09-12 12:48:16,615 ERROR:app:Exception on /api/schwab/access-token [POST]
+Traceback (most recent call last):
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 920, in full_dispatch_request
+    return self.finalize_request(rv)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 939, in finalize_request
+    response = self.make_response(rv)
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1249, in make_response
+    raise TypeError(
+    ...<5 lines>...
+    )
+TypeError: The view function did not return a valid response. The return type must be a string, dict, list, tuple with headers or status, Response instance, or WSGI callable, but it was a bool.
+2025-09-12 12:48:16,619 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:48:16] "[35m[1mPOST /api/schwab/access-token HTTP/1.1[0m" 500 -
+2025-09-12 12:49:27,253 INFO:databento.live.client:terminating live client
+2025-09-12 12:49:32,701 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-12 12:49:32,702 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-12 12:49:32,725 INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-09-12 12:49:32,726 INFO:werkzeug:[33mPress CTRL+C to quit[0m
+2025-09-12 12:49:36,942 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:49:36] "OPTIONS /api/schwab/access-token HTTP/1.1" 200 -
+2025-09-12 12:49:39,025 ERROR:app:Exception on /api/schwab/access-token [POST]
+Traceback (most recent call last):
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 920, in full_dispatch_request
+    return self.finalize_request(rv)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 939, in finalize_request
+    response = self.make_response(rv)
+  File "C:\Users\Super\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1249, in make_response
+    raise TypeError(
+    ...<5 lines>...
+    )
+TypeError: The view function did not return a valid response. The return type must be a string, dict, list, tuple with headers or status, Response instance, or WSGI callable, but it was a bool.
+2025-09-12 12:49:39,028 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 12:49:39] "[35m[1mPOST /api/schwab/access-token HTTP/1.1[0m" 500 -
+2025-09-12 12:51:37,773 INFO:databento.live.client:terminating live client
+2025-09-12 12:51:46,411 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-12 12:51:46,412 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-12 12:51:46,434 INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-09-12 12:51:46,435 INFO:werkzeug:[33mPress CTRL+C to quit[0m

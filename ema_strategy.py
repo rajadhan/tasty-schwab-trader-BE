@@ -11,7 +11,7 @@ from datetime import datetime
 import pytz
 from config import *
 from strategy_consumer import StrategyConsumer
-from tastytrade import place_tastytrade_order
+from brokers.tastytrade import place_tastytrade_order
 
 
 def ema_strategy(ticker, logger):
