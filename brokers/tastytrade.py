@@ -1,19 +1,26 @@
-import requests
-from time import sleep
-from config import *
-import pandas as pd
-from datetime import datetime, timedelta
-import pytz
-import os
 import json
 import logging
-import threading
+import os
+import pandas as pd
+import pytz
 import redis
+import requests
+import threading
 import time
-
+from datetime import datetime, timedelta
+from flask import jsonify
+from time import sleep
 from utils import get_strategy_prarams, save_json, get_active_exchange_symbol, get_trade_file_path, load_json
 
-# Configure logging
+TASTY_API = "https://api.tastyworks.com"
+# TASTY_API = "https://api.cert.tastyworks.com"  # TEST
+TASTY_REDIRECT_URI = "https://api.tastyworks.com"
+TASTY_MY_APP_URL = "https://my.tastytrade.com/auth.html"
+TASTY_CLIENT_SECRET = "8283d5bbbb61c1e58b5e1b5b913ffc775e12d46a"
+TASTY_CLIENT_ID = "f1ff7542-2fa9-446c-a57e-22f95108e02c"
+# TASTY_CLIENT_SECRET = "9fb238518d48e77f966cf87d7474876b0e6f760a" # TEST
+# TASTY_CLIENT_ID = "011d2533-2c97-402c-a360-6aba494cc8c9" # TEST
+TASTY_ACCESS_TOKEN_PATH = os.path.join("tokens", "tastytrade_tokens.txt")
 logger = logging.getLogger(__name__)
 
 # Redis client
@@ -22,6 +29,49 @@ REDIS_CLIENT = redis.Redis(
     port=int(os.getenv("REDIS_PORT", 6379)),
     db=int(os.getenv("REDIS_DB", 0))
 )
+
+
+def authorize_url():
+    params = {
+        "response_type": "code",
+        "client_id": TASTY_CLIENT_ID,
+        "redirect_uri": TASTY_REDIRECT_URI,
+    }
+    request_url = requests.Request("GET", TASTY_MY_APP_URL, params=params).prepare().url
+    print("Visit this URL in your browser to authorize:")
+    print(request_url)
+    return request_url
+
+
+def access_token(authorization_code):
+    access_token_url = f"{TASTY_API}/oauth/token"
+    payload = {
+        "grant_type": "authorization_code",
+        "code": authorization_code,
+        "client_id": TASTY_CLIENT_ID,
+        "client_secret": TASTY_CLIENT_SECRET,
+        "redirect_uri": TASTY_REDIRECT_URI,
+    }
+    headers = {"Accept": "application/json", "Content-Type": "application/json"}
+    response = requests.post(access_token_url, data=payload, headers=headers)
+    tokens = response.json()
+    access_token = tokens.get("access_token")
+    refresh_token = tokens.get("refresh_token")
+    if access_token and refresh_token:
+        tokens_to_save = {"access_token": access_token, "refresh_token": refresh_token}
+        with open(TASTY_ACCESS_TOKEN_PATH, "w") as f:
+            json.dump(tokens_to_save, f)
+        return jsonify(
+            {
+                "success": True,
+                "message": "Tastytrade connection established successfully",
+            }
+        )
+    else:
+        return jsonify(
+            {"success": False, "message": "Failed to establish Tastytrade connection"}
+        )
+
 
 def create_header(token):
     # Ensure token is properly formatted
@@ -35,28 +85,67 @@ def create_header(token):
 
 
 def refresh_tastytrade_token():
-    with open(TASTY_ACCESS_TOKEN_PATH, "r") as f:
-        tokens = json.load(f)
-    tasty_refresh_access_token_url = f"{TASTY_API}/oauth/token"
-    refresh_token = tokens.get("refresh_token")
-    payload = {
-        "grant_type": "refresh_token",
-        "refresh_token": refresh_token,
-        "client_id": TASTY_CLIENT_ID,
-        "client_secret": TASTY_CLIENT_SECRET,
-        "redirect_uri": TASTY_REDIRECT_URI,
-    }
-    response = requests.post(tasty_refresh_access_token_url, data=payload)
-    new_tokens = response.json()
-    if "access_token" in new_tokens:
-        tokens = {
-            "access_token": new_tokens.get('access_token'),
-            "refresh_token": refresh_token
+    """Refresh TastyTrade access token using existing refresh token"""
+    try:
+        # Load existing refresh token
+        try:
+            with open(TASTY_ACCESS_TOKEN_PATH, "r") as f:
+                tokens = json.load(f)
+                refresh_token = tokens.get("refresh_token", "")
+        except Exception:
+            return jsonify({
+                "success": False,
+                "error": "No refresh token found"
+            }), 400
+        
+        if not refresh_token:
+            return jsonify({
+                "success": False,
+                "error": "No refresh token available"
+            }), 400
+        
+        refresh_url = f"{TASTY_API}/oauth/token"
+        payload = {
+            "grant_type": "refresh_token",
+            "refresh_token": refresh_token,
+            "client_id": TASTY_CLIENT_ID,
+            "client_secret": TASTY_CLIENT_SECRET,
+            "redirect_uri": TASTY_REDIRECT_URI,
         }
-        save_json(TASTY_ACCESS_TOKEN_PATH, tokens)
-        return new_tokens["access_token"]
-    else:
-        raise Exception(f"Failed to refresh token: {new_tokens}")
+        headers = {"Accept": "application/json", "Content-Type": "application/json"}
+        response = requests.post(refresh_url, data=payload, headers=headers)
+        if response.status_code != 200:
+            return (
+                jsonify(
+                    {
+                        "success": False,
+                        "error": f"Failed to refresh token: {response.status_code}",
+                        "details": response.text,
+                    }
+                ),
+                400,
+            )
+        new_tokens = response.json()
+        new_access_token = new_tokens.get("access_token")
+        new_refresh_token = new_tokens.get(
+            "refresh_token", refresh_token
+        )
+        if not new_access_token:
+            return jsonify({"success": False, "error": "No access token received"}), 400
+
+        # Save new tokens
+        tokens_to_save = {
+            "access_token": new_access_token,
+            "refresh_token": new_refresh_token,
+        }
+        save_json(TASTY_ACCESS_TOKEN_PATH, tokens_to_save)
+        return jsonify({
+            "success": True,
+            "message": "TastyTrade tokens refreshed successfully",
+            "access_token": new_access_token,
+        })
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
 
 
 def tastytrade_api_request(method, url, **kwargs):

@@ -1,6 +1,6 @@
 from config import *
 from datetime import timedelta, datetime, timezone
-from flask import Flask, request, jsonify, send_from_directory
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 from functools import wraps
 from main_equities import run_every_week
@@ -9,13 +9,20 @@ from brokers.schwab import (
     get_refresh_token as schwab_get_refresh_token,
     authorize_url as schwab_authorization_url,
 )
-from brokers.tastytrade import manual_trigger_action
+from brokers.tastytrade import (
+    manual_trigger_action,
+    refresh_tastytrade_token,
+    authorize_url as tastytrade_authorize_url,
+    access_token as tastytrade_access_token,
+    update_tastytrade_instruments_csv,
+)
 from utils import ticker_data_path_for_strategy, configure_logger
 import json
 import jwt
 import os
 import requests
 import redis
+import threading
 
 app = Flask(__name__, static_folder="static")
 CORS(app)
@@ -115,20 +122,29 @@ def login():
             except Exception:
                 refresh_token = ""
 
+            # Update Tastytrade instruments CSV in background after successful login
             try:
-                with open(TASTY_ACCESS_TOKEN_PATH, "r") as file:
-                    tasty_token = json.load(file)
-                    access_token = tasty_token.get("access_token", "")
-            except Exception:
-                access_token = ""
+                threading.Thread(
+                    target=update_tastytrade_instruments_csv,
+                    daemon=True,
+                ).start()
+            except Exception as e:
+                print(f"Error starting background CSV update on login: {e}")
+
+            # try:
+            #     with open(TASTY_ACCESS_TOKEN_PATH, "r") as file:
+            #         tasty_token = json.load(file)
+            #         access_token = tasty_token.get("access_token", "")
+            # except Exception:
+            #     access_token = ""
 
             return (
                 jsonify(
                     {
                         "success": True,
                         "token": token,
-                        "refreshToken": refresh_token,
-                        "tastyToken": access_token,
+                        # "refreshToken": refresh_token,
+                        # "tastyToken": access_token,
                     }
                 ),
                 200,
@@ -146,15 +162,7 @@ def login():
 @app.route("/api/tasty/authorize-url", methods=["GET"])
 @token_required
 def tasty_authorize_url():
-    params = {
-        "response_type": "code",
-        "client_id": TASTY_CLIENT_ID,
-        "redirect_uri": TASTY_REDIRECT_URI,
-    }
-    request_url = requests.Request("GET", TASTY_MY_APP_URL, params=params).prepare().url
-    print("Visit this URL in your browser to authorize:")
-    print(request_url)
-    return request_url
+    return tastytrade_authorize_url()
 
 
 @app.route("/api/tasty/access-token", methods=["POST"])
@@ -162,109 +170,13 @@ def tasty_authorize_url():
 def tasty_access_token():
     data = request.json
     authorization_code = data.get("authorizationCode")
-    access_token_url = f"{TASTY_API}/oauth/token"
-    payload = {
-        "grant_type": "authorization_code",
-        "code": authorization_code,
-        "client_id": TASTY_CLIENT_ID,
-        "client_secret": TASTY_CLIENT_SECRET,
-        "redirect_uri": TASTY_REDIRECT_URI,
-    }
-    headers = {"Accept": "application/json", "Content-Type": "application/json"}
-    response = requests.post(access_token_url, data=payload, headers=headers)
-    tokens = response.json()
-    access_token = tokens.get("access_token")
-    refresh_token = tokens.get("refresh_token")
-    if access_token and refresh_token:
-        tokens_to_save = {"access_token": access_token, "refresh_token": refresh_token}
-        with open(TASTY_ACCESS_TOKEN_PATH, "w") as f:
-            json.dump(tokens_to_save, f)
-        return jsonify(
-            {
-                "success": True,
-                "message": "Tastytrade connection established successfully",
-            }
-        )
-    else:
-        return jsonify(
-            {"success": False, "message": "Failed to establish Tastytrade connection"}
-        )
+    return tastytrade_access_token(authorization_code)
 
 
 @app.route("/api/tasty/refresh-token", methods=["POST"])
 @token_required
 def tasty_refresh_token():
-    """Refresh TastyTrade access token using existing refresh token"""
-    try:
-        # Load existing refresh token
-        try:
-            with open(TASTY_ACCESS_TOKEN_PATH, "r") as f:
-                tokens = json.load(f)
-                refresh_token = tokens.get("refresh_token", "")
-        except Exception:
-            return jsonify({"success": False, "error": "No refresh token found"}), 400
-
-        if not refresh_token:
-            return (
-                jsonify({"success": False, "error": "No refresh token available"}),
-                400,
-            )
-
-        # Exchange refresh token for new access token
-        refresh_url = f"{TASTY_API}/oauth/token"
-        payload = {
-            "grant_type": "refresh_token",
-            "refresh_token": refresh_token,
-            "client_id": TASTY_CLIENT_ID,
-            "client_secret": TASTY_CLIENT_SECRET,
-        }
-        headers = {"Accept": "application/json", "Content-Type": "application/json"}
-
-        response = requests.post(refresh_url, data=payload, headers=headers)
-
-        if response.status_code != 200:
-            return (
-                jsonify(
-                    {
-                        "success": False,
-                        "error": f"Failed to refresh token: {response.status_code}",
-                        "details": response.text,
-                    }
-                ),
-                400,
-            )
-
-        new_tokens = response.json()
-        new_access_token = new_tokens.get("access_token")
-        new_refresh_token = new_tokens.get(
-            "refresh_token", refresh_token
-        )  # Keep old if not provided
-
-        if not new_access_token:
-            return jsonify({"success": False, "error": "No access token received"}), 400
-
-        # Save new tokens
-        tokens_to_save = {
-            "access_token": new_access_token,
-            "refresh_token": new_refresh_token,
-        }
-
-        with open(TASTY_ACCESS_TOKEN_PATH, "w") as f:
-            json.dump(tokens_to_save, f)
-
-        return (
-            jsonify(
-                {
-                    "success": True,
-                    "message": "TastyTrade tokens refreshed successfully",
-                    "access_token": new_access_token,
-                }
-            ),
-            200,
-        )
-
-    except Exception as e:
-        return jsonify({"success": False, "error": str(e)}), 500
+    return refresh_tastytrade_token()
 
 
 @app.route("/api/schwab/authorize-url", methods=["GET"])
@@ -280,7 +192,6 @@ def schwab_access_token():
     data = request.json
     authorization_link = data.get("authorizationLink")
     response = schwab_get_refresh_token(authorization_link)
-    print("respnse", response)
     if response:
         return jsonify(
             {

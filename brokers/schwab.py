@@ -1,4 +1,3 @@
-from config import *
 from datetime import datetime, timedelta
 from flask import jsonify
 from pytz import timezone as pytz_timezone
@@ -15,17 +14,19 @@ SCHWAB_API_KEY = os.getenv("SCHWAB_API_KEY")
 SCHWAB_API_SECRET = os.getenv("SCHWAB_API_SECRET")
 SCHWAB_API = "https://api.schwabapi.com"
 SCHWAB_CALLBACK_URL = "https://127.0.0.1"
+SCHWAB_ACCESS_TOKEN_PATH = os.path.join("tokens", "schwab_tokens.txt")
 logger = logging.getLogger(__name__)
 
+
 def authorize_url():
-    params = {
-        "client_id": SCHWAB_API_KEY,
-        "redirect_uri": SCHWAB_CALLBACK_URL
-    }
+    params = {"client_id": SCHWAB_API_KEY, "redirect_uri": SCHWAB_CALLBACK_URL}
     request_url = (
-        requests.Request("GET", f"{SCHWAB_API}/v1/oauth/authorize", params=params).prepare().url
+        requests.Request("GET", f"{SCHWAB_API}/v1/oauth/authorize", params=params)
+        .prepare()
+        .url
     )
     return request_url
+
 
 def create_api_header(access_token):
     # Ensure token is properly formatted
@@ -37,6 +38,7 @@ def create_api_header(access_token):
         "Authorization": token,
     }
 
+
 def create_auth_header():
     credentials = f"{SCHWAB_API_KEY}:{SCHWAB_API_SECRET}"
     encoded_credentials = base64.b64encode(credentials.encode("utf-8")).decode("utf-8")
@@ -44,6 +46,7 @@ def create_auth_header():
         "Authorization": f"Basic {encoded_credentials}",
         "Content-Type": "application/x-www-form-urlencoded",
     }
+
 
 def get_refresh_token(redirect_link):
     # Fix the code extraction logic
@@ -64,10 +67,10 @@ def get_refresh_token(redirect_link):
         "code": code,
         "redirect_uri": SCHWAB_CALLBACK_URL,
     }
-    authtoken_link = f"{SCHWAB_API}/v1/oauth/authorize"
+    authtoken_link = f"{SCHWAB_API}/v1/oauth/token"
 
     response = requests.post(authtoken_link, data=payload, headers=create_auth_header())
-
+    print("respnse", response)
     # Check HTTP status code first
     if response.status_code != 200:
         print(f"API request failed with status {response.status_code}: {response.text}")
@@ -84,6 +87,7 @@ def get_refresh_token(redirect_link):
         return True
     else:
         return False
+
 
 def refresh_access_token():
     """Refresh Charles Schwab access token using existing refresh token"""
@@ -151,6 +155,7 @@ def refresh_access_token():
 
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
+
 
 def _time_convert(dt=None, form="8601"):
     """
@@ -432,7 +437,8 @@ def get_encrypted_account_id(schwab_account_id, logger):
     try:
         get_encrypted_account_id_url = f"{schwab_trader_link}/accounts/accountNumbers"
         response = requests.get(
-            url=get_encrypted_account_id_url, headers=create_api_header("Bearer", logger)
+            url=get_encrypted_account_id_url,
+            headers=create_api_header("Bearer", logger),
         )
         encrypted_account_id = response.json()[0]["hashValue"]
         return encrypted_account_id
