@@ -420,3 +420,67 @@ def get_symbol_for_data(ticker):
         return get_active_exchange_symbol(ticker)
     else:
         return ticker
+
+
+def time_frame_config(timeframe):
+    if timeframe == "1h":
+        return {
+            "periodType": "day",
+            "period": 10,
+            "frequencyType": "minute",
+            "frequency": 30,
+            "resample": "1H"
+        }
+    elif timeframe == "4h":
+        return {
+            "periodType": "day",
+            "period": 10,
+            "frequencyType": "minute",
+            "frequency": 30,
+            "resample": "4H"
+        }
+    elif timeframe == "1d":
+        return {
+            "periodType": "year",
+            "period": 1,
+            "frequencyType": "daily",
+            "frequency": 1,
+        }
+    elif timeframe == 1:
+        return {
+            "periodType": "day",
+            "period": 1,
+            "frequencyType": "minute",
+            "frequency": 1,
+        }
+    elif timeframe == 2:
+        return {
+            "periodType": "day",
+            "period": 2,
+            "frequencyType": "minute",
+            "frequency": 1,
+            "resample": "2min",
+        }
+    elif timeframe == 5:
+        return {
+            "periodType": "day",
+            "period": 5,
+            "frequencyType": "minute",
+            "frequency": 5,
+        }
+    elif timeframe == 15:
+        return {
+            "periodType": "day",
+            "period": 5,
+            "frequencyType": "minute",
+            "frequency": 15,
+        }
+    elif timeframe == 30:
+        return {
+            "periodType": "day",
+            "period": 10,
+            "frequencyType": "minute",
+            "frequency": 30,
+        }
+    else:
+        return None

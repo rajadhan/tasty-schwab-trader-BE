@@ -1,41 +1,6 @@
 import os
 
-#------------------------------#
-# Tasty Trade credentials
-
-
-TASTY_USERNAME = "tmckenna@boardwalkag.com"    # tastytrade
-TASTY_PASSWORD = "Boardwalk2024!"              # tastytrade
-
-
-TASTY_ACCOUNT_ID = "5WX28756"  # Business ID
-# TASTY_ACCOUNT_ID = "5WW38442"  # Individual ID
-
-# TASTY_ACCOUNT_ID = "5WU58822"
-
-#------------------------------#
-# Charles Schwab
-account_username = "tim30mcke"
-account_password = "Sweeny07!"
-schwab_account_id = "13241612"
-
-access_token_path = "tokens/access_token.txt"
-refresh_token_path = "tokens/refresh_token.txt"
-refresh_token_link_path = "jsons/refresh_token_link.json"
-tickers_path = os.path.join("settings", "ticker_data.json")
-gs_json_path = "jsons/creds.json"
-
-
-base_api_url = "https://api.schwabapi.com"
-schwab_market_data_link = "https://api.schwabapi.com/marketdata/v1"
-schwab_trader_link = "https://api.schwabapi.com/trader/v1"
-
-Google_sheet_name = "tim_McKenna_algo"
-parameter_sheet = "Equities"
-link_sheet = "Token_Link"
-
-
-TIME_ZONE = "US/Eastern"
+TIME_ZONE = "US/Central"
 
 EMA_TICKER_DATA_PATH = os.path.join('settings', 'ema_ticker_data.json')
 SUPER_TICKER_DATA_PATH = os.path.join('settings', 'super_ticker_data.json')

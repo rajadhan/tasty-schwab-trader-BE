@@ -11,6 +11,7 @@ from brokers.schwab import (
 )
 from brokers.tastytrade import (
     manual_trigger_action,
+    manual_ema_trigger_action,
     refresh_tastytrade_token,
     authorize_url as tastytrade_authorize_url,
     access_token as tastytrade_access_token,
@@ -101,6 +102,19 @@ def token_required(f):
 # ================== Routes ==================
 
 
+def _start_tastytrade_update_instruments_background():
+    """Start updating Tastytrade instruments in a background thread with app context."""
+    def _task():
+        try:
+            with app.app_context():
+                update_tastytrade_instruments_csv()
+        except Exception as e:
+            # Avoid failing silently if background thread errors
+            print(f"Error in background Tastytrade instruments update: {e}")
+
+    threading.Thread(target=_task, daemon=True).start()
+
+
 @app.route("/api/login", methods=["POST"])
 def login():
     try:
@@ -116,35 +130,17 @@ def login():
         ) and password == admin_credentials.get("password"):
             token = generate_token(email, password)
 
-            try:
-                with open(refresh_token_path, "r") as file:
-                    refresh_token = json.load(file)
-            except Exception:
-                refresh_token = ""
-
             # Update Tastytrade instruments CSV in background after successful login
             try:
-                threading.Thread(
-                    target=update_tastytrade_instruments_csv,
-                    daemon=True,
-                ).start()
+                _start_tastytrade_update_instruments_background()
             except Exception as e:
                 print(f"Error starting background CSV update on login: {e}")
-
-            # try:
-            #     with open(TASTY_ACCESS_TOKEN_PATH, "r") as file:
-            #         tasty_token = json.load(file)
-            #         access_token = tasty_token.get("access_token", "")
-            # except Exception:
-            #     access_token = ""
 
             return (
                 jsonify(
                     {
                         "success": True,
                         "token": token,
-                        # "refreshToken": refresh_token,
-                        # "tastyToken": access_token,
                     }
                 ),
                 200,
@@ -211,7 +207,22 @@ def schwab_access_token():
 @app.route("/api/schwab/refresh-token", methods=["POST"])
 @token_required
 def refresh_schwab_token():
-    return schwab_refresh_access_token()
+    access_token = schwab_refresh_access_token()
+    if access_token:
+        return jsonify(
+            {
+                "success": True,
+                "message": "Charles Schwab token refreshed successfully",
+                "access_token": access_token,
+            }
+        )
+    else:
+        return jsonify(
+            {
+                "success": False,
+                "message": "Failed to refresh Charles Schwab token",
+            }
+        )
 
 
 @app.route("/api/update-credentials", methods=["POST"])
@@ -417,8 +428,20 @@ def start_trading():
             # values[2] is trade_enabled ("TRUE" or "FALSE")
             if len(values) >= 3 and values[2] == "TRUE":
                 trade_enabled_symbols.append(symbol)
-        results = {}
+        # results = {}
         if trade_enabled_symbols:
+            # for symbol in trade_enabled_symbols:
+            #     trade_file = os.path.join(f"trades/{strategy}", f"{symbol}.json")
+            #     trades = None
+            #     if os.path.exists(trade_file):
+            #         try:
+            #             with open(trade_file, "r") as f:
+            #                 trades = json.load(f)
+            #         except Exception as e:
+            #             trades = {"error": str(e)}
+            #     # Optionally, add OHLCV/signals/chart data here if available
+            #     # For now, just return trades
+            #     results[symbol] = {"trades": trades}
             # Clear stop flag for this strategy
             try:
                 REDIS_CLIENT.delete(f"trading:stop:{strategy}")
@@ -426,24 +449,8 @@ def start_trading():
                 pass
             print("Loading trading parameters ... ")
             run_every_week(strategy)
-            # result = requests.get('https://api.schwabapi.com/v1/oauth/authorize?response_type=code&client_id=1iSr8ykD9qh2M2HoQv56wM2R1kWgQYZI&redirect_uri=https://127.0.0.1', allow_redirects=True)
             print("Trading started!")
-            # After running the strategy, collect trade and signal/chart data for each enabled ticker
-            import os
-            import json
 
-            for symbol in trade_enabled_symbols:
-                trade_file = os.path.join(f"trades/{strategy}", f"{symbol}.json")
-                trades = None
-                if os.path.exists(trade_file):
-                    try:
-                        with open(trade_file, "r") as f:
-                            trades = json.load(f)
-                    except Exception as e:
-                        trades = {"error": str(e)}
-                # Optionally, add OHLCV/signals/chart data here if available
-                # For now, just return trades
-                results[symbol] = {"trades": trades}
             return (
                 jsonify(
                     {
@@ -490,6 +497,20 @@ def manual_trigger():
     logger = configure_logger(ticker, "zeroday")
     logger.info(f"Manual trigger received for {ticker} with action {action}")
     manual_trigger_action(ticker, action, logger)
+    return {"status": "success", "action": action, "ticker": ticker}
+
+
+@app.route('/api/ema-manual-trigger', methods = ["POST"])
+@token_required
+def ema_manual_trigger():
+    
+    data = request.json
+    ticker = data.get("ticker")
+    action = data["action"]
+
+    logger = configure_logger(ticker, "ema")
+    logger.info(f"Manual trigger received for {ticker} with action {action}")
+    manual_ema_trigger_action(ticker, action, logger)
     return {"status": "success", "action": action, "ticker": ticker}
 
 

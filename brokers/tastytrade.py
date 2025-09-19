@@ -235,8 +235,10 @@ def check_order_status(order_id, account_id, logger):
         order_history = response.json()
         
         logger.info(f"order_history for user {account_id} = {order_history}")
-        order_status = order_history["data"]["status"]
-        traded_qty = int(order_history["data"]["size"])
+        order_status = order_history["data"]["items"][0]["status"]
+        logger.info(f"{account_id}=> order status = {order_status}")
+        traded_qty = int(order_history["data"]["items"][0]["legs"][0]["quantity"])
+        logger.info(f"{account_id}=> traded qty = {traded_qty}")
         if order_status == "Rejected" or order_status == "Cancelled":
             return False, traded_qty
         else:
@@ -694,15 +696,14 @@ def place_tastytrade_option_order(option_symbol: str, qty: int, action: str, acc
 def manual_trigger_action(ticker, action, logger):
     trade_file = get_trade_file_path(ticker, "zeroday")
     trades = load_json(trade_file)
-    [tasty_qty] = get_strategy_prarams("zeroday", ticker, logger)[2:3]
-
+    [tasty_qty] = get_strategy_prarams("zeroday", ticker, logger)[3:4]
     if ticker not in trades:
         if action == "long":
             order_id_tastytrade = (
                 place_option_trade(
                     ticker, "CALL", "Buy to Open", tasty_qty, TASTY_ACCOUNT_ID, logger
                 )
-                if tasty_qty > 0
+                if int(tasty_qty) > 0
                 else 0
             )
             trades[ticker] = {
@@ -716,7 +717,7 @@ def manual_trigger_action(ticker, action, logger):
                 place_option_trade(
                     ticker, "PUT", "Buy to Open", tasty_qty, TASTY_ACCOUNT_ID, logger
                 )
-                if tasty_qty > 0
+                if int(tasty_qty) > 0
                 else 0
             )
             trades[ticker] = {
@@ -732,7 +733,7 @@ def manual_trigger_action(ticker, action, logger):
                     place_option_trade(
                         ticker, "PUT", "Sell to Close", tasty_qty, TASTY_ACCOUNT_ID, logger
                     )
-                    if tasty_qty > 0
+                    if int(tasty_qty) > 0
                     else 0
                 )
             order_id_tastytrade = (
@@ -740,7 +741,7 @@ def manual_trigger_action(ticker, action, logger):
                     ticker, "CALL", "Buy to Open", tasty_qty,
                     TASTY_ACCOUNT_ID, logger
                 )
-                if tasty_qty > 0
+                if int(tasty_qty) > 0
                 else 0
             )
             trades[ticker] = {
@@ -755,14 +756,14 @@ def manual_trigger_action(ticker, action, logger):
                     place_option_trade(
                         ticker, "CALL", "Sell to Close", tasty_qty, TASTY_ACCOUNT_ID, logger
                     )
-                    if tasty_qty > 0
+                    if int(tasty_qty) > 0
                     else 0
                 )
             order_id_tastytrade = (
                 place_option_trade(
                     ticker, "PUT", "Buy to Open", tasty_qty, TASTY_ACCOUNT_ID, logger
                 )
-                if tasty_qty > 0
+                if int(tasty_qty) > 0
                 else 0
             )
             trades[ticker] = {
@@ -776,6 +777,87 @@ def manual_trigger_action(ticker, action, logger):
         json.dump(trades, file)
 
     logger.info(f"Manual trigger executed: {action} for {ticker}")
+
+
+def manual_ema_trigger_action(ticker, action, logger):
+    trade_file = get_trade_file_path(ticker, "ema")
+    trades = load_json(trade_file)
+    [tasty_qty] = get_strategy_prarams("ema", ticker, logger)[3:4]
+
+    if ticker not in trades:
+        if action == "LONG":
+            order_id_tastytrade = (
+                place_tastytrade_order(
+                    ticker, tasty_qty, "Buy to Open", TASTY_ACCOUNT_ID, logger
+                )
+                if int(tasty_qty) > 0
+                else 0
+            )
+            trades[ticker] = {
+                "action": "LONG",
+                "order_id_tastytrade": order_id_tastytrade,
+            }
+        elif action == "SHORT":
+            order_id_tastytrade = (
+                place_tastytrade_order(
+                    ticker, tasty_qty, "Sell to Open", TASTY_ACCOUNT_ID, logger
+                )
+                if int(tasty_qty) > 0
+                else 0
+            )
+            trades[ticker] = {
+                "action": "SHORT",
+                "order_id_tastytrade": order_id_tastytrade,
+            }
+    else:
+        # If switching positions, place a single order in the opposite direction
+        # This automatically closes the existing position and opens the new one
+        if trades[ticker]["action"] == "LONG" and action == "SHORT":
+            order_id_tastytrade = (
+                place_tastytrade_order(
+                    ticker, tasty_qty, "Sell to Close", TASTY_ACCOUNT_ID, logger
+                )
+                if int(tasty_qty) > 0
+                else 0
+            )
+            order_id_tastytrade = (
+                place_tastytrade_order(
+                    ticker, tasty_qty, "Sell to Open", TASTY_ACCOUNT_ID, logger
+                )
+                if int(tasty_qty) > 0
+                else 0
+            )
+            trades[ticker] = {
+                "action": "SHORT",
+                "order_id_tastytrade": order_id_tastytrade,
+            }
+
+        elif trades[ticker]["action"] == "SHORT" and action == "LONG":
+            order_id_tastytrade = (
+                place_tastytrade_order(
+                    ticker, tasty_qty, "Buy to Close", TASTY_ACCOUNT_ID, logger
+                )
+                if int(tasty_qty) > 0
+                else 0
+            )
+            order_id_tastytrade = (
+                place_tastytrade_order(
+                    ticker, tasty_qty, "Buy to Open", TASTY_ACCOUNT_ID, logger
+                )
+                if int(tasty_qty) > 0
+                else 0
+            )
+            trades[ticker] = {
+                "action": "LONG",
+                "order_id_tastytrade": order_id_tastytrade,
+            }
+
+    with open(
+        f"trades/ema/{ticker[1:] if '/' == ticker[0] else ticker}.json", "w"
+    ) as file:
+        json.dump(trades.copy(), file)
+
+    logger.info(f"Strategy for {ticker} completed.")
 
 
 if __name__ == "__main__":

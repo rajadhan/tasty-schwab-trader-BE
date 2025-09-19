@@ -9,13 +9,9 @@ from datetime import datetime, timedelta, timezone
 from dotenv import load_dotenv
 from tick_buffer import DatabentoLiveManager, TickDataBuffer, TimeBasedBarBufferWithRedis
 from utils import (
-    extract_tick_count,
-    get_active_exchange_symbol,
     get_dataset,
     get_symbol_for_data,
     is_tick_timeframe,
-    load_json,
-    ticker_data_path_for_strategy,
     get_schema,
     parse_strategy_params,
 )
@@ -71,13 +67,14 @@ class TickProducer:
                 ticker, dataset, self.logger, schema
             )
             safe_historical_start_time = get_historical_start_time(
-                ticker, time_frame, safe_historical_end_time
+                ticker, time_frame, safe_historical_end_time, self.logger
             )
             historical_end_time = safe_historical_end_time.isoformat()
             historical_start_time = safe_historical_start_time.isoformat()
             ticker_for_data = get_symbol_for_data(ticker)
 
             self._setup_symbol_buffer(
+                ticker,
                 ticker_for_data,
                 time_frame,
                 max_period,
@@ -91,6 +88,7 @@ class TickProducer:
 
     def _setup_symbol_buffer(
         self,
+        ticker,
         ticker_for_data,
         time_frame,
         max_period,
@@ -100,7 +98,7 @@ class TickProducer:
         dataset,
         schema,
     ):
-        if ticker_for_data not in self.tick_buffers:
+        if ticker not in self.tick_buffers:
             if is_tick_timeframe(time_frame):
                 buffer = TickDataBufferWithRedis(
                     ticker=ticker_for_data,
@@ -111,19 +109,19 @@ class TickProducer:
                 )
             else:
                 buffer = TimeBasedBarBufferWithRedis(
-                    ticker=ticker_for_data,
+                    ticker=ticker,
                     strategy=self.strategy,
                     time_frame=time_frame,
                     max_period=max_period,
                     logger=self.logger,
                 )
-            self.tick_buffers[ticker_for_data] = buffer
+            self.tick_buffers[ticker] = buffer
             print(
-                f"Initialized buffer for {ticker_for_data} of {self.strategy} with timeframe {time_frame}"
+                f"Initialized buffer for {ticker} of {self.strategy} with timeframe {time_frame}"
             )
 
         if is_tick_timeframe(time_frame):
-            self.tick_buffers[ticker_for_data].warmup_with_historical_ticks(
+            self.tick_buffers[ticker].warmup_with_historical_ticks(
                 symbol=ticker_for_data,
                 dataset=dataset,
                 start=historical_start_time,
@@ -131,8 +129,8 @@ class TickProducer:
                 schema=schema,
             )
         else:
-            self.tick_buffers[ticker_for_data].warmup_with_historical_timebars(
-                symbol=ticker_for_data,
+            self.tick_buffers[ticker].warmup_with_historical_timebars(
+                symbol=ticker,
                 dataset=dataset,
                 start=historical_start_time,
                 end=historical_end_time,
@@ -140,14 +138,14 @@ class TickProducer:
             )
 
         # Setup live feed
-        bars = self.tick_buffers[ticker_for_data].processed_bars
+        bars = self.tick_buffers[ticker].processed_bars
         if bars:
             last_ts = pd.Timestamp(bars[-1]["timestamp"])
             replay_start_time = last_ts.value + 1
         else:
             replay_start_time = 0
 
-        live_symbols_config[ticker_for_data] = {
+        live_symbols_config[ticker] = {
             "dataset": dataset,
             "schema": get_schema(time_frame) if not is_tick_timeframe(time_frame) else 'trades',
             "start_time": replay_start_time,
@@ -157,29 +155,13 @@ class TickProducer:
     async def start_live_feeds(self, live_symbols_config):
         """Start live data feeds"""
         if live_symbols_config:
-            # Handle SPX/SPXW separately with Tastytrade
-            spx_symbols = {k: v for k, v in live_symbols_config.items() if k in ["SPX", "SPXW"]}
-            other_symbols = {k: v for k, v in live_symbols_config.items() if k not in ["SPX", "SPXW"]}
-            
-            # Start Tastytrade feeds for SPX symbols
-            if spx_symbols:
-                self.logger.info(f"Starting Tastytrade feeds for SPX symbols: {list(spx_symbols.keys())}")
-                for symbol, config in spx_symbols.items():
-                    if symbol in self.tick_buffers:
-                        # Use the SPX buffer's specialized live subscription
-                        await self.tick_buffers[symbol].start_live_subscription(
-                            symbol, config.get("dataset"), config.get("schema")
-                        )
-            
-            # Start Databento feeds for other symbols
-            if other_symbols:
-                self.live_manager = DatabentoLiveManager()
-                self.logger.info(
-                    f"Starting Databento live feeds for: {list(other_symbols.keys())}"
-                )
-                await self.live_manager.start_live_feeds(
-                    other_symbols, self.tick_buffers
-                )
+            self.live_manager = DatabentoLiveManager()
+            self.logger.info(
+                f"Starting Databento live feeds for: {list(live_symbols_config.keys())}"
+            )
+            await self.live_manager.start_live_feeds(
+                live_symbols_config, self.tick_buffers
+            )
 
     def run(self, tickers_config, strategy):
         """Main run method"""
@@ -258,39 +240,30 @@ def get_historical_end_time(ticker, dataset, logger, schema):
         return safe_historical_end
 
 
-def get_historical_start_time(ticker, timeframe, end_time):
+def get_historical_start_time(ticker, timeframe, end_time, logger):
     start_time = end_time
     timeframe = str(timeframe)
     if is_tick_timeframe(timeframe):
-        tick_timeframe = int(timeframe[:-1])
-        if tick_timeframe <= 1000:
-            start_time = end_time - timedelta(days=1)
-        elif tick_timeframe <= 1600:
-            start_time = end_time - timedelta(days=2)
-        else:
-            start_time = end_time - timedelta(days=4)
+        start_time = (end_time - timedelta(days=4)).replace(
+            hour=22, minute=0, second=0, microsecond=0
+        )
     else:
         if timeframe == "1":
-            start_time = end_time - timedelta(days=1)
+            start_time = end_time - timedelta(days=8)
         elif timeframe == "2":
-            start_time = end_time - timedelta(days=1)
+            start_time = end_time - timedelta(days=16)
         elif timeframe == "5":
-            start_time = end_time - timedelta(days=2)
+            start_time = end_time - timedelta(days=40)
         elif timeframe == "15":
-            start_time = end_time - timedelta(days=3)
+            start_time = end_time - timedelta(days=90)
         elif timeframe == "30":
-            start_time = end_time - timedelta(days=5)
+            start_time = end_time - timedelta(days=90)
         elif timeframe == "1h":
-            start_time = end_time - timedelta(days=10)
+            start_time = end_time - timedelta(days=280)
         elif timeframe == "4h":
-            start_time = end_time - timedelta(days=30)
+            start_time = end_time - timedelta(days=280)
         elif timeframe == "1d":
-            start_time = end_time - timedelta(days=60)
+            start_time = end_time - timedelta(days=450)
     
-    # Ensure minimum time difference to avoid Databento errors
-    min_diff = timedelta(days=1)
-    if (end_time - start_time) < min_diff:
-        start_time = end_time - min_diff
-    
+    logger.info(f"{ticker}'s start time: {start_time}")
     return start_time
-        

@@ -9,10 +9,15 @@ from utils import (
 import json
 from datetime import datetime
 import pytz
-from config import *
+
+from config import TIME_ZONE
 from strategy_consumer import StrategyConsumer
 from brokers.tastytrade import (
-    place_option_trade,
+    place_option_trade as place_tasty_order,
+)
+from brokers.schwab import (
+    historical_data,
+    place_order as place_schwab_order
 )
 
 
@@ -21,13 +26,15 @@ def zeroday_strategy(ticker, logger):
     """Runs the trading strategy for the specified ticker."""
     try:
         [
+            timeframe,
+            schwab_qty,
             trade_enabled,
             tasty_qty,
             trend_line_1,
             period_1,
             trend_line_2,
             period_2,
-        ] = get_strategy_prarams("zeroday", ticker, logger)[2:8]  # Skip unused timeframe and schwab_qty
+        ] = get_strategy_prarams("zeroday", ticker, logger)
 
         if trade_enabled != "TRUE":
             logger.info(f"Skipping  strategy for {ticker}, trade flag is FALSE.")
@@ -46,12 +53,14 @@ def zeroday_strategy(ticker, logger):
         logger.info(
             f"Running strategy for {ticker} at {datetime.now(tz=pytz.timezone(TIME_ZONE))} with params: Tasty_QTY={tasty_qty} TRENDS=({period_1}, {trend_line_1}), ({period_2}, {trend_line_2})"
         )
-        tasty_qty = int(tasty_qty)
+        schwab_qty = int(schwab_qty) # Convert Schwab quantity into integer type
+        tasty_qty = int(tasty_qty) # Convert Tasty quantity into integer type
+        # Load trade history
         trade_file = get_trade_file_path(ticker, "zeroday")
         trades = load_json(trade_file)
 
         logger.info(f"Using tick data for {ticker}")
-        df = strategy_consumer.get_tick_dataframe(ticker, int(period_1), int(period_2))  # This returns DataFrame and updated number of bars needed for each period
+        df = historical_data(ticker, timeframe, logger)
 
         if df is None:
             logger.warning(f"No tick data available for {ticker}")
@@ -102,22 +111,39 @@ def zeroday_strategy(ticker, logger):
         prev_trend1 = df["trend1"].shift(1)
         prev_trend2 = df["trend2"].shift(1)
         df["method"] = ""
-        df.loc[(df['trend1'] > df['trend2']) & (prev_trend1 < prev_trend2), 'method'] = "LONG"
-        df.loc[(df['trend1'] < df['trend2']) & (prev_trend1 > prev_trend2), 'method'] = "SHORT"
+        df.loc[
+            (df["trend1"] > df["trend2"]) & (prev_trend1 < prev_trend2), "method"
+        ] = "LONG"
+        df.loc[
+            (df["trend1"] < df["trend2"]) & (prev_trend1 > prev_trend2), "method"
+        ] = "SHORT"
         df.to_csv(
             f"logs/zeroday/{ticker[1:] if '/' == ticker[0] else ticker}.csv",
             index=True,
-            index_label="timestamp"
-            )
+            index_label="timestamp",
+        )
 
         # Execute trades based on conditions
         if ticker not in trades:
             if Long_condition:
-                logger.info(f"Long condition triggered for {ticker} (zeroday strategy) - Buying CALL option")
+                logger.info(
+                    f"Long condition triggered for {ticker} (zeroday strategy) - Buying CALL option"
+                )
                 # Buy at-the-money CALL option
+                order_id_schwab = (
+                    place_schwab_order(
+                        ticker, schwab_qty, "BUY", logger, "OPENING"
+                    )
+                    if schwab_qty > 0
+                    else 0
+                )
                 order_id_tastytrade = (
-                    place_option_trade(
-                        ticker, "CALL", "Buy to Open", tasty_qty, TASTY_ACCOUNT_ID, logger
+                    place_tasty_order(
+                        ticker,
+                        "CALL",
+                        "Buy to Open",
+                        tasty_qty,
+                        logger,
                     )
                     if tasty_qty > 0
                     else 0
@@ -125,16 +151,26 @@ def zeroday_strategy(ticker, logger):
                 trades[ticker] = {
                     "action": "LONG",
                     "option_type": "CALL",
+                    "order_id_schwab": order_id_schwab,
                     "order_id_tastytrade": order_id_tastytrade,
                     "entry_time": datetime.now(pytz.utc).isoformat(),
-                    "entry_price": df.iloc[-1]["close"]
+                    "entry_price": df.iloc[-1]["close"],
                 }
             elif Short_condition:
-                logger.info(f"Short condition triggered for {ticker} (zeroday strategy) - Buying PUT option")
+                logger.info(
+                    f"Short condition triggered for {ticker} (zeroday strategy) - Buying PUT option"
+                )
                 # Buy at-the-money PUT option
+                order_id_schwab = place_schwab_order(
+                    ticker, schwab_qty, "SELL_SHORT", logger, "OPENING"
+                ) if schwab_qty > 0 else 0
                 order_id_tastytrade = (
-                    place_option_trade(
-                        ticker, "PUT", "Buy to Open", tasty_qty, TASTY_ACCOUNT_ID, logger
+                    place_tasty_order(
+                        ticker,
+                        "PUT",
+                        "Buy to Open",
+                        tasty_qty,
+                        logger,
                     )
                     if tasty_qty > 0
                     else 0
@@ -142,9 +178,10 @@ def zeroday_strategy(ticker, logger):
                 trades[ticker] = {
                     "action": "SHORT",
                     "option_type": "PUT",
+                    "order_id_schwab": order_id_schwab,
                     "order_id_tastytrade": order_id_tastytrade,
                     "entry_time": datetime.now(pytz.utc).isoformat(),
-                    "entry_price": df.iloc[-1]["close"]
+                    "entry_price": df.iloc[-1]["close"],
                 }
         else:
             if trades[ticker]["action"] == "LONG" and Short_condition:
@@ -152,17 +189,31 @@ def zeroday_strategy(ticker, logger):
                     f"Reversing position for {ticker}: Closing CALL, opening PUT (zeroday strategy)"
                 )
                 # Close current CALL position
+                close_order_id_schwab = place_schwab_order(
+                    ticker, schwab_qty, "SELL", logger, "CLOSING"
+                ) if schwab_qty > 0 else 0
                 close_order_id = (
-                    place_option_trade(
-                        ticker, "CALL", "Sell to Close", tasty_qty, TASTY_ACCOUNT_ID, logger
+                    place_tasty_order(
+                        ticker,
+                        "CALL",
+                        "Sell to Close",
+                        tasty_qty,
+                        logger,
                     )
                     if tasty_qty > 0
                     else 0
                 )
                 # Open new PUT position
+                open_order_id_schwab = place_schwab_order(
+                    ticker, schwab_qty, "SELL_SHORT", logger, "OPENING"
+                ) if schwab_qty > 0 else 0
                 open_order_id = (
-                    place_option_trade(
-                        ticker, "PUT", "Buy to Open", tasty_qty, TASTY_ACCOUNT_ID, logger
+                    place_tasty_order(
+                        ticker,
+                        "PUT",
+                        "Buy to Open",
+                        tasty_qty,
+                        logger,
                     )
                     if tasty_qty > 0
                     else 0
@@ -170,10 +221,10 @@ def zeroday_strategy(ticker, logger):
                 trades[ticker] = {
                     "action": "SHORT",
                     "option_type": "PUT",
+                    "order_id_schwab": open_order_id_schwab,
                     "order_id_tastytrade": open_order_id,
-                    "close_order_id": close_order_id,
                     "entry_time": datetime.now(pytz.utc).isoformat(),
-                    "entry_price": df.iloc[-1]["close"]
+                    "entry_price": df.iloc[-1]["close"],
                 }
 
             elif trades[ticker]["action"] == "SHORT" and Long_condition:
@@ -181,17 +232,31 @@ def zeroday_strategy(ticker, logger):
                     f"Reversing position for {ticker}: Closing PUT, opening CALL (zeroday strategy)"
                 )
                 # Close current PUT position
+                close_order_id_schwab = place_schwab_order(
+                    ticker, schwab_qty, "BUY_TO_COVER", logger, "CLOSING"
+                ) if schwab_qty > 0 else 0
                 close_order_id = (
-                    place_option_trade(
-                        ticker, "PUT", "Sell to Close", tasty_qty, TASTY_ACCOUNT_ID, logger
+                    place_tasty_order(
+                        ticker,
+                        "PUT",
+                        "Sell to Close",
+                        tasty_qty,
+                        logger,
                     )
                     if tasty_qty > 0
                     else 0
                 )
                 # Open new CALL position
+                open_order_id_schwab = place_schwab_order(
+                    ticker, schwab_qty, "BUY", logger, "OPENING"
+                ) if schwab_qty > 0 else 0
                 open_order_id = (
-                    place_option_trade(
-                        ticker, "CALL", "Buy to Open", tasty_qty, TASTY_ACCOUNT_ID, logger
+                    place_tasty_order(
+                        ticker,
+                        "CALL",
+                        "Buy to Open",
+                        tasty_qty,
+                        logger,
                     )
                     if tasty_qty > 0
                     else 0
@@ -199,10 +264,10 @@ def zeroday_strategy(ticker, logger):
                 trades[ticker] = {
                     "action": "LONG",
                     "option_type": "CALL",
+                    "order_id_schwab": open_order_id_schwab,
                     "order_id_tastytrade": open_order_id,
-                    "close_order_id": close_order_id,
                     "entry_time": datetime.now(pytz.utc).isoformat(),
-                    "entry_price": df.iloc[-1]["close"]
+                    "entry_price": df.iloc[-1]["close"],
                 }
         with open(
             f"trades/zeroday/{ticker[1:] if '/' == ticker[0] else ticker}.json", "w"

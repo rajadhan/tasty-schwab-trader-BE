@@ -1,0 +1,109 @@
+2025-09-12 18:40:49,142 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-12 18:40:49,143 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-12 18:40:49,168 INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-09-12 18:40:49,168 INFO:werkzeug:[33mPress CTRL+C to quit[0m
+2025-09-12 18:40:56,130 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 18:40:56] "OPTIONS /api/login HTTP/1.1" 200 -
+2025-09-12 18:40:56,137 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 18:40:56] "POST /api/login HTTP/1.1" 200 -
+2025-09-12 18:40:57,807 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 18:40:57] "OPTIONS /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 18:40:57,832 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 18:40:57] "GET /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 18:40:57,887 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 18:40:57] "GET /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 18:58:43,889 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 18:58:43] "OPTIONS /api/get-ticker?strategy=zeroday HTTP/1.1" 200 -
+2025-09-12 18:58:43,891 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 18:58:43] "OPTIONS /api/get-ticker?strategy=zeroday HTTP/1.1" 200 -
+2025-09-12 18:58:43,895 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 18:58:43] "GET /api/get-ticker?strategy=zeroday HTTP/1.1" 200 -
+2025-09-12 18:58:43,899 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 18:58:43] "GET /api/get-ticker?strategy=zeroday HTTP/1.1" 200 -
+2025-09-12 18:58:50,582 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 18:58:50] "OPTIONS /api/add-ticker HTTP/1.1" 200 -
+2025-09-12 18:58:50,587 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 18:58:50] "[35m[1mPOST /api/add-ticker HTTP/1.1[0m" 201 -
+2025-09-12 20:40:18,913 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-12 20:40:18,914 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-12 20:40:19,352 INFO:databento.live.client:terminating live client
+2025-09-12 21:34:42,821 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-12 21:34:42,822 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-12 21:34:42,842 INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-09-12 21:34:42,842 INFO:werkzeug:[33mPress CTRL+C to quit[0m
+2025-09-12 21:44:55,530 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 21:44:55] "OPTIONS /api/login HTTP/1.1" 200 -
+2025-09-12 21:44:55,587 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 21:44:55] "POST /api/login HTTP/1.1" 200 -
+2025-09-12 21:44:55,900 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 21:44:55] "OPTIONS /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 21:44:55,902 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 21:44:55] "OPTIONS /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 21:44:55,909 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 21:44:55] "GET /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 21:44:55,913 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 21:44:55] "GET /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 21:44:57,692 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 21:44:57] "OPTIONS /api/get-ticker?strategy=zeroday HTTP/1.1" 200 -
+2025-09-12 21:44:57,693 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 21:44:57] "OPTIONS /api/get-ticker?strategy=zeroday HTTP/1.1" 200 -
+2025-09-12 21:44:57,698 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 21:44:57] "GET /api/get-ticker?strategy=zeroday HTTP/1.1" 200 -
+2025-09-12 21:44:57,703 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 21:44:57] "GET /api/get-ticker?strategy=zeroday HTTP/1.1" 200 -
+2025-09-12 21:46:18,545 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 21:46:18] "OPTIONS /api/login HTTP/1.1" 200 -
+2025-09-12 21:46:18,550 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 21:46:18] "POST /api/login HTTP/1.1" 200 -
+2025-09-12 21:46:18,882 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 21:46:18] "OPTIONS /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 21:46:18,886 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 21:46:18] "OPTIONS /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 21:46:18,895 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 21:46:18] "GET /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 21:46:18,901 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 21:46:18] "GET /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 21:46:24,603 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 21:46:24] "OPTIONS /api/get-ticker?strategy=zeroday HTTP/1.1" 200 -
+2025-09-12 21:46:24,605 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 21:46:24] "OPTIONS /api/get-ticker?strategy=zeroday HTTP/1.1" 200 -
+2025-09-12 21:46:24,609 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 21:46:24] "GET /api/get-ticker?strategy=zeroday HTTP/1.1" 200 -
+2025-09-12 21:46:24,613 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 21:46:24] "GET /api/get-ticker?strategy=zeroday HTTP/1.1" 200 -
+2025-09-12 21:50:19,482 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 21:50:19] "OPTIONS /api/login HTTP/1.1" 200 -
+2025-09-12 21:50:19,488 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 21:50:19] "POST /api/login HTTP/1.1" 200 -
+2025-09-12 21:50:19,803 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 21:50:19] "OPTIONS /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 21:50:19,813 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 21:50:19] "GET /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 21:50:19,819 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 21:50:19] "GET /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-12 21:50:24,122 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 21:50:24] "OPTIONS /api/get-ticker?strategy=zeroday HTTP/1.1" 200 -
+2025-09-12 21:50:24,124 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 21:50:24] "OPTIONS /api/get-ticker?strategy=zeroday HTTP/1.1" 200 -
+2025-09-12 21:50:24,128 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 21:50:24] "GET /api/get-ticker?strategy=zeroday HTTP/1.1" 200 -
+2025-09-12 21:50:24,132 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 21:50:24] "GET /api/get-ticker?strategy=zeroday HTTP/1.1" 200 -
+2025-09-12 22:02:57,002 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 22:02:57] "OPTIONS /api/start-trading?strategy=zeroday HTTP/1.1" 200 -
+2025-09-12 22:02:59,059 INFO:TickProducer:Starting Tick Producer...
+2025-09-12 22:03:00,407 INFO:TickProducer:SPX's schema range for ohlcv-1m: {'start': '2013-04-01T00:00:00.000000000Z', 'end': '2025-09-12T13:30:00.000000000Z'}
+2025-09-12 22:03:00,427 INFO:TickProducer:Fetching historical OHLCV base for warmup: SPX [2025-09-10T13:30:00+00:00 to 2025-09-12T13:30:00+00:00] schema=ohlcv-1m
+2025-09-12 22:03:03,883 WARNING:TickProducer:No historical OHLCV returned for SPX
+2025-09-12 22:03:14,061 INFO:werkzeug:127.0.0.1 - - [12/Sep/2025 22:03:14] "GET /api/start-trading?strategy=zeroday HTTP/1.1" 200 -
+2025-09-12 22:03:14,062 INFO:SPX:MAIN STRATEGY STARTED for SPX
+2025-09-12 22:03:22,597 INFO:databento.live.client:terminating live client
+2025-09-12 22:03:32,604 INFO:SPX:Running strategy zeroday for SPX
+2025-09-12 22:03:32,650 INFO:SPX:Running strategy for SPX at 2025-09-12 14:03:32.650582-05:00 with params: Tasty_QTY=1 TRENDS=(9, EMA), (21, EMA)
+2025-09-12 22:03:32,651 INFO:SPX:Using tick data for SPX
+2025-09-12 22:03:32,651 INFO:SPX:Fetching historical data for $SPX
+2025-09-12 22:03:32,651 ERROR:SPX:Error in getting historical data for $SPX: create_api_header() takes 1 positional argument but 2 were given
+2025-09-12 22:03:37,652 INFO:SPX:Fetching historical data for $SPX
+2025-09-12 22:03:37,654 ERROR:SPX:Error in getting historical data for $SPX: create_api_header() takes 1 positional argument but 2 were given
+2025-09-12 22:03:42,656 INFO:SPX:Fetching historical data for $SPX
+2025-09-12 22:03:42,657 ERROR:SPX:Error in getting historical data for $SPX: create_api_header() takes 1 positional argument but 2 were given
+2025-09-12 22:03:47,658 INFO:SPX:Fetching historical data for $SPX
+2025-09-12 22:03:47,658 ERROR:SPX:Error in getting historical data for $SPX: create_api_header() takes 1 positional argument but 2 were given
+2025-09-12 22:03:52,659 INFO:SPX:Fetching historical data for $SPX
+2025-09-12 22:03:52,659 ERROR:SPX:Error in getting historical data for $SPX: create_api_header() takes 1 positional argument but 2 were given
+2025-09-12 22:03:57,660 INFO:SPX:Fetching historical data for $SPX
+2025-09-12 22:03:57,662 ERROR:SPX:Error in getting historical data for $SPX: create_api_header() takes 1 positional argument but 2 were given
+2025-09-12 22:04:02,663 INFO:SPX:Fetching historical data for $SPX
+2025-09-12 22:04:02,664 ERROR:SPX:Error in getting historical data for $SPX: create_api_header() takes 1 positional argument but 2 were given
+2025-09-12 22:04:07,665 INFO:SPX:Fetching historical data for $SPX
+2025-09-12 22:04:07,665 ERROR:SPX:Error in getting historical data for $SPX: create_api_header() takes 1 positional argument but 2 were given
+2025-09-12 22:04:12,667 INFO:SPX:Fetching historical data for $SPX
+2025-09-12 22:04:12,668 ERROR:SPX:Error in getting historical data for $SPX: create_api_header() takes 1 positional argument but 2 were given
+2025-09-12 22:04:17,669 INFO:SPX:Fetching historical data for $SPX
+2025-09-12 22:04:17,671 ERROR:SPX:Error in getting historical data for $SPX: create_api_header() takes 1 positional argument but 2 were given
+2025-09-12 22:04:22,672 INFO:SPX:Fetching historical data for $SPX
+2025-09-12 22:04:22,673 ERROR:SPX:Error in getting historical data for $SPX: create_api_header() takes 1 positional argument but 2 were given
+2025-09-12 22:04:27,674 INFO:SPX:Fetching historical data for $SPX
+2025-09-12 22:04:27,675 ERROR:SPX:Error in getting historical data for $SPX: create_api_header() takes 1 positional argument but 2 were given
+2025-09-12 22:04:30,240 INFO:databento.live.client:terminating live client
+2025-09-13 00:40:00,530 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-13 00:40:00,531 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-13 00:40:00,555 INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-09-13 00:40:00,555 INFO:werkzeug:[33mPress CTRL+C to quit[0m
+2025-09-13 00:43:38,845 INFO:databento.live.client:terminating live client
+2025-09-13 00:43:44,454 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-13 00:43:44,455 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-09-13 00:43:44,479 INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-09-13 00:43:44,479 INFO:werkzeug:[33mPress CTRL+C to quit[0m
+2025-09-13 00:45:06,500 INFO:werkzeug:127.0.0.1 - - [13/Sep/2025 00:45:06] "OPTIONS /api/login HTTP/1.1" 200 -
+2025-09-13 00:45:06,507 INFO:werkzeug:127.0.0.1 - - [13/Sep/2025 00:45:06] "POST /api/login HTTP/1.1" 200 -
+2025-09-13 00:45:06,915 INFO:werkzeug:127.0.0.1 - - [13/Sep/2025 00:45:06] "OPTIONS /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-13 00:45:06,923 INFO:werkzeug:127.0.0.1 - - [13/Sep/2025 00:45:06] "GET /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-13 00:45:06,926 INFO:werkzeug:127.0.0.1 - - [13/Sep/2025 00:45:06] "GET /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-09-13 00:45:13,695 INFO:werkzeug:127.0.0.1 - - [13/Sep/2025 00:45:13] "OPTIONS /api/get-ticker?strategy=zeroday HTTP/1.1" 200 -
+2025-09-13 00:45:13,696 INFO:werkzeug:127.0.0.1 - - [13/Sep/2025 00:45:13] "OPTIONS /api/get-ticker?strategy=zeroday HTTP/1.1" 200 -
+2025-09-13 00:45:13,700 INFO:werkzeug:127.0.0.1 - - [13/Sep/2025 00:45:13] "GET /api/get-ticker?strategy=zeroday HTTP/1.1" 200 -
+2025-09-13 00:45:13,704 INFO:werkzeug:127.0.0.1 - - [13/Sep/2025 00:45:13] "GET /api/get-ticker?strategy=zeroday HTTP/1.1" 200 -

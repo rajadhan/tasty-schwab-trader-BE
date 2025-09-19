@@ -12,6 +12,9 @@ import pytz
 from config import *
 from strategy_consumer import StrategyConsumer
 from brokers.tastytrade import place_tastytrade_order
+from brokers.schwab import (
+    place_order as place_schwab_order
+)
 
 
 def ema_strategy(ticker, logger):
@@ -19,13 +22,15 @@ def ema_strategy(ticker, logger):
     """Runs the trading strategy for the specified ticker."""
     try:
         [
+            timeframe,
+            schwab_qty,
             trade_enabled,
             tasty_qty,
             trend_line_1,
             period_1,
             trend_line_2,
             period_2,
-        ] = get_strategy_prarams("ema", ticker, logger)[2:8]  # Skip unused timeframe and schwab_qty
+        ] = get_strategy_prarams("ema", ticker, logger)
 
         if trade_enabled != "TRUE":
             logger.info(f"Skipping  strategy for {ticker}, trade flag is FALSE.")
@@ -49,7 +54,7 @@ def ema_strategy(ticker, logger):
         trades = load_json(trade_file)
 
         logger.info(f"Using tick data for {ticker}")
-        df = strategy_consumer.get_tick_dataframe(ticker, int(period_1), int(period_2))  # This returns DataFrame and updated number of bars needed for each period
+        df = strategy_consumer.get_tick_dataframe(ticker, int(period_1), int(period_2), timeframe)  # This returns DataFrame and updated number of bars needed for each period
 
         if df is None:
             logger.warning(f"No tick data available for {ticker}")
@@ -111,49 +116,48 @@ def ema_strategy(ticker, logger):
         if ticker not in trades.copy():
             if Long_condition:
                 logger.info(f"Long condition triggered for {ticker}")
-                # order_id_schwab = (
-                #     place_order(
-                #         ticker, schwab_qty, "BUY", schwab_account_id, logger, "OPENING"
-                #     )
-                #     if schwab_qty > 0
-                #     else 0
-                # )
+                order_id_schwab = (
+                    place_schwab_order(
+                        ticker, schwab_qty, "BUY", logger, "OPENING"
+                    )
+                    if schwab_qty > 0
+                    else 0
+                )
                 order_id_tastytrade = (
                     place_tastytrade_order(
-                        ticker, tasty_qty, "Buy to Open", TASTY_ACCOUNT_ID, logger
+                        ticker, tasty_qty, "Buy to Open", logger
                     )
                     if tasty_qty > 0
                     else 0
                 )
                 trades[ticker] = {
                     "action": "LONG",
-                    # "order_id_schwab": order_id_schwab,
+                    "order_id_schwab": order_id_schwab,
                     "order_id_tastytrade": order_id_tastytrade,
                 }
             elif Short_condition:
                 logger.info(f"Short condition triggered for {ticker}")
-                # order_id_schwab = (
-                #     place_order(
-                #         ticker,
-                #         schwab_qty,
-                #         "SELL_SHORT",
-                #         schwab_account_id,
-                #         logger,
-                #         "OPENING",
-                #     )
-                #     if schwab_qty > 0
-                #     else 0
-                # )
+                order_id_schwab = (
+                    place_schwab_order(
+                        ticker,
+                        schwab_qty,
+                        "SELL_SHORT",
+                        logger,
+                        "OPENING",
+                    )
+                    if schwab_qty > 0
+                    else 0
+                )
                 order_id_tastytrade = (
                     place_tastytrade_order(
-                        ticker, tasty_qty, "Sell to Open", TASTY_ACCOUNT_ID, logger
+                        ticker, tasty_qty, "Sell to Open", logger
                     )
                     if tasty_qty > 0
                     else 0
                 )
                 trades[ticker] = {
                     "action": "SHORT",
-                    # "order_id_schwab": order_id_schwab,
+                    "order_id_schwab": order_id_schwab,
                     "order_id_tastytrade": order_id_tastytrade,
                 }
         else:
@@ -161,42 +165,41 @@ def ema_strategy(ticker, logger):
                 logger.info(
                     f"Reversing position for {ticker}: Closing LONG, opening SHORT"
                 )
-                # long_order_id_schwab = (
-                #     place_order(
-                #         ticker, schwab_qty, "SELL", schwab_account_id, logger, "CLOSING"
-                #     )
-                #     if schwab_qty > 0
-                #     else 0
-                # )
+                long_order_id_schwab = (
+                    place_schwab_order(
+                        ticker, schwab_qty, "SELL", logger, "CLOSING"
+                    )
+                    if schwab_qty > 0
+                    else 0
+                )
                 long_order_id_tastytrade = (
                     place_tastytrade_order(
-                        ticker, tasty_qty, "Sell to Close", TASTY_ACCOUNT_ID, logger
+                        ticker, tasty_qty, "Sell to Close", logger
                     )
                     if tasty_qty > 0
                     else 0
                 )
-                # short_order_id_schwab = (
-                #     place_order(
-                #         ticker,
-                #         schwab_qty,
-                #         "SELL_SHORT",
-                #         schwab_account_id,
-                #         logger,
-                #         "OPENING",
-                #     )
-                #     if schwab_qty > 0
-                #     else 0
-                # )
+                short_order_id_schwab = (
+                    place_schwab_order(
+                        ticker,
+                        schwab_qty,
+                        "SELL_SHORT",
+                        logger,
+                        "OPENING",
+                    )
+                    if schwab_qty > 0
+                    else 0
+                )
                 short_order_id_tastytrade = (
                     place_tastytrade_order(
-                        ticker, tasty_qty, "Sell to Open", TASTY_ACCOUNT_ID, logger
+                        ticker, tasty_qty, "Sell to Open", logger
                     )
                     if tasty_qty > 0
                     else 0
                 )
                 trades[ticker] = {
                     "action": "SHORT",
-                    # "order_id_schwab": short_order_id_schwab,
+                    "order_id_schwab": short_order_id_schwab,
                     "order_id_tastytrade": short_order_id_tastytrade,
                 }
 
@@ -204,42 +207,41 @@ def ema_strategy(ticker, logger):
                 logger.info(
                     f"Reversing position for {ticker}: Closing SHORT, opening LONG"
                 )
-                # short_order_id_schwab = (
-                #     place_order(
-                #         ticker,
-                #         schwab_qty,
-                #         "BUY_TO_COVER",
-                #         schwab_account_id,
-                #         logger,
-                #         "CLOSING",
-                #     )
-                #     if schwab_qty > 0
-                #     else 0
-                # )
+                short_order_id_schwab = (
+                    place_schwab_order(
+                        ticker,
+                        schwab_qty,
+                        "BUY_TO_COVER",
+                        logger,
+                        "CLOSING",
+                    )
+                    if schwab_qty > 0
+                    else 0
+                )
                 short_order_id_tastytrade = (
                     place_tastytrade_order(
-                        ticker, tasty_qty, "Buy to Close", TASTY_ACCOUNT_ID, logger
+                        ticker, tasty_qty, "Buy to Close", logger
                     )
                     if tasty_qty > 0
                     else 0
                 )
-                # long_order_id_schwab = (
-                #     place_order(
-                #         ticker, schwab_qty, "BUY", schwab_account_id, logger, "OPENING"
-                #     )
-                #     if schwab_qty > 0
-                #     else 0
-                # )
+                long_order_id_schwab = (
+                    place_schwab_order(
+                        ticker, schwab_qty, "BUY", logger, "OPENING"
+                    )
+                    if schwab_qty > 0
+                    else 0
+                )
                 long_order_id_tastytrade = (
                     place_tastytrade_order(
-                        ticker, tasty_qty, "Buy to Open", TASTY_ACCOUNT_ID, logger
+                        ticker, tasty_qty, "Buy to Open", logger
                     )
                     if tasty_qty > 0
                     else 0
                 )
                 trades[ticker] = {
                     "action": "LONG",
-                    # "order_id_schwab": long_order_id_schwab,
+                    "order_id_schwab": long_order_id_schwab,
                     "order_id_tastytrade": long_order_id_tastytrade,
                 }
 

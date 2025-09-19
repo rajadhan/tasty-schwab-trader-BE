@@ -37,3 +37,31 @@
 2025-09-08 04:25:39,421 - INFO - Market closed on weekends
 2025-09-08 04:26:41,457 - INFO - Market closed on weekends
 2025-09-08 04:26:41,457 - INFO - Market closed on weekends
+2025-09-12 22:03:14,062 - INFO - MAIN STRATEGY STARTED for SPX
+2025-09-12 22:03:32,604 - INFO - Running strategy zeroday for SPX
+2025-09-12 22:03:32,650 - INFO - Running strategy for SPX at 2025-09-12 14:03:32.650582-05:00 with params: Tasty_QTY=1 TRENDS=(9, EMA), (21, EMA)
+2025-09-12 22:03:32,651 - INFO - Using tick data for SPX
+2025-09-12 22:03:32,651 - INFO - Fetching historical data for $SPX
+2025-09-12 22:03:32,651 - ERROR - Error in getting historical data for $SPX: create_api_header() takes 1 positional argument but 2 were given
+2025-09-12 22:03:37,652 - INFO - Fetching historical data for $SPX
+2025-09-12 22:03:37,654 - ERROR - Error in getting historical data for $SPX: create_api_header() takes 1 positional argument but 2 were given
+2025-09-12 22:03:42,656 - INFO - Fetching historical data for $SPX
+2025-09-12 22:03:42,657 - ERROR - Error in getting historical data for $SPX: create_api_header() takes 1 positional argument but 2 were given
+2025-09-12 22:03:47,658 - INFO - Fetching historical data for $SPX
+2025-09-12 22:03:47,658 - ERROR - Error in getting historical data for $SPX: create_api_header() takes 1 positional argument but 2 were given
+2025-09-12 22:03:52,659 - INFO - Fetching historical data for $SPX
+2025-09-12 22:03:52,659 - ERROR - Error in getting historical data for $SPX: create_api_header() takes 1 positional argument but 2 were given
+2025-09-12 22:03:57,660 - INFO - Fetching historical data for $SPX
+2025-09-12 22:03:57,662 - ERROR - Error in getting historical data for $SPX: create_api_header() takes 1 positional argument but 2 were given
+2025-09-12 22:04:02,663 - INFO - Fetching historical data for $SPX
+2025-09-12 22:04:02,664 - ERROR - Error in getting historical data for $SPX: create_api_header() takes 1 positional argument but 2 were given
+2025-09-12 22:04:07,665 - INFO - Fetching historical data for $SPX
+2025-09-12 22:04:07,665 - ERROR - Error in getting historical data for $SPX: create_api_header() takes 1 positional argument but 2 were given
+2025-09-12 22:04:12,667 - INFO - Fetching historical data for $SPX
+2025-09-12 22:04:12,668 - ERROR - Error in getting historical data for $SPX: create_api_header() takes 1 positional argument but 2 were given
+2025-09-12 22:04:17,669 - INFO - Fetching historical data for $SPX
+2025-09-12 22:04:17,671 - ERROR - Error in getting historical data for $SPX: create_api_header() takes 1 positional argument but 2 were given
+2025-09-12 22:04:22,672 - INFO - Fetching historical data for $SPX
+2025-09-12 22:04:22,673 - ERROR - Error in getting historical data for $SPX: create_api_header() takes 1 positional argument but 2 were given
+2025-09-12 22:04:27,674 - INFO - Fetching historical data for $SPX
+2025-09-12 22:04:27,675 - ERROR - Error in getting historical data for $SPX: create_api_header() takes 1 positional argument but 2 were given

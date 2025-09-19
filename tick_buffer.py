@@ -7,6 +7,7 @@ import pandas as pd
 import pytz
 import redis
 import threading
+from brokers.schwab import historical_data
 from datetime import timedelta, datetime
 from utils import extract_tick_count
 
@@ -61,6 +62,7 @@ class TickDataBuffer:
                 data = self.historical_client.timeseries.get_range(
                     dataset=dataset,
                     symbols=[symbol],
+                    stype_in="raw_symbol",
                     schema=schema,
                     start=start,
                     end=end
@@ -69,6 +71,7 @@ class TickDataBuffer:
                 print(f"Error in get historical data {symbol}: {e}")
                 data = pd.DataFrame()
             df = data.to_df()
+            df.to_csv(f"logs/{self.strategy}/schwab_mes.csv")
             print(f"Data fetched for {symbol}: {df}")
             if df.empty:
                 self.logger.warning(f"No historical data returned for {symbol}")
@@ -185,7 +188,7 @@ class TickDataBuffer:
             'close': prices[-1],
             'volume': sum(volumes)
         }
-        
+
 
     def get_dataframe(self, min_bars):
         with self.lock:
@@ -324,28 +327,35 @@ class TimeBasedBarBufferWithRedis:
         return s.resample(self.resample_rule, label='right', closed='right').agg(agg).dropna()
 
     def _save_bar_to_redis(self, bar_ts: pd.Timestamp, bar_row: pd.Series):
+        # Normalize timestamp from row or fallback to bar_ts
+        row_dt = bar_row.get("datetime") if isinstance(bar_row, (pd.Series, dict)) else None
+        try:
+            ts = pd.to_datetime(row_dt) if row_dt is not None else pd.to_datetime(bar_ts)
+        except Exception:
+            ts = pd.to_datetime(bar_ts)
+        # Ensure Python datetime for JSON serialization
+        ts_py = pd.Timestamp(ts).to_pydatetime()
         payload = {
             "symbol": self.ticker,
-            "timestamp": pd.Timestamp(bar_ts).to_pydatetime().isoformat(),
+            "timestamp": ts_py.isoformat(),
             "open": float(bar_row['open']),
             "high": float(bar_row['high']),
             "low": float(bar_row['low']),
             "close": float(bar_row['close']),
-            "volume": float(bar_row['volume']) if pd.notna(bar_row['volume']) else 0,
         }
         with self.lock:
             self.processed_bars.append({
-                'timestamp': pd.Timestamp(bar_ts).to_pydatetime(),
+                'timestamp': ts_py,
                 'open': payload['open'],
                 'high': payload['high'],
                 'low': payload['low'],
                 'close': payload['close'],
-                'volume': payload['volume'],
             })
-        score = int(pd.Timestamp(bar_ts).timestamp())
+        score = int(pd.Timestamp(ts_py).timestamp())
         data_str = json.dumps(payload)
         zset_key_strategy = f"bars_history:{self.strategy}{self.ticker}"
         zset_key_plain = f"bars_history:{self.ticker}"
+
         try:
             self.redis_client.zadd(zset_key_strategy, {data_str: score})
             self.redis_client.zadd(zset_key_plain, {data_str: score})
@@ -357,33 +367,21 @@ class TimeBasedBarBufferWithRedis:
     def warmup_with_historical_timebars(self, symbol, dataset, start, end, base_schema):
         try:
             self.logger.info(f"Fetching historical OHLCV base for warmup: {symbol} [{start} to {end}] schema={base_schema}")
-
-            if symbol == "SPX":
-                spx_data = self.historical_client.timeseries.get_range(
-                    dataset="GLBX.MDP3",
-                    symbols=["SPX"],
-                    schema="ohlcv-1m",
-                    start=start,
-                    end=end
-                )
-
-                print("spx data", spx_data)
-            else:
-                data = self.historical_client.timeseries.get_range(
-                    dataset=dataset,
-                    symbols=[symbol],
-                    schema=base_schema,
-                    start=start,
-                    end=end,
-                )
-
-            bars_df = self._bars_to_df(data)
-            if bars_df.empty:
-                self.logger.warning(f"No historical OHLCV returned for {symbol}")
-                return
-            resampled = self._resample_bars(bars_df)
-            self.logger.info(f"Resampled bars for {symbol}: {resampled}")
-            for ts, row in resampled.iterrows():
+            # data = self.historical_client.timeseries.get_range(
+            #     dataset=dataset,
+            #     symbols=[symbol],
+            #     schema=base_schema,
+            #     start=start,
+            #     end=end,
+            # )
+            data = historical_data(symbol, self.time_frame, self.logger)
+            # bars_df = self._bars_to_df(data)
+            # if bars_df.empty:
+            #     self.logger.warning(f"No historical OHLCV returned for {symbol}")
+            #     return
+            # resampled = self._resample_bars(bars_df)
+            # self.logger.info(f"Resampled bars for {symbol}: {resampled}")
+            for ts, row in data.iterrows():
                 self._save_bar_to_redis(ts, row)
             self.historical_loaded = True
             self.logger.info(f"Historical time-based warmup completed for {symbol}: {len(self.processed_bars)} bars created.")

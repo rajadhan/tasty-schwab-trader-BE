@@ -31,22 +31,26 @@ class StrategyConsumer:
         self.pending_strategies = defaultdict(threading.Event)  # For triggering strategy on new bars
 
 
-    def get_tick_dataframe(self, symbol, period1, period2):
+    def get_tick_dataframe(self, symbol, period1, period2, timeframe):
         ticker_for_data = get_active_exchange_symbol(symbol)
-        zset_key = f"bars_history:{ticker_for_data}"
+        if is_tick_timeframe(timeframe):
+            zset_key = f"bars_history:{ticker_for_data}"
+        else:
+            zset_key = f"bars_history:{symbol}"
 
         bars_count = self.redis_client.zcard(zset_key)
         print(f"{zset_key} has {bars_count} bars saved")
 
         max_bars = max(period1, period2)
         # Fetch latest bars by rank (newest to oldest), then reverse for oldest → newest
-        latest_bars = self.redis_client.zrevrange(zset_key, 0, 1000)
+        latest_bars = self.redis_client.zrevrange(zset_key, 0, -1)
         bars = [json.loads(bar.decode('utf-8')) for bar in reversed(latest_bars)]
         self.logger.info(f"Latest bars for {symbol}: {len(bars)}")
         if not bars:
             return pd.DataFrame()
 
         df = pd.DataFrame(bars)
+        df.to_csv(f"logs/ema/strategy_MNQ.csv")
         # Robust ISO8601 parsing with ns precision and no timezone
         parsed_ts = pd.to_datetime(df['timestamp'], format='ISO8601', utc=True, errors='coerce')
         # Drop rows we couldn't parse
@@ -109,7 +113,6 @@ class StrategyConsumer:
         logger = configure_logger(ticker, strategy)
         logger.info(f"MAIN STRATEGY STARTED for {ticker}")
         print(f"Starting main loop for {ticker} with strategy {strategy}")
-
         try:
             while True:
                 # Check stop flag per strategy
