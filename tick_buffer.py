@@ -7,7 +7,7 @@ import pandas as pd
 import pytz
 import redis
 import threading
-from brokers.schwab import historical_data
+from brokers.schwab import historical_data, get_quotes
 from datetime import timedelta, datetime
 from utils import extract_tick_count
 
@@ -230,6 +230,7 @@ class DatabentoLiveManager:
                 start_time = config.get('start_time', 0) # Default to 0 for full replay
                 
                 # Create task for this symbol's live feed
+                
                 task = asyncio.create_task(
                     tick_buffers[symbol].start_live_subscription(symbol, dataset, schema, start_time)
                 )
@@ -267,6 +268,7 @@ class TimeBasedBarBufferWithRedis:
         self.max_period = max_period
         self.logger = logger
         self.processed_bars = []
+        self.buffer = []
         self.lock = threading.Lock()
         self.new_bar_event = threading.Event()
         self.historical_loaded = False
@@ -274,6 +276,20 @@ class TimeBasedBarBufferWithRedis:
         self.resample_rule = self._determine_resample_rule(time_frame)
         self._agg_bucket_start = None
         self._agg_bar = None
+
+    def _timeframe_freq(self):
+        tf = (self.time_frame or "1min").lower()
+        mapping = {
+            "1": "1min",
+            "2": "2min",
+            "5": "5min",
+            "15": "15min",
+            "30": "30min",
+            "1h": "1h",
+            "4h": "4h",
+            "1d": "1d",
+        }
+        return mapping.get(tf, "1min")
 
     def _determine_resample_rule(self, timeframe):
         mapping = {
@@ -357,6 +373,9 @@ class TimeBasedBarBufferWithRedis:
         zset_key_plain = f"bars_history:{self.ticker}"
 
         try:
+            # Ensure only one member per bucket timestamp by removing prior entry at the same score
+            self.redis_client.zremrangebyscore(zset_key_strategy, score, score)
+            self.redis_client.zremrangebyscore(zset_key_plain, score, score)
             self.redis_client.zadd(zset_key_strategy, {data_str: score})
             self.redis_client.zadd(zset_key_plain, {data_str: score})
             self.redis_client.zremrangebyrank(zset_key_strategy, 0, -1000)
@@ -421,45 +440,116 @@ class TimeBasedBarBufferWithRedis:
         self._agg_bar['volume'] = (self._agg_bar.get('volume') or 0) + (base_bar.get('volume') or 0)
 
     async def start_live_subscription(self, symbol, dataset, schema, start_time=0):
-        try:
-            self.logger.info(f"Starting live OHLCV base subscription for {symbol} on {dataset} schema={schema}")
-            live_client = db.Live(key=DB_API_KEY)
-            self.live_session = live_client
-            self.live_session.subscribe(
-                dataset=dataset,
-                schema=schema,
-                symbols=[symbol],
-                stype_in="raw_symbol",
-                start=start_time,
-            )
-            async for record in self.live_session:
-                try:
-                    # Expect OHLCV base fields
-                    if all(hasattr(record, attr) for attr in ["open", "high", "low", "close"]) and hasattr(record, "ts_event"):
-                        ts = pd.to_datetime(record.ts_event, unit='ns', utc=True)
-                        base_bar = {
-                            'open': float(record.open) / 1e9,
-                            'high': float(record.high) / 1e9,
-                            'low': float(record.low) / 1e9,
-                            'close': float(record.close) / 1e9,
-                            'volume': float(getattr(record, 'volume', 0)),
-                        }
-                        if self.resample_rule is None:
-                            self._save_bar_to_redis(ts, pd.Series(base_bar))
-                            self.new_bar_event.set()
-                            self.logger.info(
-                                f"Created new live bar for {self.ticker}: "
-                                f"record={record.ts_event}, {ts} open={base_bar['open']}, high={base_bar['high']}, low={base_bar['low']}, close={base_bar['close']}, volume={base_bar['volume']}"
-                            )
-                        else:
-                            self._update_aggregator_with_base_bar(ts, base_bar)
-                    else:
-                        self.logger.debug(f"Ignored non-OHLCV message for {symbol}: {record}")
-                except Exception as e:
-                    self.logger.error(f"Error processing OHLCV record for {symbol}: {e}")
-        except Exception as e:
-            self.logger.error(f"Error in time-based live subscription for {symbol}: {e}", exc_info=True)
-        finally:
-            self._finalize_and_emit_current_agg()
-            if self.live_session:
-                await self.live_session.stop()
+        while True:
+            quote = get_quotes(symbol)
+            # Convert Schwab quoteTime to UTC Timestamp
+            ts_utc = None
+            last_price = None
+            try:
+                if isinstance(quote, dict):
+                    ts_val = quote.get('quoteTime')
+                    last_price = quote.get('last')
+                    if ts_val is not None:
+                        try:
+                            ts_utc = pd.to_datetime(ts_val, unit='ms', utc=True)
+                        except Exception:
+                            ts_utc = pd.to_datetime(ts_val, utc=True)
+                if ts_utc is None:
+                    # If no timestamp, skip this tick
+                    await asyncio.sleep(5)
+                    continue
+            except Exception:
+                await asyncio.sleep(5)
+                continue
+            self.logger.info(f"Quote for {symbol}: {quote}, {ts_utc}, {self.time_frame}")
+
+            # Determine bucket start (UTC) based on self.time_frame
+            bucket_start = ts_utc.floor(self._timeframe_freq())
+
+            # Initialize or update current aggregation bar
+            if self._agg_bucket_start is None:
+                self._agg_bucket_start = bucket_start
+                self._agg_bar = {
+                    'open': float(last_price) if last_price is not None else None,
+                    'high': float(last_price) if last_price is not None else None,
+                    'low': float(last_price) if last_price is not None else None,
+                    'close': float(last_price) if last_price is not None else None,
+                }
+                ts = self._agg_bucket_start
+                row = pd.Series(self._agg_bar)
+                self._save_bar_to_redis(ts, row)
+            elif bucket_start != self._agg_bucket_start:
+                # Minute changed -> finalize previous bar and start new one
+                ts = self._agg_bucket_start
+                row = pd.Series(self._agg_bar)
+                self._save_bar_to_redis(ts, row)
+                self.logger.info(
+                    f"Created new aggregated live bar for {self.ticker} ({self.time_frame}): "
+                    f"open={self._agg_bar['open']}, high={self._agg_bar['high']}, low={self._agg_bar['low']}, close={self._agg_bar['close']}"
+                )
+                self._agg_bucket_start = None
+                self._agg_bar = None
+                self.new_bar_event.set()
+
+                self._agg_bucket_start = bucket_start
+                self._agg_bar = {
+                    'open': float(last_price) if last_price is not None else None,
+                    'high': float(last_price) if last_price is not None else None,
+                    'low': float(last_price) if last_price is not None else None,
+                    'close': float(last_price) if last_price is not None else None,
+                }
+            else:
+                # Same minute -> update high/low/close
+                if last_price is not None and self._agg_bar is not None:
+
+                    price = float(last_price)
+                    self._agg_bar['high'] = max(self._agg_bar['high'], price) if self._agg_bar['high'] is not None else price
+                    self._agg_bar['low'] = min(self._agg_bar['low'], price) if self._agg_bar['low'] is not None else price
+                    self._agg_bar['close'] = price
+                    ts = self._agg_bucket_start
+                    row = pd.Series(self._agg_bar)
+                    self._save_bar_to_redis(ts, row)
+
+            await asyncio.sleep(5)
+        # try:
+        #     self.logger.info(f"Starting live OHLCV base subscription for {symbol} on {dataset} schema={schema}")
+        #     live_client = db.Live(key=DB_API_KEY)
+        #     self.live_session = live_client
+        #     self.live_session.subscribe(
+        #         dataset=dataset,
+        #         schema=schema,
+        #         symbols=[symbol],
+        #         stype_in="raw_symbol",
+        #         start=start_time,
+        #     )
+        #     async for record in self.live_session:
+        #         try:
+        #             # Expect OHLCV base fields
+        #             if all(hasattr(record, attr) for attr in ["open", "high", "low", "close"]) and hasattr(record, "ts_event"):
+        #                 ts = pd.to_datetime(record.ts_event, unit='ns', utc=True)
+        #                 base_bar = {
+        #                     'open': float(record.open) / 1e9,
+        #                     'high': float(record.high) / 1e9,
+        #                     'low': float(record.low) / 1e9,
+        #                     'close': float(record.close) / 1e9,
+        #                     'volume': float(getattr(record, 'volume', 0)),
+        #                 }
+        #                 if self.resample_rule is None:
+        #                     self._save_bar_to_redis(ts, pd.Series(base_bar))
+        #                     self.new_bar_event.set()
+        #                     self.logger.info(
+        #                         f"Created new live bar for {self.ticker}: "
+        #                         f"record={record.ts_event}, {ts} open={base_bar['open']}, high={base_bar['high']}, low={base_bar['low']}, close={base_bar['close']}, volume={base_bar['volume']}"
+        #                     )
+        #                 else:
+        #                     self._update_aggregator_with_base_bar(ts, base_bar)
+        #             else:
+        #                 self.logger.debug(f"Ignored non-OHLCV message for {symbol}: {record}")
+        #         except Exception as e:
+        #             self.logger.error(f"Error processing OHLCV record for {symbol}: {e}")
+        # except Exception as e:
+        #     self.logger.error(f"Error in time-based live subscription for {symbol}: {e}", exc_info=True)
+        # finally:
+        #     self._finalize_and_emit_current_agg()
+        #     if self.live_session:
+        #         await self.live_session.stop()

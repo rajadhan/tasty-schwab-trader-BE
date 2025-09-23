@@ -50,6 +50,7 @@ def ema_strategy(ticker, logger):
             f"Running strategy for {ticker} at {datetime.now(tz=pytz.timezone(TIME_ZONE))} with params: Tasty_QTY={tasty_qty} TRENDS=({period_1}, {trend_line_1}), ({period_2}, {trend_line_2})"
         )
         tasty_qty = int(tasty_qty)
+        schwab_qty = int(schwab_qty)
         trade_file = get_trade_file_path(ticker, "ema")
         trades = load_json(trade_file)
 

@@ -148,48 +148,26 @@ def schwab_api_request(method, url, **kwargs):
     return response
 
 
-def get_quotes(symbols):
-    """
-    Fetch real-time quotes for one or more symbols using Schwab marketdata v1 quotes endpoint.
-    Symbols can include futures (e.g., "/MES"), indices (e.g., "$SPX"), or equities (e.g., "AAPL").
-    Returns a dict of symbol -> quote payload, with useful fields normalized.
-    """
-    if not symbols:
-        return {}
-    # Schwab expects comma-separated list; also handle SPX mapping if needed upstream
-    symbols_param = ",".join(symbols)
+def get_quotes(symbol):
     url = f"{SCHWAB_API}/marketdata/v1/quotes"
-    params = {"symbols": symbols_param}
-    resp = schwab_api_request("GET", url, params=params)
-    try:
-        data = resp.json() if hasattr(resp, "json") else {}
-    except Exception:
-        data = {}
-    # Normalize into a simple map: symbol -> {last, bid, ask, quoteTime}
-    quotes = {}
+    params = {"symbols": symbol, 'fields': 'quote,fundamental'}
+    response = schwab_api_request("GET", url, params=params)
+    data = response.json()
+    quote = {}
     if isinstance(data, dict):
         for sym, payload in data.items():
-            # Schwab returns different payloads by asset type; try common fields
             last = (
                 payload.get("quote", {}).get("lastPrice")
                 or payload.get("lastPrice")
                 or payload.get("mark")
-            )
-            bid = (
-                payload.get("quote", {}).get("bidPrice")
-                or payload.get("bidPrice")
-            )
-            ask = (
-                payload.get("quote", {}).get("askPrice")
-                or payload.get("askPrice")
             )
             ts = (
                 payload.get("quote", {}).get("quoteTime")
                 or payload.get("quoteTime")
                 or payload.get("tradeTime")
             )
-            quotes[sym] = {"last": last, "bid": bid, "ask": ask, "quoteTime": ts}
-    return quotes
+            quote = {"last": last, "quoteTime": ts}
+    return quote
 
 
 def get_accounts():
