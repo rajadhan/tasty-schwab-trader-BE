@@ -441,76 +441,80 @@ class TimeBasedBarBufferWithRedis:
 
     async def start_live_subscription(self, symbol, dataset, schema, start_time=0):
         while True:
-            quote = get_quotes(symbol)
-            # Convert Schwab quoteTime to UTC Timestamp
-            ts_utc = None
-            last_price = None
             try:
-                if isinstance(quote, dict):
-                    ts_val = quote.get('quoteTime')
-                    last_price = quote.get('last')
-                    if ts_val is not None:
-                        try:
-                            ts_utc = pd.to_datetime(ts_val, unit='ms', utc=True)
-                        except Exception:
-                            ts_utc = pd.to_datetime(ts_val, utc=True)
-                if ts_utc is None:
-                    # If no timestamp, skip this tick
+                quote = get_quotes(symbol)
+                # Convert Schwab quoteTime to UTC Timestamp
+                ts_utc = None
+                last_price = None
+                try:
+                    if isinstance(quote, dict):
+                        ts_val = quote.get('quoteTime')
+                        last_price = quote.get('last')
+                        if ts_val is not None:
+                            try:
+                                ts_utc = pd.to_datetime(ts_val, unit='ms', utc=True)
+                            except Exception:
+                                ts_utc = pd.to_datetime(ts_val, utc=True)
+                    if ts_utc is None:
+                        # If no timestamp, skip this tick
+                        await asyncio.sleep(5)
+                        continue
+                except Exception:
+                    # Parsing error or malformed response; back off and continue
                     await asyncio.sleep(5)
                     continue
-            except Exception:
-                await asyncio.sleep(5)
-                continue
-            self.logger.info(f"Quote for {symbol}: {quote}, {ts_utc}, {self.time_frame}")
+                self.logger.info(f"Quote for {symbol}: {quote}, {ts_utc}, {self.time_frame}")
 
-            # Determine bucket start (UTC) based on self.time_frame
-            bucket_start = ts_utc.floor(self._timeframe_freq())
+                # Determine bucket start (UTC) based on self.time_frame
+                bucket_start = ts_utc.floor(self._timeframe_freq())
 
-            # Initialize or update current aggregation bar
-            if self._agg_bucket_start is None:
-                self._agg_bucket_start = bucket_start
-                self._agg_bar = {
-                    'open': float(last_price) if last_price is not None else None,
-                    'high': float(last_price) if last_price is not None else None,
-                    'low': float(last_price) if last_price is not None else None,
-                    'close': float(last_price) if last_price is not None else None,
-                }
-                ts = self._agg_bucket_start
-                row = pd.Series(self._agg_bar)
-                self._save_bar_to_redis(ts, row)
-            elif bucket_start != self._agg_bucket_start:
-                # Minute changed -> finalize previous bar and start new one
-                ts = self._agg_bucket_start
-                row = pd.Series(self._agg_bar)
-                self._save_bar_to_redis(ts, row)
-                self.logger.info(
-                    f"Created new aggregated live bar for {self.ticker} ({self.time_frame}): "
-                    f"open={self._agg_bar['open']}, high={self._agg_bar['high']}, low={self._agg_bar['low']}, close={self._agg_bar['close']}"
-                )
-                self._agg_bucket_start = None
-                self._agg_bar = None
-                self.new_bar_event.set()
-
-                self._agg_bucket_start = bucket_start
-                self._agg_bar = {
-                    'open': float(last_price) if last_price is not None else None,
-                    'high': float(last_price) if last_price is not None else None,
-                    'low': float(last_price) if last_price is not None else None,
-                    'close': float(last_price) if last_price is not None else None,
-                }
-            else:
-                # Same minute -> update high/low/close
-                if last_price is not None and self._agg_bar is not None:
-
-                    price = float(last_price)
-                    self._agg_bar['high'] = max(self._agg_bar['high'], price) if self._agg_bar['high'] is not None else price
-                    self._agg_bar['low'] = min(self._agg_bar['low'], price) if self._agg_bar['low'] is not None else price
-                    self._agg_bar['close'] = price
+                # Initialize or update current aggregation bar
+                if self._agg_bucket_start is None:
+                    self._agg_bucket_start = bucket_start
+                    self._agg_bar = {
+                        'open': float(last_price) if last_price is not None else None,
+                        'high': float(last_price) if last_price is not None else None,
+                        'low': float(last_price) if last_price is not None else None,
+                        'close': float(last_price) if last_price is not None else None,
+                    }
                     ts = self._agg_bucket_start
                     row = pd.Series(self._agg_bar)
                     self._save_bar_to_redis(ts, row)
+                elif bucket_start != self._agg_bucket_start:
+                    # Minute changed -> finalize previous bar and start new one
+                    ts = self._agg_bucket_start
+                    row = pd.Series(self._agg_bar)
+                    self._save_bar_to_redis(ts, row)
+                    self.logger.info(
+                        f"Created new aggregated live bar for {self.ticker} ({self.time_frame}): "
+                        f"open={self._agg_bar['open']}, high={self._agg_bar['high']}, low={self._agg_bar['low']}, close={self._agg_bar['close']}"
+                    )
+                    self._agg_bucket_start = None
+                    self._agg_bar = None
+                    self.new_bar_event.set()
 
-            await asyncio.sleep(5)
+                    self._agg_bucket_start = bucket_start
+                    self._agg_bar = {
+                        'open': float(last_price) if last_price is not None else None,
+                        'high': float(last_price) if last_price is not None else None,
+                        'low': float(last_price) if last_price is not None else None,
+                        'close': float(last_price) if last_price is not None else None,
+                    }
+                else:
+                    # Same minute -> update high/low/close
+                    if last_price is not None and self._agg_bar is not None:
+                        price = float(last_price)
+                        self._agg_bar['high'] = max(self._agg_bar['high'], price) if self._agg_bar['high'] is not None else price
+                        self._agg_bar['low'] = min(self._agg_bar['low'], price) if self._agg_bar['low'] is not None else price
+                        self._agg_bar['close'] = price
+                        ts = self._agg_bucket_start
+                        row = pd.Series(self._agg_bar)
+                        self._save_bar_to_redis(ts, row)
+            except Exception as e:
+                # Catch all to prevent loop termination on transient API/network errors
+                self.logger.error(f"Live polling iteration failed for {symbol}: {e}", exc_info=True)
+            finally:
+                await asyncio.sleep(5)
         # try:
         #     self.logger.info(f"Starting live OHLCV base subscription for {symbol} on {dataset} schema={schema}")
         #     live_client = db.Live(key=DB_API_KEY)

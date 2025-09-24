@@ -3,6 +3,7 @@ from datetime import timedelta, datetime, timezone
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from functools import wraps
+from ema_strategy import ema_strategy
 from main_equities import run_every_week
 from brokers.schwab import (
     refresh_access_token as schwab_refresh_access_token,
@@ -17,6 +18,7 @@ from brokers.tastytrade import (
     access_token as tastytrade_access_token,
     update_tastytrade_instruments_csv,
 )
+from urllib.parse import unquote
 from utils import ticker_data_path_for_strategy, configure_logger
 import json
 import jwt
@@ -102,19 +104,6 @@ def token_required(f):
 # ================== Routes ==================
 
 
-def _start_tastytrade_update_instruments_background():
-    """Start updating Tastytrade instruments in a background thread with app context."""
-    def _task():
-        try:
-            with app.app_context():
-                update_tastytrade_instruments_csv()
-        except Exception as e:
-            # Avoid failing silently if background thread errors
-            print(f"Error in background Tastytrade instruments update: {e}")
-
-    threading.Thread(target=_task, daemon=True).start()
-
-
 @app.route("/api/login", methods=["POST"])
 def login():
     try:
@@ -129,12 +118,6 @@ def login():
             "email"
         ) and password == admin_credentials.get("password"):
             token = generate_token(email, password)
-
-            # Update Tastytrade instruments CSV in background after successful login
-            try:
-                _start_tastytrade_update_instruments_background()
-            except Exception as e:
-                print(f"Error starting background CSV update on login: {e}")
 
             return (
                 jsonify(
@@ -165,7 +148,11 @@ def tasty_authorize_url():
 @token_required
 def tasty_access_token():
     data = request.json
-    authorization_code = data.get("authorizationCode")
+    authorization_link = data.get("authorizationCode")
+    code_start = authorization_link.index("code=") + 5
+    authorization_code = authorization_link[code_start:]
+    authorization_code = unquote(authorization_code)
+    print("======================authorization_code", authorization_code)
     return tastytrade_access_token(authorization_code)
 
 
@@ -428,27 +415,27 @@ def start_trading():
             # values[2] is trade_enabled ("TRUE" or "FALSE")
             if len(values) >= 3 and values[2] == "TRUE":
                 trade_enabled_symbols.append(symbol)
-        # results = {}
+            symbols = symbol[1:] if symbol.startswith("/") else symbol
+            # Ensure directory exists, then create/reset the per-ticker JSON file
+            trades_dir = f"trades/{strategy}"
+            os.makedirs(trades_dir, exist_ok=True)
+            trade_file_path = os.path.join(trades_dir, f"{symbols}.json")
+            try:
+                existing = load_json(trade_file_path)
+                if not isinstance(existing, dict):
+                    existing = {}
+            except Exception:
+                existing = {}
+            save_json(trade_file_path, existing)
+        logger = configure_logger("/MES", "ema")
+        ema_strategy("/MES", logger) # TODO
         if trade_enabled_symbols:
-            # for symbol in trade_enabled_symbols:
-            #     trade_file = os.path.join(f"trades/{strategy}", f"{symbol}.json")
-            #     trades = None
-            #     if os.path.exists(trade_file):
-            #         try:
-            #             with open(trade_file, "r") as f:
-            #                 trades = json.load(f)
-            #         except Exception as e:
-            #             trades = {"error": str(e)}
-            #     # Optionally, add OHLCV/signals/chart data here if available
-            #     # For now, just return trades
-            #     results[symbol] = {"trades": trades}
-            # Clear stop flag for this strategy
             try:
                 REDIS_CLIENT.delete(f"trading:stop:{strategy}")
             except Exception:
                 pass
             print("Loading trading parameters ... ")
-            run_every_week(strategy)
+            # run_every_week(strategy) # TODO
             print("Trading started!")
 
             return (
@@ -456,8 +443,6 @@ def start_trading():
                     {
                         "success": True,
                         "message": "Trading has started",
-                        # "enabled_symbols": trade_enabled_symbols,
-                        # "results": results,
                     }
                 ),
                 200,

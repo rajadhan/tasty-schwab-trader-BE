@@ -31,7 +31,9 @@ def ema_strategy(ticker, logger):
             trend_line_2,
             period_2,
         ] = get_strategy_prarams("ema", ticker, logger)
-
+        # trade_enabled = "TRUE" # TODO
+        # tasty_qty = 1 # TODO
+        # schwab_qty = 1 # TODO
         if trade_enabled != "TRUE":
             logger.info(f"Skipping  strategy for {ticker}, trade flag is FALSE.")
             trade_file = get_trade_file_path(ticker, "ema")
@@ -82,13 +84,11 @@ def ema_strategy(ticker, logger):
 
         latest = {
             "time": df.index[-1],
-            "trend1": df.iloc[-1]["trend1"],
-            "trend2": df.iloc[-1]["trend2"],
+            "close": df.iloc[-1]["close"],
         }
         prev = {
             "time": df.index[-2],
-            "trend1": df.iloc[-2]["trend1"],
-            "trend2": df.iloc[-2]["trend2"],
+            "close": df.iloc[-2]["close"],
         }
         logger.info(f"latest data {ticker}: {latest}, {prev}")
         Long_condition = (
@@ -113,13 +113,14 @@ def ema_strategy(ticker, logger):
             index=True,
             index_label="timestamp"
             )
-
+        Long_condition = True
+        Short_condition = False
         if ticker not in trades.copy():
             if Long_condition:
                 logger.info(f"Long condition triggered for {ticker}")
                 order_id_schwab = (
                     place_schwab_order(
-                        ticker, schwab_qty, "BUY", logger, "OPENING"
+                        ticker, schwab_qty, "BUY", logger
                     )
                     if schwab_qty > 0
                     else 0
@@ -142,9 +143,8 @@ def ema_strategy(ticker, logger):
                     place_schwab_order(
                         ticker,
                         schwab_qty,
-                        "SELL_SHORT",
-                        logger,
-                        "OPENING",
+                        "SELL",
+                        logger
                     )
                     if schwab_qty > 0
                     else 0
@@ -168,7 +168,7 @@ def ema_strategy(ticker, logger):
                 )
                 long_order_id_schwab = (
                     place_schwab_order(
-                        ticker, schwab_qty, "SELL", logger, "CLOSING"
+                        ticker, schwab_qty, "SELL_SHORT", logger
                     )
                     if schwab_qty > 0
                     else 0
@@ -184,9 +184,8 @@ def ema_strategy(ticker, logger):
                     place_schwab_order(
                         ticker,
                         schwab_qty,
-                        "SELL_SHORT",
-                        logger,
-                        "OPENING",
+                        "SELL",
+                        logger
                     )
                     if schwab_qty > 0
                     else 0
@@ -213,8 +212,7 @@ def ema_strategy(ticker, logger):
                         ticker,
                         schwab_qty,
                         "BUY_TO_COVER",
-                        logger,
-                        "CLOSING",
+                        logger
                     )
                     if schwab_qty > 0
                     else 0
@@ -228,7 +226,7 @@ def ema_strategy(ticker, logger):
                 )
                 long_order_id_schwab = (
                     place_schwab_order(
-                        ticker, schwab_qty, "BUY", logger, "OPENING"
+                        ticker, schwab_qty, "BUY", logger
                     )
                     if schwab_qty > 0
                     else 0

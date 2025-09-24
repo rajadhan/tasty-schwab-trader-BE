@@ -173,7 +173,6 @@ def get_quotes(symbol):
 def get_accounts():
     url = f"{SCHWAB_API}/trader/v1/accounts"
     response = schwab_api_request("get", url)
-    print("response", response)
 
 
 def _time_convert(dt=None, form="8601"):
@@ -292,31 +291,68 @@ def historical_data(symbol, time_frame, logger):
         return None
 
 
-def place_order(symbol, quantity, action, logger, position_effect):
+def get_encrypted_account_id(schwab_account_id, logger):
+    try:
+        get_encrypted_account_id_url = f"{SCHWAB_API}/trader/v1/accounts/accountNumbers"
+        response = schwab_api_request("get", get_encrypted_account_id_url)
+        encrypted_account_id = response.json()[0]["hashValue"]
+        return encrypted_account_id
+    except Exception as e:
+        logger.error(
+            f"Error in getting encrypted account ID for {schwab_account_id}: {str(e)}"
+        )
+        return None
+
+
+def place_order(symbol, quantity, action, logger):
     try:
         logger.info(
             f"Placing order for {symbol}, Action: {action}, Quantity: {quantity}"
         )
-        asset_type = "FUTURE" if symbol.startswith("/") else "EQUITY"
-        order_payload = {
-            "orderType": "MARKET",
+        # Schwab Orders API supports EQUITY and OPTION instruments for this endpoint
+        if symbol.startswith("/"):
+            logger.error(
+                f"Unsupported instrument for Schwab Orders API: '{symbol}'. Valid assetType is EQUITY or OPTION."
+            )
+            return None
+
+        asset_type = "EQUITY"
+        params = {
             "session": "NORMAL",
             "duration": "DAY",
+            "orderType": "MARKET",
             "orderStrategyType": "SINGLE",
             "orderLegCollection": [
                 {
                     "instruction": action,
                     "quantity": quantity,
-                    "instrument": {"symbol": symbol, "assetType": asset_type},
+                    "instrument": {
+                        "assetType": asset_type,
+                        "symbol": symbol,
+                    },
                 }
             ],
         }
-
         encrypted_account_id = get_encrypted_account_id(SCHWAB_ACCOUNT_ID, logger)
         place_order_url = f"{SCHWAB_API}/trader/v1/accounts/{encrypted_account_id}/orders"
-        response = schwab_api_request("post", place_order_url, order_payload)
+        response = schwab_api_request(
+            "post",
+            place_order_url,
+            json=params,
+            headers={"Content-Type": "application/json"},
+        )
 
-        order_id = dict(response.headers)["Location"].split("/")[-1]
+        if response.status_code < 200 or response.status_code >= 300:
+            logger.error(
+                f"Order placement failed ({response.status_code}): {getattr(response, 'text', '')}"
+            )
+            return None
+
+        location_header = dict(response.headers).get("Location")
+        if not location_header:
+            logger.error("Missing Location header in order response")
+            return None
+        order_id = location_header.split("/")[-1]
         # is_filled, traded_qty = check_order_status(order_id, logger)
         # if is_filled:
         #     logger.info(f"Order placed successfully for {symbol}. Order ID: {order_id}")
@@ -335,25 +371,10 @@ def place_order(symbol, quantity, action, logger, position_effect):
         return None
 
 
-def get_encrypted_account_id(schwab_account_id, logger):
-    try:
-        get_encrypted_account_id_url = f"{SCHWAB_API}/trader/v1/accounts/accountNumbers"
-        print("get_encrypted_account_id_url", get_encrypted_account_id_url)
-        response = schwab_api_request("get", get_encrypted_account_id_url)
-        
-        encrypted_account_id = response.json()[0]["hashValue"]
-        return encrypted_account_id
-    except Exception as e:
-        logger.error(
-            f"Error in getting encrypted account ID for {schwab_account_id}: {str(e)}"
-        )
-        return None
-
-
-def check_position_status(symbol, account_id, logger):
+def check_position_status(symbol, logger):
     try:
         logger.info(f"Checking position status for {symbol}")
-        position_url = f"{schwab_trader_link}/accounts"
+        position_url = f"{SCHWAB_API}/accounts"
         response = requests.get(
             url=position_url,
             params={"fields": "positions"},
@@ -375,9 +396,9 @@ def check_position_status(symbol, account_id, logger):
 def check_order_status(order_id, logger):
     try:
         logger.info(f"Checking order status for Order ID: {order_id}")
-        encrypted_account_id = get_encrypted_account_id(account_id, logger)
+        encrypted_account_id = get_encrypted_account_id(SCHWAB_ACCOUNT_ID, logger)
         check_order_status_url = (
-            f"{schwab_trader_link}/accounts/{encrypted_account_id}/orders/{order_id}"
+            f"{SCHWAB_API}/accounts/{encrypted_account_id}/orders/{order_id}"
         )
         response = requests.get(
             url=check_order_status_url, headers=create_api_header("Bearer", logger)
@@ -411,7 +432,7 @@ def cancel_order(order_id, account_id, schwab_account_id, logger):
     try:
         logger.info(f"Cancelling order with Order ID: {order_id}")
         cancel_order_url = (
-            f"{schwab_trader_link}/accounts/{account_id}/orders/{order_id}"
+            f"{SCHWAB_API}/accounts/{account_id}/orders/{order_id}"
         )
         response = requests.delete(
             url=cancel_order_url, headers=create_api_header("Bearer", logger)
