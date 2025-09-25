@@ -73,8 +73,11 @@ def access_token(authorization_code):
 
 def create_header(token):
     # Ensure token is properly formatted
+    print("token", token)
     if not token.startswith("Bearer "):
         token = f"Bearer {token}"
+    else:
+        token = token
     return {
         "Accept": "application/json",
         "Content-Type": "application/json",
@@ -152,12 +155,17 @@ def tastytrade_api_request(method, url, **kwargs):
     access_token = tokens.get("access_token")
     headers = kwargs.pop("headers", {})
     headers.update(create_header(access_token))
+    print("headers", headers)
     response = requests.request(method, url, headers=headers, **kwargs)
+    print("response", response)
     if response.status_code == 401 or "invalid_token" in response.text or "expired_token" in response.text:
         # Try refresh
         access_token = refresh_tastytrade_token()
+        print("access_token", access_token)
         headers = create_header(access_token)
+        print('eeeeheards', headers)
         response = requests.request(method, url, headers=headers, **kwargs)
+        print("eeeeresponse", response)
     return response
 
 
@@ -253,7 +261,7 @@ def check_order_status(order_id, account_id, logger):
         return False, 0
 
 
-def place_tastytrade_order(symbol, qty, action, logger):
+def place_tastytrade_close(symbol, qty, action, logger):
     print("place tastytrade order", symbol, qty, action, TASTY_ACCOUNT_ID, logger)
     try:
         symbol = "/" + get_active_exchange_symbol(symbol)
@@ -274,6 +282,20 @@ def place_tastytrade_order(symbol, qty, action, logger):
     except Exception as e:
         print(f"{TASTY_ACCOUNT_ID}=> ERROR! in placing order = {e}.")
         return ""
+
+
+def place_tastytrade_order(symbol, quantity, action, logger, contract_type):
+    today = datetime.now().strftime("%Y-%m-%d")
+    url = f"{TASTY_API}/option-chains/{symbol}"
+    response = tastytrade_api_request("GET", url)
+    data = response.json()
+    print("data", data["data"]["underlying-price"])
+    items = data["data"]["items"]
+    symbols = []
+    for item in items:
+        if item["days-to-expiration"] == 0:
+            symbols.append(item)
+    # print("symbols", symbols)
 
 
 def manual_trigger_action(ticker, action, logger):
@@ -309,6 +331,9 @@ def manual_trigger_action(ticker, action, logger):
                 "order_id_tastytrade": order_id_tastytrade,
                 "entry_time": datetime.now(pytz.utc).isoformat(),
             }
+        elif action == "close":
+            # Nothing to close since no state
+            return True
     else:
         if action == "long":
             if trades.get(ticker, {}).get("action") == "SHORT":
@@ -355,6 +380,27 @@ def manual_trigger_action(ticker, action, logger):
                 "order_id_tastytrade": order_id_tastytrade,
                 "entry_time": datetime.now(pytz.utc).isoformat(),
             }
+        elif action == "close":
+            # Close whatever we have open
+            opt_type = trades.get(ticker, {}).get("option_type")
+            if opt_type == "CALL":
+                _ = (
+                    place_option_trade(
+                        ticker, "CALL", "Sell to Close", tasty_qty, TASTY_ACCOUNT_ID, logger
+                    )
+                    if int(tasty_qty) > 0
+                    else 0
+                )
+            elif opt_type == "PUT":
+                _ = (
+                    place_option_trade(
+                        ticker, "PUT", "Sell to Close", tasty_qty, TASTY_ACCOUNT_ID, logger
+                    )
+                    if int(tasty_qty) > 0
+                    else 0
+                )
+            # Remove state
+            trades.pop(ticker, None)
 
     with open(trade_file, "w") as file:
         json.dump(trades, file)
@@ -444,4 +490,4 @@ def manual_ema_trigger_action(ticker, action, logger):
 
 
 if __name__ == "__main__":
-    print("tastu_data", get_account_info())
+    pass

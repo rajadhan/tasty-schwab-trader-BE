@@ -11,7 +11,7 @@ from datetime import datetime
 import pytz
 from config import *
 from strategy_consumer import StrategyConsumer
-from brokers.tastytrade import place_tastytrade_order
+from brokers.tastytrade import place_tastytrade_close
 from brokers.schwab import (
     place_order as place_schwab_order
 )
@@ -113,8 +113,6 @@ def ema_strategy(ticker, logger):
             index=True,
             index_label="timestamp"
             )
-        Long_condition = True
-        Short_condition = False
         if ticker not in trades.copy():
             if Long_condition:
                 logger.info(f"Long condition triggered for {ticker}")

@@ -13,11 +13,12 @@ import pytz
 from config import TIME_ZONE
 from strategy_consumer import StrategyConsumer
 from brokers.tastytrade import (
-    place_option_trade as place_tasty_order,
+    place_tastytrade_order,
+    place_tastytrade_close
 )
 from brokers.schwab import (
-    historical_data,
-    place_order as place_schwab_order
+    place_option_order as place_schwab_order,
+    place_order as place_schwab_close
 )
 
 
@@ -55,12 +56,12 @@ def zeroday_strategy(ticker, logger):
         )
         schwab_qty = int(schwab_qty) # Convert Schwab quantity into integer type
         tasty_qty = int(tasty_qty) # Convert Tasty quantity into integer type
-        # Load trade history
+        # # Load trade history
         trade_file = get_trade_file_path(ticker, "zeroday")
         trades = load_json(trade_file)
 
         logger.info(f"Using tick data for {ticker}")
-        df = historical_data(ticker, timeframe, logger)
+        df = strategy_consumer.get_tick_dataframe(ticker, int(period_1), int(period_2), timeframe)
 
         if df is None:
             logger.warning(f"No tick data available for {ticker}")
@@ -123,152 +124,151 @@ def zeroday_strategy(ticker, logger):
             index_label="timestamp",
         )
 
+        # Long_condition = True
+        # Short_condition = False
+
         # Execute trades based on conditions
-        if ticker not in trades:
+        if ticker not in trades.copy():
             if Long_condition:
-                logger.info(
-                    f"Long condition triggered for {ticker} (zeroday strategy) - Buying CALL option"
-                )
-                # Buy at-the-money CALL option
-                order_id_schwab = (
+                logger.info(f"Long condition triggered for {ticker}")
+                [order_id_schwab, selected_schwab_symbol] = (
                     place_schwab_order(
-                        ticker, schwab_qty, "BUY", logger, "OPENING"
+                        ticker, schwab_qty, "BUY_TO_OPEN", logger, "CALL"
                     )
                     if schwab_qty > 0
                     else 0
                 )
-                order_id_tastytrade = (
-                    place_tasty_order(
-                        ticker,
-                        "CALL",
-                        "Buy to Open",
-                        tasty_qty,
-                        logger,
-                    )
-                    if tasty_qty > 0
-                    else 0
-                )
+                # order_id_tastytrade = (
+                #     place_tastytrade_order(
+                #         ticker, tasty_qty, "Buy to Open", logger, "CALL"
+                #     )
+                #     if tasty_qty > 0
+                #     else 0
+                # )
                 trades[ticker] = {
                     "action": "LONG",
-                    "option_type": "CALL",
+                    "contract": "CALL",
+                    "schwab_option_symbol": selected_schwab_symbol,
                     "order_id_schwab": order_id_schwab,
-                    "order_id_tastytrade": order_id_tastytrade,
-                    "entry_time": datetime.now(pytz.utc).isoformat(),
-                    "entry_price": df.iloc[-1]["close"],
+                    # "order_id_tastytrade": order_id_tastytrade,
                 }
             elif Short_condition:
-                logger.info(
-                    f"Short condition triggered for {ticker} (zeroday strategy) - Buying PUT option"
-                )
-                # Buy at-the-money PUT option
-                order_id_schwab = place_schwab_order(
-                    ticker, schwab_qty, "SELL_SHORT", logger, "OPENING"
-                ) if schwab_qty > 0 else 0
-                order_id_tastytrade = (
-                    place_tasty_order(
+                logger.info(f"Short condition triggered for {ticker}")
+                [order_id_schwab, selected_schwab_symbol] = (
+                    place_schwab_order(
                         ticker,
-                        "PUT",
-                        "Buy to Open",
-                        tasty_qty,
+                        schwab_qty,
+                        "BUY_TO_OPEN",
                         logger,
+                        "PUT"
                     )
-                    if tasty_qty > 0
+                    if schwab_qty > 0
                     else 0
                 )
+                # order_id_tastytrade = (
+                #     place_tastytrade_order(
+                #         ticker, tasty_qty, "Sell to Open", logger
+                #     )
+                #     if tasty_qty > 0
+                #     else 0
+                # )
                 trades[ticker] = {
                     "action": "SHORT",
-                    "option_type": "PUT",
+                    "contract": "PUT",
+                    "schwab_option_symbol": selected_schwab_symbol,
                     "order_id_schwab": order_id_schwab,
-                    "order_id_tastytrade": order_id_tastytrade,
-                    "entry_time": datetime.now(pytz.utc).isoformat(),
-                    "entry_price": df.iloc[-1]["close"],
+                    # "order_id_tastytrade": order_id_tastytrade,
                 }
         else:
             if trades[ticker]["action"] == "LONG" and Short_condition:
                 logger.info(
-                    f"Reversing position for {ticker}: Closing CALL, opening PUT (zeroday strategy)"
+                    f"Reversing position for {ticker}: Closing LONG, opening SHORT"
                 )
-                # Close current CALL position
-                close_order_id_schwab = place_schwab_order(
-                    ticker, schwab_qty, "SELL", logger, "CLOSING"
-                ) if schwab_qty > 0 else 0
-                close_order_id = (
-                    place_tasty_order(
-                        ticker,
-                        "CALL",
-                        "Sell to Close",
-                        tasty_qty,
-                        logger,
+                symbol = trades[ticker]["schwab_option_symbol"]
+                long_order_id_schwab = (
+                    place_schwab_close(
+                        symbol, schwab_qty, "SELL_TO_CLOSE", logger
                     )
-                    if tasty_qty > 0
+                    if schwab_qty > 0
                     else 0
                 )
-                # Open new PUT position
-                open_order_id_schwab = place_schwab_order(
-                    ticker, schwab_qty, "SELL_SHORT", logger, "OPENING"
-                ) if schwab_qty > 0 else 0
-                open_order_id = (
-                    place_tasty_order(
+                # long_order_id_tastytrade = (
+                #     place_tastytrade_order(
+                #         ticker, tasty_qty, "Sell to Close", logger
+                #     )
+                #     if tasty_qty > 0
+                #     else 0
+                # )
+                [short_order_id_schwab, selected_schwab_symbol] = (
+                    place_schwab_order(
                         ticker,
-                        "PUT",
-                        "Buy to Open",
-                        tasty_qty,
+                        schwab_qty,
+                        "BUY_TO_OPEN",
                         logger,
+                        "PUT"
                     )
-                    if tasty_qty > 0
+                    if schwab_qty > 0
                     else 0
                 )
+                # short_order_id_tastytrade = (
+                #     place_tastytrade_order(
+                #         ticker, tasty_qty, "Sell to Open", logger
+                #     )
+                #     if tasty_qty > 0
+                #     else 0
+                # )
                 trades[ticker] = {
                     "action": "SHORT",
-                    "option_type": "PUT",
-                    "order_id_schwab": open_order_id_schwab,
-                    "order_id_tastytrade": open_order_id,
-                    "entry_time": datetime.now(pytz.utc).isoformat(),
-                    "entry_price": df.iloc[-1]["close"],
+                    "contract": "PUT",
+                    "schwab_option_symbol": selected_schwab_symbol,
+                    "order_id_schwab": short_order_id_schwab,
+                    # "order_id_tastytrade": short_order_id_tastytrade,
                 }
 
             elif trades[ticker]["action"] == "SHORT" and Long_condition:
                 logger.info(
-                    f"Reversing position for {ticker}: Closing PUT, opening CALL (zeroday strategy)"
+                    f"Reversing position for {ticker}: Closing SHORT, opening LONG"
                 )
-                # Close current PUT position
-                close_order_id_schwab = place_schwab_order(
-                    ticker, schwab_qty, "BUY_TO_COVER", logger, "CLOSING"
-                ) if schwab_qty > 0 else 0
-                close_order_id = (
-                    place_tasty_order(
-                        ticker,
-                        "PUT",
-                        "Sell to Close",
-                        tasty_qty,
-                        logger,
+                symbol = trades[ticker]["schwab_option_symbol"]
+                short_order_id_schwab = (
+                    place_schwab_close(
+                        symbol,
+                        schwab_qty,
+                        "SELL_TO_CLOSE",
+                        logger
                     )
-                    if tasty_qty > 0
+                    if schwab_qty > 0
                     else 0
                 )
-                # Open new CALL position
-                open_order_id_schwab = place_schwab_order(
-                    ticker, schwab_qty, "BUY", logger, "OPENING"
-                ) if schwab_qty > 0 else 0
-                open_order_id = (
-                    place_tasty_order(
-                        ticker,
-                        "CALL",
-                        "Buy to Open",
-                        tasty_qty,
-                        logger,
+                # short_order_id_tastytrade = (
+                #     place_tastytrade_order(
+                #         ticker, tasty_qty, "Buy to Close", logger
+                #     )
+                #     if tasty_qty > 0
+                #     else 0
+                # )
+                [long_order_id_schwab, selected_schwab_symbol] = (
+                    place_schwab_order(
+                        ticker, schwab_qty, "BUY_TO_OPEN", logger, "CALL"
                     )
-                    if tasty_qty > 0
+                    if schwab_qty > 0
                     else 0
                 )
+                # long_order_id_tastytrade = (
+                #     place_tastytrade_order(
+                #         ticker, tasty_qty, "Buy to Open", logger
+                #     )
+                #     if tasty_qty > 0
+                #     else 0
+                # )
                 trades[ticker] = {
                     "action": "LONG",
-                    "option_type": "CALL",
-                    "order_id_schwab": open_order_id_schwab,
-                    "order_id_tastytrade": open_order_id,
-                    "entry_time": datetime.now(pytz.utc).isoformat(),
-                    "entry_price": df.iloc[-1]["close"],
+                    "contract": "CALL",
+                    "schwab_option_symbol": selected_schwab_symbol,
+                    "order_id_schwab": long_order_id_schwab,
+                    # "order_id_tastytrade": long_order_id_tastytrade,
                 }
+
         with open(
             f"trades/zeroday/{ticker[1:] if '/' == ticker[0] else ticker}.json", "w"
         ) as file:

@@ -5,7 +5,7 @@ from pytz import timezone as pytz_timezone
 from time import sleep
 from urllib.parse import unquote
 from utils import (
-    params_parser, time_frame_config, configure_logger
+    params_parser, time_frame_config, configure_logger, get_trade_file_path, load_json, save_json, get_strategy_prarams
 )
 import base64
 import os
@@ -173,6 +173,7 @@ def get_quotes(symbol):
 def get_accounts():
     url = f"{SCHWAB_API}/trader/v1/accounts"
     response = schwab_api_request("get", url)
+    print("response", response.json())
 
 
 def _time_convert(dt=None, form="8601"):
@@ -316,7 +317,11 @@ def place_order(symbol, quantity, action, logger):
             )
             return None
 
-        asset_type = "EQUITY"
+        if symbol.startswith("SPX"):
+            asset_type = "OPTION"
+        else:
+            asset_type = "EQUITY"
+
         params = {
             "session": "NORMAL",
             "duration": "DAY",
@@ -353,17 +358,6 @@ def place_order(symbol, quantity, action, logger):
             logger.error("Missing Location header in order response")
             return None
         order_id = location_header.split("/")[-1]
-        # is_filled, traded_qty = check_order_status(order_id, logger)
-        # if is_filled:
-        #     logger.info(f"Order placed successfully for {symbol}. Order ID: {order_id}")
-        #     return order_id
-        # else:
-        #     logger.warning(f"Order not filled for {symbol}. Order ID: {order_id}")
-        #     logger.warning(f"Placing order again for {symbol}. Order ID: {order_id}")
-        #     order_id = place_order(
-        #         symbol, quantity, action, logger, position_effect
-        #     )
-        #     return order_id
         return order_id
 
     except Exception as e:
@@ -371,103 +365,119 @@ def place_order(symbol, quantity, action, logger):
         return None
 
 
-def check_position_status(symbol, logger):
-    try:
-        logger.info(f"Checking position status for {symbol}")
-        position_url = f"{SCHWAB_API}/accounts"
-        response = requests.get(
-            url=position_url,
-            params={"fields": "positions"},
-            headers=create_api_header("Bearer", logger),
-        )
-        positions = response.json()[0]["securitiesAccount"]["positions"]
-        for position in positions:
-            if position["instrument"]["symbol"] == symbol:
-                logger.info(f"Position found for {symbol}")
-                return True
+def place_option_order(symbol, quantity, action, logger, contract_type):
+    if symbol == "SPX":
+        symbol = "$SPX"
+    today = datetime.now().strftime("%Y-%m-%d")
+    chains_url = f"{SCHWAB_API}/marketdata/v1/chains"
+    params = {
+        "symbol": symbol,
+        "contractType": contract_type,
+        "includeQuotes": True,
+        "strikeCount": 5,
+        "strategy": "SINGLE",
+        "toDate": today
+    }
+    response = schwab_api_request("GET", chains_url, params=params)
+    data = response.json()
+    underlying_price = data["underlyingPrice"]
+    closest_symbol = None
+    closest_diff = float("inf")
+    if contract_type == "CALL":
+        data = data["callExpDateMap"]
+    else:
+        data = data["putExpDateMap"]
+    for exp, strikes in data.items():
+        for strike, options in strikes.items():
+            opt = options[0]
+            option_symbol = opt["symbol"]
+            strike_price = float(opt["strikePrice"])
+            diff= abs(strike_price - underlying_price)
 
-        logger.info(f"No position found for {symbol}")
-        return False
-    except Exception as e:
-        logger.error(f"Error in checking position status for {symbol}: {str(e)}")
-        return False
+            if diff < closest_diff:
+                closest_diff = diff
+                closest_symbol = option_symbol
 
+    print("Selected option:", closest_symbol)
 
-def check_order_status(order_id, logger):
-    try:
-        logger.info(f"Checking order status for Order ID: {order_id}")
-        encrypted_account_id = get_encrypted_account_id(SCHWAB_ACCOUNT_ID, logger)
-        check_order_status_url = (
-            f"{SCHWAB_API}/accounts/{encrypted_account_id}/orders/{order_id}"
-        )
-        response = requests.get(
-            url=check_order_status_url, headers=create_api_header("Bearer", logger)
-        )
-        order_history = response.json()
-        order_status = order_history["status"]
-        traded_qty = int(order_history["quantity"])
-
-        if order_status == "FILLED":
-            logger.info(f"Order ID {order_id} is filled")
-            return True, traded_qty
-        else:
-            if order_status == "REJECTED":
-                logger.warning(f"Order ID {order_id} is rejected")
-                return False, 0
-            else:
-                logger.warning(f"Order ID {order_id} is not filled")
-                sleep(1)
-                is_filled, traded_qty = check_order_status(order_id, logger)
-                return is_filled, traded_qty
-
-    except Exception as e:
-        logger.error(
-            f"Error in checking order status for Order ID {order_id}: {str(e)}"
-        )
-        is_filled, traded_qty = check_order_status(order_id, logger)
-        return is_filled, traded_qty
+    resp = place_order(closest_symbol, quantity, action, logger)
+    return [resp, closest_symbol]
 
 
-def cancel_order(order_id, account_id, schwab_account_id, logger):
-    try:
-        logger.info(f"Cancelling order with Order ID: {order_id}")
-        cancel_order_url = (
-            f"{SCHWAB_API}/accounts/{account_id}/orders/{order_id}"
-        )
-        response = requests.delete(
-            url=cancel_order_url, headers=create_api_header("Bearer", logger)
-        )
-        logger.info(f"Order ID {order_id} cancelled successfully")
-    except Exception as e:
-        logger.error(f"Error in cancelling order with Order ID {order_id}: {str(e)}")
+def manual_trigger_action(action, logger, ticker="SPX"):
+    """Handle manual actions for Schwab zeroday options on SPX.
 
+    Actions supported:
+      - "call": open long via Buy to Open (auto-closes PUT or CALL if present)
+      - "put": open long via Buy to Open (auto-closes CALL or PUT if present)
+      - "close": close any existing position
 
-def validate_refresh_link(link, REFRESH_TOKEN_LINK):
-    """
-    Validate the provided Schwab refresh‐token link.
-    If valid, save it to session_state and file.
-    Returns (bool, str) for success status and message.
+    Stores and reads state from trades/zeroday/<ticker>.json
     """
     try:
-        # Validate link format
-        if not link or not isinstance(link, str):
-            return False, "Invalid link format"
+        trade_file = get_trade_file_path(ticker, "zeroday")
+        trades = load_json(trade_file)
+        [
+            timeframe,
+            schwab_qty,
+            trade_enabled,
+            tasty_qty,
+            trend_line_1,
+            period_1,
+            trend_line_2,
+            period_2,
+        ] = get_strategy_prarams("zeroday", ticker, logger)
+        # Determine quantity for Schwab from settings if available, default 1
+        qty = int(schwab_qty)
+        # Attempt to pull quantity from zeroday settings if present
+        # We avoid importing get_strategy_prarams here to prevent cycles; quantity of 1 is safe default
 
-        if "code=" not in link:
-            return False, "No authorization code found in link"
+        existing = trades.get(ticker, {})
+        existing_symbol = existing.get("schwab_option_symbol")
+        existing_action = existing.get("action")  # LONG or SHORT
+        existing_type = existing.get("contract")  # CALL or PUT
 
-        is_valid = get_refresh_token(link)
-        if is_valid:
-            # Save the link as JSON with proper structure
-            link_data = {"refresh_token_link": link}
-            with open(REFRESH_TOKEN_LINK, "w") as file:
-                json.dump(link_data, file, indent=2)
-            return True, "Token refreshed successfully"
+        # Helper to place close order if we have an existing specific option symbol
+        def close_existing():
+            nonlocal trades
+            if not existing_symbol:
+                logger.info("No existing position to close")
+                return None
+            instruction = "SELL_TO_CLOSE"
+            logger.info(f"Closing existing {existing_type} position: {existing_symbol}")
+            resp = place_order(existing_symbol, qty, instruction, logger)
+            
+            return None  # Close operations don't return order details
+
+        if action == "close":
+            close_existing()
+            return None
+
+        if action == "call":
+            # Close any existing position first
+            close_existing()
+            [order_id, selected_symbol] = place_option_order("SPX", qty, "BUY_TO_OPEN", logger, "CALL")
+            
+            return [order_id, selected_symbol]
+        elif action == "put":
+            # Close any existing position first
+            close_existing()
+            [order_id, selected_symbol] = place_option_order("SPX", qty, "BUY_TO_OPEN", logger, "PUT")
+            
+            return [order_id, selected_symbol]
         else:
-            return False, "Link is expired or invalid"
+            logger.error(f"Unsupported manual action for Schwab: {action}")
+            return None
     except Exception as e:
-        return False, f"Error validating link: {str(e)}"
+        logger.error(f"Error in Schwab manual trigger: {str(e)}")
+        return None
+
 
 if __name__  == "__main__":
     logger = configure_logger("SPX", "zeroday")
-    get_accounts()
+    encrypted_account_id = get_encrypted_account_id(SCHWAB_ACCOUNT_ID, logger)
+    print("encrypted_account_id", encrypted_account_id)
+    url = f"{SCHWAB_API}/trader/v1/accounts/{encrypted_account_id}/orders/1004238708712"
+    response = schwab_api_request("get", url)
+    data = response.json()
+    print("data", data)
