@@ -1,128 +1,89 @@
-# Trading Application Backend
+# Automated Trading System (Backend)
 
-A Flask-based trading application that integrates with Schwab and Tastytrade APIs for automated trading strategies.
+This project is a Python-based trading engine designed for automated execution of multiple trading strategies across **futures, stocks, and 0DTE SPX options**.  
+It integrates with **Charles Schwab** and **Tastytrade APIs** for execution and uses **Databento** for real-time market data.
 
-## Features
+---
 
-- **RESTful API**: Flask-based API with JWT authentication
-- **Multi-Broker Support**: Integration with Schwab and Tastytrade
-- **Automated Trading**: Configurable trading strategies with EMA/SMA indicators
-- **Real-time Data**: Historical market data retrieval
-- **Position Management**: Automated position opening/closing based on strategy signals
+## 🚀 Features
+- **EMA Crossover Strategy**
+  - Long/short entry when EMAs cross.
+  - Supports SMA, EMA, and Wilder’s averages.
+  - Works on multiple instruments and timeframes simultaneously.
 
-## Prerequisites
+- **Supertrend Reversal Strategy**
+  - Derived from ThinkScript logic.
+  - Executes on reversal candle signals (buy/sell).
+  - Includes stop-loss and reversal handling.
 
-- Python 3.8 or higher
-- pip (Python package installer)
+- **0DTE SPX Options Strategy**
+  - Trades ATM SPX options expiring the same day.
+  - Signal: EMA crossovers on SPX index.
+  - Supports **automatic execution** and **manual push-button trigger**.
 
-## Installation
+---
 
-1. **Clone the repository** (if not already done):
+## 📊 Supported Instruments
+- **Futures:** `/MES`, `/ES`, `/MNQ`, `/NQ`, `/M2K`, `/RTY`
+- **Stocks:** `MSTR`, `TSLA`, `NVDA`
+- **Options:** SPX 0-day-to-expiry (0DTE)
+
+---
+
+## 🔌 Integrations
+- **Brokers/APIs**
+  - Charles Schwab API
+  - Tastytrade API
+- **Market Data**
+  - Databento (tick-level futures data)
+  - Optional: Tastytrade tick feed
+
+---
+
+## ⚙️ Setup
+1. Clone the repository:
    ```bash
-   git clone <repository-url>
-   cd backend
-   ```
-
-2. **Install dependencies**:
+   git clone https://github.com/your-repo/trading-backend.git
+   cd trading-backend
+2. Create and activate virtual environment:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate   # Linux/Mac
+   venv\Scripts\activate      # Windows
+3. Install dependencies:
    ```bash
    pip install -r requirements.txt
-   ```
+4. Configure API keys:
+   ```bash
+   SCHWAB_API_KEY=your_key
+   SCHWAB_ACCOUNT_ID=your_account
+   TASTYTRADE_API_KEY=your_key
+   DATABENTO_API_KEY=your_key
+5. Run trading engine:
+   ```bash
+   flask run
 
-3. **Configure credentials**:
-   - Update `config.py` with your API credentials
-   - Update `credentials/admin_credentials.json` with your admin login details
+---
 
-## Quick Start
+## 🛠 Configuration
+- **Timeframes**: 1m, 2m, 5m, 15m, 30m, 1h, 4h, 1d
+- **Tick Charts**: customizable (e.g., 512t, 1160t, 1600t)
+- **Check Intervals:**
+   - Short TFs: every 10s
+   - Medium TFs: every 1m
+   - Tick charts: 5–15s
 
-### Option 1: Using the startup script (Recommended)
-```bash
-python run_app.py
-```
+---
 
-### Option 2: Direct Flask run
-```bash
-python app.py
-```
+## 📡 Deployment
+- Runs on **AWS EC2** instance.
+- Auto-restarts with **systemd supervisor**.
+- Logs stored in ```logs/``` directory.
 
-The application will start on `http://localhost:5000`
+---
 
-## API Endpoints
-
-### Authentication
-- `POST /api/login` - Login with admin credentials
-
-### Trading Management
-- `POST /api/add-ticker` - Add a new ticker with strategy parameters
-- `GET /api/get-ticker` - Get all configured tickers
-- `POST /api/manual-trade` - Manually execute trades for the zeroday strategy
-- `GET /api/start-trading` - Start the automated trading process
-
-## Configuration
-
-### Ticker Configuration Format
-Each ticker is configured with the following parameters:
-```json
-{
-  "symbol": "timeframe",
-  "schwab_quantity": "trade_enabled",
-  "tastytrade_quantity": "trend_line_1",
-  "period_1": "trend_line_2",
-  "period_2": ""
-}
-```
-
-### Strategy Parameters
-- **timeframe**: Trading interval (e.g., "1Min", "1Hour", "1Day")
-- **schwab_quantity**: Number of shares/contracts for Schwab
-- **trade_enabled**: "TRUE" or "FALSE" to enable/disable trading
-- **tastytrade_quantity**: Number of shares/contracts for Tastytrade
-- **trend_line_1/2**: Technical indicators ("EMA", "SMA", "SuperTrend")
-- **period_1/2**: Periods for the technical indicators
-
-## File Structure
-
-```
-backend/
-├── app.py                 # Main Flask application
-├── config.py             # Configuration and credentials
-├── main_equities.py      # Trading strategy implementation
-├── utils.py              # Utility functions
-├── tastytrade.py         # Tastytrade API integration
-├── schwab/               # Schwab API integration
-├── consts/               # Constants and reference data
-├── credentials/          # Admin credentials
-├── settings/             # Trading configuration
-├── tokens/               # API tokens storage
-├── jsons/                # JSON configuration files
-├── trades/               # Trade history files
-├── logs/                 # Application logs
-└── previous_logs/        # Archived logs
-```
-
-## Testing
-
-Run the import test to verify all dependencies are correctly installed:
-```bash
-python test_imports.py
-```
-
-## Security Notes
-
-- **JWT Secret**: Change the `JWT_SECRET` in `app.py` for production use
-- **Credentials**: Never commit API credentials to version control
-- **HTTPS**: Use HTTPS in production environments
-
-## Troubleshooting
-
-1. **Import Errors**: Run `python test_imports.py` to check dependencies
-2. **Missing Files**: The startup script will create necessary directories and files
-3. **API Errors**: Check your credentials in `config.py`
-4. **Permission Errors**: Ensure write permissions for logs and data directories
-
-## Development
-
-For development, the application runs in debug mode with auto-reload disabled to prevent conflicts with the trading threads.
-
-## License
-
-This project is for educational and personal use only. Please ensure compliance with your broker's terms of service and local regulations.
+## 📌 Roadmap
+- Improve execution latency.
+- Expand to multi-broker support.
+- Integrate risk management (max loss per day).
+- Enhanced backtesting module.
