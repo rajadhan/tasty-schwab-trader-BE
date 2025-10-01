@@ -1,0 +1,28 @@
+2025-10-01 06:06:07,047 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-10-01 06:06:07,048 INFO:databento.historical.client:Initialized Historical(gateway=https://hist.databento.com)
+2025-10-01 06:06:07,630 INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-10-01 06:06:07,630 INFO:werkzeug:[33mPress CTRL+C to quit[0m
+2025-10-01 06:10:34,130 INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 06:10:34] "OPTIONS /api/login HTTP/1.1" 200 -
+2025-10-01 06:10:34,220 INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 06:10:34] "POST /api/login HTTP/1.1" 200 -
+2025-10-01 06:10:56,213 INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 06:10:56] "OPTIONS /api/login HTTP/1.1" 200 -
+2025-10-01 06:10:56,218 INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 06:10:56] "POST /api/login HTTP/1.1" 200 -
+2025-10-01 06:11:00,901 INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 06:11:00] "OPTIONS /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-10-01 06:11:00,908 INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 06:11:00] "GET /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-10-01 06:11:00,915 INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 06:11:00] "GET /api/get-ticker?strategy=ema HTTP/1.1" 200 -
+2025-10-01 06:17:15,150 INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 06:17:15] "OPTIONS /api/get-ticker?strategy=supertrend HTTP/1.1" 200 -
+2025-10-01 06:17:15,152 INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 06:17:15] "OPTIONS /api/get-ticker?strategy=supertrend HTTP/1.1" 200 -
+2025-10-01 06:17:15,159 INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 06:17:15] "GET /api/get-ticker?strategy=supertrend HTTP/1.1" 200 -
+2025-10-01 06:17:15,162 INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 06:17:15] "GET /api/get-ticker?strategy=supertrend HTTP/1.1" 200 -
+2025-10-01 06:17:17,190 INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 06:17:17] "OPTIONS /api/get-ticker?strategy=zeroday HTTP/1.1" 200 -
+2025-10-01 06:17:17,191 INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 06:17:17] "OPTIONS /api/get-ticker?strategy=zeroday HTTP/1.1" 200 -
+2025-10-01 06:17:17,196 INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 06:17:17] "GET /api/get-ticker?strategy=zeroday HTTP/1.1" 200 -
+2025-10-01 06:17:17,200 INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 06:17:17] "GET /api/get-ticker?strategy=zeroday HTTP/1.1" 200 -
+2025-10-01 06:18:27,494 INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 06:18:27] "OPTIONS /api/tasty/authorize-url HTTP/1.1" 200 -
+2025-10-01 06:18:27,495 INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 06:18:27] "OPTIONS /api/schwab/authorize-url HTTP/1.1" 200 -
+2025-10-01 06:18:27,497 INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 06:18:27] "OPTIONS /api/tasty/authorize-url HTTP/1.1" 200 -
+2025-10-01 06:18:27,499 INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 06:18:27] "OPTIONS /api/schwab/authorize-url HTTP/1.1" 200 -
+2025-10-01 06:18:27,526 INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 06:18:27] "GET /api/tasty/authorize-url HTTP/1.1" 200 -
+2025-10-01 06:18:27,528 INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 06:18:27] "GET /api/schwab/authorize-url HTTP/1.1" 200 -
+2025-10-01 06:18:27,534 INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 06:18:27] "GET /api/tasty/authorize-url HTTP/1.1" 200 -
+2025-10-01 06:18:27,538 INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 06:18:27] "GET /api/schwab/authorize-url HTTP/1.1" 200 -
