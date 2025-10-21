@@ -130,7 +130,7 @@ Specialized strategy for same-day expiration SPX options trading.
 - **NVIDIA** (`NVDA`) - Semiconductor and AI technology
 
 ### Options Markets
-- **SPX 0DTE Options** - Same-day expiration S&P 500 index options
+- **SPX 0DTE Options** -  Same-day expiration S&P 500 index options
 
 ## API Integrations
 
