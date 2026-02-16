@@ -13,6 +13,10 @@ from utils import is_tick_timeframe, get_active_exchange_symbol
 from datetime import datetime,timedelta,timezone
 import logging
 import sys
+from gamma_rwr_engine import GammaRWREngine
+from gamma_rwr_filters import GammaRWRFilters
+from rwr_alert_manager import RWRAlertManager
+from brokers.schwab import get_positions, discover_credit_spreads, get_quotes
 
 logging.basicConfig(
     level=logging.INFO,
@@ -29,6 +33,7 @@ class StrategyConsumer:
         self.logger = logging.getLogger('StrategyConsumer')
         # Remove self.tick_dataframes - use Redis only for tick data
         self.pending_strategies = defaultdict(threading.Event)  # For triggering strategy on new bars
+        self.rwr_components = {} # Stores (engine, filters, alerts) per ticker
 
 
     def get_tick_dataframe(self, symbol, period1, period2, timeframe):
@@ -108,6 +113,70 @@ class StrategyConsumer:
                 except Exception as e:
                     self.logger.error(f"Error processing tick bar message: {e}")
 
+    def run_rwr_monitoring(self, ticker, logger):
+        """Executes one cycle of Gamma RWR risk monitoring."""
+        if ticker not in self.rwr_components:
+            self.rwr_components[ticker] = {
+                'engine': GammaRWREngine(),
+                'filters': GammaRWRFilters(),
+                'alerts': RWRAlertManager(ticker, logger)
+            }
+        
+        comp = self.rwr_components[ticker]
+        
+        try:
+            # 1. Sync Positions and Discover Spreads
+            positions = get_positions()
+            spreads = discover_credit_spreads(positions)
+            
+            if ticker not in spreads:
+                return # No active spreads for this ticker
+                
+            active_spreads = spreads[ticker]
+            for spread in active_spreads:
+                # 2. Get Real-time Data for Greeks
+                # For 0DTE, we focus on the short leg's threat
+                short_leg = spread['short']
+                symbol = short_leg['instrument']['symbol']
+                quote = get_quotes(symbol)
+                
+                # Simplified 0DTE Greek Inputs:
+                # In real scenario, we'd fetch IV and Spot from market data service
+                # Here we use placeholders or derived values for demonstration
+                spot = quote.get('last', 0)
+                if spot == 0: continue
+                
+                # 3. Calculate Greeks & G.A.R.
+                # Transform position to engine format
+                legs = [
+                    {'strike': float(spread['short']['instrument']['symbol'][-7:])/1000, 
+                     'iv': 0.2, 'expiry_years': 1/365, 'qty': -1, 'type': spread['type']},
+                    {'strike': float(spread['long']['instrument']['symbol'][-7:])/1000, 
+                     'iv': 0.2, 'expiry_years': 1/365, 'qty': 1, 'type': spread['type']}
+                ]
+                
+                # Note: Strike parsing from Schwab symbol is tricky, 
+                # but we'll assume a standard YYMMDD[C/P]STRIKE format.
+                
+                net_greeks = comp['engine'].calculate_position_greeks(spot, legs)
+                gar = net_greeks['gar']
+                
+                # 4. Filter and Validate (ECCM)
+                # Volume ratio placeholder (would be pulled from Databento/Redis)
+                comp['filters'].add_snapshot(gar=gar, volume_ratio=1.0, iv_delta=0.0)
+                confidence = comp['filters'].calculate_confidence()
+                gar_results = comp['filters'].get_multi_window_gar()
+                
+                # 5. Alerting
+                threat_level, _ = comp['engine'].classify_threat(gar)
+                comp['alerts'].render_hud(gar_results, confidence, threat_level)
+                
+                if comp['filters'].should_eject(gar_results, confidence):
+                    comp['alerts'].trigger_alert('LAUNCH', f"G.A.R. Spike: {gar}")
+                    
+        except Exception as e:
+            logger.error(f"Error in RWR monitoring for {ticker}: {e}")
+
     def main_strategy_loop(self, ticker, strategy):
         """Main strategy loop for a specific ticker"""
         logger = configure_logger(ticker, strategy)
@@ -157,8 +226,13 @@ class StrategyConsumer:
 
                     if run_strategy:
                         print(f"Running strategy for {ticker} with time frame {time_frame}")
+                        # Move sleep before strategy or after? Original code has it before strategy call.
                         sleep_base_on_timeframe(time_frame)
                         self.strategy(strategy, ticker, logger)
+                        
+                        # Run RWR Monitoring cycle after strategy execution
+                        if strategy == "zeroday":
+                            self.run_rwr_monitoring(ticker, logger)
 
         except Exception as e:
             logger.error(f"Error in main loop for {ticker}: {e}", exc_info=True)

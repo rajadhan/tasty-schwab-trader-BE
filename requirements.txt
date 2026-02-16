@@ -8,3 +8,5 @@ PyJWT
 python-dotenv
 redis
 schedule
+numpy
+scipy

@@ -1,0 +1,19 @@
+[project]
+name = "tasty-schwab-trader-be"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "asyncio>=4.0.0",
+    "databento>=0.70.0",
+    "flask>=3.1.2",
+    "flask-cors>=6.0.2",
+    "numpy>=2.4.2",
+    "pandas>=3.0.0",
+    "pandas-market-calendars>=5.3.0",
+    "pyjwt>=2.11.0",
+    "python-dotenv>=1.2.1",
+    "pytz>=2025.2",
+    "redis>=7.1.1",
+    "schedule>=1.2.2",
+    "scipy>=1.17.0",
+]

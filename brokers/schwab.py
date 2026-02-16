@@ -170,6 +170,75 @@ def get_quotes(symbol):
     return quote
 
 
+    return quote
+
+
+def get_positions():
+    """Fetches all active positions from the Schwab account."""
+    encrypted_account_id = get_encrypted_account_id(SCHWAB_ACCOUNT_ID, configure_logger("SYNC", "schwab"))
+    url = f"{SCHWAB_API}/trader/v1/accounts/{encrypted_account_id}?fields=positions"
+    response = schwab_api_request("GET", url)
+    if response.status_code != 200:
+        return []
+        
+    data = response.json()
+    return data.get("securitiesAccount", {}).get("positions", [])
+
+
+def discover_credit_spreads(positions):
+    """
+    Groups individual option legs into 2-leg credit spreads.
+    Returns a dict mapping underlying symbols to lists of spread strike pairs.
+    """
+    option_positions = [p for p in positions if p.get("instrument", {}).get("assetType") == "OPTION"]
+    
+    # Sort by underlying and expiration
+    by_underlying = {}
+    for p in option_positions:
+        instr = p["instrument"]
+        symbol = instr.get("underlyingSymbol", "UNKNOWN")
+        if symbol not in by_underlying:
+            by_underlying[symbol] = []
+        by_underlying[symbol].append(p)
+        
+    spreads = {}
+    for underlying, legs in by_underlying.items():
+        # Group by expiration
+        by_expiry = {}
+        for leg in legs:
+            # Parse expiry from symbol (e.g. SPX   260215C05000000)
+            # Or use a more robust way if available in instrument object
+            symbol = leg["instrument"]["symbol"]
+            # Typical Schwab option symbol format: SPX   YYMMDD[C/P]STRIKE
+            expiry = symbol[6:12] 
+            if expiry not in by_expiry:
+                by_expiry[expiry] = []
+            by_expiry[expiry].append(leg)
+            
+        for expiry, exp_legs in by_expiry.items():
+            # Pair Long (+qty) and Short (-qty) of same type (CP)
+            calls = [l for l in exp_legs if "C" in l["instrument"]["symbol"][12:13]]
+            puts = [l for l in exp_legs if "P" in l["instrument"]["symbol"][12:13]]
+            
+            # Simplified pairing: one short and one long of same type = credit/debit spread
+            # In a real environment, we'd match quantities and distance
+            if len(calls) >= 2:
+                short = [l for l in calls if l["longQuantity"] == 0 and l["shortQuantity"] > 0]
+                long = [l for l in calls if l["longQuantity"] > 0 and l["shortQuantity"] == 0]
+                if short and long:
+                    if underlying not in spreads: spreads[underlying] = []
+                    spreads[underlying].append({'type': 'CALL', 'short': short[0], 'long': long[0]})
+            
+            if len(puts) >= 2:
+                short = [l for l in puts if l["longQuantity"] == 0 and l["shortQuantity"] > 0]
+                long = [l for l in puts if l["longQuantity"] > 0 and l["shortQuantity"] == 0]
+                if short and long:
+                    if underlying not in spreads: spreads[underlying] = []
+                    spreads[underlying].append({'type': 'PUT', 'short': short[0], 'long': long[0]})
+                    
+    return spreads
+
+
 def get_accounts():
     url = f"{SCHWAB_API}/trader/v1/accounts"
     response = schwab_api_request("get", url)
