@@ -26,3 +26,4 @@
 2025-10-01 06:18:27,528 INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 06:18:27] "GET /api/schwab/authorize-url HTTP/1.1" 200 -
 2025-10-01 06:18:27,534 INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 06:18:27] "GET /api/tasty/authorize-url HTTP/1.1" 200 -
 2025-10-01 06:18:27,538 INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 06:18:27] "GET /api/schwab/authorize-url HTTP/1.1" 200 -
+2026-02-15 23:33:29,542 CRITICAL:RWR_E2E:RWR LAUNCH ALERT: G.A.R. Spike: 1.62 @ Conf: 0.71

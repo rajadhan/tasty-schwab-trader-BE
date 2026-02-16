@@ -139,40 +139,66 @@ class StrategyConsumer:
                 short_leg = spread['short']
                 symbol = short_leg['instrument']['symbol']
                 quote = get_quotes(symbol)
-                
-                # Simplified 0DTE Greek Inputs:
-                # In real scenario, we'd fetch IV and Spot from market data service
-                # Here we use placeholders or derived values for demonstration
                 spot = quote.get('last', 0)
                 if spot == 0: continue
                 
-                # 3. Calculate Greeks & G.A.R.
-                # Transform position to engine format
-                legs = [
-                    {'strike': float(spread['short']['instrument']['symbol'][-7:])/1000, 
-                     'iv': 0.2, 'expiry_years': 1/365, 'qty': -1, 'type': spread['type']},
-                    {'strike': float(spread['long']['instrument']['symbol'][-7:])/1000, 
-                     'iv': 0.2, 'expiry_years': 1/365, 'qty': 1, 'type': spread['type']}
-                ]
+                # 3. Fetch latest market data from Redis for Greeks/Volume
+                # Underlying symbol for volume analysis
+                underlying = spread['short']['instrument']['underlyingSymbol']
+                underlying_key = f"bars_history:{underlying}"
+                latest_underlying = self.redis_client.zrevrange(underlying_key, 0, 0)
                 
-                # Note: Strike parsing from Schwab symbol is tricky, 
-                # but we'll assume a standard YYMMDD[C/P]STRIKE format.
+                volume_ratio = 1.0
+                if latest_underlying:
+                    und_bar = json.loads(latest_underlying[0].decode('utf-8'))
+                    # Simple volume ratio: current volume vs 5-period avg (placeholder logic)
+                    volume_ratio = 1.2 # Placeholder for real ratio logic
                 
+                # Option legs - try to get Massive Greeks from Redis if available
+                legs = []
+                for leg_type in ['short', 'long']:
+                    leg_data = spread[leg_type]
+                    symbol = leg_data['instrument']['symbol']
+                    # Massive key format (O:...)
+                    massive_key = f"bars_history:{symbol}"
+                    latest_leg = self.redis_client.zrevrange(massive_key, 0, 0)
+                    
+                    strike = float(symbol[-7:])/1000
+                    qty = -1 if leg_type == 'short' else 1
+                    
+                    engine_leg = {
+                        'strike': strike,
+                        'qty': qty,
+                        'type': spread['type'],
+                        'expiry_years': 1/365, # Placeholder for real DTE
+                        'iv': 0.2
+                    }
+                    
+                    if latest_leg:
+                        leg_bar = json.loads(latest_leg[0].decode('utf-8'))
+                        if 'gamma' in leg_bar:
+                            engine_leg.update({
+                                'delta': leg_bar.get('delta'),
+                                'gamma': leg_bar.get('gamma'),
+                                'theta': leg_bar.get('theta')
+                            })
+                    legs.append(engine_leg)
+
+                # 4. Calculate Greeks & G.A.R.
                 net_greeks = comp['engine'].calculate_position_greeks(spot, legs)
                 gar = net_greeks['gar']
                 
-                # 4. Filter and Validate (ECCM)
-                # Volume ratio placeholder (would be pulled from Databento/Redis)
-                comp['filters'].add_snapshot(gar=gar, volume_ratio=1.0, iv_delta=0.0)
+                # 5. Filter and Validate (ECCM)
+                comp['filters'].add_snapshot(gar=gar, volume_ratio=volume_ratio, iv_delta=0.0)
                 confidence = comp['filters'].calculate_confidence()
                 gar_results = comp['filters'].get_multi_window_gar()
                 
-                # 5. Alerting
+                # 6. Alerting
                 threat_level, _ = comp['engine'].classify_threat(gar)
                 comp['alerts'].render_hud(gar_results, confidence, threat_level)
                 
                 if comp['filters'].should_eject(gar_results, confidence):
-                    comp['alerts'].trigger_alert('LAUNCH', f"G.A.R. Spike: {gar}")
+                    comp['alerts'].trigger_alert('LAUNCH', f"G.A.R. Spike: {gar:.2f} @ Conf: {confidence:.2f}")
                     
         except Exception as e:
             logger.error(f"Error in RWR monitoring for {ticker}: {e}")
