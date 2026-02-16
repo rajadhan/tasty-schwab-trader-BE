@@ -64,15 +64,23 @@ class GammaRWREngine:
         q = 0.0   # Assume no dividends for 0DTE snapshot
         
         for leg in legs:
-            greeks = self.black_scholes_greeks(
-                spot, 
-                leg['strike'], 
-                leg['expiry_years'], 
-                leg['iv'], 
-                r, 
-                q, 
-                leg['type']
-            )
+            # check if Greeks are already provided (e.g., from Massive/Polygon snapshot)
+            if all(k in leg for k in ['delta', 'gamma', 'theta']):
+                greeks = {
+                    'delta': leg['delta'],
+                    'gamma': leg['gamma'],
+                    'theta': leg['theta']
+                }
+            else:
+                greeks = self.black_scholes_greeks(
+                    spot, 
+                    leg['strike'], 
+                    leg['expiry_years'], 
+                    leg['iv'], 
+                    r, 
+                    q, 
+                    leg['type']
+                )
             
             qty = leg['qty']
             net_delta += greeks['delta'] * qty

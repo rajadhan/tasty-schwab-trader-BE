@@ -1,5 +1,5 @@
 import asyncio
-import databento as db
+import massive as ms
 import json
 import logging
 import os
@@ -7,7 +7,7 @@ import pandas as pd
 import redis
 from datetime import datetime, timedelta, timezone
 from dotenv import load_dotenv
-from tick_buffer import DatabentoLiveManager, TickDataBuffer, TimeBasedBarBufferWithRedis
+from tick_buffer import MassiveLiveManager, TickDataBuffer, TimeBasedBarBufferWithRedis
 from utils import (
     get_dataset,
     get_symbol_for_data,
@@ -19,7 +19,7 @@ from utils import (
 load_dotenv()  # Load environment variables from .env
 
 # Global clients - created once and reused
-DB_API_KEY = os.getenv("DATABENTO_API_KEY")
+MASSIVE_API_KEY = os.getenv("MASSIVE_API_KEY")
 REDIS_HOST = os.getenv("REDIS_HOST", "localhost")
 REDIS_PORT = int(os.getenv("REDIS_PORT", 6379))
 REDIS_DB = int(os.getenv("REDIS_DB", 0))
@@ -27,9 +27,8 @@ REDIS_DB = int(os.getenv("REDIS_DB", 0))
 # Global Redis client
 REDIS_CLIENT = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, db=REDIS_DB)
 
-# Global Databento clients
-HISTORICAL_CLIENT = db.Historical(DB_API_KEY)
-LIVE_CLIENT = db.Live(key=DB_API_KEY)
+# Global Massive client
+REST_CLIENT = ms.RESTClient(api_key=MASSIVE_API_KEY)
 
 
 class TickProducer:
@@ -38,7 +37,7 @@ class TickProducer:
         self.TickDataBuffer = TickDataBuffer  # Store the class, not an instance
         self.strategy = None
         self.tick_buffers = {}
-        self.live_manager = DatabentoLiveManager()
+        self.live_manager = MassiveLiveManager()
         self.logger = logging.getLogger("TickProducer")
         logging.basicConfig(level=logging.INFO)
 
@@ -61,16 +60,14 @@ class TickProducer:
                 max_period = 50
             else:
                 max_period = 1
-            dataset = get_dataset(ticker)
-            schema = get_schema(time_frame)
-            safe_historical_end_time = get_historical_end_time(
-                ticker, dataset, self.logger, schema
-            )
-            safe_historical_start_time = get_historical_start_time(
-                ticker, time_frame, safe_historical_end_time, self.logger
-            )
-            historical_end_time = safe_historical_end_time.isoformat()
-            historical_start_time = safe_historical_start_time.isoformat()
+            dataset = "DELAYED" # Default for Massive migration
+            schema = "minute"
+            safe_historical_end_time = datetime.now(timezone.utc)
+            safe_historical_start_time = safe_historical_end_time - timedelta(days=1)
+            
+            # Massive date format (YYYY-MM-DD)
+            historical_end_time = safe_historical_end_time.strftime("%Y-%m-%d")
+            historical_start_time = safe_historical_start_time.strftime("%Y-%m-%d")
             ticker_for_data = get_symbol_for_data(ticker)
 
             self._setup_symbol_buffer(
@@ -153,11 +150,11 @@ class TickProducer:
 
     
     async def start_live_feeds(self, live_symbols_config):
-        """Start live data feeds"""
+        """Start live data feeds using MassiveLiveManager"""
         if live_symbols_config:
-            self.live_manager = DatabentoLiveManager()
+            self.live_manager = MassiveLiveManager()
             self.logger.info(
-                f"Starting Databento live feeds for: {list(live_symbols_config.keys())}"
+                f"Starting Massive live feeds for: {list(live_symbols_config.keys())}"
             )
             await self.live_manager.start_live_feeds(
                 live_symbols_config, self.tick_buffers
@@ -221,49 +218,7 @@ class TickDataBufferWithRedis(TickDataBuffer):
 
 
 def get_historical_end_time(ticker, dataset, logger, schema):
-    try:
-        metadata = HISTORICAL_CLIENT.metadata.get_dataset_range(dataset=dataset)
-        schema_range = metadata.get("schema", {}).get(schema, {})
-        logger.info(f"{ticker}'s schema range for {schema}: {schema_range}")
-        if "end" in schema_range:
-            safe_historical_end = pd.to_datetime(schema_range["end"]).tz_convert(
-                "UTC"
-            )
-        else:
-            safe_historical_end = datetime.now(timezone.utc) - timedelta(minutes=10)
-        return safe_historical_end
-    except Exception as e:
-        logger.error(
-            f"Error fetching historical end time for dataset {dataset} and schema {schema}: {e}"
-        )
-        safe_historical_end = datetime.now(timezone.utc) - timedelta(minutes=10)
-        return safe_historical_end
-
+    return datetime.now(timezone.utc)
 
 def get_historical_start_time(ticker, timeframe, end_time, logger):
-    start_time = end_time
-    timeframe = str(timeframe)
-    if is_tick_timeframe(timeframe):
-        start_time = (end_time - timedelta(days=4)).replace(
-            hour=22, minute=0, second=0, microsecond=0
-        )
-    else:
-        if timeframe == "1":
-            start_time = end_time - timedelta(days=8)
-        elif timeframe == "2":
-            start_time = end_time - timedelta(days=16)
-        elif timeframe == "5":
-            start_time = end_time - timedelta(days=40)
-        elif timeframe == "15":
-            start_time = end_time - timedelta(days=90)
-        elif timeframe == "30":
-            start_time = end_time - timedelta(days=90)
-        elif timeframe == "1h":
-            start_time = end_time - timedelta(days=280)
-        elif timeframe == "4h":
-            start_time = end_time - timedelta(days=280)
-        elif timeframe == "1d":
-            start_time = end_time - timedelta(days=450)
-    
-    logger.info(f"{ticker}'s start time: {start_time}")
-    return start_time
+    return end_time - timedelta(days=1)

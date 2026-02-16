@@ -7,6 +7,7 @@ dependencies = [
     "databento>=0.70.0",
     "flask>=3.1.2",
     "flask-cors>=6.0.2",
+    "massive>=2.2.0",
     "numpy>=2.4.2",
     "pandas>=3.0.0",
     "pandas-market-calendars>=5.3.0",

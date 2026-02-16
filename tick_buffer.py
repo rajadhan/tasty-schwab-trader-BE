@@ -1,5 +1,5 @@
 import asyncio
-import databento as db
+import massive as ms
 import json
 import logging
 import os
@@ -13,7 +13,7 @@ from utils import extract_tick_count
 
 
 # Global clients - created once and reused
-DB_API_KEY = os.getenv("DATABENTO_API_KEY")
+MASSIVE_API_KEY = os.getenv("MASSIVE_API_KEY")
 REDIS_HOST = os.getenv("REDIS_HOST", "localhost")
 REDIS_PORT = int(os.getenv("REDIS_PORT", 6379))
 REDIS_DB = int(os.getenv("REDIS_DB", 0))
@@ -21,8 +21,8 @@ REDIS_DB = int(os.getenv("REDIS_DB", 0))
 # Global Redis client
 REDIS_CLIENT = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, db=REDIS_DB)
 
-# Global Databento clients
-HISTORICAL_CLIENT = db.Historical(DB_API_KEY)
+# Global Massive REST client
+REST_CLIENT = ms.RESTClient(api_key=MASSIVE_API_KEY) if MASSIVE_API_KEY else None
 
 
 class TickDataBuffer:
@@ -31,7 +31,6 @@ class TickDataBuffer:
         self.strategy = strategy
         self.time_frame = time_frame
         self.redis_client = REDIS_CLIENT
-        self.historical_client = HISTORICAL_CLIENT
         self.max_period = max_period
         self.logger = logger
         self.buffer = []
@@ -39,127 +38,47 @@ class TickDataBuffer:
         self.lock = threading.Lock()
         self.new_bar_event = threading.Event()
         self.historical_loaded = False
-        self.live_session = None
-        self.tick_size = extract_tick_count(self.time_frame)
+        self.tick_size = extract_tick_count(self.time_frame) if self.time_frame else 1
 
 
-    # Get historical data - ticks and then convert ticks into bars, then save bars into processed_bars
     def warmup_with_historical_ticks(self, symbol, dataset, start, end, schema):
+        """Warmup using Massive Aggregates"""
         try:
             self.logger.info(f"Fetching historical tick data for warmup: {symbol} [{start} to {end}]")
-            # Fetch raw trade ticks
-            result = self.historical_client.symbology.resolve(
-                dataset=dataset,
-                symbols=[symbol],
-                stype_in="raw_symbol",
-                stype_out="instrument_id",
-                start_date=start,
-                end_date=end,
+            
+            # Use 1-minute aggregates for warmup
+            aggs = REST_CLIENT.list_aggs(
+                ticker=symbol,
+                multiplier=1,
+                timespan="minute",
+                from_=start,
+                to=end,
+                limit=50000
             )
-            print(f"Resolved symbol: {result}")
 
-            try:
-                data = self.historical_client.timeseries.get_range(
-                    dataset=dataset,
-                    symbols=[symbol],
-                    stype_in="raw_symbol",
-                    schema=schema,
-                    start=start,
-                    end=end
-                )
-            except Exception as e:
-                print(f"Error in get historical data {symbol}: {e}")
-                data = pd.DataFrame()
-            df = data.to_df()
-            df.to_csv(f"logs/{self.strategy}/schwab_mes.csv")
-            print(f"Data fetched for {symbol}: {df}")
-            if df.empty:
-                self.logger.warning(f"No historical data returned for {symbol}")
-                return
+            processed_count = 0
+            for agg in aggs:
+                bar = {
+                    'timestamp': pd.to_datetime(agg.timestamp, unit='ms', utc=True),
+                    'open': agg.open,
+                    'high': agg.high,
+                    'low': agg.low,
+                    'close': agg.close,
+                    'volume': agg.volume
+                }
+                self.processed_bars.append(bar)
+                processed_count += 1
 
-            df.sort_values("ts_event", inplace=True)
-            df.reset_index(drop=True, inplace=True)
-
-            # Normalize price and construct tick dicts
-            df['price'] = df['price']
-            df['timestamp'] = pd.to_datetime(df['ts_event'], unit='ns')
-            df['volume'] = df['size']
-
-            ticks = df[['timestamp', 'price', 'volume']].to_dict(orient='records')
-
-            self.logger.info(f"Fetched and parsed {len(ticks)} ticks for {symbol} of {self.strategy}")
-
-            bar_ticks = []
-            for tick in ticks:
-                bar_ticks.append(tick)
-                tick_size = self.tick_size
-                if tick_size > 0 and len(bar_ticks) >= tick_size:
-                    self.buffer = bar_ticks
-                    bar = self._create_bar_from_ticks()
-                    self.processed_bars.append(bar)
-                    bar_ticks = []
-
-            self.buffer = []  # clear residuals
             self.historical_loaded = True
-            self.logger.info(f"Historical warmup completed for {symbol}: {len(self.processed_bars)} bars created.")
+            self.logger.info(f"Historical warmup completed for {symbol}: {processed_count} bars created.")
 
         except Exception as e:
-            self.logger.error(f"Databento historical warmup failed for {symbol}: {e}", exc_info=True)
+            self.logger.error(f"Massive historical warmup failed for {symbol}: {e}", exc_info=True)
 
-
-    async def start_live_subscription(self, symbol, dataset, schema, start_time=0):
-        """Start live tick data subscription using Databento Live API with optional replay"""
-        try:
-            self.logger.info(f"Starting live tick subscription for {symbol} on dataset {dataset}")
-            if start_time:
-                self.logger.info(f"Using intraday replay starting from {start_time}")
-            # Create live session
-            live_client = db.Live(key=DB_API_KEY)
-            self.live_session = live_client
-            # Subscribe to the symbol with optional start time for intraday replay
-            self.live_session.subscribe(
-                dataset=dataset,
-                schema=schema,
-                symbols=[symbol],
-                stype_in="raw_symbol",
-                start=start_time
-            )
-            
-            self.logger.info(f"Successfully subscribed to live data for {symbol}")
-            
-            # Start consuming live data
-            async for record in self.live_session:
-                try:
-                    # Only process trade messages (rtype == "Trade" or check type)
-                    if hasattr(record, "price") and hasattr(record, "size"):
-                        tick_data = {
-                            'timestamp': pd.to_datetime(record.ts_event, unit='ns'),
-                            'price': record.price / 1e9,
-                            'volume': record.size,
-                            'symbol': symbol
-                        }
-                        self.add_tick(tick_data)
-                    else:
-                        # Optionally log or skip non-trade messages
-                        self.logger.debug(f"Ignored non-trade message for {symbol}: {record}")
-                except Exception as e:
-                    self.logger.error(f"Error processing live tick for {symbol}: {e}")
-                    
-            self.logger.info(f"Live subscription ended for {symbol}")      
-        except Exception as e:
-            self.logger.error(f"Error in live subscription for {symbol}: {e}", exc_info=True)
-        finally:
-            if self.live_session:
-                await self.live_session.stop()
 
     def stop_live_subscription(self):
-        """Stop the live subscription"""
-        if self.live_session:
-            try:
-                asyncio.create_task(self.live_session.stop())
-                self.logger.info(f"Live subscription stopped for {self.ticker}")
-            except Exception as e:
-                self.logger.error(f"Error stopping live subscription for {self.ticker}: {e}")
+        """Placeholder for backward compatibility"""
+        pass
 
     def add_tick(self, tick_data):
         with self.lock:
@@ -180,7 +99,11 @@ class TickDataBuffer:
         prices = [tick['price'] for tick in self.buffer]
         volumes = [tick['volume'] for tick in self.buffer]
         timestamps = [tick['timestamp'] for tick in self.buffer]
-        return {
+        
+        # If greeks are present in the last tick, include them in the bar for the engine to use
+        last_tick = self.buffer[-1]
+        
+        bar = {
             'timestamp': timestamps[-1],
             'open': prices[0],
             'high': max(prices),
@@ -188,6 +111,15 @@ class TickDataBuffer:
             'close': prices[-1],
             'volume': sum(volumes)
         }
+        
+        if 'delta' in last_tick:
+            bar.update({
+                'delta': last_tick['delta'],
+                'gamma': last_tick['gamma'],
+                'theta': last_tick['theta']
+            })
+            
+        return bar
 
 
     def get_dataframe(self, min_bars):
@@ -195,11 +127,8 @@ class TickDataBuffer:
             if len(self.processed_bars) < min_bars:
                 return None
             df = pd.DataFrame(self.processed_bars[-min_bars:])
-            print("df - 50", df)
             df['timestamp'] = pd.to_datetime(df['timestamp'])
-            print("df timestamp", df['timestamp'])
             df.set_index('timestamp', inplace=True)
-            print("df", df)
             return df
 
     def wait_for_new_bar(self, timeout=None):
@@ -209,62 +138,64 @@ class TickDataBuffer:
         self.new_bar_event.clear()
 
 
-class DatabentoLiveManager:
-    """Manages live Databento subscriptions for multiple symbols"""
+class MassiveLiveManager:
+    """Manages live Massive.com (Polygon.io) subscriptions for multiple symbols"""
     
     def __init__(self):
-        self.live_tasks = {}
-        self.logger = logging.getLogger('DatabentoLiveManager')
+        self.ws_client = None
+        self.logger = logging.getLogger('MassiveLiveManager')
+        self.api_key = MASSIVE_API_KEY
+        self.running = False
         
     async def start_live_feeds(self, symbols_config, tick_buffers):
         """
-        Start live feeds for multiple symbols
-        symbols_config: dict like {'ESM2': {'dataset': 'GLBX.MDP3', 'schema': 'trades', 'start_time': timestamp}}
-        tick_buffers: dict of ticker -> TickDataBuffer instances
+        Start live feeds for multiple symbols using Massive WebSocket & Polling
         """
-        tasks = []
-        for symbol, config in symbols_config.items():
-            if symbol in tick_buffers:
-                dataset = config.get('dataset', 'GLBX.MDP3')
-                schema = config.get('schema', 'trades')
-                start_time = config.get('start_time', 0) # Default to 0 for full replay
-                
-                # Create task for this symbol's live feed
-                
-                task = asyncio.create_task(
-                    tick_buffers[symbol].start_live_subscription(symbol, dataset, schema, start_time)
-                )
-                self.live_tasks[symbol] = task
-                tasks.append(task)
-                
-                self.logger.info(f"Started live feed task for {symbol} with start_time: {start_time}")
+        self.running = True
         
-        if tasks:
-            # Run all live feeds concurrently
-            await asyncio.gather(*tasks, return_exceptions=True)
-    
+        # 1. Polling Task for Options (Greeks)
+        async def poll_snapshots():
+            while self.running:
+                try:
+                    for ticker, buffer in tick_buffers.items():
+                        if ticker.startswith("O:"):
+                            # Get snapshot for Greeks
+                            snapshot = REST_CLIENT.get_option_contract_snapshot(ticker)
+                            if snapshot and hasattr(snapshot, "greeks"):
+                                g = snapshot.greeks
+                                tick_data = {
+                                    'timestamp': datetime.now(pytz.UTC),
+                                    'price': snapshot.day.last_price if snapshot.day else 0,
+                                    'volume': snapshot.day.volume if snapshot.day else 0,
+                                    'delta': getattr(g, 'delta', 0),
+                                    'gamma': getattr(g, 'gamma', 0),
+                                    'theta': getattr(g, 'theta', 0),
+                                    'symbol': ticker
+                                }
+                                buffer.add_tick(tick_data)
+                except Exception as e:
+                    self.logger.error(f"Snapshot polling error: {e}")
+                await asyncio.sleep(60)
+
+        # 2. WebSocket Task for Trades/Quotes (Equities/Indices if needed)
+        async def ws_consumer():
+            # Future: Implement WebSocket trades for 0DTE underlyings
+            pass
+
+        await asyncio.gather(poll_snapshots(), ws_consumer())
+
     def stop_all_feeds(self, tick_buffers):
-        """Stop all live feeds"""
-        for symbol, task in self.live_tasks.items():
-            if not task.done():
-                task.cancel()
-                self.logger.info(f"Cancelled live feed for {symbol}")
-        
-        # Also stop individual buffer subscriptions
-        for symbol, buffer in tick_buffers.items():
-            buffer.stop_live_subscription()
+        self.running = False
 
 
 class TimeBasedBarBufferWithRedis:
-    """Aggregate trades into time-based OHLCV bars with optional resampling and persist to Redis."""
+    """Aggregate trades into time-based OHLCV bars using Massive data."""
 
     def __init__(self, ticker, strategy, time_frame, max_period, logger):
         self.ticker = ticker
         self.strategy = strategy
         self.time_frame = time_frame
         self.redis_client = REDIS_CLIENT
-        self.historical_client = HISTORICAL_CLIENT
-        self.live_client = db.Live(key=DB_API_KEY)
         self.max_period = max_period
         self.logger = logger
         self.processed_bars = []
@@ -272,85 +203,19 @@ class TimeBasedBarBufferWithRedis:
         self.lock = threading.Lock()
         self.new_bar_event = threading.Event()
         self.historical_loaded = False
-        self.live_session = None
-        self.resample_rule = self._determine_resample_rule(time_frame)
         self._agg_bucket_start = None
-        self._agg_bar = None
+        self._agg_bar = {}
 
     def _timeframe_freq(self):
         tf = (self.time_frame or "1min").lower()
         mapping = {
-            "1": "1min",
-            "2": "2min",
-            "5": "5min",
-            "15": "15min",
-            "30": "30min",
-            "1h": "1h",
-            "4h": "4h",
-            "1d": "1d",
+            "1": "1min", "2": "2min", "5": "5min", "15": "15min",
+            "30": "30min", "1h": "1h", "4h": "4h", "1d": "1d",
         }
         return mapping.get(tf, "1min")
 
-    def _determine_resample_rule(self, timeframe):
-        mapping = {
-            "2": "2min",
-            "5": "5min",
-            "15": "15min",
-            "30": "30min",
-            "4h": "4h",
-        }
-        # Base resolutions (1m, 1h, 1d) -> no resample
-        return mapping.get(timeframe, None)
-
-    def _bars_to_df(self, data):
-        df = data.to_df()
-        print("df=================", df)
-        if df.empty:
-            return df
-        # Expect OHLCV schema: ts_event, open, high, low, close, volume
-        if 'ts_event' in df.columns:
-            df['timestamp'] = pd.to_datetime(df['ts_event'], unit='ns', utc=True)
-        else:
-            df['timestamp'] = pd.to_datetime(df.index, utc=True)
-        if 'volume' not in df.columns and 'size' in df.columns:
-            df['volume'] = df['size']
-        required = ['open', 'high', 'low', 'close', 'volume']
-        missing = [c for c in required if c not in df.columns]
-        if missing:
-            self.logger.warning(f"Missing columns in OHLCV data: {missing}")
-            return pd.DataFrame()
-        df = df[['timestamp', 'open', 'high', 'low', 'close', 'volume']].copy()
-        # Normalize to display units (Databento OHLCV prices are in nanounits)
-        df['open'] = pd.to_numeric(df['open'], errors='coerce')
-        df['high'] = pd.to_numeric(df['high'], errors='coerce')
-        df['low'] = pd.to_numeric(df['low'], errors='coerce')
-        df['close'] = pd.to_numeric(df['close'], errors='coerce')
-        return df
-
-    def _resample_bars(self, bars_df: pd.DataFrame) -> pd.DataFrame:
-        if bars_df.empty:
-            return bars_df
-        if self.resample_rule is None:
-            return bars_df.set_index('timestamp').sort_index()
-        s = bars_df.set_index('timestamp').sort_index()
-        agg = {
-            'open': 'first',
-            'high': 'max',
-            'low': 'min',
-            'close': 'last',
-            'volume': 'sum',
-        }
-        return s.resample(self.resample_rule, label='right', closed='right').agg(agg).dropna()
-
     def _save_bar_to_redis(self, bar_ts: pd.Timestamp, bar_row: pd.Series):
-        # Normalize timestamp from row or fallback to bar_ts
-        row_dt = bar_row.get("datetime") if isinstance(bar_row, (pd.Series, dict)) else None
-        try:
-            ts = pd.to_datetime(row_dt) if row_dt is not None else pd.to_datetime(bar_ts)
-        except Exception:
-            ts = pd.to_datetime(bar_ts)
-        # Ensure Python datetime for JSON serialization
-        ts_py = pd.Timestamp(ts).to_pydatetime()
+        ts_py = pd.Timestamp(bar_ts).to_pydatetime()
         payload = {
             "symbol": self.ticker,
             "timestamp": ts_py.isoformat(),
@@ -373,7 +238,6 @@ class TimeBasedBarBufferWithRedis:
         zset_key_plain = f"bars_history:{self.ticker}"
 
         try:
-            # Ensure only one member per bucket timestamp by removing prior entry at the same score
             self.redis_client.zremrangebyscore(zset_key_strategy, score, score)
             self.redis_client.zremrangebyscore(zset_key_plain, score, score)
             self.redis_client.zadd(zset_key_strategy, {data_str: score})
@@ -385,175 +249,10 @@ class TimeBasedBarBufferWithRedis:
 
     def warmup_with_historical_timebars(self, symbol, dataset, start, end, base_schema):
         try:
-            self.logger.info(f"Fetching historical OHLCV base for warmup: {symbol} [{start} to {end}] schema={base_schema}")
-            # data = self.historical_client.timeseries.get_range(
-            #     dataset=dataset,
-            #     symbols=[symbol],
-            #     schema=base_schema,
-            #     start=start,
-            #     end=end,
-            # )
+            self.logger.info(f"Fetching historical OHLCV via Schwab fall-back for {symbol}")
             data = historical_data(symbol, self.time_frame, self.logger)
-            # bars_df = self._bars_to_df(data)
-            # if bars_df.empty:
-            #     self.logger.warning(f"No historical OHLCV returned for {symbol}")
-            #     return
-            # resampled = self._resample_bars(bars_df)
-            # self.logger.info(f"Resampled bars for {symbol}: {resampled}")
             for ts, row in data.iterrows():
                 self._save_bar_to_redis(ts, row)
             self.historical_loaded = True
-            self.logger.info(f"Historical time-based warmup completed for {symbol}: {len(self.processed_bars)} bars created.")
         except Exception as e:
-            self.logger.error(f"Historical time-based warmup failed for {symbol}: {e}", exc_info=True)
-
-    def _finalize_and_emit_current_agg(self):
-        if self._agg_bucket_start is None or self._agg_bar is None:
-            return
-        ts = self._agg_bucket_start
-        row = pd.Series(self._agg_bar)
-        self._save_bar_to_redis(ts, row)
-        self.logger.info(
-            f"Created new aggregated live bar for {self.ticker} ({self.time_frame}): "
-            f"open={self._agg_bar['open']}, high={self._agg_bar['high']}, low={self._agg_bar['low']}, close={self._agg_bar['close']}, volume={self._agg_bar['volume']}"
-        )
-        self._agg_bucket_start = None
-        self._agg_bar = None
-        self.new_bar_event.set()
-
-    def _update_aggregator_with_base_bar(self, base_ts: pd.Timestamp, base_bar: dict):
-        bucket_start = base_ts.tz_convert('UTC') if base_ts.tzinfo else base_ts.tz_localize('UTC')
-        if self.resample_rule:
-            bucket_start = bucket_start.floor(self.resample_rule)
-        if self._agg_bucket_start is None:
-            self._agg_bucket_start = bucket_start
-            self._agg_bar = dict(base_bar)
-            return
-        if bucket_start != self._agg_bucket_start:
-            self._finalize_and_emit_current_agg()
-            self._agg_bucket_start = bucket_start
-            self._agg_bar = dict(base_bar)
-            return
-        self._agg_bar['high'] = max(self._agg_bar['high'], base_bar['high'])
-        self._agg_bar['low'] = min(self._agg_bar['low'], base_bar['low'])
-        self._agg_bar['close'] = base_bar['close']
-        self._agg_bar['volume'] = (self._agg_bar.get('volume') or 0) + (base_bar.get('volume') or 0)
-
-    async def start_live_subscription(self, symbol, dataset, schema, start_time=0):
-        while True:
-            try:
-                quote = get_quotes(symbol)
-                # Convert Schwab quoteTime to UTC Timestamp
-                ts_utc = None
-                last_price = None
-                try:
-                    if isinstance(quote, dict):
-                        ts_val = quote.get('quoteTime')
-                        last_price = quote.get('last')
-                        if ts_val is not None:
-                            try:
-                                ts_utc = pd.to_datetime(ts_val, unit='ms', utc=True)
-                            except Exception:
-                                ts_utc = pd.to_datetime(ts_val, utc=True)
-                    if ts_utc is None:
-                        # If no timestamp, skip this tick
-                        await asyncio.sleep(5)
-                        continue
-                except Exception:
-                    # Parsing error or malformed response; back off and continue
-                    await asyncio.sleep(5)
-                    continue
-                self.logger.info(f"Quote for {symbol}: {quote}, {ts_utc}, {self.time_frame}")
-
-                # Determine bucket start (UTC) based on self.time_frame
-                bucket_start = ts_utc.floor(self._timeframe_freq())
-
-                # Initialize or update current aggregation bar
-                if self._agg_bucket_start is None:
-                    self._agg_bucket_start = bucket_start
-                    self._agg_bar = {
-                        'open': float(last_price) if last_price is not None else None,
-                        'high': float(last_price) if last_price is not None else None,
-                        'low': float(last_price) if last_price is not None else None,
-                        'close': float(last_price) if last_price is not None else None,
-                    }
-                    ts = self._agg_bucket_start
-                    row = pd.Series(self._agg_bar)
-                    self._save_bar_to_redis(ts, row)
-                elif bucket_start != self._agg_bucket_start:
-                    # Minute changed -> finalize previous bar and start new one
-                    ts = self._agg_bucket_start
-                    row = pd.Series(self._agg_bar)
-                    self._save_bar_to_redis(ts, row)
-                    self.logger.info(
-                        f"Created new aggregated live bar for {self.ticker} ({self.time_frame}): "
-                        f"open={self._agg_bar['open']}, high={self._agg_bar['high']}, low={self._agg_bar['low']}, close={self._agg_bar['close']}"
-                    )
-                    self._agg_bucket_start = None
-                    self._agg_bar = None
-                    self.new_bar_event.set()
-
-                    self._agg_bucket_start = bucket_start
-                    self._agg_bar = {
-                        'open': float(last_price) if last_price is not None else None,
-                        'high': float(last_price) if last_price is not None else None,
-                        'low': float(last_price) if last_price is not None else None,
-                        'close': float(last_price) if last_price is not None else None,
-                    }
-                else:
-                    # Same minute -> update high/low/close
-                    if last_price is not None and self._agg_bar is not None:
-                        price = float(last_price)
-                        self._agg_bar['high'] = max(self._agg_bar['high'], price) if self._agg_bar['high'] is not None else price
-                        self._agg_bar['low'] = min(self._agg_bar['low'], price) if self._agg_bar['low'] is not None else price
-                        self._agg_bar['close'] = price
-                        ts = self._agg_bucket_start
-                        row = pd.Series(self._agg_bar)
-                        self._save_bar_to_redis(ts, row)
-            except Exception as e:
-                # Catch all to prevent loop termination on transient API/network errors
-                self.logger.error(f"Live polling iteration failed for {symbol}: {e}", exc_info=True)
-            finally:
-                await asyncio.sleep(5)
-        # try:
-        #     self.logger.info(f"Starting live OHLCV base subscription for {symbol} on {dataset} schema={schema}")
-        #     live_client = db.Live(key=DB_API_KEY)
-        #     self.live_session = live_client
-        #     self.live_session.subscribe(
-        #         dataset=dataset,
-        #         schema=schema,
-        #         symbols=[symbol],
-        #         stype_in="raw_symbol",
-        #         start=start_time,
-        #     )
-        #     async for record in self.live_session:
-        #         try:
-        #             # Expect OHLCV base fields
-        #             if all(hasattr(record, attr) for attr in ["open", "high", "low", "close"]) and hasattr(record, "ts_event"):
-        #                 ts = pd.to_datetime(record.ts_event, unit='ns', utc=True)
-        #                 base_bar = {
-        #                     'open': float(record.open) / 1e9,
-        #                     'high': float(record.high) / 1e9,
-        #                     'low': float(record.low) / 1e9,
-        #                     'close': float(record.close) / 1e9,
-        #                     'volume': float(getattr(record, 'volume', 0)),
-        #                 }
-        #                 if self.resample_rule is None:
-        #                     self._save_bar_to_redis(ts, pd.Series(base_bar))
-        #                     self.new_bar_event.set()
-        #                     self.logger.info(
-        #                         f"Created new live bar for {self.ticker}: "
-        #                         f"record={record.ts_event}, {ts} open={base_bar['open']}, high={base_bar['high']}, low={base_bar['low']}, close={base_bar['close']}, volume={base_bar['volume']}"
-        #                     )
-        #                 else:
-        #                     self._update_aggregator_with_base_bar(ts, base_bar)
-        #             else:
-        #                 self.logger.debug(f"Ignored non-OHLCV message for {symbol}: {record}")
-        #         except Exception as e:
-        #             self.logger.error(f"Error processing OHLCV record for {symbol}: {e}")
-        # except Exception as e:
-        #     self.logger.error(f"Error in time-based live subscription for {symbol}: {e}", exc_info=True)
-        # finally:
-        #     self._finalize_and_emit_current_agg()
-        #     if self.live_session:
-        #         await self.live_session.stop()
+            self.logger.error(f"Historical warmup failed for {symbol}: {e}")
