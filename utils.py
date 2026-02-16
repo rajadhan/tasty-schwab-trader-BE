@@ -87,7 +87,9 @@ def configure_logger(ticker, strategy):
     logger.setLevel(logging.DEBUG)
 
     # Create file handler
-    file_handler = logging.FileHandler(f"logs/{strategy}/{ticker}.log")
+    log_file = f"logs/{strategy}/{ticker}.log"
+    os.makedirs(os.path.dirname(log_file), exist_ok=True)
+    file_handler = logging.FileHandler(log_file)
     file_handler.setLevel(logging.DEBUG)
 
     # Create formatter

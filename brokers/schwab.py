@@ -33,8 +33,14 @@ def authorize_url():
 
 def create_api_header(access_token):
     # Ensure token is properly formatted
+    if not access_token:
+        return {}
+    if not isinstance(access_token, str):
+        return {}
     if not access_token.startswith("Bearer "):
         token = f"Bearer {access_token}"
+    else:
+        token = access_token
     return {
         "Authorization": token,
     }

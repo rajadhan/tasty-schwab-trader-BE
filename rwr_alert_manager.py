@@ -13,7 +13,7 @@ class RWRAlertManager:
         self.alert_threshold_seconds = 60  # Rate limit alerts
         self.current_threat_level = 'SEARCH'
 
-    def render_hud(self, gar_results, confidence, threat_level):
+    def render_hud(self, gar_results, confidence, threat_level, timestamp=None, spot=0, greeks=None):
         """
         Prints a high-visibility ASCII HUD to the terminal.
         """
@@ -24,14 +24,27 @@ class RWRAlertManager:
         }.get(threat_level, '\033[0m')
         
         reset = '\033[0m'
+        display_time = timestamp if timestamp else time.strftime('%H:%M:%S')
         
+        greeks_str = f"D: {greeks.get('net_delta', 0):.4f} | G: {greeks.get('net_gamma', 0):.4f} | T: {greeks.get('net_theta', 0):.4f}" if greeks else "N/A"
+        
+        # Calculate distance to strike if possible
+        dist_str = ""
+        if greeks and 'strikes' in greeks:
+            short_strikes = [s for s, q in greeks['strikes'] if q < 0]
+            if short_strikes:
+                nearest = min(abs(spot - k) for k in short_strikes)
+                dist_str = f"\nDIST TO STRIKE: {nearest:.2f}"
+
         banner = f"""
 {color_code}================================================================
 >>> RWR THREAT STATUS: {threat_level} [{self.ticker}] <<<
 ================================================================
+SPOT PRICE: {spot:.2f} {dist_str}
+NET GREEKS: {greeks_str}
 GA.R. WINDOWS: {gar_results}
 CONFIDENCE: {confidence * 100}%
-TIME: {time.strftime('%H:%M:%S')}
+TIME: {display_time}
 ----------------------------------------------------------------{reset}
 """
         print(banner)

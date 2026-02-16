@@ -7,7 +7,20 @@ import pandas as pd
 import redis
 from datetime import datetime, timedelta, timezone
 from dotenv import load_dotenv
-from tick_buffer import MassiveLiveManager, TickDataBuffer, TimeBasedBarBufferWithRedis
+import pytz
+import re
+from events import BarEvent, OptionLegEvent
+
+# Load environment variables FIRST before any internal imports
+load_dotenv() 
+
+from tick_buffer import (
+    REDIS_CLIENT, 
+    REST_CLIENT, 
+    MassiveLiveManager, 
+    TickDataBuffer, 
+    TimeBasedBarBufferWithRedis
+)
 from utils import (
     get_dataset,
     get_symbol_for_data,
@@ -15,20 +28,6 @@ from utils import (
     get_schema,
     parse_strategy_params,
 )
-
-load_dotenv()  # Load environment variables from .env
-
-# Global clients - created once and reused
-MASSIVE_API_KEY = os.getenv("MASSIVE_API_KEY")
-REDIS_HOST = os.getenv("REDIS_HOST", "localhost")
-REDIS_PORT = int(os.getenv("REDIS_PORT", 6379))
-REDIS_DB = int(os.getenv("REDIS_DB", 0))
-
-# Global Redis client
-REDIS_CLIENT = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, db=REDIS_DB)
-
-# Global Massive client
-REST_CLIENT = ms.RESTClient(api_key=MASSIVE_API_KEY)
 
 
 class TickProducer:
@@ -38,9 +37,10 @@ class TickProducer:
         self.strategy = None
         self.tick_buffers = {}
         self.live_manager = MassiveLiveManager()
+        self.spreads = {}
         self.logger = logging.getLogger("TickProducer")
         logging.basicConfig(level=logging.INFO)
-
+    
     def setup_tick_buffers(self, tickers_config):
         """Setup buffers for all symbols (tick- or time-based)."""
         live_symbols_config = {}
@@ -63,7 +63,7 @@ class TickProducer:
             dataset = "DELAYED" # Default for Massive migration
             schema = "minute"
             safe_historical_end_time = datetime.now(timezone.utc)
-            safe_historical_start_time = safe_historical_end_time - timedelta(days=1)
+            safe_historical_start_time = safe_historical_end_time - timedelta(days=5)
             
             # Massive date format (YYYY-MM-DD)
             historical_end_time = safe_historical_end_time.strftime("%Y-%m-%d")
@@ -113,6 +113,11 @@ class TickProducer:
                     logger=self.logger,
                 )
             self.tick_buffers[ticker] = buffer
+            
+            # Add bar closed callback for RWR
+            if self.strategy == "zeroday":
+                buffer.on_bar_closed = self.handle_bar_closed
+                
             print(
                 f"Initialized buffer for {ticker} of {self.strategy} with timeframe {time_frame}"
             )
@@ -149,23 +154,164 @@ class TickProducer:
         }
 
     
-    async def start_live_feeds(self, live_symbols_config):
-        """Start live data feeds using MassiveLiveManager"""
-        if live_symbols_config:
-            self.live_manager = MassiveLiveManager()
-            self.logger.info(
-                f"Starting Massive live feeds for: {list(live_symbols_config.keys())}"
+    def load_spreads(self, config_path="backtest_positions.json"):
+        """Load live/test spreads from a JSON file."""
+        try:
+            if os.path.exists(config_path):
+                with open(config_path, "r") as f:
+                    self.spreads = json.load(f)
+                self.logger.info(f"Loaded live spreads for: {list(self.spreads.keys())}")
+                
+                # Automatically add all legs to monitored symbols
+                for ticker, spreads in self.spreads.items():
+                    for spread in spreads:
+                        for leg_type in ['short', 'long']:
+                            leg_symbol = spread[leg_type]['instrument']['symbol']
+                            # Add with Massive prefix
+                            massive_symbol = f"O:{leg_symbol.replace(' ', '')}"
+                            self.add_dynamic_ticker(massive_symbol)
+            else:
+                self.spreads = {}
+        except Exception as e:
+            self.logger.error(f"Failed to load spreads: {e}")
+            self.spreads = {}
+
+    def handle_bar_closed(self, ticker, bar):
+        """Callback invoked when a bar is finalized in any buffer."""
+        # If this is an underlying ticker (e.g. SPY), generate and publish a BarEvent
+        if ticker in self.spreads:
+            self.emit_bar_event(ticker, bar)
+
+    def emit_bar_event(self, ticker, u_bar):
+        """Constructs and publishes a unified BarEvent (Market + Legs)."""
+        try:
+            # 1. Start with the underlying data
+            event = BarEvent(
+                ticker=ticker,
+                timestamp=u_bar.get('timestamp') or datetime.now().isoformat(),
+                underlying_price=u_bar['close']
             )
-            await self.live_manager.start_live_feeds(
-                live_symbols_config, self.tick_buffers
-            )
+            
+            # 2. Add legs from current spreads
+            active_spreads = self.spreads.get(ticker, [])
+            for spread in active_spreads:
+                for leg_type in ['short', 'long']:
+                    leg_data = spread[leg_type]
+                    symbol = leg_data['instrument']['symbol']
+                    massive_symbol = f"O:{symbol.replace(' ', '')}"
+                    
+                    # Fetch leg price from its own buffer if available
+                    leg_price = 0.0
+                    leg_vol = 0.0
+                    if massive_symbol in self.tick_buffers:
+                        l_bars = self.tick_buffers[massive_symbol].processed_bars
+                        if l_bars:
+                            leg_price = l_bars[-1]['close']
+                            leg_vol = l_bars[-1].get('volume', 0)
+                    
+                    # Metadata (Strike, Expiry, Type)
+                    strike, o_type, expiry_dt = self._parse_symbol(symbol)
+                    
+                    # Calculate expiry years
+                    if expiry_dt:
+                        expiry_dt_aware = pytz.timezone('US/Eastern').localize(
+                            datetime.combine(expiry_dt.date(), datetime.min.time().replace(hour=16))
+                        )
+                        now_dt = datetime.now(pytz.UTC)
+                        diff = (expiry_dt_aware - now_dt).total_seconds()
+                        expiry_years = max(1 / (365 * 24 * 3600), diff / (365 * 24 * 3600))
+                    else:
+                        expiry_years = 0.01
+                        
+                    leg_event = OptionLegEvent(
+                        symbol=symbol,
+                        price=leg_price,
+                        volume=leg_vol,
+                        strike=strike,
+                        type=o_type,
+                        expiry_years=expiry_years,
+                        qty=float(leg_data.get('quantity', 1)) * (-1 if leg_type == 'short' else 1)
+                    )
+                    event.legs.append(leg_event)
+            
+            # 3. Publish to Redis
+            channel = f"tick_events:{ticker}"
+            REDIS_CLIENT.publish(channel, json.dumps(event.to_dict()))
+            self.logger.info(f"Published BarEvent for {ticker} with {len(event.legs)} legs.")
+            
+        except Exception as e:
+            self.logger.error(f"Failed to emit BarEvent for {ticker}: {e}", exc_info=True)
+
+    def _parse_symbol(self, symbol):
+        """Internal helper to parse option symbol."""
+        try:
+            strike = float(symbol[-8:]) / 1000.0
+            type_char = symbol[-9]
+            o_type = 'put' if type_char == 'P' else 'call'
+            match = re.search(r'(\d{6})', symbol)
+            expiry_dt = datetime.strptime(match.group(1), "%y%m%d") if match else None
+            return strike, o_type, expiry_dt
+        except:
+            return 0.0, 'call', None
+
+    def add_dynamic_ticker(self, ticker, config=None):
+        """Dynamically add a new ticker to the monitoring list"""
+        if ticker in self.tick_buffers:
+            return
+            
+        self.logger.info(f"Dynamically adding ticker: {ticker}")
+        # Default config for RWR options if none provided
+        if not config:
+            config = {"strategy": self.strategy, "timeframe": "1"} # Default to 1m for RWR
+            
+        self.setup_tick_buffers({ticker: config})
+
+    async def listen_for_commands(self):
+        """Listen for commands from Redis (e.g., dynamic symbol additions)"""
+        pubsub = REDIS_CLIENT.pubsub()
+        pubsub.subscribe("tick_producer:commands")
+        self.logger.info("Listening for commands on 'tick_producer:commands'...")
+        
+        while True:
+            try:
+                # We use a thread-safe approach for pubsub in async
+                message = pubsub.get_message(ignore_subscribe_messages=True)
+                if message:
+                    data = json.loads(message['data'].decode('utf-8'))
+                    cmd = data.get('command')
+                    if cmd == 'subscribe':
+                        ticker = data.get('ticker')
+                        if ticker:
+                            self.add_dynamic_ticker(ticker)
+                
+                await asyncio.sleep(1) # Don't hammer Redis
+            except Exception as e:
+                self.logger.error(f"Error in command listener: {e}")
+                await asyncio.sleep(5)
+
+    async def start_all(self, tickers_config):
+        """Start both the live feeds and the command listener"""
+        live_symbols_config = self.setup_tick_buffers(tickers_config)
+        
+        # Start the initial feeds
+        feed_task = asyncio.create_task(
+            self.live_manager.start_live_feeds(live_symbols_config, self.tick_buffers)
+        )
+        
+        # Start the dynamic command listener
+        command_task = asyncio.create_task(self.listen_for_commands())
+        
+        await asyncio.gather(feed_task, command_task)
 
     def run(self, tickers_config, strategy):
-        """Main run method"""
+        """Main run method (entry point)"""
         self.strategy = strategy
-        self.logger.info("Starting Tick Producer...")
-        live_symbols_config = self.setup_tick_buffers(tickers_config)
-        asyncio.run(self.start_live_feeds(live_symbols_config))
+        self.load_spreads() # Load spreads AFTER strategy is set
+        self.logger.info("Starting Tick Producer with Dynamic Support...")
+        try:
+            asyncio.run(self.start_all(tickers_config))
+        except KeyboardInterrupt:
+            self.logger.info("Tick Producer shutting down...")
 
 
 class TickDataBufferWithRedis(TickDataBuffer):
@@ -222,3 +368,17 @@ def get_historical_end_time(ticker, dataset, logger, schema):
 
 def get_historical_start_time(ticker, timeframe, end_time, logger):
     return end_time - timedelta(days=1)
+
+if __name__ == "__main__":
+    from utils import load_strategy_configs
+    
+    # Load ticker configuration from settings/ directory
+    _, _, zeroday_config = load_strategy_configs()
+    
+    if not zeroday_config:
+        print("Error: No tickers found in settings/zeroday_ticker_data.json")
+    else:
+        print(f"Loaded {len(zeroday_config)} tickers for RWR monitoring.")
+        producer = TickProducer()
+        # Strategy 'zeroday' is used for RWR monitoring
+        producer.run(zeroday_config, strategy="zeroday")

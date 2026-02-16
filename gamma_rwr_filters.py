@@ -69,17 +69,17 @@ class GammaRWRFilters:
             
         return results
 
-    def should_eject(self, gar_results, confidence):
+    def should_eject(self, threat_level, confidence):
         """
-        Final signal validation logic.
+        Final signal validation logic based on threat level and confidence.
         """
-        # LAUNCH level requires G.A.R >= 1.5 in multiple windows OR 1m spike
-        # AND confidence >= 0.70
+        # LAUNCH level (already incorporates PoT-weighted Risk Intensity)
+        # AND confidence >= 0.60
         
-        is_high_gamma = any(v >= 1.5 for v in gar_results.values())
-        is_confident = confidence >= 0.70
+        is_launch = (threat_level == 'LAUNCH')
+        is_confident = confidence >= 0.60
         
-        if is_high_gamma and is_confident:
+        if is_launch and is_confident:
             self.launch_counter += 1
         else:
             self.launch_counter = 0

@@ -1,0 +1,19 @@
+{
+    "SPY": [
+        {
+            "type": "VERTICAL",
+            "short": {
+                "instrument": {
+                    "symbol": "SPY   260213P00678000",
+                    "underlyingSymbol": "SPY"
+                }
+            },
+            "long": {
+                "instrument": {
+                    "symbol": "SPY   260213P00677000",
+                    "underlyingSymbol": "SPY"
+                }
+            }
+        }
+    ]
+}

@@ -7,9 +7,12 @@ import pandas as pd
 import pytz
 import redis
 import threading
-from brokers.schwab import historical_data, get_quotes
 from datetime import timedelta, datetime
+from dotenv import load_dotenv
 from utils import extract_tick_count
+
+# Ensure environment variables are loaded
+load_dotenv()
 
 
 # Global clients - created once and reused
@@ -39,6 +42,7 @@ class TickDataBuffer:
         self.new_bar_event = threading.Event()
         self.historical_loaded = False
         self.tick_size = extract_tick_count(self.time_frame) if self.time_frame else 1
+        self.on_bar_closed = None
 
 
     def warmup_with_historical_ticks(self, symbol, dataset, start, end, schema):
@@ -92,6 +96,8 @@ class TickDataBuffer:
                 )
                 self.buffer = []
                 self.new_bar_event.set()
+                if self.on_bar_closed:
+                    self.on_bar_closed(self.ticker, bar)
 
     def _create_bar_from_ticks(self):
         if not self.buffer:
@@ -157,8 +163,11 @@ class MassiveLiveManager:
         async def poll_snapshots():
             while self.running:
                 try:
-                    for ticker, buffer in tick_buffers.items():
+                    # Use a list of keys to avoid "dictionary changed size during iteration"
+                    current_tickers = list(tick_buffers.keys())
+                    for ticker in current_tickers:
                         if ticker.startswith("O:"):
+                            buffer = tick_buffers[ticker]
                             # Get snapshot for Greeks
                             snapshot = REST_CLIENT.get_option_contract_snapshot(ticker)
                             if snapshot and hasattr(snapshot, "greeks"):
@@ -184,7 +193,7 @@ class MassiveLiveManager:
 
         await asyncio.gather(poll_snapshots(), ws_consumer())
 
-    def stop_all_feeds(self, tick_buffers):
+    def stop_all_feeds(self):
         self.running = False
 
 
@@ -203,6 +212,7 @@ class TimeBasedBarBufferWithRedis:
         self.lock = threading.Lock()
         self.new_bar_event = threading.Event()
         self.historical_loaded = False
+        self.on_bar_closed = None
         self._agg_bucket_start = None
         self._agg_bar = {}
 
@@ -244,15 +254,61 @@ class TimeBasedBarBufferWithRedis:
             self.redis_client.zadd(zset_key_plain, {data_str: score})
             self.redis_client.zremrangebyrank(zset_key_strategy, 0, -1000)
             self.redis_client.zremrangebyrank(zset_key_plain, 0, -1000)
+            
+            if self.on_bar_closed:
+                self.on_bar_closed(self.ticker, payload)
         except Exception as e:
             self.logger.error(f"Failed to write OHLCV bar for {self.ticker}: {e}")
 
+    def _get_massive_ticker(self, ticker):
+        """Helper to format ticker for Massive (Polygon) API"""
+        if ticker.startswith("O:") or ticker.startswith("I:"):
+            return ticker
+        # Common indices that need I: prefix in Polygon
+        indices = ["SPX", "NDX", "DJI", "VIX", "RUT"]
+        if ticker in indices:
+            return f"I:{ticker}"
+        return ticker
+
     def warmup_with_historical_timebars(self, symbol, dataset, start, end, base_schema):
         try:
-            self.logger.info(f"Fetching historical OHLCV via Schwab fall-back for {symbol}")
-            data = historical_data(symbol, self.time_frame, self.logger)
-            for ts, row in data.iterrows():
-                self._save_bar_to_redis(ts, row)
+            massive_ticker = self._get_massive_ticker(symbol)
+            self.logger.info(f"Fetching historical OHLCV via Massive aggregates for {massive_ticker}")
+            
+            # Map time_frame to Polygon aggregations
+            tf = str(self.time_frame)
+            timespan = "minute"
+            multiplier = 1
+            if tf == "1h":
+                timespan = "hour"
+            elif tf == "1d":
+                timespan = "day"
+            elif tf.isdigit():
+                multiplier = int(tf)
+                
+            aggs = REST_CLIENT.list_aggs(
+                ticker=massive_ticker,
+                multiplier=multiplier,
+                timespan=timespan,
+                from_=start,
+                to=end,
+                limit=50000
+            )
+
+            processed_count = 0
+            for agg in aggs:
+                bar_row = {
+                    'open': agg.open,
+                    'high': agg.high,
+                    'low': agg.low,
+                    'close': agg.close,
+                    'volume': agg.volume
+                }
+                ts = pd.Timestamp(agg.timestamp, unit='ms', tz='UTC')
+                self._save_bar_to_redis(ts, pd.Series(bar_row))
+                processed_count += 1
+                
             self.historical_loaded = True
+            self.logger.info(f"Massive historical OHLCV warmup completed for {symbol}: {processed_count} bars.")
         except Exception as e:
-            self.logger.error(f"Historical warmup failed for {symbol}: {e}")
+            self.logger.error(f"Massive historical warmup failed for {symbol}: {e}")
