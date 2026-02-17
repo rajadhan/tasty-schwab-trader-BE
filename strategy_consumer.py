@@ -38,7 +38,7 @@ logging.basicConfig(
     ]
 )
 class StrategyConsumer:
-    def __init__(self, redis_host='localhost', redis_port=6379, redis_db=0):
+    def __init__(self, redis_host='localhost', redis_port=6379, redis_db=0, launch_only=False):
         self.redis_client = redis.Redis(host=redis_host, port=redis_port, db=redis_db)
         self.pubsub = self.redis_client.pubsub()
         self.logger = logging.getLogger('StrategyConsumer')
@@ -46,7 +46,7 @@ class StrategyConsumer:
         # Type hints for better IDE/linting support
         self.rwr_components: dict[str, dict] = {} 
         self.backtest_positions: dict[str, list] = {}
-        self._backtest_ejected = False
+        self.launch_only = launch_only  # Only log LAUNCH events
 
 
     def get_tick_dataframe(self, symbol, period1, period2, timeframe):
@@ -178,26 +178,44 @@ class StrategyConsumer:
             pot = comp['engine'].calculate_probability_of_touch(
                 spot, short_strike, min_dte, market_iv
             )
-            self.logger.info(f"PoT Calc: Strike={short_strike}, Spot={spot:.2f}, DTE={min_dte:.4f}y, IV={market_iv:.2f}, PoT={pot:.3f}")
         else:
             pot = 1.0  # Default to full risk if no short strike identified
         
-        # ECCM logic
-        comp['filters'].add_snapshot(gar=gar, volume_ratio=1.0, iv_delta=0.0)
+        # Market Hours Filter: Only process RWR during regular trading hours
+        eastern = pytz.timezone('US/Eastern')
+        event_time = datetime.fromisoformat(ts).astimezone(eastern)
+        market_open = event_time.replace(hour=9, minute=30, second=0, microsecond=0)
+        market_close = event_time.replace(hour=16, minute=0, second=0, microsecond=0)
+        
+        # Warm-up period: Skip first 10 minutes to let windows fill with market data
+        warmup_end = market_open + timedelta(minutes=10)
+        
+        is_market_hours = market_open <= event_time <= market_close
+        is_warmed_up = event_time >= warmup_end
+        
+        # ECCM logic - always accumulate data during market hours
+        if is_market_hours:
+            comp['filters'].add_snapshot(gar=gar, volume_ratio=1.0, iv_delta=0.0)
+        
         confidence = comp['filters'].calculate_confidence()
         gar_results = {k: float(v) for k, v in comp['filters'].get_multi_window_gar().items()}
         
-        threat_level, _ = comp['engine'].classify_threat(gar, pot)
+        # Convert DTE from years to hours for time-decay calculation
+        dte_hours = min_dte * 365.25 * 24 if min_dte != float('inf') else 6.5
         
-        # HUD Handling
-        is_ejected = getattr(self, '_backtest_ejected', False)
-        # Always render HUD during backtest/replay for monitoring
-        if not is_ejected:
-            comp['alerts'].render_hud(gar_results, confidence, threat_level, timestamp=est_ts, spot=spot, greeks=net_greeks)
+        threat_level, _ = comp['engine'].classify_threat(gar, pot, dte_hours=dte_hours)
+        risk_intensity = comp['engine'].calculate_time_adjusted_risk_intensity(gar, pot, dte_hours)
         
-        # Alerting
-        if comp['filters'].should_eject(threat_level, confidence) and not is_ejected:
-            self._backtest_ejected = True
+        # Diagnostic logging for threat classification
+        self.logger.info(f"Threat Analysis: GAR={gar:.2f}, PoT={pot:.3f}, DTE={dte_hours:.2f}h, RI={risk_intensity:.2f}, Level={threat_level}, Conf={confidence:.2f}")
+        
+        # HUD Handling - only show LAUNCH events if launch_only mode
+        should_show_hud = (not self.launch_only) or (threat_level == 'LAUNCH')
+        if should_show_hud:
+            comp['alerts'].render_hud(gar_results, confidence, threat_level, timestamp=est_ts, spot=spot, greeks=net_greeks, pot=pot)
+        
+        # Alerting - only after warm-up period (continuous monitoring, no eject-once)
+        if is_warmed_up and comp['filters'].should_eject(threat_level, confidence):
             logger.warning(f"RWR ALERT: !!! EJECT !!! for {ticker} at GAR {gar:.2f} (Time: {ts})")
             comp['alerts'].trigger_alert('LAUNCH', f"G.A.R. Spike: {gar:.2f} @ Conf: {confidence:.2f}")
 
@@ -407,9 +425,10 @@ if __name__ == "__main__":
     parser.add_argument("--backtest", action="store_true", help="Run in backtest mode")
     parser.add_argument("--ticker", type=str, help="Ticker for backtesting (required if --backtest set)")
     parser.add_argument("--config", type=str, default="backtest_positions.json", help="Path to backtest positions JSON")
+    parser.add_argument("--launch-only", action="store_true", help="Only log LAUNCH threat events (suppress SEARCH/LOCK)")
     args = parser.parse_args()
 
-    consumer = StrategyConsumer()
+    consumer = StrategyConsumer(launch_only=args.launch_only)
 
     if args.backtest:
         if not args.ticker:

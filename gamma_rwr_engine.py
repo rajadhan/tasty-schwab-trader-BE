@@ -183,18 +183,65 @@ class GammaRWREngine:
         
         return max(0.0, min(1.0, pot))
     
-    def classify_threat(self, gar, pot=1.0):
+    def calculate_time_adjusted_risk_intensity(self, gar, pot, dte_hours):
+        """
+        Blends PoT-based and proximity-based risk using time-decay weighting.
+        
+        Mirrors the inverse of theta decay: as DTE → 0, proximity-based threat
+        dominates (kinematic assessment), while early in the day PoT dominates
+        (probabilistic assessment).
+        
+        Args:
+            gar: Gamma Risk metric
+            pot: Probability of Touch
+            dte_hours: Days to expiration in hours
+            
+        Returns:
+            Time-adjusted risk intensity
+        """
+        # Prevent division by zero, use minimum 1 minute
+        dte_hours = max(dte_hours, 1/60)
+        
+        # Time decay modifier (inverse square root - mirrors theta acceleration)
+        # Early day (6.5h): weight ≈ 0.39
+        # Mid-day (3h): weight ≈ 0.58
+        # Final hour (1h): weight ≈ 1.0
+        # Final 15min (0.25h): weight ≈ 2.0
+        proximity_weight = 1.0 / np.sqrt(dte_hours)
+        
+        # Cap at 4x for final minutes to prevent extreme values
+        proximity_weight = min(proximity_weight, 4.0)
+        
+        # Blend PoT-weighted (probabilistic) and proximity-weighted (kinematic) risk
+        pot_risk = gar * pot  # Probabilistic component
+        proximity_risk = gar * proximity_weight  # Kinematic component
+        
+        # Blend factor: 0 (early day, use PoT) → 1 (late day, use proximity)
+        alpha = min(proximity_weight / 4.0, 1.0)
+        
+        # Weighted average
+        risk_intensity = (1 - alpha) * pot_risk + alpha * proximity_risk
+        
+        return risk_intensity
+
+    def classify_threat(self, gar, pot=1.0, dte_hours=None):
         """
         Classifies threat based on VAGR (Market Vol / Break-even Vol)
-        weighted by Probability of Touch (PoT).
+        weighted by Probability of Touch (PoT) and time-decay.
         
-        Risk Intensity = GAR * PoT
+        If dte_hours is provided, uses time-adjusted risk intensity.
+        Otherwise falls back to simple PoT weighting.
+        
+        Risk Intensity = GAR * PoT (early) → GAR * proximity_weight (late)
         
         Level 1 (SEARCH): < 0.5  (Low risk or far OTM)
         Level 2 (LOCK): 0.5 - 1.0 (Moderate risk)
         Level 3 (LAUNCH): >= 1.0 (High risk and near strike)
         """
-        risk_intensity = gar * pot
+        if dte_hours is not None:
+            risk_intensity = self.calculate_time_adjusted_risk_intensity(gar, pot, dte_hours)
+        else:
+            risk_intensity = gar * pot
         
         if risk_intensity < 0.5:
             return 'SEARCH', 'Green'

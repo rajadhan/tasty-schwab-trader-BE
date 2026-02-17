@@ -13,7 +13,7 @@ class RWRAlertManager:
         self.alert_threshold_seconds = 60  # Rate limit alerts
         self.current_threat_level = 'SEARCH'
 
-    def render_hud(self, gar_results, confidence, threat_level, timestamp=None, spot=0, greeks=None):
+    def render_hud(self, gar_results, confidence, threat_level, timestamp=None, spot=0, greeks=None, pot=None):
         """
         Prints a high-visibility ASCII HUD to the terminal.
         """
@@ -35,6 +35,9 @@ class RWRAlertManager:
             if short_strikes:
                 nearest = min(abs(spot - k) for k in short_strikes)
                 dist_str = f"\nDIST TO STRIKE: {nearest:.2f}"
+        
+        # Add PoT if provided
+        pot_str = f" | PoT: {pot*100:.1f}%" if pot is not None else ""
 
         banner = f"""
 {color_code}================================================================
@@ -43,7 +46,7 @@ class RWRAlertManager:
 SPOT PRICE: {spot:.2f} {dist_str}
 NET GREEKS: {greeks_str}
 GA.R. WINDOWS: {gar_results}
-CONFIDENCE: {confidence * 100}%
+CONFIDENCE: {confidence * 100}%{pot_str}
 TIME: {display_time}
 ----------------------------------------------------------------{reset}
 """
