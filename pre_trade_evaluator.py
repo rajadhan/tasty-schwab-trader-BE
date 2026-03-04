@@ -73,7 +73,9 @@ class PreTradeEvaluator:
         manageability_score = ev - (self.lambda_penalty * penalty_sum)
         return float(manageability_score)
 
-    def evaluate_monte_carlo_jump_diffusion(self, S0: float, strikes: List[float], 
+    def evaluate_monte_carlo_jump_diffusion(self, S0: float, 
+                                            strikes: List[float], 
+                                            premiums: List[float],
                                             vol: float, jump_intensity: float, 
                                             jump_mean: float, jump_std: float, 
                                             time_to_expiry_days: float = 1/365.25, 
@@ -81,103 +83,200 @@ class PreTradeEvaluator:
                                             steps_per_day: int = 390) -> Optional[Dict]:
         """
         Mode 1: Monte Carlo (Jump-Diffusion) Evaluation
-        Simulates 10,000 intraday price paths using a Jump-Diffusion model to account for sudden
-        violent intraday moves followed by range-bound drift.
+        Simulates intraday price paths using a Jump-Diffusion model to account for sudden
+        violent intraday moves. Evaluates an Iron Condor (or single spread) against these paths.
         
-        :return: Dictionary containing the manageability score and expected value, or None if net debit.
+        :param strikes: List of 4 strikes for an Iron Condor/Butterfly [Put, Put, Call, Call]
+                        or 2 strikes for a vertical spread.
+        :param premiums: List of prices paid/received for the legs in the same order as strikes. 
+                         (Positive for credit/selling, Negative for debit/buying).
+        :return: Dictionary containing the manageability score and expected value.
         """
         logger.info(f"Starting Mode 1 (Monte Carlo Jump-Diffusion) for S0={S0:.2f} | Paths={num_paths}")
         
+        net_premium = sum(premiums)
+        logger.info(f"Spread successfully constructed at {self.format_price(net_premium)}.")
+
         # Define simulation parameters
         dt = time_to_expiry_days / steps_per_day
         paths = np.zeros((num_paths, steps_per_day + 1))
         paths[:, 0] = S0
         
-        # Vectorized path generation
+        # Vectorized path generation (Jump-Diffusion)
         for t in range(1, steps_per_day + 1):
-            # Standard normally distributed random numbers
             z = np.random.standard_normal(num_paths)
-            
-            # Poisson jump occurrence
             poisson_jumps = np.random.poisson(jump_intensity * dt, num_paths)
-            
-            # Normally distributed jump sizes
             jump_sizes = np.random.normal(jump_mean, jump_std, num_paths) * poisson_jumps
             
-            # Merton Jump-Diffusion geometric step (simplified risk-neutral drift r=0 for intraday zero-interest)
+            # Merton Jump-Diffusion geometric step (simplified risk-neutral drift r=0 for intraday)
             drift = -0.5 * (vol**2) * dt
             diffusion = vol * np.sqrt(dt) * z
-            
             paths[:, t] = paths[:, t-1] * np.exp(drift + diffusion + jump_sizes)
             
-        # -- Placeholder for spread generation logic --
-        # We must strictly construct a spread that yields a net credit.
-        mock_net_credit = 0.85 # Assumed Net Credit collected
-        if mock_net_credit <= 0:
-            logger.warning(f"Spread construction yields {self.format_price(mock_net_credit)}. Rejecting spread (Net Debit).")
-            return None # Strict Business Logic Constraint: Reject Net Debits
+        final_prices = paths[:, -1]
+        
+        # Calculate Payoff at Expiration
+        directions = [-1.0 if p > 0 else 1.0 for p in premiums]
+        
+        if len(strikes) == 4: # Iron Condor/Butterfly: Put, Put, Call, Call
+            p1, p2, c1, c2 = strikes
+            payoffs = net_premium \
+                      + directions[0] * np.maximum(0, p1 - final_prices) \
+                      + directions[1] * np.maximum(0, p2 - final_prices) \
+                      + directions[2] * np.maximum(0, final_prices - c1) \
+                      + directions[3] * np.maximum(0, final_prices - c2)
             
-        logger.info(f"Spread successfully constructed at {self.format_price(mock_net_credit)}.")
-
-        # -- Mock EV and manageability mapping -- 
-        # In a real run, we would map the final paths against the payoff profile, calculate mean P&L for EV,
-        # and then map the localized price nodes to the exact calculate_manageability_score() function.
+        elif len(strikes) == 2: # Vertical Spread
+            s1, s2 = strikes
+            is_call = (s1 + s2) / 2.0 >= S0
+            if is_call:
+                payoffs = net_premium \
+                          + directions[0] * np.maximum(0, final_prices - s1) \
+                          + directions[1] * np.maximum(0, final_prices - s2)
+            else:
+                payoffs = net_premium \
+                          + directions[0] * np.maximum(0, s1 - final_prices) \
+                          + directions[1] * np.maximum(0, s2 - final_prices)
+        else:
+            payoffs = np.zeros(num_paths)
         
-        expected_value = 1.25 # Mock positive EV (Net Credit realized + decay)
+        # Expected Value (Mean of all simulated path payoffs)
+        expected_value = float(np.mean(payoffs))
         
-        # Mocking an arbitrary localized price array and P&L array for the manageability calculation
-        simulated_prices = np.linspace(S0 * 0.95, S0 * 1.05, 100)
-        simulated_pnl = expected_value - np.maximum(0, simulated_prices - strikes[0]) # Arbitrary short call payoff shape
+        # To calculate Manageability Score, we need a deterministic P&L curve across a price range
+        sorted_indices = np.argsort(final_prices)
+        sorted_prices = final_prices[sorted_indices]
         
-        manageability_score = self.calculate_manageability_score(expected_value, simulated_prices, simulated_pnl)
+        # Smooth the P&L curve slightly for gradient calculation
+        percentiles = np.linspace(1, 99, 200)
+        p_prices = np.asarray(np.percentile(sorted_prices, percentiles))
+        
+        # Calculate deterministic payoff for these percentiled prices to get a clean gradient
+        if len(strikes) == 4:
+            p1, p2, c1, c2 = strikes
+            p_payoffs = net_premium \
+                        + directions[0] * np.maximum(0, p1 - p_prices) \
+                        + directions[1] * np.maximum(0, p2 - p_prices) \
+                        + directions[2] * np.maximum(0, p_prices - c1) \
+                        + directions[3] * np.maximum(0, p_prices - c2)
+        elif len(strikes) == 2:
+            s1, s2 = strikes
+            is_call = (s1 + s2) / 2.0 >= S0
+            if is_call:
+                p_payoffs = net_premium \
+                            + directions[0] * np.maximum(0, p_prices - s1) \
+                            + directions[1] * np.maximum(0, p_prices - s2)
+            else:
+                p_payoffs = net_premium \
+                            + directions[0] * np.maximum(0, s1 - p_prices) \
+                            + directions[1] * np.maximum(0, s2 - p_prices)
+        else:
+            p_payoffs = np.zeros_like(p_prices)
+            
+        manageability_score = self.calculate_manageability_score(expected_value, p_prices, p_payoffs)
         
         return {
             "mode": "Monte Carlo (Jump-Diffusion)",
             "paths_simulated": num_paths,
-            "net_premium": self.format_price(mock_net_credit),
+            "net_premium": self.format_price(net_premium),
             "expected_value": self.format_price(expected_value),
-            "manageability_score": round(manageability_score, 4)
+            "manageability_score": round(manageability_score, 4),
+            "win_rate": f"{(np.sum(payoffs > 0) / num_paths) * 100:.1f}%"
         }
 
-    def evaluate_mdp_state_space(self, S0: float, time_steps: int, 
-                                 price_nodes: int = 50, iv_nodes: int = 10) -> Optional[Dict]:
+    def evaluate_mdp_state_space(self, S0: float, 
+                                 strikes: List[float], 
+                                 premiums: List[float],
+                                 time_steps: int, 
+                                 vol: float,
+                                 price_nodes: int = 50, 
+                                 time_to_expiry_days: float = 1/365.25) -> Optional[Dict]:
         """
         Mode 2: MDP State-Space Evaluation
-        Constructs a static, multi-dimensional grid (Time Remaining, Price, IV).
-        Uses backward induction to calculate the Expected Value (EV) of the spread at T=0
+        Constructs a static, multi-dimensional grid (Time Remaining, Price).
+        Uses geometric random walk probabilities to calculate the Expected Value (EV) of the spread at T=0
         and measures the fragility to immediate price shocks via EV gradients.
+        
+        :return: Dictionary containing the manageability score and expected value, or None if net debit.
         """
-        logger.info(f"Starting Mode 2 (MDP State-Space) Grid: {time_steps}T x {price_nodes}P x {iv_nodes}V")
+        logger.info(f"Starting Mode 2 (MDP State-Space) Grid: {time_steps}T x {price_nodes}P")
         
-        # Form grid dimensions: S = (Time, Price, IV)
-        # Using QuantLib finite difference / trinomial trees or explicit ND grid solvers goes here.
-        # ...
-        
-        # Strict business logic: Ensure the transition matrix starts from a state of net credit.
-        mock_net_credit = 1.15
-        if mock_net_credit <= 0:
-            logger.warning(f"Initial State Space boundary evaluates to {self.format_price(mock_net_credit)}. Rejecting spread.")
-            return None
-            
-        logger.info(f"Initial Grid Boundary constructed at {self.format_price(mock_net_credit)}.")
+        net_premium = sum(premiums)
+        logger.info(f"Initial Grid Boundary constructed at {self.format_price(net_premium)}.")
 
-        # Backward Induction Step (Mock logic)
-        # T=N (Expiration) payoff is deterministic.
-        # Step backward from T=N to T=0 applying transition probabilities & discounting.
+        # Simplified 1D State Space Grid for Intraday (Price x Time)
+        dt = time_to_expiry_days / time_steps
         
-        expected_value_t0 = 1.05 # Mocked resulting EV at T=0
+        # Define price bounds (e.g. +/- 3 standard deviations)
+        std_dev = vol * np.sqrt(time_to_expiry_days)
+        S_min = S0 * np.exp(-3 * std_dev)
+        S_max = S0 * np.exp(3 * std_dev)
+        prices = np.linspace(S_min, S_max, price_nodes)
+        
+        # Transition Probabilities (Simplified Trinomial approximations for dt drift/diffusion)
+        # In a full QuantLib implementation, we would extract transition probabilities from the tree.
+        # Here we use an explicit finite difference approximation equivalent.
+        dx = np.log(prices[1] / prices[0]) if price_nodes > 1 else 1.0
+        
+        # Probabilities for Up, Middle, Down movements
+        pu = 0.5 * (vol**2 * dt / dx**2 + (0.0 - 0.5 * vol**2) * dt / dx)
+        pd = 0.5 * (vol**2 * dt / dx**2 - (0.0 - 0.5 * vol**2) * dt / dx)
+        pm = 1.0 - pu - pd
+        
+        # Ensure numerical stability
+        pu = max(0.0, min(1.0, pu))
+        pd = max(0.0, min(1.0, pd))
+        pm = max(0.0, 1.0 - pu - pd)
+
+        # Initialize Terminal Payoff State at Expiration T=N
+        V = np.zeros(price_nodes)
+        directions = [-1.0 if p > 0 else 1.0 for p in premiums]
+        
+        if len(strikes) == 4:
+            p1, p2, c1, c2 = strikes
+            V = net_premium \
+                + directions[0] * np.maximum(0, p1 - prices) \
+                + directions[1] * np.maximum(0, p2 - prices) \
+                + directions[2] * np.maximum(0, prices - c1) \
+                + directions[3] * np.maximum(0, prices - c2)
+        elif len(strikes) == 2:
+            s1, s2 = strikes
+            is_call = (s1 + s2) / 2.0 >= S0
+            if is_call:
+                V = net_premium \
+                    + directions[0] * np.maximum(0, prices - s1) \
+                    + directions[1] * np.maximum(0, prices - s2)
+            else:
+                V = net_premium \
+                    + directions[0] * np.maximum(0, s1 - prices) \
+                    + directions[1] * np.maximum(0, s2 - prices)
+
+        # Backward Induction Step
+        # Roll back from T=N to T=0
+        for _ in range(time_steps - 1, -1, -1):
+            V_new = np.zeros(price_nodes)
+            # Boundary conditions (Dirichlet)
+            V_new[0] = V[0]    # Absorption at lower bound
+            V_new[-1] = V[-1]  # Absorption at upper bound
+            
+            # Interior nodes transition
+            V_new[1:-1] = pu * V[2:] + pm * V[1:-1] + pd * V[:-2]
+            V = V_new
+        
+        # V now represents the Expected Value vector at T=0 across the price state space
+        
+        # Interpolate the EV at exactly S0 for the main output
+        expected_value_t0 = float(np.interp(S0, prices, V))
         
         # Map EV gradient across adjacent immediate price nodes to calculate manageability.
-        # fragility = d(EV) / d(Price)
-        mock_prices = np.linspace(S0 - 10, S0 + 10, price_nodes)
-        mock_ev_landscape = expected_value_t0 * np.sin(np.linspace(0, np.pi, price_nodes)) # Arbitrary landscape shape
-        
-        m_score = self.calculate_manageability_score(expected_value_t0, mock_prices, mock_ev_landscape)
+        # Fragility = d(EV) / d(Price)
+        # Using the full state space prices and V vectors is perfect for our custom manageability function
+        m_score = self.calculate_manageability_score(expected_value_t0, prices, V)
         
         return {
             "mode": "MDP State-Space Evaluation",
-            "grid_dimensions": f"{time_steps}x{price_nodes}x{iv_nodes}",
-            "net_premium": self.format_price(mock_net_credit),
+            "grid_dimensions": f"{time_steps}x{price_nodes}",
+            "net_premium": self.format_price(net_premium),
             "expected_value": self.format_price(expected_value_t0),
             "manageability_score": round(m_score, 4)
         }
@@ -186,10 +285,12 @@ if __name__ == "__main__":
     # Example Usage demonstrating the framework constraints and output formats.
     evaluator = PreTradeEvaluator(lambda_penalty=1.5)
     
-    # Run Mode 1
+    # Run Mode 1 (Iron Condor example: Long Put 510, Short Put 515, Short Call 525, Long Call 530)
+    logger.info("--- Testing Mode 1: Monte Carlo ---")
     mc_results = evaluator.evaluate_monte_carlo_jump_diffusion(
         S0=520.0, 
-        strikes=[525.0, 530.0], 
+        strikes=[510.0, 515.0, 525.0, 530.0], 
+        premiums=[-1.20, 3.50, 2.80, -0.90], # Net Credit = 4.20
         vol=0.15, 
         jump_intensity=2.0, 
         jump_mean=0.0, 
@@ -199,6 +300,13 @@ if __name__ == "__main__":
         logger.info(f"MC Results: {mc_results}")
         
     # Run Mode 2
-    mdp_results = evaluator.evaluate_mdp_state_space(S0=520.0, time_steps=390)
+    logger.info("--- Testing Mode 2: MDP State-Space ---")
+    mdp_results = evaluator.evaluate_mdp_state_space(
+        S0=520.0, 
+        strikes=[510.0, 515.0, 525.0, 530.0], 
+        premiums=[-1.20, 3.50, 2.80, -0.90],
+        time_steps=390,
+        vol=0.15
+    )
     if mdp_results:
         logger.info(f"MDP Results: {mdp_results}")
