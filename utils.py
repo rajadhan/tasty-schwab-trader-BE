@@ -57,6 +57,8 @@ def ticker_data_path_for_strategy(strategy):
         TICKER_DATA_PATH = SUPER_TICKER_DATA_PATH
     elif strategy == "zeroday":
         TICKER_DATA_PATH = ZERODAY_TICKER_DATA_PATH
+    elif strategy == "dynamic_ic":
+        TICKER_DATA_PATH = DYNAMIC_IC_TICKER_DATA_PATH
     return TICKER_DATA_PATH
 
 
@@ -147,7 +149,7 @@ def sleep_base_on_timeframe(interval_minutes):
 
 def get_strategy_for_ticker(ticker):
     """Determine which strategy configuration to use for a ticker."""
-    ema_data, super_data, zeroday_data = load_strategy_configs()
+    ema_data, super_data, zeroday_data, dynamic_ic_data = load_strategy_configs()
 
     if ticker in ema_data:
         return 'ema', ema_data[ticker]
@@ -155,6 +157,8 @@ def get_strategy_for_ticker(ticker):
         return 'supertrend', super_data[ticker]
     elif ticker in zeroday_data:
         return 'zeroday', zeroday_data[ticker]
+    elif ticker in dynamic_ic_data:
+        return 'dynamic_ic', dynamic_ic_data[ticker]
     else:
         return None, None
 
@@ -165,10 +169,11 @@ def load_strategy_configs():
         ema_data = load_json(os.path.join('settings', 'ema_ticker_data.json'))
         super_data = load_json(os.path.join('settings', 'super_ticker_data.json'))
         zeroday_data = load_json(os.path.join('settings', 'zeroday_ticker_data.json'))
-        return ema_data, super_data, zeroday_data
+        dynamic_ic_data = load_json(os.path.join('settings', 'dynamic_ic_data.json'))
+        return ema_data, super_data, zeroday_data, dynamic_ic_data
     except Exception as e:
         print(f"Error loading strategy configs: {e}")
-        return {}, {}, {}
+        return {}, {}, {}, {}
 
 
 # Strategy Router Functions
@@ -347,7 +352,7 @@ def parse_strategy_params(config, strategy_type):
 
 def get_all_active_tickers():
     """Get all tickers that are configured and enabled for trading across all strategies."""
-    ema_data, super_data, zeroday_data = load_strategy_configs()
+    ema_data, super_data, zeroday_data, dynamic_ic_data = load_strategy_configs()
 
     active_tickers = []
 
@@ -366,6 +371,11 @@ def get_all_active_tickers():
     for ticker, config in zeroday_data.items():
         if config[2] == "TRUE":  # trade_enabled
             active_tickers.append((ticker, 'zeroday'))
+            
+    # Check Dynamic IC strategy tickers
+    for ticker, config in dynamic_ic_data.items():
+        if isinstance(config, dict) and config.get("trade_enabled") == "TRUE":
+            active_tickers.append((ticker, 'dynamic_ic'))
 
     return active_tickers
 
@@ -385,11 +395,17 @@ def validate_strategy_config(ticker, strategy_type, config):
             required_length = 8
             if len(config) != required_length:
                 return False, f"Zero-day strategy requires {required_length} parameters, got {len(config)}"
+        elif strategy_type == 'dynamic_ic':
+            if not isinstance(config, dict):
+                return False, f"Dynamic IC strategy requires a dictionary configuration, got {type(config)}"
+            if 'trade_enabled' not in config:
+                return False, "Dynamic IC strategy requires 'trade_enabled' parameter"
+            return True, "Configuration is valid"
         else:
             return False, f"Unknown strategy type: {strategy_type}"
 
-        # Check if trade_enabled is valid
-        if config[2] not in ["TRUE", "FALSE"]:
+        # Check if trade_enabled is valid for array-based configs
+        if strategy_type != 'dynamic_ic' and config[2] not in ["TRUE", "FALSE"]:
             return False, f"trade_enabled must be 'TRUE' or 'FALSE', got {config[2]}"
 
         return True, "Configuration is valid"

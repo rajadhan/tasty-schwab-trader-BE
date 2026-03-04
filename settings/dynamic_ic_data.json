@@ -1,0 +1,26 @@
+{
+    "SPY": {
+        "trade_enabled": "TRUE",
+        "schwab_qty": 1,
+        "tasty_qty": 1,
+        "dte": 0,
+        "short_delta": 0.15,
+        "long_delta": 0.05,
+        "trigger_delta": 0.30,
+        "confirmation_mins": 5,
+        "max_rolls_per_day": 2,
+        "max_loss_multiplier": 2.0
+    },
+    "QQQ": {
+        "trade_enabled": "FALSE",
+        "schwab_qty": 1,
+        "tasty_qty": 1,
+        "dte": 0,
+        "short_delta": 0.15,
+        "long_delta": 0.05,
+        "trigger_delta": 0.30,
+        "confirmation_mins": 5,
+        "max_rolls_per_day": 2,
+        "max_loss_multiplier": 2.0
+    }
+}

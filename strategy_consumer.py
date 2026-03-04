@@ -45,6 +45,7 @@ class StrategyConsumer:
         self.pending_strategies = defaultdict(threading.Event)
         # Type hints for better IDE/linting support
         self.rwr_components: dict[str, dict] = {} 
+        self.dynamic_ic_components: dict[str, dict] = {} 
         self.backtest_positions: dict[str, list] = {}
         self.launch_only = launch_only  # Only log LAUNCH events
 
@@ -105,7 +106,7 @@ class StrategyConsumer:
         
         self.logger.info(f"Subscribed to tick bars for symbols: {symbols}")
 
-    def listen_for_events(self, tickers):
+    def listen_for_events(self, tickers, strategy="zeroday"):
         """Main event listener for unified BarEvents."""
         for ticker in tickers:
             channel = f"tick_events:{ticker}"
@@ -129,11 +130,25 @@ class StrategyConsumer:
                         est_time = event_data.get('timestamp')
 
                     self.logger.info(f"Received BarEvent for {ticker} at {est_time} EST")
-                    self.process_bar_event(ticker, event_data)
+                    
+                    if strategy == "zeroday":
+                        self.process_bar_event(ticker, event_data)
+                    elif strategy == "dynamic_ic":
+                        self.process_dynamic_ic_event(ticker, event_data)
                     
                 except Exception as e:
                     self.logger.error(f"Error in event listener: {e}")
 
+    def process_dynamic_ic_event(self, ticker, event):
+        """Processes a unified BarEvent for the Dynamic Iron Condor Strategy."""
+        from dynamic_ic_strategy import process_dynamic_ic_tick
+        
+        # Initialize component state if missing
+        if ticker not in self.dynamic_ic_components:
+            self.dynamic_ic_components[ticker] = {}
+            
+        state = self.dynamic_ic_components[ticker]
+        process_dynamic_ic_tick(ticker, event, state, self.logger)
     def process_bar_event(self, ticker, event):
         """Processes a unified BarEvent (Market + Legs)."""
         logger = logging.getLogger(f"RWR:{ticker}")
@@ -340,9 +355,9 @@ class StrategyConsumer:
         logger = configure_logger(ticker, strategy)
         logger.info(f"EVENT LISTENER STARTED for {ticker}")
         
-        # For RWR, we just listen for events
-        if strategy == "zeroday":
-            self.listen_for_events([ticker])
+        # For RWR and Dynamic IC, we just listen for events
+        if strategy in ["zeroday", "dynamic_ic"]:
+            self.listen_for_events([ticker], strategy)
         else:
             # Legacy polling strategies
             print(f"Starting main loop for {ticker} with strategy {strategy}")
@@ -440,12 +455,13 @@ if __name__ == "__main__":
         consumer.run_backtest(args.ticker, logger)
     else:
         # Load all strategy configurations from the settings/ directory
-        ema_config, super_config, zeroday_config = load_strategy_configs()
+        ema_config, super_config, zeroday_config, dynamic_ic_config = load_strategy_configs()
         
         configs = [
             ("ema", ema_config),
             ("supertrend", super_config),
-            ("zeroday", zeroday_config)
+            ("zeroday", zeroday_config),
+            ("dynamic_ic", dynamic_ic_config)
         ]
         
         threads = []
